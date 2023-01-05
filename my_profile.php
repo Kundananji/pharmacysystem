@@ -27,7 +27,7 @@
           // header section end
           require "php/db_connection.php";
           if($con) {
-            $query = "SELECT * FROM admin_credentials";
+            $query = "SELECT * FROM users";
             $result = mysqli_query($con, $query);
             $row = mysqli_fetch_array($result);
             $pharmacy_name = $row['PHARMACY_NAME'];

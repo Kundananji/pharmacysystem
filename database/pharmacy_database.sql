@@ -24,25 +24,6 @@ CREATE DATABASE IF NOT EXISTS `pharmacy` DEFAULT CHARACTER SET utf8mb4 COLLATE u
 USE `pharmacy`;
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `admin_credentials`
---
-
-CREATE TABLE `admin_credentials` (
-  `USERNAME` varchar(50) COLLATE utf16_bin NOT NULL,
-  `PASSWORD` varchar(50) COLLATE utf16_bin NOT NULL,
-  `ADDRESS` varchar(255) COLLATE utf16_bin DEFAULT NULL,
-  `EMAIL` varchar(150) COLLATE utf16_bin DEFAULT NULL,
-  `IS_LOGGED_IN` varchar(10) COLLATE utf16_bin DEFAULT NULL,
-  `CONTACT_NUMBER` varchar(20) COLLATE utf16_bin DEFAULT NULL,
-  `PHARMACY_NAME` varchar(100) COLLATE utf16_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
-
---
--- Dumping data for table `admin_credentials`
---
-
 --
 -- Table structure for table `users`
 --
@@ -66,8 +47,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `admin_credentials` (`USERNAME`, `PASSWORD`, `ADDRESS`, `EMAIL`, `CONTACT_NUMBER`, `PHARMACY_NAME`) VALUES
-('admin', 'admin123', 'Plot No. 24, Riverside Extension, KITWE', 'info@pharmacy.com', '095323124', 'Linked Pharmacy');
+INSERT INTO `users` (`USERNAME`, `PASSWORD`, `ADDRESS`, `EMAIL`, `CONTACT_NUMBER`, `PHARMACY_NAME`, `ROLE`, `STATUS` ) VALUES
+('admin', 'admin123', 'Plot No. 24, Riverside Extension, KITWE', 'info@pharmacy.com', '095323124', 'Linked Pharmacy', 'Admin', 'Active');
 
 -- --------------------------------------------------------
 
@@ -260,8 +241,8 @@ INSERT INTO `suppliers` (`ID`, `NAME`, `EMAIL`, `CONTACT_NUMBER`, `ADDRESS`) VAL
 --
 -- Indexes for table `admin_credentials`
 --
-ALTER TABLE `admin_credentials`
-  ADD PRIMARY KEY (`USERNAME`);
+ALTER TABLE `users`
+  ADD UNIQUE KEY (`USERNAME`);
 
 --
 -- Indexes for table `customers`

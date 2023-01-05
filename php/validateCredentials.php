@@ -6,7 +6,7 @@
   function isSetupDone() {
     require "db_connection.php";
     if($con) {
-      $query = "SELECT * FROM admin_credentials";
+      $query = "SELECT * FROM users";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "true" : "false";
@@ -14,7 +14,8 @@
   }
 
   if(isset($_GET['action']) && $_GET['action'] == 'is_admin')
-    isAdmin();
+  isAdmin();
+ 
 
   function isAdmin() {
     require "db_connection.php";
@@ -22,11 +23,33 @@
       $username = $_GET["uname"];
       $password = $_GET["pswd"];
 
-      $query = "SELECT * FROM admin_credentials WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+      $query = "SELECT * FROM users WHERE USERNAME = '$username' AND PASSWORD = '$password'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       if($row)  {
-        $query = "UPDATE admin_credentials SET IS_LOGGED_IN = 'true'";
+        $query = "UPDATE users SET IS_LOGGED_IN = 'true'";
+        $result = mysqli_query($con, $query);
+        echo "true";
+      }
+      else{
+            
+             isUser();
+      }       
+    }
+  }
+
+  //isUser login
+  function isUser() {
+    require "db_connection.php";
+    if($con) {
+      $username = $_GET["uname"];
+      $password = $_GET["pswd"];
+
+      $query = "SELECT * FROM users WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+      $result = mysqli_query($con, $query);
+      $row = mysqli_fetch_array($result);
+      if($row)  {
+        $query = "UPDATE users SET IS_LOGGED_IN = 'true'";
         $result = mysqli_query($con, $query);
         echo "true";
       }
@@ -48,7 +71,7 @@
       $username = $_GET["username"];
       $password = $_GET["password"];
 
-      $query = "INSERT INTO admin_credentials (PHARMACY_NAME, ADDRESS, EMAIL, CONTACT_NUMBER, USERNAME, PASSWORD, IS_LOGGED_IN) VALUES('$pharmacy_name', '$address', '$email', '$contact_number', '$username', '$password', 'false')";
+      $query = "INSERT INTO users (PHARMACY_NAME, ADDRESS, EMAIL, CONTACT_NUMBER, USERNAME, PASSWORD, IS_LOGGED_IN) VALUES('$pharmacy_name', '$address', '$email', '$contact_number', '$username', '$password', 'false')";
       $result = mysqli_query($con, $query);
       echo ($result) ? "true" : "false";
     }
@@ -63,7 +86,7 @@
       $email = $_GET["email"];
       $contact_number = $_GET["contact_number"];
 
-      $query = "SELECT * FROM admin_credentials WHERE EMAIL = '$email' AND CONTACT_NUMBER = '$contact_number'";
+      $query = "SELECT * FROM users WHERE EMAIL = '$email' AND CONTACT_NUMBER = '$contact_number'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "true" : "false";
@@ -81,7 +104,7 @@
       $email = $_GET["email"];
       $contact_number = $_GET["contact_number"];
 
-      $query = "UPDATE admin_credentials SET USERNAME = '$username', PASSWORD = '$password' WHERE EMAIL = '$email' AND CONTACT_NUMBER = '$contact_number'";
+      $query = "UPDATE users SET USERNAME = '$username', PASSWORD = '$password' WHERE EMAIL = '$email' AND CONTACT_NUMBER = '$contact_number'";
       $result = mysqli_query($con, $query);
       echo ($result) ? "true" : "false";
     }
@@ -95,7 +118,7 @@
     if($con) {
       $password = $_GET["password"];
 
-      $query = "SELECT * FROM admin_credentials WHERE PASSWORD = '$password'";
+      $query = "SELECT * FROM users WHERE PASSWORD = '$password'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "true" : "false";
@@ -114,7 +137,7 @@
       $contact_number = $_GET["contact_number"];
       $username = $_GET["username"];
 
-      $query = "UPDATE admin_credentials SET PHARMACY_NAME = '$pharmacy_name', ADDRESS = '$address', EMAIL = '$email', CONTACT_NUMBER = '$contact_number', USERNAME = '$username'";
+      $query = "UPDATE users SET PHARMACY_NAME = '$pharmacy_name', ADDRESS = '$address', EMAIL = '$email', CONTACT_NUMBER = '$contact_number', USERNAME = '$username'";
       $result = mysqli_query($con, $query);
       echo ($result) ? "Details updated..." : "Oops! Somthing wrong happend...";
     }
@@ -128,7 +151,7 @@
     if($con) {
       $password = $_GET["password"];
 
-      $query = "UPDATE admin_credentials SET PASSWORD = '$password'";
+      $query = "UPDATE users SET PASSWORD = '$password'";
       $result = mysqli_query($con, $query);
       echo ($result) ? "Password changed..." : "Oops! Somthing wrong happend...";
     }

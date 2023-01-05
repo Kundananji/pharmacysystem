@@ -24,7 +24,7 @@
       $address = ucwords($_GET["address"]);
       $role = ucwords($_GET["role"]);
       $status = ucwords($_GET["status"]);
-      updateSupplier($id, $name, $email, $contact_number, $address, $role, $status);
+      updateUser($id, $name, $email, $contact_number, $address, $role, $status);
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "cancel")
@@ -86,14 +86,14 @@ function showEditOptionsRow($seq_no, $row) {
       <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="email" class="form-control" value="<?php echo $row['EMAIL']; ?>" placeholder="Email" id="supplier_email" onblur="validateContactNumber(this.value, 'email_error');">
+      <input type="email" class="form-control" value="<?php echo $row['EMAIL']; ?>" placeholder="Email" id="email" onblur="validateContactNumber(this.value, 'email_error');">
     </td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['CONTACT_NUMBER']; ?>" placeholder="Contact Number" id="supplier_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
+      <input type="number" class="form-control" value="<?php echo $row['CONTACT_NUMBER']; ?>" placeholder="Contact Number" id="contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
       <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code>
     </td>
     <td>
-      <textarea class="form-control" placeholder="Address" id="supplier_address" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['ADDRESS']; ?></textarea>
+      <textarea class="form-control" placeholder="Address" id="address" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['ADDRESS']; ?></textarea>
       <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
     </td>
     <td>

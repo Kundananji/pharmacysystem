@@ -123,7 +123,7 @@
 
       <?php
 
-      $query = "SELECT * FROM admin_credentials";
+      $query = "SELECT * FROM users";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       $p_name = $row['PHARMACY_NAME'];
