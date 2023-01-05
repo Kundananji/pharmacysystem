@@ -43,6 +43,29 @@ CREATE TABLE `admin_credentials` (
 -- Dumping data for table `admin_credentials`
 --
 
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL,
+  `USERNAME` varchar(50) COLLATE utf16_bin NOT NULL,
+  `FNAME` varchar(50) COLLATE utf16_bin NOT NULL,
+  `SNAME` varchar(50) COLLATE utf16_bin NOT NULL,
+  `PASSWORD` varchar(50) COLLATE utf16_bin NOT NULL,
+  `ADDRESS` varchar(255) COLLATE utf16_bin DEFAULT NULL,
+  `EMAIL` varchar(150) COLLATE utf16_bin DEFAULT NULL,
+  `IS_LOGGED_IN` varchar(10) COLLATE utf16_bin DEFAULT NULL,
+  `CONTACT_NUMBER` varchar(20) COLLATE utf16_bin DEFAULT NULL,
+  `PHARMACY_NAME` varchar(100) COLLATE utf16_bin DEFAULT NULL,
+  `ROLE` varchar(50) COLLATE utf16_bin NOT NULL,
+  `STATUS` varchar(50) COLLATE utf16_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+--
+-- Dumping data for table `users`
+--
+
 INSERT INTO `admin_credentials` (`USERNAME`, `PASSWORD`, `ADDRESS`, `EMAIL`, `CONTACT_NUMBER`, `PHARMACY_NAME`) VALUES
 ('admin', 'admin123', 'Plot No. 24, Riverside Extension, KITWE', 'info@pharmacy.com', '095323124', 'Linked Pharmacy');
 

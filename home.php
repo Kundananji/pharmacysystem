@@ -139,6 +139,7 @@
             createSection2('handshake', 'add_customer.php', 'Add New Customer');
             createSection2('shopping-bag', 'add_medicine.php', 'Add New Medicine');
             createSection2('group', 'add_supplier.php', 'Add New Supplier');
+            createSection2('group', 'add_user.php', 'Add New User');
             createSection2('bar-chart', 'add_purchase.php', 'Add New Purchase');
             createSection2('book', 'sales_report.php', 'Sales Report');
             createSection2('book', 'purchase_report.php', 'Purchase Report');

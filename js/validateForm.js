@@ -182,3 +182,30 @@ function addMedicine() {
   	xhttp.send();
   }
 }
+
+function addUser() {
+    document.getElementById("user_acknowledgement").innerHTML = "";
+    var fname = document.getElementById("fname");
+    var sname = document.getElementById("sname");
+    var email = document.getElementById("email");
+    var contact_number = document.getElementById("contact_number");
+    var address = document.getElementById("address");
+    var role = document.getElementById("role");
+    var status = document.getElementById("status");
+    if (!validateAddress(email.value, "email_error"))
+        email.focus();
+    else if (!validateContactNumber(contact_number.value, "contact_number_error"))
+        contact_number.focus();
+    else if (!validateAddress(address.value, "address_error"))
+        address.focus();
+    else {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState = 4 && xhttp.status == 200)
+                document.getElementById("user_acknowledgement").innerHTML = xhttp.responseText;
+        };
+        xhttp.open("GET", "php/add_new_user.php?fname=" + fname.value + "&sname=" + sname.value + "&email=" + email.value + "&contact_number=" + contact_number.value + "&address=" + address.value + "&role=" + role.value + "&status=" + status.value, true);
+        xhttp.send();
+    }
+}
+
