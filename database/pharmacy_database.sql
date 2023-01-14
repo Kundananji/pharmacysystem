@@ -20,8 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `pharmacy`
 --
-CREATE DATABASE IF NOT EXISTS `pharmacy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `pharmacy`;
+CREATE DATABASE IF NOT EXISTS `twishe5_pharmacy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE `twishe5_pharmacy`;
 
 -- --------------------------------------------------------
 --
