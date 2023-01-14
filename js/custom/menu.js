@@ -176,6 +176,11 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
+  id = 'input-menu-id-name' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
   if(incrementRowCount){
     localStorage.setItem("table_menu",rowCount-1);
   }

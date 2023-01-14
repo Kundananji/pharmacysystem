@@ -43,8 +43,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($menuEdit->getId()!=null){ $defaultValues['icon']=$menuEdit->getIcon();};
                   ?>
-                  <label for="input-menu-icon">Icon*</label>
-  <input type="text" name="icon" id="input-menu-icon" class="form-control " placeholder="Enter Icon " value="<?php echo null!==($menuEdit->getIcon())?($menuEdit->getIcon()):(isset($defaultValues['icon'])?($defaultValues['icon']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-menu-icon">Icon</label>
+  <input type="text" name="icon" id="input-menu-icon" class="form-control " placeholder="Enter Icon " value="<?php echo null!==($menuEdit->getIcon())?($menuEdit->getIcon()):(isset($defaultValues['icon'])?($defaultValues['icon']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -79,8 +79,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($menuEdit->getId()!=null){ $defaultValues['url']=$menuEdit->getUrl();};
                   ?>
-                  <label for="input-menu-url">Url*</label>
-  <input type="text" name="url" id="input-menu-url" class="form-control " placeholder="Enter Url " value="<?php echo null!==($menuEdit->getUrl())?($menuEdit->getUrl()):(isset($defaultValues['url'])?($defaultValues['url']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-menu-url">Url</label>
+  <input type="text" name="url" id="input-menu-url" class="form-control " placeholder="Enter Url " value="<?php echo null!==($menuEdit->getUrl())?($menuEdit->getUrl()):(isset($defaultValues['url'])?($defaultValues['url']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -91,7 +91,7 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($menuEdit->getId()!=null){ $defaultValues['target']=$menuEdit->getTarget();};
                   ?>
-                  <label for="input-menu-target">Target*</label>
+                  <label for="input-menu-target">Target</label>
   <?php 
     include_once("../classes/menu-target.php");
     include_once("../daos/menu-target-dao.php");
@@ -99,7 +99,7 @@ if(isset($id)){
     $menuTargetDao = new MenuTargetDao(); 
     $objects = $menuTargetDao->selectAll(); 
     ?>
-    <select name="target" id="input-menu-target" class="form-control " required <?php echo $readonly;?> >
+    <select name="target" id="input-menu-target" class="form-control "  <?php echo $readonly;?> >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Menu&nbsp;target--</option>
       <?php
         foreach($objects as $menuTarget){
@@ -171,6 +171,18 @@ if(isset($id)){
         }
       ?>
     </select>
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-menu-id-name">
+
+                 <?php
+                  $readonly = in_array('idName',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($menuEdit->getId()!=null){ $defaultValues['idName']=$menuEdit->getIdName();};
+                  ?>
+                  <label for="input-menu-id-name">Id&nbsp;Name</label>
+  <input type="text" name="idName" id="input-menu-id-name" class="form-control " placeholder="Enter Id&nbsp;Name " value="<?php echo null!==($menuEdit->getIdName())?($menuEdit->getIdName()):(isset($defaultValues['idName'])?($defaultValues['idName']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

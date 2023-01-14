@@ -12,6 +12,7 @@ class Menu implements \JsonSerializable{
   private $target;
   private $parentId;
   private $profileId;
+  private $idName;
 
 /**
 * function to initialize object
@@ -161,6 +162,24 @@ class Menu implements \JsonSerializable{
 */
   public function getProfileId(){
     return $this->profileId;
+
+  }
+
+/**
+* function to set the value of idName
+* @param idName : value to set
+*/
+  public function setIdName($idName){
+    $this->idName=$idName;
+
+  }
+
+/**
+* function to get the value of idName
+* @return String
+*/
+  public function getIdName(){
+    return $this->idName;
 
   }
 

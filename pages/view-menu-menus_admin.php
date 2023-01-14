@@ -95,6 +95,9 @@ $objects = $dao->selectAll();
         Profile
       </th>
       <th>
+        Id&nbsp;Name
+      </th>
+      <th>
       </th>
       <th>
       </th>
@@ -164,6 +167,12 @@ $objects = $dao->selectAll();
           $fprofileDao = new ProfileDao(); 
           $fprofile = $fprofileDao->select($menu->getProfileId()); 
           echo  $fprofile==null?"-": $fprofile->toString();
+        ?>
+        </td>
+        <td>
+        <?php
+          $idName=$menu->getIdName();
+          echo str_ireplace("\n","<br/>",$menu->getIdName());
         ?>
         </td>
         <td>

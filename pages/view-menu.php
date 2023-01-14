@@ -81,6 +81,9 @@ $dao = new MenuDao();
         Profile
       </th>
       <th>
+        Id&nbsp;Name
+      </th>
+      <th>
       </th>
       <th>
       </th>
@@ -148,6 +151,11 @@ $dao = new MenuDao();
           $fprofileDao = new ProfileDao(); 
           $fprofile = $fprofileDao->select($menu->getProfileId()); 
           echo  $fprofile==null?"-": $fprofile->toString();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $menu->getIdName();
         ?>
         </td>
         <td>

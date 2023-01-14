@@ -86,8 +86,8 @@ if(isset($id)){
 
  <!--start of form group-->
 <div class="form-group input-menu-icon">
-  <label for="input-menu-icon">Icon*</label>
-  <input type="text" name="icon" id="input-menu-icon" class="form-control " placeholder="Enter Icon* " value="<?php echo (isset($defaultValues['icon'])?($defaultValues['icon']): "");?>" required <?php echo $readonly;?>   />
+  <label for="input-menu-icon">Icon</label>
+  <input type="text" name="icon" id="input-menu-icon" class="form-control " placeholder="Enter Icon " value="<?php echo (isset($defaultValues['icon'])?($defaultValues['icon']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <?php
   $readonly = in_array('name',$uneditableFields)?'readonly':'';
@@ -119,8 +119,8 @@ if(isset($id)){
 
  <!--start of form group-->
 <div class="form-group input-menu-url">
-  <label for="input-menu-url">Url*</label>
-  <input type="text" name="url" id="input-menu-url" class="form-control " placeholder="Enter Url* " value="<?php echo (isset($defaultValues['url'])?($defaultValues['url']): "");?>" required <?php echo $readonly;?>   />
+  <label for="input-menu-url">Url</label>
+  <input type="text" name="url" id="input-menu-url" class="form-control " placeholder="Enter Url " value="<?php echo (isset($defaultValues['url'])?($defaultValues['url']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <?php
   $readonly = in_array('target',$uneditableFields)?'readonly':'';
@@ -130,7 +130,7 @@ if(isset($id)){
 
  <!--start of form group-->
 <div class="form-group input-menu-target">
-  <label for="input-menu-target">Target*</label>
+  <label for="input-menu-target">Target</label>
   <?php 
     include_once("../classes/menu-target.php");
     include_once("../daos/menu-target-dao.php");
@@ -138,8 +138,8 @@ if(isset($id)){
     $menuTargetDao = new MenuTargetDao(); 
     $objects = $menuTargetDao->selectAll(); 
     ?>
-    <select name="target" id="input-menu-target" class="form-control " required <?php echo $readonly;?> >
-      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Target*--</option>
+    <select name="target" id="input-menu-target" class="form-control "  <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Target--</option>
       <?php
         foreach($objects as $menuTarget){
           $optionValue  = $menuTarget->getId();
@@ -208,6 +208,17 @@ if(isset($id)){
         }
       ?>
     </select>
+</div> <!--end form-group-->
+<?php
+  $readonly = in_array('idName',$uneditableFields)?'readonly':'';
+  //override default value with actual value if object is sent
+    if($menuEdit->getId()!=null){ $defaultValues['idName']=$menuEdit->getIdName();};
+?>
+
+ <!--start of form group-->
+<div class="form-group input-menu-id-name">
+  <label for="input-menu-id-name">Id&nbsp;Name</label>
+  <input type="text" name="idName" id="input-menu-id-name" class="form-control " placeholder="Enter Id&nbsp;Name " value="<?php echo (isset($defaultValues['idName'])?($defaultValues['idName']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

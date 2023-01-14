@@ -168,13 +168,35 @@
                      <!-- Page Heading -->
                      
                      <div class="row">
-                         <div class="col table-responsive" id="page-content">      <h3 style="text-align:center">Welcome to the Hospital Manangement System</h3>      The Hospital Management System allows you Manage all aspects of your hospital, including but not limited to: 
-<ul>
-      <li>Staff Management</li>
-      <li>Out Patient Department</li>
-</ul>
+                         <div class="col table-responsive" id="page-content">      <h3 style="text-align:center">Welcome to the Hospital Manangement System</h3>      								<div class="row">
+									<div class="col">
+										<img src="img/hms-home.jpg" style="width:100%" class="m-4">
 
+									</div>
+									<div class="col">
+										<div class="alert m-4">
+										 <p class="fs-1">
+                                             The hospital management system (HMS) is a computerized system that manages and maintains the day-to-day operations of a hospital. It includes a variety of modules that handle different aspects of hospital administration, such as patient management, billing, and scheduling.  It has the following features:
 
+ </p>
+
+<ul><li><p>Electronic health records (EHRs): Allows for the storage and sharing of patient information across different departments, including medical history, lab results, and treatment plans.</p></li>
+<li><p>Appointment scheduling: Allows patients to schedule appointments with doctors and other healthcare providers, and for providers to schedule surgeries and procedures.</p></li><li><p>Billing and insurance: Handles the processing of insurance claims and patient billing, including the ability to produce invoices, statements and receipts.</p></li>
+
+<li><p>Inventory management: Keeps track of the hospital's medical equipment and supplies, including the ability to order and reorder items as needed.</p></li>
+
+<li><p>Reporting and analytics: Provides data and analysis on various aspects of hospital operations, such as patient demographics, financial performance, and resource utilization.</p></li>
+
+<li><p>Reporting and analytics: Provides data and analysis on various aspects of hospital operations, such as patient demographics, financial performance, and resource utilization.</p></li>
+
+<li><p>Security and compliance: Ensures that patient data is kept secure and compliant with relevant regulations and laws.</p></li>
+
+<li><p>Mobile and cloud-based integration: Allows the access of the system from anywhere and anytime, also facilitates collaboration among the healthcare providers.</p></li></ul>
+
+							             </div>
+
+									</div>
+								</div>
                        </div>
                      </div>
  
@@ -187,9 +209,10 @@
              <!-- Footer -->
              <footer class="sticky-footer bg-white">
                  <div class="container my-auto">
-                      <div class="copyright text-center my-auto">
-                          <span>Copyright &copy; 2023</span>
-                      </div>
+
+                                            © 2023 Powered by <a href="https://www.kundananjicreations.com/" target="_blank">Kundananji Creations Limited</a>
+
+                      
                  </div>
              </footer>
              <!-- End of Footer -->

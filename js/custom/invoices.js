@@ -172,6 +172,116 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   localStorage.setItem("table_invoices_id",tableId);
 }
 
+
+//declare fields in scope
+
+/**
+*
+*function to view items for permission dashboard
+*
+ **/
+let viewInvoices_admin=(data)=>{
+//assign global fields current values
+  loader(divPageContent);
+  $.ajax({
+    url: "pages/view-invoices-_admin.php",
+    type: "post",
+    data:data,
+    success: (data)=>{
+      divPageContent.html(data);
+    }
+  });
+  };
+let addNewInvoices_admin=(data)=>{
+  $('#dataInputModalBody').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Loading... Please wait...</div>');
+  $('#dataInputModal').modal('show');
+  $.ajax({
+    url: "forms/invoices-_admin-form.php",
+    type: "get",
+    data: data, 
+    success: (data)=>{
+      $('#dataInputModalBody').html(data);
+      initializePlugins();
+      var lastDate = localStorage.getItem('_date_cache_');
+      $('.datepicker').datepicker({
+        format:'dd/mm/yyyy',
+        todayBtn:'linked',
+        defaultViewDate:isEmpty(lastDate)?'today':lastDate,
+      }) ;
+    }
+  });
+}
+
+ let submitFormInvoices_admin = (e,args) =>{
+  e.preventDefault();
+  let oForm = document.getElementById('form-invoices');
+  let elements = oForm.elements;
+  let data = {};
+  let tinyFields = [];
+  for(let i=0; i<elements.length; i++){
+    let element = elements[i];
+    
+    if(tinyFields.indexOf(element.name)!=-1){
+      data[element.name] =  tinymce.activeEditor.getContent();
+    }else{
+      data[element.name]=element.value;
+    }
+    console.log('invoices',element);
+  };
+  console.log('invoices',data);
+  $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
+  $('#form-submit-button').prop('disabled', true);
+  $.ajax({
+    url: "scripts/submit-invoices-_admin-form.php",
+    type: "post",
+    dataType:"json",
+    data:data,
+    success: (resp)=>{
+      $('#form-submit-button').prop('disabled', false);
+      if(resp.status == "success"){
+        $('#dataInputModal').modal('hide');
+        $('#form-submit-feedback').html('<div class="alert alert-success"><i class="fa fa-check"></i> '+data.message+'</div>');
+                viewInvoices_admin(args);
+        swal(resp.title,resp.message,'success');
+      }else{
+        $('#form-submit-feedback').html('<div class="alert alert-danger"><i class="fa fa-times"></i> '+resp.message+'</div>');
+        swal(resp.title,resp.message,'warning');
+      }
+    }
+  });
+}
+
+/**
+/*
+/* function to delete item 
+/*
+**/
+ let deleteInvoices_admin = (invoicesId, args) =>{
+  swal({
+    title:" Are you sure you want to delete this item?",
+    text: "If you are sure you want to delete; proceed and click okay below. Otherwise, cancel to abort.",
+    type: "warning",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    showLoaderOnConfirm: true,
+  },  ()=> {
+    $.ajax({
+      url: "scripts/delete-invoices-item.php",
+      type: "post",
+      dataType: "json",
+      data:{invoicesId: invoicesId},
+      success: (data)=>{
+        if(data.status == "success"){
+          viewInvoices_admin(args);
+                    swal(data.title,data.message,'success');
+      }else{
+          swal(data.title,data.message,'warning');
+        }
+      }
+    });
+  });
+};
+
 let divPageContent = $('#page-content');
 let viewInvoices=( INVOICE_ID)=>{
   let viewInModal = $('#link-view-invoices').data('viewInModal'); 
@@ -295,5 +405,9 @@ $(document).ready(()=>{
    submitFormInvoices : submitFormInvoices, 
    uploadFile : uploadFile, 
    deleteFile : deleteFile, 
+   viewInvoices_admin : viewInvoices_admin, 
+    addNewInvoices_admin :  addNewInvoices_admin, 
+   submitFormInvoices_admin : submitFormInvoices_admin, 
+   deleteInvoices_admin : deleteInvoices_admin, 
 }
 })(jQuery); // End of use strict

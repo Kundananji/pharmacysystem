@@ -15,10 +15,11 @@ class MenuDao{
     $target=  $menu->getTarget();
     $parentId=  $menu->getParentId();
     $profileId=  $menu->getProfileId();
+    $idName=  $menu->getIdName();
     try{
-      $sql="INSERT INTO menu(`id`,`icon`,`name`,`label`,`url`,`target`,`parentId`,`profileId`) VALUES(?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO menu(`id`,`icon`,`name`,`label`,`url`,`target`,`parentId`,`profileId`,`idName`) VALUES(?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issssiii",$id,$icon,$name,$label,$url,$target,$parentId,$profileId);
+      $stmt->bind_param("issssiiis",$id,$icon,$name,$label,$url,$target,$parentId,$profileId,$idName);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -57,10 +58,11 @@ class MenuDao{
     $target=  $menu->getTarget();
     $parentId=  $menu->getParentId();
     $profileId=  $menu->getProfileId();
+    $idName=  $menu->getIdName();
     try{
-      $sql="UPDATE menu SET `icon`=?,`name`=?,`label`=?,`url`=?,`target`=?,`parentId`=?,`profileId`=? WHERE id =?";
+      $sql="UPDATE menu SET `icon`=?,`name`=?,`label`=?,`url`=?,`target`=?,`parentId`=?,`profileId`=?,`idName`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssssiiii",$icon,$name,$label,$url,$target,$parentId,$profileId,$id);
+      $stmt->bind_param("ssssiiisi",$icon,$name,$label,$url,$target,$parentId,$profileId,$idName,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -310,6 +312,7 @@ class MenuDao{
       $menu->setTarget($row['target']);
       $menu->setParentId($row['parentId']);
       $menu->setProfileId($row['profileId']);
+      $menu->setIdName($row['idName']);
     return $menu;
   }
 }

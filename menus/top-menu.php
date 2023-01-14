@@ -12,10 +12,10 @@
 </a>
 
 <?php
-include("daos/_alternative-profile-dao.php");
-include("classes/_alternative-profile.php");
-include("daos/_profile-dao.php");
-include("classes/_profile.php");
+include_once("daos/_alternative-profile-dao.php");
+include_once("classes/_alternative-profile.php");
+include_once("daos/_profile-dao.php");
+include_once("classes/_profile.php");
 $alternativeProfileDao = new AlternativeProfiledao();
 $profileDao = new Profiledao();
 $currentProfile = $profileDao->select($_SESSION['user_profile_id']);

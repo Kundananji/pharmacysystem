@@ -16,8 +16,8 @@ include_once("classes/_profile.php");
 include_once("classes/menu-target.php");
 include_once("daos/menu-target-dao.php");
 
-include("daos/menu-dao.php");
-include("classes/menu.php");
+include_once("daos/menu-dao.php");
+include_once("classes/menu.php");
 include_once("config/database.php");
 
 $menuDao = new MenuDao();
@@ -53,8 +53,9 @@ if(isset($_SESSION['user_profile_id'])){
 
                         <?php
                           foreach($children as $child){
+                            $target = $menuTargetDao->select($child->getTarget());
                             ?>
-                                 <a class="collapse-item" href="<?php echo $child->getUrl() ?>" id="<?php echo $child->getIdName() ?>" target="<?php echo $child->getTarget() ?>"><?php echo $child->getLabel() ?></a>
+                                 <a class="collapse-item" href="<?php echo $child->getUrl() ?>" id="<?php echo $child->getIdName() ?>" <?php echo $target!=null?'target="'.$target->getName().'"':"" ?>><?php echo $child->getLabel() ?></a>
                             <?php
                           }
 
@@ -65,8 +66,6 @@ if(isset($_SESSION['user_profile_id'])){
                 </div>
             </li> 
 
-
-
                 <?php
 
             }
@@ -74,7 +73,7 @@ if(isset($_SESSION['user_profile_id'])){
                 //no children
                 ?>
                  <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $menu->getUrl()?>" target="<?php echo $target->getName()?>" id="<?php echo $child->getIdName() ?>">
+                    <a class="nav-link" href="<?php echo $menu->getUrl()?>" <?php echo $target!=null?'target="'.$target->getName().'"':"" ?> id="<?php echo $menu->getIdName() ?>">
                         <em class="<?php echo $menu->getIcon() ?>"></em>
                         <span><?php echo $menu->getLabel() ?></span>
                     </a>

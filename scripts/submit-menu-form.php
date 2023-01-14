@@ -11,20 +11,11 @@ $menuEdit = new Menu();
 if(!isset($_POST["id"]) || $_POST["id"]==''){ 
   exit(json_encode(array("title"=>"id required","status"=>"error","message"=>"The field id is required")));
 }
-if(!isset($_POST["icon"]) || $_POST["icon"]==''){ 
-  exit(json_encode(array("title"=>"icon required","status"=>"error","message"=>"The field icon is required")));
-}
 if(!isset($_POST["name"]) || $_POST["name"]==''){ 
   exit(json_encode(array("title"=>"name required","status"=>"error","message"=>"The field name is required")));
 }
 if(!isset($_POST["label"]) || $_POST["label"]==''){ 
   exit(json_encode(array("title"=>"label required","status"=>"error","message"=>"The field label is required")));
-}
-if(!isset($_POST["url"]) || $_POST["url"]==''){ 
-  exit(json_encode(array("title"=>"url required","status"=>"error","message"=>"The field url is required")));
-}
-if(!isset($_POST["target"]) || $_POST["target"]==''){ 
-  exit(json_encode(array("title"=>"target required","status"=>"error","message"=>"The field target is required")));
 }
 if(!isset($_POST["profileId"]) || $_POST["profileId"]==''){ 
   exit(json_encode(array("title"=>"profileId required","status"=>"error","message"=>"The field profileId is required")));
@@ -38,6 +29,7 @@ $menuEdit->setUrl(!isset($_POST["url"]) || $_POST["url"]==""?NULL:filter_var($_P
 $menuEdit->setTarget(!isset($_POST["target"]) || $_POST["target"]==""?NULL:filter_var($_POST["target"],FILTER_SANITIZE_NUMBER_INT));
 $menuEdit->setParentId(!isset($_POST["parentId"]) || $_POST["parentId"]==""?NULL:filter_var($_POST["parentId"],FILTER_SANITIZE_NUMBER_INT));
 $menuEdit->setProfileId(!isset($_POST["profileId"]) || $_POST["profileId"]==""?NULL:filter_var($_POST["profileId"],FILTER_SANITIZE_NUMBER_INT));
+$menuEdit->setIdName(!isset($_POST["idName"]) || $_POST["idName"]==""?NULL:filter_var($_POST["idName"],FILTER_SANITIZE_STRING));
 
 try{
   if(isset($_POST["id"]) && (int)$_POST["id"] > 0){
