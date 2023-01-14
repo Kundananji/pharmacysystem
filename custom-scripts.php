@@ -4,6 +4,7 @@
 <script type="text/javascript" src="js/custom/menu.js?v=1673693203"></script>
 <script type="text/javascript" src="js/custom/privilege.js?v=1673693203"></script>
 <script type="text/javascript" src="js/custom/users.js?v=1673693203"></script>
+<script type="text/javascript" src="js/custom/medicines.js?v=1673693204"></script>
 <script>
   $(document).ready(()=>{
     <?php if(sizeof($_GET)<2){ ?>
