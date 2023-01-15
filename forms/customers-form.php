@@ -51,12 +51,12 @@ if(isset($ID)){
 <div class="form-group input-customers--c-o-n-t-a-c-t--n-u-m-b-e-r">
 
                  <?php
-                  $readonly = in_array('CONTACT_NUMBER',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('contact_number',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($customersEdit->getID()!=null){ $defaultValues['CONTACT_NUMBER']=$customersEdit->getContactNumber();};
+                  if($customersEdit->getID()!=null){ $defaultValues['contact_number']=$customersEdit->getContactNumber();};
                   ?>
                   <label for="input-customers--c-o-n-t-a-c-t--n-u-m-b-e-r">Contact&nbsp;Number*</label>
-  <input type="text" name="contactNumber" id="input-customers--c-o-n-t-a-c-t--n-u-m-b-e-r" class="form-control " placeholder="Enter Contact&nbsp;Number " value="<?php echo null!==($customersEdit->getContactNumber())?($customersEdit->getContactNumber()):(isset($defaultValues['CONTACT_NUMBER'])?($defaultValues['CONTACT_NUMBER']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="contactNumber" id="input-customers--c-o-n-t-a-c-t--n-u-m-b-e-r" class="form-control " placeholder="Enter Contact&nbsp;Number " value="<?php echo null!==($customersEdit->getContactNumber())?($customersEdit->getContactNumber()):(isset($defaultValues['contact_number'])?($defaultValues['contact_number']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -75,24 +75,24 @@ if(isset($ID)){
 <div class="form-group input-customers--d-o-c-t-o-r--n-a-m-e">
 
                  <?php
-                  $readonly = in_array('DOCTOR_NAME',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('doctor_name',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($customersEdit->getID()!=null){ $defaultValues['DOCTOR_NAME']=$customersEdit->getDoctorName();};
+                  if($customersEdit->getID()!=null){ $defaultValues['doctor_name']=$customersEdit->getDoctorName();};
                   ?>
                   <label for="input-customers--d-o-c-t-o-r--n-a-m-e">Doctor&nbsp;Name*</label>
-  <input type="text" name="doctorName" id="input-customers--d-o-c-t-o-r--n-a-m-e" class="form-control " placeholder="Enter Doctor&nbsp;Name " value="<?php echo null!==($customersEdit->getDoctorName())?($customersEdit->getDoctorName()):(isset($defaultValues['DOCTOR_NAME'])?($defaultValues['DOCTOR_NAME']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="doctorName" id="input-customers--d-o-c-t-o-r--n-a-m-e" class="form-control " placeholder="Enter Doctor&nbsp;Name " value="<?php echo null!==($customersEdit->getDoctorName())?($customersEdit->getDoctorName()):(isset($defaultValues['doctor_name'])?($defaultValues['doctor_name']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
 <div class="form-group input-customers--d-o-c-t-o-r--a-d-d-r-e-s-s">
 
                  <?php
-                  $readonly = in_array('DOCTOR_ADDRESS',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('doctor_address',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($customersEdit->getID()!=null){ $defaultValues['DOCTOR_ADDRESS']=$customersEdit->getDoctorAddress();};
+                  if($customersEdit->getID()!=null){ $defaultValues['doctor_address']=$customersEdit->getDoctorAddress();};
                   ?>
                   <label for="input-customers--d-o-c-t-o-r--a-d-d-r-e-s-s">Doctor&nbsp;Address*</label>
-  <input type="text" name="doctorAddress" id="input-customers--d-o-c-t-o-r--a-d-d-r-e-s-s" class="form-control " placeholder="Enter Doctor&nbsp;Address " value="<?php echo null!==($customersEdit->getDoctorAddress())?($customersEdit->getDoctorAddress()):(isset($defaultValues['DOCTOR_ADDRESS'])?($defaultValues['DOCTOR_ADDRESS']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="doctorAddress" id="input-customers--d-o-c-t-o-r--a-d-d-r-e-s-s" class="form-control " placeholder="Enter Doctor&nbsp;Address " value="<?php echo null!==($customersEdit->getDoctorAddress())?($customersEdit->getDoctorAddress()):(isset($defaultValues['doctor_address'])?($defaultValues['doctor_address']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

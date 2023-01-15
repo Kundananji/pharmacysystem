@@ -283,14 +283,14 @@ let addNewInvoices_admin=(data)=>{
 };
 
 let divPageContent = $('#page-content');
-let viewInvoices=( INVOICE_ID)=>{
+let viewInvoices=( invoice_id)=>{
   let viewInModal = $('#link-view-invoices').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-invoices.php",
     type: "post",
     data: { 
-      INVOICE_ID:INVOICE_ID
+      invoice_id:invoice_id
      },
     success: (data)=>{
         divPageContent.html(data);

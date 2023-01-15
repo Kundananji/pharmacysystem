@@ -63,24 +63,24 @@ if(isset($ID)){
 <div class="form-group input-medicines-stock--e-x-p-i-r-y--d-a-t-e">
 
                  <?php
-                  $readonly = in_array('EXPIRY_DATE',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('expiry_date',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesStockEdit->getID()!=null){ $defaultValues['EXPIRY_DATE']=$medicinesStockEdit->getExpiryDate();};
+                  if($medicinesStockEdit->getID()!=null){ $defaultValues['expiry_date']=$medicinesStockEdit->getExpiryDate();};
                   ?>
                   <label for="input-medicines-stock--e-x-p-i-r-y--d-a-t-e">Expiry&nbsp;Date*</label>
-  <input type="text" name="expiryDate" id="input-medicines-stock--e-x-p-i-r-y--d-a-t-e" class="form-control " placeholder="Enter Expiry&nbsp;Date " value="<?php echo null!==($medicinesStockEdit->getExpiryDate())?($medicinesStockEdit->getExpiryDate()):(isset($defaultValues['EXPIRY_DATE'])?($defaultValues['EXPIRY_DATE']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="expiryDate" id="input-medicines-stock--e-x-p-i-r-y--d-a-t-e" class="form-control " placeholder="Enter Expiry&nbsp;Date " value="<?php echo null!==($medicinesStockEdit->getExpiryDate())?($medicinesStockEdit->getExpiryDate()):(isset($defaultValues['expiry_date'])?($defaultValues['expiry_date']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
 <div class="form-group input-medicines-stock--q-u-a-n-t-i-t-y">
 
                  <?php
-                  $readonly = in_array('QUANTITY',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('quantity',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesStockEdit->getID()!=null){ $defaultValues['QUANTITY']=$medicinesStockEdit->getQUANTITY();};
+                  if($medicinesStockEdit->getID()!=null){ $defaultValues['quantity']=$medicinesStockEdit->getquantity();};
                   ?>
                   <label for="input-medicines-stock--q-u-a-n-t-i-t-y">&nbsp;Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y*</label>
-  <input type="number" name="qUANTITY" id="input-medicines-stock--q-u-a-n-t-i-t-y" class="form-control " placeholder="Enter &nbsp;Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y " value="<?php echo null!==($medicinesStockEdit->getQUANTITY())?($medicinesStockEdit->getQUANTITY()):(isset($defaultValues['QUANTITY'])?($defaultValues['QUANTITY']): "");?>" required <?php echo $readonly;?>   />
+  <input type="number" name="quantity" id="input-medicines-stock--q-u-a-n-t-i-t-y" class="form-control " placeholder="Enter &nbsp;Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y " value="<?php echo null!==($medicinesStockEdit->getquantity())?($medicinesStockEdit->getquantity()):(isset($defaultValues['quantity'])?($defaultValues['quantity']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

@@ -32,7 +32,7 @@ function updateMedicineStock(id) {
     batch_id.focus();
   else if(!checkExpiry(expiry_date.value, "expiry_date_error"))
     expiry_date.focus();
-  else if(!checkQuantity(quantity.value, "quantity_error"))
+  else if(!checkquantity(quantity.value, "quantity_error"))
     quantity.focus();
   else if(!checkValue(mrp.value, "mrp_error"))
     mrp.focus();

@@ -91,7 +91,7 @@ function searchPurchase(text, tag) {
     document.getElementById("by_voucher_number").value = "";
     document.getElementById("by_purchase_date").value = "";
   }
-  if(tag == "PURCHASE_DATE") {
+  if(tag == "purchase_date") {
     document.getElementById("by_suppliers_name").value = "";
     document.getElementById("by_voucher_number").value = "";
     document.getElementById("by_invoice_number").value = "";

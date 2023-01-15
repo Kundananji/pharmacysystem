@@ -63,12 +63,12 @@ if(isset($ID)){
 <div class="form-group input-suppliers--c-o-n-t-a-c-t--n-u-m-b-e-r">
 
                  <?php
-                  $readonly = in_array('CONTACT_NUMBER',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('contact_number',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($suppliersEdit->getID()!=null){ $defaultValues['CONTACT_NUMBER']=$suppliersEdit->getContactNumber();};
+                  if($suppliersEdit->getID()!=null){ $defaultValues['contact_number']=$suppliersEdit->getContactNumber();};
                   ?>
                   <label for="input-suppliers--c-o-n-t-a-c-t--n-u-m-b-e-r">Contact&nbsp;Number*</label>
-  <input type="text" name="contactNumber" id="input-suppliers--c-o-n-t-a-c-t--n-u-m-b-e-r" class="form-control " placeholder="Enter Contact&nbsp;Number " value="<?php echo null!==($suppliersEdit->getContactNumber())?($suppliersEdit->getContactNumber()):(isset($defaultValues['CONTACT_NUMBER'])?($defaultValues['CONTACT_NUMBER']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="contactNumber" id="input-suppliers--c-o-n-t-a-c-t--n-u-m-b-e-r" class="form-control " placeholder="Enter Contact&nbsp;Number " value="<?php echo null!==($suppliersEdit->getContactNumber())?($suppliersEdit->getContactNumber()):(isset($defaultValues['contact_number'])?($defaultValues['contact_number']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

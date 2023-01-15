@@ -23,7 +23,7 @@
       $username = $_GET["uname"];
       $password = $_GET["pswd"];
 
-      $query = "SELECT * FROM users WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+      $query = "SELECT * FROM users WHERE USERname = '$username' AND PASSWORD = '$password'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       if($row)  {
@@ -45,7 +45,7 @@
       $username = $_GET["uname"];
       $password = $_GET["pswd"];
 
-      $query = "SELECT * FROM users WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+      $query = "SELECT * FROM users WHERE USERname = '$username' AND PASSWORD = '$password'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       if($row)  {
@@ -71,22 +71,22 @@
       $username = $_GET["username"];
       $password = $_GET["password"];
 
-      $query = "INSERT INTO users (PHARMACY_NAME, ADDRESS, EMAIL, CONTACT_NUMBER, USERNAME, PASSWORD, IS_LOGGED_IN) VALUES('$pharmacy_name', '$address', '$email', '$contact_number', '$username', '$password', 'false')";
+      $query = "INSERT INTO users (PHARMACY_name, address, email, contact_number, USERname, PASSWORD, IS_LOGGED_IN) VALUES('$pharmacy_name', '$address', '$email', '$contact_number', '$username', '$password', 'false')";
       $result = mysqli_query($con, $query);
       echo ($result) ? "true" : "false";
     }
   }
 
   if(isset($_GET['action']) && $_GET['action'] == 'verify_email_number')
-    verifyEmailNumber();
+    verifyemailNumber();
 
-  function verifyEmailNumber() {
+  function verifyemailNumber() {
     require "db_connection.php";
     if($con) {
       $email = $_GET["email"];
       $contact_number = $_GET["contact_number"];
 
-      $query = "SELECT * FROM users WHERE EMAIL = '$email' AND CONTACT_NUMBER = '$contact_number'";
+      $query = "SELECT * FROM users WHERE email = '$email' AND contact_number = '$contact_number'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "true" : "false";
@@ -104,7 +104,7 @@
       $email = $_GET["email"];
       $contact_number = $_GET["contact_number"];
 
-      $query = "UPDATE users SET USERNAME = '$username', PASSWORD = '$password' WHERE EMAIL = '$email' AND CONTACT_NUMBER = '$contact_number'";
+      $query = "UPDATE users SET USERname = '$username', PASSWORD = '$password' WHERE email = '$email' AND contact_number = '$contact_number'";
       $result = mysqli_query($con, $query);
       echo ($result) ? "true" : "false";
     }
@@ -137,7 +137,7 @@
       $contact_number = $_GET["contact_number"];
       $username = $_GET["username"];
 
-      $query = "UPDATE users SET PHARMACY_NAME = '$pharmacy_name', ADDRESS = '$address', EMAIL = '$email', CONTACT_NUMBER = '$contact_number', USERNAME = '$username'";
+      $query = "UPDATE users SET PHARMACY_name = '$pharmacy_name', address = '$address', email = '$email', contact_number = '$contact_number', USERname = '$username'";
       $result = mysqli_query($con, $query);
       echo ($result) ? "Details updated..." : "Oops! Somthing wrong happend...";
     }

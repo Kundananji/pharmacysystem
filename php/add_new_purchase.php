@@ -21,7 +21,7 @@
   function isSupplier($name) {
     require "db_connection.php";
     if($con) {
-      $query = "SELECT * FROM suppliers WHERE UPPER(NAME) = '$name'";
+      $query = "SELECT * FROM suppliers WHERE UPPER(name) = '$name'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "true" : "false";
@@ -31,7 +31,7 @@
   function isInvoiceExist($invoice_number) {
     require "db_connection.php";
     if($con) {
-      $query = "SELECT * FROM purchases WHERE INVOICE_NUMBER = $invoice_number";
+      $query = "SELECT * FROM purchases WHERE invoice_number = $invoice_number";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "true" : "false";
@@ -41,7 +41,7 @@
   function isNewMedicine($name, $packing) {
     require "db_connection.php";
     if($con) {
-      $query = "SELECT * FROM medicines WHERE UPPER(NAME) = '$name' AND UPPER(PACKING) = '$packing'";
+      $query = "SELECT * FROM medicines WHERE UPPER(name) = '$name' AND UPPER(packing) = '$packing'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       echo ($row) ? "false" : "true";
@@ -58,16 +58,16 @@
     $rate = $_GET['rate'];
     $invoice_number = $_GET['invoice_number'];
     if($con) {
-      $query = "SELECT * FROM medicines_stock WHERE UPPER(NAME) = '".strtoupper($name)."' AND UPPER(BATCH_ID) = '$batch_id'";
+      $query = "SELECT * FROM medicines_stock WHERE UPPER(name) = '".strtoupper($name)."' AND UPPER(batch_id) = '$batch_id'";
       $result = mysqli_query($con, $query);
       $row = mysqli_fetch_array($result);
       if($row) {
-        $new_quantity = $row['QUANTITY'] + $quantity;
-        $query = "UPDATE medicines_stock SET QUANTITY = $new_quantity WHERE UPPER(NAME) = '".strtoupper($name)."' AND UPPER(BATCH_ID) = '$batch_id'";
+        $new_quantity = $row['quantity'] + $quantity;
+        $query = "UPDATE medicines_stock SET quantity = $new_quantity WHERE UPPER(name) = '".strtoupper($name)."' AND UPPER(batch_id) = '$batch_id'";
         $result = mysqli_query($con, $query);
       }
       else {
-        $query = "INSERT INTO medicines_stock (NAME, BATCH_ID, EXPIRY_DATE, QUANTITY, MRP, RATE, INVOICE_NUMBER) VALUES('$name', '$batch_id', '$expiry_date', $quantity, $mrp, $rate, $invoice_number)";
+        $query = "INSERT INTO medicines_stock (name, batch_id, expiry_date, quantity, mrp, rate, invoice_number) VALUES('$name', '$batch_id', '$expiry_date', $quantity, $mrp, $rate, $invoice_number)";
         $result = mysqli_query($con, $query);
       }
     }
@@ -80,10 +80,10 @@
     $payment_type = $_GET['payment_type'];
     $invoice_date = $_GET['invoice_date'];
     $grand_total = $_GET['grand_total'];
-    $payment_status = ($payment_type == "Payment Due") ? "DUE" : "PAID";
+    $payment_status = ($payment_type == "Payment Due") ? "DUE" : "PAid";
 
     if($con) {
-      $query = "INSERT INTO purchases (SUPPLIER_NAME, INVOICE_NUMBER, PURCHASE_DATE, TOTAL_AMOUNT, PAYMENT_STATUS) VALUES('$suppliers_name', $invoice_number, '$invoice_date', $grand_total, '$payment_status')";
+      $query = "INSERT INTO purchases (supplier_name, invoice_number, purchase_date, total_amount, payment_status) VALUES('$suppliers_name', $invoice_number, '$invoice_date', $grand_total, '$payment_status')";
       $result = mysqli_query($con, $query);
       if($result)
         echo "Purchase saved...";
@@ -98,7 +98,7 @@
       ?>
       <div class="row col col-md-12">
         <div class="col col-md-2">
-          <input type="text" class="form-control" placeholder="Medicine Name" name="medicine_name">
+          <input type="text" class="form-control" placeholder="Medicine name" name="medicine_name">
           <code class="text-danger small font-weight-bold float-right" id="medicine_name_error_<?php echo $row_number; ?>" style="display: none;"></code>
         </div>
         <div class="col col-md-1">
@@ -140,7 +140,7 @@
       <div class="row col col-md-8">
         <div class="col col-md-4"><label for="generic_name" class="font-weight-bold">&nbsp;If new medicine, generic name : </label></div>
         <div class="col col-md-8">
-          <input type="text" class="form-control" placeholder="Generic Name" name="generic_name">
+          <input type="text" class="form-control" placeholder="Generic name" name="generic_name">
           <code class="text-danger small font-weight-bold float-right" id="generic_name_error_<?php echo $row_number; ?>" style="display: none;"></code>
         </div>
       </div>

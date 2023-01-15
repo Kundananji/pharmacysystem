@@ -185,7 +185,7 @@ function addPurchase() {
       else if(!checkExpiry(expiry_date.value, expiry_date_error.getAttribute('id')) || checkExpiry(expiry_date.value, expiry_date_error.getAttribute('id')) == -1)
         expiry_date.focus();
 
-      else if(!checkQuantity(quantity.value, quantity_error.getAttribute('id')))
+      else if(!checkquantity(quantity.value, quantity_error.getAttribute('id')))
         quantity.focus();
 
       else if(quantity.value == 0) {

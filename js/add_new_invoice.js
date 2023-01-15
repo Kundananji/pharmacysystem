@@ -65,8 +65,8 @@ function medicineOptions(text, id) {
 
 function fillFields(medicine_name, id) {
   fill(medicine_name, 'batch_id_' + id, 'BATCH_ID');
-  fill(medicine_name, 'available_quantity_' + id, 'QUANTITY');
-  fill(medicine_name, 'expiry_date_' + id, 'EXPIRY_DATE');
+  fill(medicine_name, 'available_quantity_' + id, 'quantity');
+  fill(medicine_name, 'expiry_date_' + id, 'expiry_date');
   fill(medicine_name, 'mrp_' + id, 'MRP');
   getTotal(id);
   var expiry_date = document.getElementById('expiry_date_' + id).value;
@@ -76,7 +76,7 @@ function fillFields(medicine_name, id) {
   else
     return;
   var available_quantity = document.getElementById("available_quantity_" + id).value;
-  if(!checkAvailableQuantity(available_quantity, id))
+  if(!checkAvailablequantity(available_quantity, id))
     return;
   document.getElementById("medicine_name_" + id).blur();
 }
@@ -94,7 +94,7 @@ function fill(name, field_name, column) {
 function getTotal(id) {
   var mrp = document.getElementById("mrp_" + id).value;
   var qty = document.getElementById("quantity_" + id).value;
-  if(!checkQuantity(qty, 'quantity_error_' + id)) return;
+  if(!checkquantity(qty, 'quantity_error_' + id)) return;
   var discount = document.getElementById("discount_" + id).value;
   if(!checkValue(discount, 'discount_error_' + id)) return;
   var total = document.getElementById("total_" + id);
@@ -121,7 +121,7 @@ function getTotal(id) {
   document.getElementById("net_total").value = net_total;
 }
 
-function checkAvailableQuantity(value, id) {
+function checkAvailablequantity(value, id) {
   var medicine_name = document.getElementById("medicine_name_" + id).value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -247,7 +247,7 @@ function addInvoice() {
       //alert(quantity.getAttribute('id').slice(9, 10));
 
       //alert(medicine_name.value + " " + batch_id.value + " " + expiry_date.value + " " + quantity.value + " " + mrp.value + " " + discount.value + " " +total.value);
-      var isAvailable = checkAvailableQuantity(quantity.value, quantity.getAttribute('id').slice(9, 10))
+      var isAvailable = checkAvailablequantity(quantity.value, quantity.getAttribute('id').slice(9, 10))
       //alert(medicine_name.value);
       if(!notNull(medicine_name.value, medicine_name_error.getAttribute('id')))
         medicine_name.focus();
@@ -266,7 +266,7 @@ function addInvoice() {
         medicine_name.focus();
       }
 
-      else if(!checkQuantity(quantity.value, quantity_error.getAttribute('id')))
+      else if(!checkquantity(quantity.value, quantity_error.getAttribute('id')))
         quantity.focus();
 
       else if(quantity.value == 0) {

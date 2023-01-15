@@ -28,19 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `customers` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(20) COLLATE utf16_bin NOT NULL,
-  `CONTACT_NUMBER` varchar(10) COLLATE utf16_bin NOT NULL,
-  `ADDRESS` varchar(100) COLLATE utf16_bin NOT NULL,
-  `DOCTOR_NAME` varchar(20) COLLATE utf16_bin NOT NULL,
-  `DOCTOR_ADDRESS` varchar(100) COLLATE utf16_bin NOT NULL
+  `id` int(11) NOT NULL,
+  `name` varchar(20) COLLATE utf16_bin NOT NULL,
+  `contact_number` varchar(10) COLLATE utf16_bin NOT NULL,
+  `address` varchar(100) COLLATE utf16_bin NOT NULL,
+  `doctor_name` varchar(20) COLLATE utf16_bin NOT NULL,
+  `doctor_address` varchar(100) COLLATE utf16_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`ID`, `NAME`, `CONTACT_NUMBER`, `ADDRESS`, `DOCTOR_NAME`, `DOCTOR_ADDRESS`) VALUES
+INSERT INTO `customers` (`id`, `name`, `contact_number`, `address`, `doctor_name`, `doctor_address`) VALUES
 (4, 'Kiran Suthar', '1234567690', 'Andheri East', 'Anshari', 'Andheri East'),
 (6, 'Aditya', '7365687269', 'Virar West', 'Xyz', 'Virar West'),
 (11, 'Shivam Tiwari', '6862369896', 'Dadar West', 'Dr Kapoor', 'Dadar East'),
@@ -55,19 +55,19 @@ INSERT INTO `customers` (`ID`, `NAME`, `CONTACT_NUMBER`, `ADDRESS`, `DOCTOR_NAME
 --
 
 CREATE TABLE `invoices` (
-  `INVOICE_ID` int(11) NOT NULL,
-  `NET_TOTAL` double NOT NULL DEFAULT 0,
-  `INVOICE_DATE` date NOT NULL DEFAULT current_timestamp(),
-  `CUSTOMER_ID` int(11) NOT NULL,
-  `TOTAL_AMOUNT` double NOT NULL,
-  `TOTAL_DISCOUNT` double NOT NULL
+  `invoice_id` int(11) NOT NULL,
+  `net_total` double NOT NULL DEFAULT 0,
+  `invoice_date` date NOT NULL DEFAULT current_timestamp(),
+  `customer_id` int(11) NOT NULL,
+  `total_amount` double NOT NULL,
+  `total_discount` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 --
 -- Dumping data for table `invoices`
 --
 
-INSERT INTO `invoices` (`INVOICE_ID`, `NET_TOTAL`, `INVOICE_DATE`, `CUSTOMER_ID`, `TOTAL_AMOUNT`, `TOTAL_DISCOUNT`) VALUES
+INSERT INTO `invoices` (`invoice_id`, `net_total`, `invoice_date`, `customer_id`, `total_amount`, `total_discount`) VALUES
 (2, 2626, '2021-10-19', 6, 2626, 0),
 (3, 5282, '2023-01-03', 15, 5282, 0),
 (4, 30, '2023-01-03', 15, 30, 0);
@@ -79,18 +79,18 @@ INSERT INTO `invoices` (`INVOICE_ID`, `NET_TOTAL`, `INVOICE_DATE`, `CUSTOMER_ID`
 --
 
 CREATE TABLE `medicines` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `PACKING` varchar(20) COLLATE utf16_bin NOT NULL,
-  `GENERIC_NAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `SUPPLIER_NAME` varchar(100) COLLATE utf16_bin NOT NULL
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf16_bin NOT NULL,
+  `packing` varchar(20) COLLATE utf16_bin NOT NULL,
+  `generic_name` varchar(100) COLLATE utf16_bin NOT NULL,
+  `supplier_name` varchar(100) COLLATE utf16_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 --
 -- Dumping data for table `medicines`
 --
 
-INSERT INTO `medicines` (`ID`, `NAME`, `PACKING`, `GENERIC_NAME`, `SUPPLIER_NAME`) VALUES
+INSERT INTO `medicines` (`id`, `name`, `packing`, `generic_name`, `supplier_name`) VALUES
 (1, 'Nicip Plus', '10tab', 'Paracetamole', 'BDPL PHARMA'),
 (2, 'Crosin', '10tab', 'Hdsgvkvajkcbja', 'Kiran Pharma'),
 (4, 'Dolo 650', '15tab', 'paracetamole', 'BDPL PHARMA'),
@@ -104,20 +104,20 @@ INSERT INTO `medicines` (`ID`, `NAME`, `PACKING`, `GENERIC_NAME`, `SUPPLIER_NAME
 --
 
 CREATE TABLE `medicines_stock` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `BATCH_ID` varchar(20) COLLATE utf16_bin NOT NULL,
-  `EXPIRY_DATE` varchar(10) COLLATE utf16_bin NOT NULL,
-  `QUANTITY` int(11) NOT NULL,
-  `MRP` double NOT NULL,
-  `RATE` double NOT NULL
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf16_bin NOT NULL,
+  `batch_id` varchar(20) COLLATE utf16_bin NOT NULL,
+  `expiry_date` varchar(10) COLLATE utf16_bin NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `mrp` double NOT NULL,
+  `rate` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 --
 -- Dumping data for table `medicines_stock`
 --
 
-INSERT INTO `medicines_stock` (`ID`, `NAME`, `BATCH_ID`, `EXPIRY_DATE`, `QUANTITY`, `MRP`, `RATE`) VALUES
+INSERT INTO `medicines_stock` (`id`, `name`, `batch_id`, `expiry_date`, `quantity`, `mrp`, `rate`) VALUES
 (1, 'Crosin', 'CROS12', '12/34', 0, 2626, 26),
 (2, 'Gelusil', 'G327', '12/42', 0, 15, 12),
 (3, 'Dolo 650', 'DOLO327', '01/23', 1, 30, 24),
@@ -195,19 +195,19 @@ INSERT INTO `privilege` (`id`, `name`, `profileId`) VALUES
 --
 
 CREATE TABLE `purchases` (
-  `SUPPLIER_NAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `INVOICE_NUMBER` int(11) NOT NULL,
-  `VOUCHER_NUMBER` int(11) NOT NULL,
-  `PURCHASE_DATE` varchar(10) COLLATE utf16_bin NOT NULL,
-  `TOTAL_AMOUNT` double NOT NULL,
-  `PAYMENT_STATUS` varchar(20) COLLATE utf16_bin NOT NULL
+  `supplier_name` varchar(100) COLLATE utf16_bin NOT NULL,
+  `invoice_number` int(11) NOT NULL,
+  `voucher_number` int(11) NOT NULL,
+  `purchase_date` varchar(10) COLLATE utf16_bin NOT NULL,
+  `total_amount` double NOT NULL,
+  `payment_status` varchar(20) COLLATE utf16_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 --
 -- Dumping data for table `purchases`
 --
 
-INSERT INTO `purchases` (`SUPPLIER_NAME`, `INVOICE_NUMBER`, `VOUCHER_NUMBER`, `PURCHASE_DATE`, `TOTAL_AMOUNT`, `PAYMENT_STATUS`) VALUES
+INSERT INTO `purchases` (`supplier_name`, `invoice_number`, `voucher_number`, `purchase_date`, `total_amount`, `payment_status`) VALUES
 ('Kundananji Creations Limited', 11, 1, '2023-01-03', 180, 'PAID');
 
 -- --------------------------------------------------------
@@ -217,22 +217,22 @@ INSERT INTO `purchases` (`SUPPLIER_NAME`, `INVOICE_NUMBER`, `VOUCHER_NUMBER`, `P
 --
 
 CREATE TABLE `sales` (
-  `CUSTOMER_ID` int(11) NOT NULL,
-  `INVOICE_NUMBER` varchar(100) DEFAULT NULL,
-  `MEDICINE_NAME` varchar(100) DEFAULT NULL,
-  `BATCH_ID` varchar(100) DEFAULT NULL,
-  `EXPIRY_DATE` varchar(20) DEFAULT NULL,
-  `QUANTITY` int(11) DEFAULT NULL,
-  `MRP` double DEFAULT NULL,
-  `DISCOUNT` decimal(10,2) DEFAULT NULL,
-  `TOTAL` decimal(10,2) DEFAULT NULL
+  `customer_id` int(11) NOT NULL,
+  `invoice_number` varchar(100) DEFAULT NULL,
+  `medicine_name` varchar(100) DEFAULT NULL,
+  `batch_id` varchar(100) DEFAULT NULL,
+  `expiry_date` varchar(20) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `mrp` double DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL,
+  `total` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`CUSTOMER_ID`, `INVOICE_NUMBER`, `MEDICINE_NAME`, `BATCH_ID`, `EXPIRY_DATE`, `QUANTITY`, `MRP`, `DISCOUNT`, `TOTAL`) VALUES
+INSERT INTO `sales` (`customer_id`, `invoice_number`, `medicine_name`, `batch_id`, `expiry_date`, `quantity`, `mrp`, `discount`, `total`) VALUES
 (15, '4', 'Dolo 650', 'DOLO327', '01/23', 1, 30, '0.00', '30.00');
 
 -- --------------------------------------------------------
@@ -261,18 +261,18 @@ INSERT INTO `status` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `suppliers` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `EMAIL` varchar(100) COLLATE utf16_bin NOT NULL,
-  `CONTACT_NUMBER` varchar(10) COLLATE utf16_bin NOT NULL,
-  `ADDRESS` varchar(100) COLLATE utf16_bin NOT NULL
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf16_bin NOT NULL,
+  `email` varchar(100) COLLATE utf16_bin NOT NULL,
+  `contact_number` varchar(10) COLLATE utf16_bin NOT NULL,
+  `address` varchar(100) COLLATE utf16_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 --
 -- Dumping data for table `suppliers`
 --
 
-INSERT INTO `suppliers` (`ID`, `NAME`, `EMAIL`, `CONTACT_NUMBER`, `ADDRESS`) VALUES
+INSERT INTO `suppliers` (`id`, `name`, `email`, `contact_number`, `address`) VALUES
 (1, 'Desai Pharma', 'desai@gmail.com', '9948724242', 'Mahim East'),
 (2, 'BDPL PHARMA', 'bdpl@gmail.com', '8645632963', 'Santacruz West'),
 (9, 'Kiran Pharma', 'kiranpharma@gmail.com', '7638683637', 'Andheri East'),
@@ -396,6 +396,67 @@ CREATE TABLE `_user_tokens` (
   `expiry` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- ---------------------------------------
+--
+-- Table structure for `patients_details`
+--
+
+CREATE TABLE `patients_details` (
+  `id` int(11) NOT NULL,
+  `fileId` varchar(50) COLLATE utf16_bin NOT NULL,
+  `firstName` varchar(50) COLLATE utf16_bin NOT NULL,
+  `lastName` varchar(50) COLLATE utf16_bin NOT NULL,
+  `address` text COLLATE utf16_bin DEFAULT NULL,
+  `contactNumber` varchar(20) COLLATE utf16_bin DEFAULT NULL,
+  `dateOfBirth` datetime NOT NULL,
+  `nationality` varchar(50) COLLATE utf16_bin NOT NULL,
+  `status` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+--	---------------------------------------
+--
+-- Table structure for `regular_checkups`
+--
+
+CREATE TABLE `regular_checkups` (
+  `id` int(11) NOT NULL,
+  `patient_id` varchar(50) COLLATE utf16_bin NOT NULL,
+  `temperature` varchar(50) COLLATE utf16_bin NOT NULL,
+  `bloodPressure` varchar(50) COLLATE utf16_bin NOT NULL,
+  `weight` varchar(20) COLLATE utf16_bin NOT NULL,
+  `other` text COLLATE utf16_bin DEFAULT NULL,  
+  `status` int(10) NOT NULL,
+  `timeTested` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- ---------------------------------------
+--
+-- Table structure for `regular_checkups`
+--
+
+CREATE TABLE `procedures_taken` (
+  `id` int(11) NOT NULL,
+  `patient_id` varchar(50) COLLATE utf16_bin NOT NULL,
+  `department` varchar(50) COLLATE utf16_bin NOT NULL,
+  `procedureConducted` varchar(50) COLLATE utf16_bin NOT NULL,
+  `resultsDetails` text COLLATE utf16_bin DEFAULT NULL,  
+  `doctorsName` varchar(20) COLLATE utf16_bin NOT NULL,
+  `labTech` varchar(20) COLLATE utf16_bin NOT NULL,  
+  `fee` int(10) NOT NULL,
+  `timeTested` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- ---------------------------------------
+--
+-- Table structure for `hospital_procedures`
+--
+
+CREATE TABLE `hospital_procedures` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf16_bin NOT NULL,
+  `description` varchar(50) COLLATE utf16_bin NOT NULL,
+  `fee` varchar(50) COLLATE utf16_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 --
 -- Indexes for dumped tables
 --
@@ -404,26 +465,47 @@ CREATE TABLE `_user_tokens` (
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
+  --
+-- Indexes for table `patients_details`
+--
+ALTER TABLE `patients_details`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `regular_checkups`
+--
+ALTER TABLE `regular_checkups`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `procedures_taken`
+--
+ALTER TABLE `procedures_taken`
+  ADD PRIMARY KEY (`id`);
+
+  --
+-- Indexes for table `hospital_procedures`
+--
+ALTER TABLE `hospital_procedures`
+  ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `invoices`
 --
 ALTER TABLE `invoices`
-  ADD PRIMARY KEY (`INVOICE_ID`);
+  ADD PRIMARY KEY (`invoice_id`);
 
 --
 -- Indexes for table `medicines`
 --
 ALTER TABLE `medicines`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `medicines_stock`
 --
 ALTER TABLE `medicines_stock`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `BATCH_ID` (`BATCH_ID`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `batch_id` (`batch_id`);
 
 --
 -- Indexes for table `menu`
@@ -451,7 +533,7 @@ ALTER TABLE `privilege`
 -- Indexes for table `purchases`
 --
 ALTER TABLE `purchases`
-  ADD PRIMARY KEY (`VOUCHER_NUMBER`);
+  ADD PRIMARY KEY (`voucher_number`);
 
 --
 -- Indexes for table `status`
@@ -463,7 +545,7 @@ ALTER TABLE `status`
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -512,25 +594,25 @@ ALTER TABLE `_user_tokens`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `INVOICE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `medicines`
 --
 ALTER TABLE `medicines`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `medicines_stock`
 --
 ALTER TABLE `medicines_stock`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -554,7 +636,7 @@ ALTER TABLE `privilege`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `VOUCHER_NUMBER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `voucher_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -623,7 +705,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `_alternative_profile`
   ADD CONSTRAINT `fk_altprof_profid` FOREIGN KEY (`profileId`) REFERENCES `_profile` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_altprof_usrid` FOREIGN KEY (`userId`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_altprof_usrid` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `_profile`
@@ -636,7 +718,7 @@ ALTER TABLE `_profile`
 -- Constraints for table `_user_tokens`
 --
 ALTER TABLE `_user_tokens`
-  ADD CONSTRAINT `fk_tknsusr_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_tknsusr_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

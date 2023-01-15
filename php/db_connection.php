@@ -1,10 +1,10 @@
 <?php
   $SERVER = 'localhost';
-  $USERNAME = 'twishe5_pharmacy';
+  $USERname = 'twishe5_pharmacy';
   $PASSWORD = '1_4BdbO{ZG8C';
   $DB = 'twishe5_pharmacy';
 
-  @$con = mysqli_connect($SERVER, $USERNAME, $PASSWORD, $DB)
+  @$con = mysqli_connect($SERVER, $USERname, $PASSWORD, $DB)
   or
   die("<div class='text-danger text-center h5'>Oops, Unable to connect with database!</div>");
 

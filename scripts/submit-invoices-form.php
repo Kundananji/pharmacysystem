@@ -9,22 +9,22 @@ $invoicesEditDao = new InvoicesDao();
 $invoicesEdit = new Invoices();
 
 if(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==''){ 
-  exit(json_encode(array("title"=>"invoiceId required","status"=>"error","message"=>"The field INVOICE_ID is required")));
+  exit(json_encode(array("title"=>"invoiceId required","status"=>"error","message"=>"The field invoice_id is required")));
 }
 if(!isset($_POST["netTotal"]) || $_POST["netTotal"]==''){ 
-  exit(json_encode(array("title"=>"netTotal required","status"=>"error","message"=>"The field NET_TOTAL is required")));
+  exit(json_encode(array("title"=>"netTotal required","status"=>"error","message"=>"The field net_total is required")));
 }
 if(!isset($_POST["invoiceDate"]) || $_POST["invoiceDate"]==''){ 
-  exit(json_encode(array("title"=>"invoiceDate required","status"=>"error","message"=>"The field INVOICE_DATE is required")));
+  exit(json_encode(array("title"=>"invoiceDate required","status"=>"error","message"=>"The field invoice_date is required")));
 }
 if(!isset($_POST["customerId"]) || $_POST["customerId"]==''){ 
-  exit(json_encode(array("title"=>"customerId required","status"=>"error","message"=>"The field CUSTOMER_ID is required")));
+  exit(json_encode(array("title"=>"customerId required","status"=>"error","message"=>"The field customer_id is required")));
 }
 if(!isset($_POST["totalAmount"]) || $_POST["totalAmount"]==''){ 
-  exit(json_encode(array("title"=>"totalAmount required","status"=>"error","message"=>"The field TOTAL_AMOUNT is required")));
+  exit(json_encode(array("title"=>"totalAmount required","status"=>"error","message"=>"The field total_amount is required")));
 }
 if(!isset($_POST["totalDiscount"]) || $_POST["totalDiscount"]==''){ 
-  exit(json_encode(array("title"=>"totalDiscount required","status"=>"error","message"=>"The field TOTAL_DISCOUNT is required")));
+  exit(json_encode(array("title"=>"totalDiscount required","status"=>"error","message"=>"The field total_discount is required")));
 }
 
 $invoicesEdit->setInvoiceId(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==""?NULL:filter_var($_POST["invoiceId"],FILTER_SANITIZE_NUMBER_INT));
@@ -35,7 +35,7 @@ $invoicesEdit->setTotalAmount(!isset($_POST["totalAmount"]) || $_POST["totalAmou
 $invoicesEdit->setTotalDiscount(!isset($_POST["totalDiscount"]) || $_POST["totalDiscount"]==""?NULL:filter_var($_POST["totalDiscount"],FILTER_SANITIZE_STRING));
 
 try{
-  if(isset($_POST["INVOICE_ID"]) && (int)$_POST["INVOICE_ID"] > 0){
+  if(isset($_POST["invoice_id"]) && (int)$_POST["invoice_id"] > 0){
     $tempObject = $invoicesEditDao->update($invoicesEdit);
   }else{
     $tempObject = $invoicesEditDao->insert($invoicesEdit);

@@ -7,22 +7,22 @@ class PurchasesDao{
 * @return inserted objected of type Purchases
 */
   public function insert($purchases){
-    $supplierName=  $purchases->getSupplierName();
+    $suppliername=  $purchases->getSuppliername();
     $invoiceNumber=  $purchases->getInvoiceNumber();
     $voucherNumber=  $purchases->getVoucherNumber();
     $purchaseDate=  $purchases->getPurchaseDate();
-    $totalAmount=  $purchases->getTotalAmount();
+    $totalAmount=  $purchases->gettotalAmount();
     $paymentStatus=  $purchases->getPaymentStatus();
     try{
-      $sql="INSERT INTO purchases(`SUPPLIER_NAME`,`INVOICE_NUMBER`,`VOUCHER_NUMBER`,`PURCHASE_DATE`,`TOTAL_AMOUNT`,`PAYMENT_STATUS`) VALUES(?,?,?,?,?,?)";
+      $sql="INSERT INTO purchases(`supplier_name`,`invoice_number`,`voucher_number`,`purchase_date`,`total_amount`,`payment_status`) VALUES(?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("siisss",$supplierName,$invoiceNumber,$voucherNumber,$purchaseDate,$totalAmount,$paymentStatus);
+      $stmt->bind_param("siisss",$suppliername,$invoiceNumber,$voucherNumber,$purchaseDate,$totalAmount,$paymentStatus);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM purchases WHERE `VOUCHER_NUMBER`=?";
+      $sql="SELECT * FROM purchases WHERE `voucher_number`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -47,20 +47,20 @@ class PurchasesDao{
 * @return updated objected of type Purchases
 */
   public function update($purchases){
-    $supplierName=  $purchases->getSupplierName();
+    $suppliername=  $purchases->getSuppliername();
     $invoiceNumber=  $purchases->getInvoiceNumber();
     $voucherNumber=  $purchases->getVoucherNumber();
     $purchaseDate=  $purchases->getPurchaseDate();
-    $totalAmount=  $purchases->getTotalAmount();
+    $totalAmount=  $purchases->gettotalAmount();
     $paymentStatus=  $purchases->getPaymentStatus();
     try{
-      $sql="UPDATE purchases SET `SUPPLIER_NAME`=?,`INVOICE_NUMBER`=?,`PURCHASE_DATE`=?,`TOTAL_AMOUNT`=?,`PAYMENT_STATUS`=? WHERE VOUCHER_NUMBER =?";
+      $sql="UPDATE purchases SET `supplier_name`=?,`invoice_number`=?,`purchase_date`=?,`total_amount`=?,`payment_status`=? WHERE voucher_number =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sisssi",$supplierName,$invoiceNumber,$purchaseDate,$totalAmount,$paymentStatus,$voucherNumber);
+      $stmt->bind_param("sisssi",$suppliername,$invoiceNumber,$purchaseDate,$totalAmount,$paymentStatus,$voucherNumber);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM purchases WHERE `VOUCHER_NUMBER`=?";
+      $sql="SELECT * FROM purchases WHERE `voucher_number`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$voucherNumber);
       $stmt->execute();
@@ -150,11 +150,11 @@ class PurchasesDao{
 * function to select single instance of object of type Purchases from database
 * @return object of type Purchases
 */
-  public function select($purchasesId){
+  public function select($purchasesid){
     try{
-      $sql="SELECT * FROM `purchases` WHERE `VOUCHER_NUMBER`=?";
+      $sql="SELECT * FROM `purchases` WHERE `voucher_number`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$purchasesId);
+      $stmt->bind_param("i",$purchasesid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -225,11 +225,11 @@ class PurchasesDao{
 * function to delete a single instance of object of type Purchases from database
 * @return boolean
 */
-  public function delete($purchasesId){
+  public function delete($purchasesid){
     try{
-      $sql="DELETE FROM `purchases` WHERE `VOUCHER_NUMBER`=?";
+      $sql="DELETE FROM `purchases` WHERE `voucher_number`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$purchasesId);
+      $stmt->bind_param("i",$purchasesid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -298,12 +298,12 @@ class PurchasesDao{
 */
   public function getFields($row){
     $purchases= new Purchases();
-      $purchases->setSupplierName($row['SUPPLIER_NAME']);
-      $purchases->setInvoiceNumber($row['INVOICE_NUMBER']);
-      $purchases->setVoucherNumber($row['VOUCHER_NUMBER']);
-      $purchases->setPurchaseDate($row['PURCHASE_DATE']);
-      $purchases->setTotalAmount($row['TOTAL_AMOUNT']);
-      $purchases->setPaymentStatus($row['PAYMENT_STATUS']);
+      $purchases->setSuppliername($row['supplier_name']);
+      $purchases->setInvoiceNumber($row['invoice_number']);
+      $purchases->setVoucherNumber($row['voucher_number']);
+      $purchases->setPurchaseDate($row['purchase_date']);
+      $purchases->settotalAmount($row['total_amount']);
+      $purchases->setPaymentStatus($row['payment_status']);
     return $purchases;
   }
 }

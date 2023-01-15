@@ -18,10 +18,10 @@ if(!isset($_POST["voucherNumber"]) || $_POST["voucherNumber"]==''){
   exit(json_encode(array("title"=>"voucherNumber required","status"=>"error","message"=>"The field VOUCHER_NUMBER is required")));
 }
 if(!isset($_POST["purchaseDate"]) || $_POST["purchaseDate"]==''){ 
-  exit(json_encode(array("title"=>"purchaseDate required","status"=>"error","message"=>"The field PURCHASE_DATE is required")));
+  exit(json_encode(array("title"=>"purchaseDate required","status"=>"error","message"=>"The field purchase_date is required")));
 }
 if(!isset($_POST["totalAmount"]) || $_POST["totalAmount"]==''){ 
-  exit(json_encode(array("title"=>"totalAmount required","status"=>"error","message"=>"The field TOTAL_AMOUNT is required")));
+  exit(json_encode(array("title"=>"totalAmount required","status"=>"error","message"=>"The field total_amount is required")));
 }
 if(!isset($_POST["paymentStatus"]) || $_POST["paymentStatus"]==''){ 
   exit(json_encode(array("title"=>"paymentStatus required","status"=>"error","message"=>"The field PAYMENT_STATUS is required")));

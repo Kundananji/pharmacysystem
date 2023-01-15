@@ -18,10 +18,10 @@ if(!isset($_POST["batchId"]) || $_POST["batchId"]==''){
   exit(json_encode(array("title"=>"batchId required","status"=>"error","message"=>"The field BATCH_ID is required")));
 }
 if(!isset($_POST["expiryDate"]) || $_POST["expiryDate"]==''){ 
-  exit(json_encode(array("title"=>"expiryDate required","status"=>"error","message"=>"The field EXPIRY_DATE is required")));
+  exit(json_encode(array("title"=>"expiryDate required","status"=>"error","message"=>"The field expiry_date is required")));
 }
-if(!isset($_POST["qUANTITY"]) || $_POST["qUANTITY"]==''){ 
-  exit(json_encode(array("title"=>"qUANTITY required","status"=>"error","message"=>"The field QUANTITY is required")));
+if(!isset($_POST["quantity"]) || $_POST["quantity"]==''){ 
+  exit(json_encode(array("title"=>"quantity required","status"=>"error","message"=>"The field quantity is required")));
 }
 if(!isset($_POST["mRP"]) || $_POST["mRP"]==''){ 
   exit(json_encode(array("title"=>"mRP required","status"=>"error","message"=>"The field MRP is required")));
@@ -34,7 +34,7 @@ $medicinesStockEdit->setID(!isset($_POST["iD"]) || $_POST["iD"]==""?NULL:filter_
 $medicinesStockEdit->setNAME(!isset($_POST["nAME"]) || $_POST["nAME"]==""?NULL:filter_var($_POST["nAME"],FILTER_SANITIZE_STRING));
 $medicinesStockEdit->setBatchId(!isset($_POST["batchId"]) || $_POST["batchId"]==""?NULL:filter_var($_POST["batchId"],FILTER_SANITIZE_STRING));
 $medicinesStockEdit->setExpiryDate(!isset($_POST["expiryDate"]) || $_POST["expiryDate"]==""?NULL:filter_var($_POST["expiryDate"],FILTER_SANITIZE_STRING));
-$medicinesStockEdit->setQUANTITY(!isset($_POST["qUANTITY"]) || $_POST["qUANTITY"]==""?NULL:filter_var($_POST["qUANTITY"],FILTER_SANITIZE_NUMBER_INT));
+$medicinesStockEdit->setquantity(!isset($_POST["quantity"]) || $_POST["quantity"]==""?NULL:filter_var($_POST["quantity"],FILTER_SANITIZE_NUMBER_INT));
 $medicinesStockEdit->setMRP(!isset($_POST["mRP"]) || $_POST["mRP"]==""?NULL:filter_var($_POST["mRP"],FILTER_SANITIZE_STRING));
 $medicinesStockEdit->setRATE(!isset($_POST["rATE"]) || $_POST["rATE"]==""?NULL:filter_var($_POST["rATE"],FILTER_SANITIZE_STRING));
 

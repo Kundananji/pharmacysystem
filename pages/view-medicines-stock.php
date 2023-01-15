@@ -90,7 +90,7 @@ $dao = new MedicinesStockdao();
         </td>
         <td>
         <?php
-          echo $medicinesStock->getQUANTITY();
+          echo $medicinesStock->getquantity();
         ?>
         </td>
         <td>

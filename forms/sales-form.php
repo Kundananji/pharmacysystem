@@ -37,12 +37,12 @@ if(isset($)){
 <div class="form-group input-sales--c-u-s-t-o-m-e-r--i-d">
 
                  <?php
-                  $readonly = in_array('CUSTOMER_ID',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('customer_id',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($salesEdit->get()!=null){ $defaultValues['CUSTOMER_ID']=$salesEdit->getCustomerId();};
+                  if($salesEdit->get()!=null){ $defaultValues['customer_id']=$salesEdit->getCustomerId();};
                   ?>
                   <label for="input-sales--c-u-s-t-o-m-e-r--i-d">Customer&nbsp;*</label>
-  <input type="number" name="customerId" id="input-sales--c-u-s-t-o-m-e-r--i-d" class="form-control " placeholder="Enter Customer&nbsp; " value="<?php echo null!==($salesEdit->getCustomerId())?($salesEdit->getCustomerId()):(isset($defaultValues['CUSTOMER_ID'])?($defaultValues['CUSTOMER_ID']): "");?>" required <?php echo $readonly;?>   />
+  <input type="number" name="customerId" id="input-sales--c-u-s-t-o-m-e-r--i-d" class="form-control " placeholder="Enter Customer&nbsp; " value="<?php echo null!==($salesEdit->getCustomerId())?($salesEdit->getCustomerId()):(isset($defaultValues['customer_id'])?($defaultValues['customer_id']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -85,24 +85,24 @@ if(isset($)){
 <div class="form-group input-sales--e-x-p-i-r-y--d-a-t-e">
 
                  <?php
-                  $readonly = in_array('EXPIRY_DATE',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('expiry_date',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($salesEdit->get()!=null){ $defaultValues['EXPIRY_DATE']=$salesEdit->getExpiryDate();};
+                  if($salesEdit->get()!=null){ $defaultValues['expiry_date']=$salesEdit->getExpiryDate();};
                   ?>
                   <label for="input-sales--e-x-p-i-r-y--d-a-t-e">Expiry&nbsp;Date</label>
-  <input type="text" name="expiryDate" id="input-sales--e-x-p-i-r-y--d-a-t-e" class="form-control " placeholder="Enter Expiry&nbsp;Date " value="<?php echo null!==($salesEdit->getExpiryDate())?($salesEdit->getExpiryDate()):(isset($defaultValues['EXPIRY_DATE'])?($defaultValues['EXPIRY_DATE']): "");?>"  <?php echo $readonly;?>   />
+  <input type="text" name="expiryDate" id="input-sales--e-x-p-i-r-y--d-a-t-e" class="form-control " placeholder="Enter Expiry&nbsp;Date " value="<?php echo null!==($salesEdit->getExpiryDate())?($salesEdit->getExpiryDate()):(isset($defaultValues['expiry_date'])?($defaultValues['expiry_date']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
 <div class="form-group input-sales--q-u-a-n-t-i-t-y">
 
                  <?php
-                  $readonly = in_array('QUANTITY',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('quantity',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($salesEdit->get()!=null){ $defaultValues['QUANTITY']=$salesEdit->getQUANTITY();};
+                  if($salesEdit->get()!=null){ $defaultValues['quantity']=$salesEdit->getquantity();};
                   ?>
                   <label for="input-sales--q-u-a-n-t-i-t-y">&nbsp;Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y</label>
-  <input type="number" name="qUANTITY" id="input-sales--q-u-a-n-t-i-t-y" class="form-control " placeholder="Enter &nbsp;Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y " value="<?php echo null!==($salesEdit->getQUANTITY())?($salesEdit->getQUANTITY()):(isset($defaultValues['QUANTITY'])?($defaultValues['QUANTITY']): "");?>"  <?php echo $readonly;?>   />
+  <input type="number" name="quantity" id="input-sales--q-u-a-n-t-i-t-y" class="form-control " placeholder="Enter &nbsp;Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y " value="<?php echo null!==($salesEdit->getquantity())?($salesEdit->getquantity()):(isset($defaultValues['quantity'])?($defaultValues['quantity']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

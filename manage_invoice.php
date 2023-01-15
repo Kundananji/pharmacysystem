@@ -33,10 +33,10 @@
 
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="number" class="form-control" id="by_invoice_number" placeholder="By Invoice Nuber" onkeyup="searchInvoice(this.value, 'INVOICE_ID');">
+            <input type="number" class="form-control" id="by_invoice_number" placeholder="By Invoice Nuber" onkeyup="searchInvoice(this.value, 'invoice_id');">
             &emsp;<input type="text" class="form-control" id="by_customer_name" placeholder="By Customer Name" onkeyup="searchInvoice(this.value, 'NAME');">
             &emsp;<label class="font-weight-bold" for="">By Invoice Date :&emsp;</label>
-            <input type="date" class="form-control" id="by_date" onchange="searchInvoice(this.value, 'INVOICE_DATE');">
+            <input type="date" class="form-control" id="by_date" onchange="searchInvoice(this.value, 'invoice_date');">
             &emsp;<button class="btn btn-success font-weight-bold" onclick="refresh();"><i class="fa fa-refresh"></i></button>
           </div>
 

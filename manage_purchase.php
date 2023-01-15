@@ -39,7 +39,7 @@
             &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchPurchase(this.value, 'SUPPLIER_NAME');">
             &emsp;<input type="number" class="form-control" id="by_invoice_number" placeholder="By Invoice" onkeyup="searchPurchase(this.value, 'INVOICE_NUMBER');">
             &emsp;<label class="font-weight-bold" for="">By Purchase Date :&emsp;</label>
-            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'PURCHASE_DATE');">
+            <input type="date" class="form-control" id="by_purchase_date" onchange="searchPurchase(this.value, 'purchase_date');">
             &emsp;
             <select class="form-control" onchange="searchPurchase(this.value, 'PAYMENT_STATUS');">
               <option value="DUE">DUE</option>

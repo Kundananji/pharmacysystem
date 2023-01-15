@@ -63,24 +63,24 @@ if(isset($VOUCHER_NUMBER)){
 <div class="form-group input-purchases--p-u-r-c-h-a-s-e--d-a-t-e">
 
                  <?php
-                  $readonly = in_array('PURCHASE_DATE',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('purchase_date',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($purchasesEdit->getVoucherNumber()!=null){ $defaultValues['PURCHASE_DATE']=$purchasesEdit->getPurchaseDate();};
+                  if($purchasesEdit->getVoucherNumber()!=null){ $defaultValues['purchase_date']=$purchasesEdit->getPurchaseDate();};
                   ?>
                   <label for="input-purchases--p-u-r-c-h-a-s-e--d-a-t-e">Purchase&nbsp;Date*</label>
-  <input type="text" name="purchaseDate" id="input-purchases--p-u-r-c-h-a-s-e--d-a-t-e" class="form-control " placeholder="Enter Purchase&nbsp;Date " value="<?php echo null!==($purchasesEdit->getPurchaseDate())?($purchasesEdit->getPurchaseDate()):(isset($defaultValues['PURCHASE_DATE'])?($defaultValues['PURCHASE_DATE']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="purchaseDate" id="input-purchases--p-u-r-c-h-a-s-e--d-a-t-e" class="form-control " placeholder="Enter Purchase&nbsp;Date " value="<?php echo null!==($purchasesEdit->getPurchaseDate())?($purchasesEdit->getPurchaseDate()):(isset($defaultValues['purchase_date'])?($defaultValues['purchase_date']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
 <div class="form-group input-purchases--t-o-t-a-l--a-m-o-u-n-t">
 
                  <?php
-                  $readonly = in_array('TOTAL_AMOUNT',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('total_amount',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($purchasesEdit->getVoucherNumber()!=null){ $defaultValues['TOTAL_AMOUNT']=$purchasesEdit->getTotalAmount();};
+                  if($purchasesEdit->getVoucherNumber()!=null){ $defaultValues['total_amount']=$purchasesEdit->getTotalAmount();};
                   ?>
                   <label for="input-purchases--t-o-t-a-l--a-m-o-u-n-t">Total&nbsp;Amount*</label>
-  <input type="text" name="totalAmount" id="input-purchases--t-o-t-a-l--a-m-o-u-n-t" class="form-control " placeholder="Enter Total&nbsp;Amount " value="<?php echo null!==($purchasesEdit->getTotalAmount())?($purchasesEdit->getTotalAmount()):(isset($defaultValues['TOTAL_AMOUNT'])?($defaultValues['TOTAL_AMOUNT']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="totalAmount" id="input-purchases--t-o-t-a-l--a-m-o-u-n-t" class="form-control " placeholder="Enter Total&nbsp;Amount " value="<?php echo null!==($purchasesEdit->getTotalAmount())?($purchasesEdit->getTotalAmount()):(isset($defaultValues['total_amount'])?($defaultValues['total_amount']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

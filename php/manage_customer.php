@@ -4,7 +4,7 @@
   if($con) {
     if(isset($_GET["action"]) && $_GET["action"] == "delete") {
       $id = $_GET["id"];
-      $query = "DELETE FROM customers WHERE ID = $id";
+      $query = "DELETE FROM customers WHERE id = $id";
       $result = mysqli_query($con, $query);
       if(!empty($result))
     		showCustomers(0);
@@ -40,7 +40,7 @@
       $result = mysqli_query($con, $query);
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
-        if($row['ID'] == $id)
+        if($row['id'] == $id)
           showEditOptionsRow($seq_no, $row);
         else
           showCustomerRow($seq_no, $row);
@@ -52,17 +52,17 @@
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
-      <td><?php echo $row['ID'] ?></td>
-      <td><?php echo $row['NAME']; ?></td>
-      <td><?php echo $row['CONTACT_NUMBER']; ?></td>
-      <td><?php echo $row['ADDRESS']; ?></td>
-      <td><?php echo $row['DOCTOR_NAME']; ?></td>
-      <td><?php echo $row['DOCTOR_ADDRESS']; ?></td>
+      <td><?php echo $row['id'] ?></td>
+      <td><?php echo $row['name']; ?></td>
+      <td><?php echo $row['contact_number']; ?></td>
+      <td><?php echo $row['address']; ?></td>
+      <td><?php echo $row['doctor_name']; ?></td>
+      <td><?php echo $row['doctor_address']; ?></td>
       <td>
-        <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['ID']; ?>);">
+        <button href="" class="btn btn-info btn-sm" onclick="editCustomer(<?php echo $row['id']; ?>);">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteCustomer(<?php echo $row['ID']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteCustomer(<?php echo $row['id']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -74,29 +74,29 @@ function showEditOptionsRow($seq_no, $row) {
   ?>
   <tr>
     <td><?php echo $seq_no; ?></td>
-    <td><?php echo $row['ID'] ?></td>
+    <td><?php echo $row['id'] ?></td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['NAME']; ?>" placeholder="Name" id="customer_name" onkeyup="validateName(this.value, 'name_error');">
+      <input type="text" class="form-control" value="<?php echo $row['name']; ?>" placeholder="name" id="customer_name" onkeyup="validatename(this.value, 'name_error');">
       <code class="text-danger small font-weight-bold float-right" id="name_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="number" class="form-control" value="<?php echo $row['CONTACT_NUMBER']; ?>" placeholder="Contact Number" id="customer_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
+      <input type="number" class="form-control" value="<?php echo $row['contact_number']; ?>" placeholder="Contact Number" id="customer_contact_number" onblur="validateContactNumber(this.value, 'contact_number_error');">
       <code class="text-danger small font-weight-bold float-right" id="contact_number_error" style="display: none;"></code>
     </td>
     <td>
-      <textarea class="form-control" placeholder="Address" id="customer_address" onblur="validateAddress(this.value, 'address_error');"><?php echo $row['ADDRESS']; ?></textarea>
+      <textarea class="form-control" placeholder="address" id="customer_address" onblur="validateaddress(this.value, 'address_error');"><?php echo $row['address']; ?></textarea>
       <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
     </td>
     <td>
-      <input type="text" class="form-control" value="<?php echo $row['DOCTOR_NAME']; ?>" placeholder="Doctor's Name" id="customer_doctors_name" onkeyup="validateName(this.value, 'doctor_name_error');">
+      <input type="text" class="form-control" value="<?php echo $row['doctor_name']; ?>" placeholder="Doctor's name" id="customer_doctors_name" onkeyup="validatename(this.value, 'doctor_name_error');">
       <code class="text-danger small font-weight-bold float-right" id="doctor_name_error" style="display: none;"></code>
     </td>
     <td>
-      <textarea class="form-control" placeholder="Doctor's Address" id="customer_doctors_address" onblur="validateAddress(this.value, 'doctor_address_error');"><?php echo $row['DOCTOR_ADDRESS']; ?></textarea>
+      <textarea class="form-control" placeholder="Doctor's address" id="customer_doctors_address" onblur="validateaddress(this.value, 'doctor_address_error');"><?php echo $row['doctor_address']; ?></textarea>
       <code class="text-danger small font-weight-bold float-right" id="doctor_address_error" style="display: none;"></code>
     </td>
     <td>
-      <button href="" class="btn btn-success btn-sm" onclick="updateCustomer(<?php echo $row['ID']; ?>);">
+      <button href="" class="btn btn-success btn-sm" onclick="updateCustomer(<?php echo $row['id']; ?>);">
         <i class="fa fa-edit"></i>
       </button>
       <button class="btn btn-danger btn-sm" onclick="cancel();">
@@ -109,7 +109,7 @@ function showEditOptionsRow($seq_no, $row) {
 
 function updateCustomer($id, $name, $contact_number, $address, $doctor_name, $doctor_address) {
   require "db_connection.php";
-  $query = "UPDATE customers SET NAME = '$name', CONTACT_NUMBER = '$contact_number', ADDRESS = '$address', DOCTOR_NAME = '$doctor_name', DOCTOR_ADDRESS = '$doctor_address' WHERE ID = $id";
+  $query = "UPDATE customers SET name = '$name', contact_number = '$contact_number', address = '$address', doctor_name = '$doctor_name', doctor_address = '$doctor_address' WHERE id = $id";
   $result = mysqli_query($con, $query);
   if(!empty($result))
     showCustomers(0);
@@ -119,7 +119,7 @@ function searchCustomer($text) {
   require "db_connection.php";
   if($con) {
     $seq_no = 0;
-    $query = "SELECT * FROM customers WHERE UPPER(NAME) LIKE '%$text%'";
+    $query = "SELECT * FROM customers WHERE UPPER(name) LIKE '%$text%'";
     $result = mysqli_query($con, $query);
     while($row = mysqli_fetch_array($result)) {
       $seq_no++;

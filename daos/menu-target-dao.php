@@ -7,8 +7,8 @@ class MenuTargetDao{
 * @return inserted objected of type MenuTarget
 */
   public function insert($menuTarget){
-    $id=  $menuTarget->getId();
-    $name=  $menuTarget->getName();
+    $id=  $menuTarget->getid();
+    $name=  $menuTarget->getname();
     try{
       $sql="INSERT INTO menu_target(`id`,`name`) VALUES(?,?)";
       $stmt=Database::getConnection()->prepare($sql);
@@ -43,8 +43,8 @@ class MenuTargetDao{
 * @return updated objected of type MenuTarget
 */
   public function update($menuTarget){
-    $id=  $menuTarget->getId();
-    $name=  $menuTarget->getName();
+    $id=  $menuTarget->getid();
+    $name=  $menuTarget->getname();
     try{
       $sql="UPDATE menu_target SET `name`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
@@ -142,11 +142,11 @@ class MenuTargetDao{
 * function to select single instance of object of type MenuTarget from database
 * @return object of type MenuTarget
 */
-  public function select($menuTargetId){
+  public function select($menuTargetid){
     try{
       $sql="SELECT * FROM `menu_target` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$menuTargetId);
+      $stmt->bind_param("i",$menuTargetid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -217,11 +217,11 @@ class MenuTargetDao{
 * function to delete a single instance of object of type MenuTarget from database
 * @return boolean
 */
-  public function delete($menuTargetId){
+  public function delete($menuTargetid){
     try{
       $sql="DELETE FROM `menu_target` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$menuTargetId);
+      $stmt->bind_param("i",$menuTargetid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -290,8 +290,8 @@ class MenuTargetDao{
 */
   public function getFields($row){
     $menuTarget= new MenuTarget();
-      $menuTarget->setId($row['id']);
-      $menuTarget->setName($row['name']);
+      $menuTarget->setid($row['id']);
+      $menuTarget->setname($row['name']);
     return $menuTarget;
   }
 }

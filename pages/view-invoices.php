@@ -97,7 +97,7 @@ $dao = new InvoicesDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Invoices.addNewInvoices({INVOICE_ID : \''.$invoices->getInvoiceId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Invoices.addNewInvoices({invoice_id : \''.$invoices->getInvoiceId.'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

@@ -101,7 +101,7 @@ $dao = new SalesDao();
         </td>
         <td>
         <?php
-          echo $sales->getQUANTITY();
+          echo $sales->getquantity();
         ?>
         </td>
         <td>

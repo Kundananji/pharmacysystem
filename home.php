@@ -87,7 +87,7 @@ if(isset($_SESSION['user_id'])){
 
                 $query = "SELECT * FROM $table";
                 if($title == "Out of Stock")
-                  $query = "SELECT * FROM $table WHERE QUANTITY = 0";
+                  $query = "SELECT * FROM $table WHERE quantity = 0";
 
                 $result = mysqli_query($con, $query);
                 $count = mysqli_num_rows($result);
@@ -97,7 +97,7 @@ if(isset($_SESSION['user_id'])){
                   // logic
                   $count = 0;
                   while($row = mysqli_fetch_array($result)) {
-                    $expiry_date = $row['EXPIRY_DATE'];
+                    $expiry_date = $row['expiry_date'];
                     if(substr($expiry_date, 3) < date('y'))
                       $count++;
                     else if(substr($expiry_date, 3) == date('y')) {
@@ -142,11 +142,11 @@ if(isset($_SESSION['user_id'])){
                   <tr>
                     <?php
                       $total = 0;
-                      $query = "SELECT NET_TOTAL FROM invoices WHERE INVOICE_DATE = '$date'";
+                      $query = "SELECT net_total FROM invoices WHERE invoice_date = '$date'";
                       $result = mysqli_query($con, $query);
 
                       while($row = mysqli_fetch_array($result))
-                        $total = $total + $row['NET_TOTAL'];
+                        $total = $total + $row['net_total'];
                     ?>
                     <th>Total Sales</th>
                     <th class="text-success">Rs. <?php echo $total; ?></th>
@@ -155,10 +155,10 @@ if(isset($_SESSION['user_id'])){
                     <?php
                       //echo $date;
                       $total = 0;
-                      $query = "SELECT TOTAL_AMOUNT FROM purchases WHERE PURCHASE_DATE = '$date'";
+                      $query = "SELECT total_amount FROM purchases WHERE purchase_date = '$date'";
                       $result = mysqli_query($con, $query);
                       while($row = mysqli_fetch_array($result))
-                        $total = $total + $row['TOTAL_AMOUNT'];
+                        $total = $total + $row['total_amount'];
                     }
                     ?>
                     <th>Total Purchase</th>

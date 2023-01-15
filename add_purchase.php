@@ -105,7 +105,7 @@
             <div class="col col-md-1">Packing</div>
             <div class="col col-md-2">Batch ID</div>
             <div class="col col-md-1">Ex. Date (mm/yy)</div>
-            <div class="col col-md-1">Quantity</div>
+            <div class="col col-md-1">quantity</div>
             <div class="col col-md-1">MRP</div>
             <div class="col col-md-1">Rate</div>
             <div class="row col col-md-3">

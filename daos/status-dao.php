@@ -7,8 +7,8 @@ class StatusDao{
 * @return inserted objected of type Status
 */
   public function insert($status){
-    $id=  $status->getId();
-    $name=  $status->getName();
+    $id=  $status->getid();
+    $name=  $status->getname();
     try{
       $sql="INSERT INTO status(`id`,`name`) VALUES(?,?)";
       $stmt=Database::getConnection()->prepare($sql);
@@ -43,8 +43,8 @@ class StatusDao{
 * @return updated objected of type Status
 */
   public function update($status){
-    $id=  $status->getId();
-    $name=  $status->getName();
+    $id=  $status->getid();
+    $name=  $status->getname();
     try{
       $sql="UPDATE status SET `name`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
@@ -142,11 +142,11 @@ class StatusDao{
 * function to select single instance of object of type Status from database
 * @return object of type Status
 */
-  public function select($statusId){
+  public function select($statusid){
     try{
       $sql="SELECT * FROM `status` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$statusId);
+      $stmt->bind_param("i",$statusid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -217,11 +217,11 @@ class StatusDao{
 * function to delete a single instance of object of type Status from database
 * @return boolean
 */
-  public function delete($statusId){
+  public function delete($statusid){
     try{
       $sql="DELETE FROM `status` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$statusId);
+      $stmt->bind_param("i",$statusid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -290,8 +290,8 @@ class StatusDao{
 */
   public function getFields($row){
     $status= new Status();
-      $status->setId($row['id']);
-      $status->setName($row['name']);
+      $status->setid($row['id']);
+      $status->setname($row['name']);
     return $status;
   }
 }

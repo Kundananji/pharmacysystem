@@ -7,21 +7,21 @@ class SuppliersDao{
 * @return inserted objected of type Suppliers
 */
   public function insert($suppliers){
-    $iD=  $suppliers->getID();
-    $nAME=  $suppliers->getNAME();
-    $eMAIL=  $suppliers->getEMAIL();
+    $id=  $suppliers->getid();
+    $name=  $suppliers->getname();
+    $email=  $suppliers->getemail();
     $contactNumber=  $suppliers->getContactNumber();
-    $aDDRESS=  $suppliers->getADDRESS();
+    $address=  $suppliers->getaddress();
     try{
-      $sql="INSERT INTO suppliers(`ID`,`NAME`,`EMAIL`,`CONTACT_NUMBER`,`ADDRESS`) VALUES(?,?,?,?,?)";
+      $sql="INSERT INTO suppliers(`id`,`name`,`email`,`contact_number`,`address`) VALUES(?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issss",$iD,$nAME,$eMAIL,$contactNumber,$aDDRESS);
+      $stmt->bind_param("issss",$id,$name,$email,$contactNumber,$address);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM suppliers WHERE `ID`=?";
+      $sql="SELECT * FROM suppliers WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -46,21 +46,21 @@ class SuppliersDao{
 * @return updated objected of type Suppliers
 */
   public function update($suppliers){
-    $iD=  $suppliers->getID();
-    $nAME=  $suppliers->getNAME();
-    $eMAIL=  $suppliers->getEMAIL();
+    $id=  $suppliers->getid();
+    $name=  $suppliers->getname();
+    $email=  $suppliers->getemail();
     $contactNumber=  $suppliers->getContactNumber();
-    $aDDRESS=  $suppliers->getADDRESS();
+    $address=  $suppliers->getaddress();
     try{
-      $sql="UPDATE suppliers SET `NAME`=?,`EMAIL`=?,`CONTACT_NUMBER`=?,`ADDRESS`=? WHERE ID =?";
+      $sql="UPDATE suppliers SET `name`=?,`email`=?,`contact_number`=?,`address`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssssi",$nAME,$eMAIL,$contactNumber,$aDDRESS,$iD);
+      $stmt->bind_param("ssssi",$name,$email,$contactNumber,$address,$id);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM suppliers WHERE `ID`=?";
+      $sql="SELECT * FROM suppliers WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$iD);
+      $stmt->bind_param("i",$id);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -148,11 +148,11 @@ class SuppliersDao{
 * function to select single instance of object of type Suppliers from database
 * @return object of type Suppliers
 */
-  public function select($suppliersId){
+  public function select($suppliersid){
     try{
-      $sql="SELECT * FROM `suppliers` WHERE `ID`=?";
+      $sql="SELECT * FROM `suppliers` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$suppliersId);
+      $stmt->bind_param("i",$suppliersid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -223,11 +223,11 @@ class SuppliersDao{
 * function to delete a single instance of object of type Suppliers from database
 * @return boolean
 */
-  public function delete($suppliersId){
+  public function delete($suppliersid){
     try{
-      $sql="DELETE FROM `suppliers` WHERE `ID`=?";
+      $sql="DELETE FROM `suppliers` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$suppliersId);
+      $stmt->bind_param("i",$suppliersid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -296,11 +296,11 @@ class SuppliersDao{
 */
   public function getFields($row){
     $suppliers= new Suppliers();
-      $suppliers->setID($row['ID']);
-      $suppliers->setNAME($row['NAME']);
-      $suppliers->setEMAIL($row['EMAIL']);
-      $suppliers->setContactNumber($row['CONTACT_NUMBER']);
-      $suppliers->setADDRESS($row['ADDRESS']);
+      $suppliers->setid($row['id']);
+      $suppliers->setname($row['name']);
+      $suppliers->setemail($row['email']);
+      $suppliers->setContactNumber($row['contact_number']);
+      $suppliers->setaddress($row['address']);
     return $suppliers;
   }
 }

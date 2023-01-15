@@ -8,7 +8,7 @@ class MedicinesStock implements \JsonSerializable{
   private $nAME;
   private $batchId;
   private $expiryDate;
-  private $qUANTITY;
+  private $quantity;
   private $mRP;
   private $rATE;
 
@@ -92,20 +92,20 @@ class MedicinesStock implements \JsonSerializable{
   }
 
 /**
-* function to set the value of qUANTITY
-* @param qUANTITY : value to set
+* function to set the value of quantity
+* @param quantity : value to set
 */
-  public function setQUANTITY($qUANTITY){
-    $this->qUANTITY=$qUANTITY;
+  public function setquantity($quantity){
+    $this->quantity=$quantity;
 
   }
 
 /**
-* function to get the value of qUANTITY
+* function to get the value of quantity
 * @return int(11)
 */
-  public function getQUANTITY(){
-    return $this->qUANTITY;
+  public function getquantity(){
+    return $this->quantity;
 
   }
 

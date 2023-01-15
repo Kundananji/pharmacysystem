@@ -18,7 +18,7 @@ if(!isset($_POST["eMAIL"]) || $_POST["eMAIL"]==''){
   exit(json_encode(array("title"=>"eMAIL required","status"=>"error","message"=>"The field EMAIL is required")));
 }
 if(!isset($_POST["contactNumber"]) || $_POST["contactNumber"]==''){ 
-  exit(json_encode(array("title"=>"contactNumber required","status"=>"error","message"=>"The field CONTACT_NUMBER is required")));
+  exit(json_encode(array("title"=>"contactNumber required","status"=>"error","message"=>"The field contact_number is required")));
 }
 if(!isset($_POST["aDDRESS"]) || $_POST["aDDRESS"]==''){ 
   exit(json_encode(array("title"=>"aDDRESS required","status"=>"error","message"=>"The field ADDRESS is required")));

@@ -7,22 +7,22 @@ class InvoicesDao{
 * @return inserted objected of type Invoices
 */
   public function insert($invoices){
-    $invoiceId=  $invoices->getInvoiceId();
-    $netTotal=  $invoices->getNetTotal();
+    $invoiceid=  $invoices->getInvoiceid();
+    $nettotal=  $invoices->getNettotal();
     $invoiceDate=  $invoices->getInvoiceDate();
-    $customerId=  $invoices->getCustomerId();
-    $totalAmount=  $invoices->getTotalAmount();
-    $totalDiscount=  $invoices->getTotalDiscount();
+    $customerid=  $invoices->getCustomerid();
+    $totalAmount=  $invoices->gettotalAmount();
+    $totaldiscount=  $invoices->gettotaldiscount();
     try{
-      $sql="INSERT INTO invoices(`INVOICE_ID`,`NET_TOTAL`,`INVOICE_DATE`,`CUSTOMER_ID`,`TOTAL_AMOUNT`,`TOTAL_DISCOUNT`) VALUES(?,?,?,?,?,?)";
+      $sql="INSERT INTO invoices(`invoice_id`,`net_total`,`invoice_date`,`customer_id`,`total_amount`,`total_discount`) VALUES(?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ississ",$invoiceId,$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount);
+      $stmt->bind_param("ississ",$invoiceid,$nettotal,$invoiceDate,$customerid,$totalAmount,$totaldiscount);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM invoices WHERE `INVOICE_ID`=?";
+      $sql="SELECT * FROM invoices WHERE `invoice_id`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -47,22 +47,22 @@ class InvoicesDao{
 * @return updated objected of type Invoices
 */
   public function update($invoices){
-    $invoiceId=  $invoices->getInvoiceId();
-    $netTotal=  $invoices->getNetTotal();
+    $invoiceid=  $invoices->getInvoiceid();
+    $nettotal=  $invoices->getNettotal();
     $invoiceDate=  $invoices->getInvoiceDate();
-    $customerId=  $invoices->getCustomerId();
-    $totalAmount=  $invoices->getTotalAmount();
-    $totalDiscount=  $invoices->getTotalDiscount();
+    $customerid=  $invoices->getCustomerid();
+    $totalAmount=  $invoices->gettotalAmount();
+    $totaldiscount=  $invoices->gettotaldiscount();
     try{
-      $sql="UPDATE invoices SET `NET_TOTAL`=?,`INVOICE_DATE`=?,`CUSTOMER_ID`=?,`TOTAL_AMOUNT`=?,`TOTAL_DISCOUNT`=? WHERE INVOICE_ID =?";
+      $sql="UPDATE invoices SET `net_total`=?,`invoice_date`=?,`customer_id`=?,`total_amount`=?,`total_discount`=? WHERE invoice_id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssissi",$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount,$invoiceId);
+      $stmt->bind_param("ssissi",$nettotal,$invoiceDate,$customerid,$totalAmount,$totaldiscount,$invoiceid);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM invoices WHERE `INVOICE_ID`=?";
+      $sql="SELECT * FROM invoices WHERE `invoice_id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$invoiceId);
+      $stmt->bind_param("i",$invoiceid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -150,11 +150,11 @@ class InvoicesDao{
 * function to select single instance of object of type Invoices from database
 * @return object of type Invoices
 */
-  public function select($invoicesId){
+  public function select($invoicesid){
     try{
-      $sql="SELECT * FROM `invoices` WHERE `INVOICE_ID`=?";
+      $sql="SELECT * FROM `invoices` WHERE `invoice_id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$invoicesId);
+      $stmt->bind_param("i",$invoicesid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -225,11 +225,11 @@ class InvoicesDao{
 * function to delete a single instance of object of type Invoices from database
 * @return boolean
 */
-  public function delete($invoicesId){
+  public function delete($invoicesid){
     try{
-      $sql="DELETE FROM `invoices` WHERE `INVOICE_ID`=?";
+      $sql="DELETE FROM `invoices` WHERE `invoice_id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$invoicesId);
+      $stmt->bind_param("i",$invoicesid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -298,12 +298,12 @@ class InvoicesDao{
 */
   public function getFields($row){
     $invoices= new Invoices();
-      $invoices->setInvoiceId($row['INVOICE_ID']);
-      $invoices->setNetTotal($row['NET_TOTAL']);
-      $invoices->setInvoiceDate($row['INVOICE_DATE']);
-      $invoices->setCustomerId($row['CUSTOMER_ID']);
-      $invoices->setTotalAmount($row['TOTAL_AMOUNT']);
-      $invoices->setTotalDiscount($row['TOTAL_DISCOUNT']);
+      $invoices->setInvoiceid($row['invoice_id']);
+      $invoices->setNettotal($row['net_total']);
+      $invoices->setInvoiceDate($row['invoice_date']);
+      $invoices->setCustomerid($row['customer_id']);
+      $invoices->settotalAmount($row['total_amount']);
+      $invoices->settotaldiscount($row['total_discount']);
     return $invoices;
   }
 }

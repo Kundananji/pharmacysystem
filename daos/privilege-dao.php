@@ -7,9 +7,9 @@ class PrivilegeDao{
 * @return inserted objected of type Privilege
 */
   public function insert($privilege){
-    $id=  $privilege->getId();
-    $name=  $privilege->getName();
-    $profileId=  $privilege->getProfileId();
+    $id=  $privilege->getid();
+    $name=  $privilege->getname();
+    $profileId=  $privilege->getprofileId();
     try{
       $sql="INSERT INTO privilege(`id`,`name`,`profileId`) VALUES(?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
@@ -44,9 +44,9 @@ class PrivilegeDao{
 * @return updated objected of type Privilege
 */
   public function update($privilege){
-    $id=  $privilege->getId();
-    $name=  $privilege->getName();
-    $profileId=  $privilege->getProfileId();
+    $id=  $privilege->getid();
+    $name=  $privilege->getname();
+    $profileId=  $privilege->getprofileId();
     try{
       $sql="UPDATE privilege SET `name`=?,`profileId`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
@@ -144,11 +144,11 @@ class PrivilegeDao{
 * function to select single instance of object of type Privilege from database
 * @return object of type Privilege
 */
-  public function select($privilegeId){
+  public function select($privilegeid){
     try{
       $sql="SELECT * FROM `privilege` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$privilegeId);
+      $stmt->bind_param("i",$privilegeid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -219,11 +219,11 @@ class PrivilegeDao{
 * function to delete a single instance of object of type Privilege from database
 * @return boolean
 */
-  public function delete($privilegeId){
+  public function delete($privilegeid){
     try{
       $sql="DELETE FROM `privilege` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$privilegeId);
+      $stmt->bind_param("i",$privilegeid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -292,9 +292,9 @@ class PrivilegeDao{
 */
   public function getFields($row){
     $privilege= new Privilege();
-      $privilege->setId($row['id']);
-      $privilege->setName($row['name']);
-      $privilege->setProfileId($row['profileId']);
+      $privilege->setid($row['id']);
+      $privilege->setname($row['name']);
+      $privilege->setprofileId($row['profileId']);
     return $privilege;
   }
 }

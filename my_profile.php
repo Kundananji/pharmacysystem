@@ -33,7 +33,7 @@
             $pharmacy_name = $row['PHARMACY_NAME'];
             $address = $row['ADDRESS'];
             $email = $row['EMAIL'];
-            $contact_number = $row['CONTACT_NUMBER'];
+            $contact_number = $row['contact_number'];
             $username = $row['USERNAME'];
           }
         ?>

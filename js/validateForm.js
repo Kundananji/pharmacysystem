@@ -70,7 +70,7 @@ function checkExpiry(date, error) {
   return false;
 }
 
-function checkQuantity(quantity, error) {
+function checkquantity(quantity, error) {
   var result = document.getElementById(error);
   result.style.display = "block";
   if(quantity < 0 || !Number.isInteger(parseFloat(quantity)))

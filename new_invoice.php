@@ -104,7 +104,7 @@
               <div class="col col-md-2">Batch ID</div>
               <div class="col col-md-1">Ava.Qty.</div>
               <div class="col col-md-1">Expiry</div>
-              <div class="col col-md-1">Quantity</div>
+              <div class="col col-md-1">quantity</div>
               <div class="col col-md-1">MRP</div>
               <div class="col col-md-1">Discount(%)</div>
               <div class="col col-md-1">Total</div>

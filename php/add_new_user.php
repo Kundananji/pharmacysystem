@@ -12,13 +12,13 @@
       $role = $_GET["role"];
       $status = $_GET["status"];
 
-    $query = "SELECT * FROM users WHERE UPPER(USERNAME) = '".strtoupper($username)."'";
+    $query = "SELECT * FROM users WHERE UPPER(USERname) = '".strtoupper($username)."'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_array($result);
     if($row)
       echo "User with email $email already exists!";
     else {
-      $query = "INSERT INTO users (PHARMACY_NAME, FNAME, SNAME, ADDRESS, EMAIL, CONTACT_NUMBER, USERNAME, PASSWORD, IS_LOGGED_IN, ROLE, STATUS) VALUES('$pharmacy_name', '$fname' , '$sname', '$address', '$email', '$contact_number', '$username', '$password', 'false', '$role', '$status')";
+      $query = "INSERT INTO users (PHARMACY_name, Fname, Sname, address, email, contact_number, USERname, PASSWORD, IS_LOGGED_IN, ROLE, STATUS) VALUES('$pharmacy_name', '$fname' , '$sname', '$address', '$email', '$contact_number', '$username', '$password', 'false', '$role', '$status')";
       $result = mysqli_query($con, $query);
       if(!empty($result))
   			echo "$email added...";

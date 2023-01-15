@@ -7,23 +7,23 @@ class MedicinesStockDao{
 * @return inserted objected of type MedicinesStock
 */
   public function insert($medicinesStock){
-    $iD=  $medicinesStock->getID();
-    $nAME=  $medicinesStock->getNAME();
-    $batchId=  $medicinesStock->getBatchId();
+    $id=  $medicinesStock->getid();
+    $name=  $medicinesStock->getname();
+    $batchid=  $medicinesStock->getBatchid();
     $expiryDate=  $medicinesStock->getExpiryDate();
-    $qUANTITY=  $medicinesStock->getQUANTITY();
-    $mRP=  $medicinesStock->getMRP();
-    $rATE=  $medicinesStock->getRATE();
+    $quantity=  $medicinesStock->getquantity();
+    $mrp=  $medicinesStock->getmrp();
+    $rate=  $medicinesStock->getrate();
     try{
-      $sql="INSERT INTO medicines_stock(`ID`,`NAME`,`BATCH_ID`,`EXPIRY_DATE`,`QUANTITY`,`MRP`,`RATE`) VALUES(?,?,?,?,?,?,?)";
+      $sql="INSERT INTO medicines_stock(`id`,`name`,`batch_id`,`expiry_date`,`quantity`,`mrp`,`rate`) VALUES(?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssiss",$iD,$nAME,$batchId,$expiryDate,$qUANTITY,$mRP,$rATE);
+      $stmt->bind_param("isssiss",$id,$name,$batchid,$expiryDate,$quantity,$mrp,$rate);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM medicines_stock WHERE `ID`=?";
+      $sql="SELECT * FROM medicines_stock WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -48,23 +48,23 @@ class MedicinesStockDao{
 * @return updated objected of type MedicinesStock
 */
   public function update($medicinesStock){
-    $iD=  $medicinesStock->getID();
-    $nAME=  $medicinesStock->getNAME();
-    $batchId=  $medicinesStock->getBatchId();
+    $id=  $medicinesStock->getid();
+    $name=  $medicinesStock->getname();
+    $batchid=  $medicinesStock->getBatchid();
     $expiryDate=  $medicinesStock->getExpiryDate();
-    $qUANTITY=  $medicinesStock->getQUANTITY();
-    $mRP=  $medicinesStock->getMRP();
-    $rATE=  $medicinesStock->getRATE();
+    $quantity=  $medicinesStock->getquantity();
+    $mrp=  $medicinesStock->getmrp();
+    $rate=  $medicinesStock->getrate();
     try{
-      $sql="UPDATE medicines_stock SET `NAME`=?,`BATCH_ID`=?,`EXPIRY_DATE`=?,`QUANTITY`=?,`MRP`=?,`RATE`=? WHERE ID =?";
+      $sql="UPDATE medicines_stock SET `name`=?,`batch_id`=?,`expiry_date`=?,`quantity`=?,`mrp`=?,`rate`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssissi",$nAME,$batchId,$expiryDate,$qUANTITY,$mRP,$rATE,$iD);
+      $stmt->bind_param("sssissi",$name,$batchid,$expiryDate,$quantity,$mrp,$rate,$id);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM medicines_stock WHERE `ID`=?";
+      $sql="SELECT * FROM medicines_stock WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$iD);
+      $stmt->bind_param("i",$id);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -152,11 +152,11 @@ class MedicinesStockDao{
 * function to select single instance of object of type MedicinesStock from database
 * @return object of type MedicinesStock
 */
-  public function select($medicinesStockId){
+  public function select($medicinesStockid){
     try{
-      $sql="SELECT * FROM `medicines_stock` WHERE `ID`=?";
+      $sql="SELECT * FROM `medicines_stock` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$medicinesStockId);
+      $stmt->bind_param("i",$medicinesStockid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -227,11 +227,11 @@ class MedicinesStockDao{
 * function to delete a single instance of object of type MedicinesStock from database
 * @return boolean
 */
-  public function delete($medicinesStockId){
+  public function delete($medicinesStockid){
     try{
-      $sql="DELETE FROM `medicines_stock` WHERE `ID`=?";
+      $sql="DELETE FROM `medicines_stock` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$medicinesStockId);
+      $stmt->bind_param("i",$medicinesStockid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -300,13 +300,13 @@ class MedicinesStockDao{
 */
   public function getFields($row){
     $medicinesStock= new MedicinesStock();
-      $medicinesStock->setID($row['ID']);
-      $medicinesStock->setNAME($row['NAME']);
-      $medicinesStock->setBatchId($row['BATCH_ID']);
-      $medicinesStock->setExpiryDate($row['EXPIRY_DATE']);
-      $medicinesStock->setQUANTITY($row['QUANTITY']);
-      $medicinesStock->setMRP($row['MRP']);
-      $medicinesStock->setRATE($row['RATE']);
+      $medicinesStock->setid($row['id']);
+      $medicinesStock->setname($row['name']);
+      $medicinesStock->setBatchid($row['batch_id']);
+      $medicinesStock->setExpiryDate($row['expiry_date']);
+      $medicinesStock->setquantity($row['quantity']);
+      $medicinesStock->setmrp($row['mrp']);
+      $medicinesStock->setrate($row['rate']);
     return $medicinesStock;
   }
 }

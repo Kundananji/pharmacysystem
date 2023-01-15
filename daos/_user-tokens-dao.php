@@ -7,10 +7,10 @@ class UserTokensDao{
 * @return inserted objected of type UserTokens
 */
   public function insert($userTokens){
-    $id=  $userTokens->getId();
+    $id=  $userTokens->getid();
     $selector=  $userTokens->getSelector();
     $hashedValidator=  $userTokens->getHashedValidator();
-    $userId=  $userTokens->getUserId();
+    $userId=  $userTokens->getuserId();
     $expiry=  $userTokens->getExpiry();
     try{
       $sql="INSERT INTO _user_tokens(`id`,`selector`,`hashed_validator`,`user_id`,`expiry`) VALUES(?,?,?,?,?)";
@@ -46,10 +46,10 @@ class UserTokensDao{
 * @return updated objected of type UserTokens
 */
   public function update($userTokens){
-    $id=  $userTokens->getId();
+    $id=  $userTokens->getid();
     $selector=  $userTokens->getSelector();
     $hashedValidator=  $userTokens->getHashedValidator();
-    $userId=  $userTokens->getUserId();
+    $userId=  $userTokens->getuserId();
     $expiry=  $userTokens->getExpiry();
     try{
       $sql="UPDATE _user_tokens SET `selector`=?,`hashed_validator`=?,`user_id`=?,`expiry`=? WHERE id =?";
@@ -148,11 +148,11 @@ class UserTokensDao{
 * function to select single instance of object of type UserTokens from database
 * @return object of type UserTokens
 */
-  public function select($userTokensId){
+  public function select($userTokensid){
     try{
       $sql="SELECT * FROM `_user_tokens` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$userTokensId);
+      $stmt->bind_param("i",$userTokensid);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -223,11 +223,11 @@ class UserTokensDao{
 * function to delete a single instance of object of type UserTokens from database
 * @return boolean
 */
-  public function delete($userTokensId){
+  public function delete($userTokensid){
     try{
       $sql="DELETE FROM `_user_tokens` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$userTokensId);
+      $stmt->bind_param("i",$userTokensid);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -296,10 +296,10 @@ class UserTokensDao{
 */
   public function getFields($row){
     $userTokens= new UserTokens();
-      $userTokens->setId($row['id']);
+      $userTokens->setid($row['id']);
       $userTokens->setSelector($row['selector']);
       $userTokens->setHashedValidator($row['hashed_validator']);
-      $userTokens->setUserId($row['user_id']);
+      $userTokens->setuserId($row['user_id']);
       $userTokens->setExpiry($row['expiry']);
     return $userTokens;
   }

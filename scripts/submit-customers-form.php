@@ -15,16 +15,16 @@ if(!isset($_POST["nAME"]) || $_POST["nAME"]==''){
   exit(json_encode(array("title"=>"nAME required","status"=>"error","message"=>"The field NAME is required")));
 }
 if(!isset($_POST["contactNumber"]) || $_POST["contactNumber"]==''){ 
-  exit(json_encode(array("title"=>"contactNumber required","status"=>"error","message"=>"The field CONTACT_NUMBER is required")));
+  exit(json_encode(array("title"=>"contactNumber required","status"=>"error","message"=>"The field contact_number is required")));
 }
 if(!isset($_POST["aDDRESS"]) || $_POST["aDDRESS"]==''){ 
   exit(json_encode(array("title"=>"aDDRESS required","status"=>"error","message"=>"The field ADDRESS is required")));
 }
 if(!isset($_POST["doctorName"]) || $_POST["doctorName"]==''){ 
-  exit(json_encode(array("title"=>"doctorName required","status"=>"error","message"=>"The field DOCTOR_NAME is required")));
+  exit(json_encode(array("title"=>"doctorName required","status"=>"error","message"=>"The field doctor_name is required")));
 }
 if(!isset($_POST["doctorAddress"]) || $_POST["doctorAddress"]==''){ 
-  exit(json_encode(array("title"=>"doctorAddress required","status"=>"error","message"=>"The field DOCTOR_ADDRESS is required")));
+  exit(json_encode(array("title"=>"doctorAddress required","status"=>"error","message"=>"The field doctor_address is required")));
 }
 
 $customersEdit->setID(!isset($_POST["iD"]) || $_POST["iD"]==""?NULL:filter_var($_POST["iD"],FILTER_SANITIZE_NUMBER_INT));

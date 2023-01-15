@@ -7,13 +7,13 @@
     $doctor_name = ucwords($_GET["doctor_name"]);
     $doctor_address = ucwords($_GET["doctor_address"]);
 
-    $query = "SELECT * FROM customers WHERE CONTACT_NUMBER = '$contact_number'";
+    $query = "SELECT * FROM customers WHERE contact_number = '$contact_number'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_array($result);
     if($row)
-      echo "Customer ".$row['NAME']." with contact number $contact_number already exists!";
+      echo "Customer ".$row['name']." with contact number $contact_number already exists!";
     else {
-      $query = "INSERT INTO customers (NAME, CONTACT_NUMBER, ADDRESS, DOCTOR_NAME, DOCTOR_ADDRESS) VALUES('$name', '$contact_number', '$address', '$doctor_name', '$doctor_address')";
+      $query = "INSERT INTO customers (name, contact_number, address, doctor_name, doctor_address) VALUES('$name', '$contact_number', '$address', '$doctor_name', '$doctor_address')";
       $result = mysqli_query($con, $query);
       if(!empty($result))
   			echo "$name added...";
