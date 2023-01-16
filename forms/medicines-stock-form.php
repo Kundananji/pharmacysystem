@@ -36,15 +36,33 @@ if(isset($id)){
   <input type="hidden" name="id" id="input-medicines-stock-id" value="<?php echo null!==($medicinesStockEdit->getId())?($medicinesStockEdit->getId()):(isset($defaultValues['id'])?($defaultValues['id']): "0");?>"/>
 
  <!--start of form group-->
-<div class="form-group input-medicines-stock-name">
+<div class="form-group input-medicines-stock-medicine-id">
 
                  <?php
-                  $readonly = in_array('name',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('medicineId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesStockEdit->getId()!=null){ $defaultValues['name']=$medicinesStockEdit->getName();};
+                  if($medicinesStockEdit->getId()!=null){ $defaultValues['medicineId']=$medicinesStockEdit->getMedicineId();};
                   ?>
-                  <label for="input-medicines-stock-name">Name*</label>
-  <input type="text" name="name" id="input-medicines-stock-name" class="form-control " placeholder="Enter Name " value="<?php echo null!==($medicinesStockEdit->getName())?($medicinesStockEdit->getName()):(isset($defaultValues['name'])?($defaultValues['name']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-stock-medicine-id">Medicine*</label>
+  <?php 
+    include_once("../classes/medicines.php");
+    include_once("../daos/medicines-dao.php");
+
+    $medicinesDao = new MedicinesDao(); 
+    $objects = $medicinesDao->selectAll(); 
+    ?>
+    <select name="medicineId" id="input-medicines-stock-medicine-id" class="form-control " required <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Medicines--</option>
+      <?php
+        foreach($objects as $medicines){
+          $optionValue  = $medicines->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['medicineId']) && $defaultValues['medicineId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['medicineId']) && $defaultValues['medicineId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['medicineId']) && $defaultValues['medicineId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$medicines->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -91,8 +109,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($medicinesStockEdit->getId()!=null){ $defaultValues['mrp']=$medicinesStockEdit->getMrp();};
                   ?>
-                  <label for="input-medicines-stock-mrp">Mrp*</label>
-  <input type="text" name="mrp" id="input-medicines-stock-mrp" class="form-control " placeholder="Enter Mrp " value="<?php echo null!==($medicinesStockEdit->getMrp())?($medicinesStockEdit->getMrp()):(isset($defaultValues['mrp'])?($defaultValues['mrp']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-stock-mrp">Mrp</label>
+  <input type="text" name="mrp" id="input-medicines-stock-mrp" class="form-control " placeholder="Enter Mrp " value="<?php echo null!==($medicinesStockEdit->getMrp())?($medicinesStockEdit->getMrp()):(isset($defaultValues['mrp'])?($defaultValues['mrp']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

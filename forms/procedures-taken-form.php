@@ -39,36 +39,120 @@ if(isset($id)){
 <div class="form-group input-procedures-taken-patient-id">
 
                  <?php
-                  $readonly = in_array('patient_id',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('patientId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['patient_id']=$proceduresTakenEdit->getPatientId();};
+                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['patientId']=$proceduresTakenEdit->getPatientId();};
                   ?>
-                  <label for="input-procedures-taken-patient-id">Patient&nbsp;*</label>
-  <input type="text" name="patientId" id="input-procedures-taken-patient-id" class="form-control " placeholder="Enter Patient&nbsp; " value="<?php echo null!==($proceduresTakenEdit->getPatientId())?($proceduresTakenEdit->getPatientId()):(isset($defaultValues['patient_id'])?($defaultValues['patient_id']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-procedures-taken-patient-id">Patient*</label>
+  <?php 
+    include_once("../classes/patients.php");
+    include_once("../daos/patients-dao.php");
+
+    $patientsDao = new PatientsDao(); 
+    $objects = $patientsDao->selectAll(); 
+    ?>
+    <select name="patientId" id="input-procedures-taken-patient-id" class="form-control " required <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Patients--</option>
+      <?php
+        foreach($objects as $patients){
+          $optionValue  = $patients->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['patientId']) && $defaultValues['patientId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$patients->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-procedures-taken-department">
+<div class="form-group input-procedures-taken-procedure-id">
 
                  <?php
-                  $readonly = in_array('department',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('procedureId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['department']=$proceduresTakenEdit->getDepartment();};
+                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['procedureId']=$proceduresTakenEdit->getProcedureId();};
                   ?>
-                  <label for="input-procedures-taken-department">Department*</label>
-  <input type="text" name="department" id="input-procedures-taken-department" class="form-control " placeholder="Enter Department " value="<?php echo null!==($proceduresTakenEdit->getDepartment())?($proceduresTakenEdit->getDepartment()):(isset($defaultValues['department'])?($defaultValues['department']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-procedures-taken-procedure-id">Procedure*</label>
+  <?php 
+    include_once("../classes/hospital-procedure.php");
+    include_once("../daos/hospital-procedure-dao.php");
+
+    $hospitalProcedureDao = new HospitalProcedureDao(); 
+    $objects = $hospitalProcedureDao->selectAll(); 
+    ?>
+    <select name="procedureId" id="input-procedures-taken-procedure-id" class="form-control " required <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Hospital&nbsp;procedure--</option>
+      <?php
+        foreach($objects as $hospitalProcedure){
+          $optionValue  = $hospitalProcedure->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['procedureId']) && $defaultValues['procedureId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['procedureId']) && $defaultValues['procedureId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['procedureId']) && $defaultValues['procedureId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$hospitalProcedure->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-procedures-taken-procedure-conducted">
+<div class="form-group input-procedures-taken-doctor-id">
 
                  <?php
-                  $readonly = in_array('procedureConducted',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('doctorId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['procedureConducted']=$proceduresTakenEdit->getProcedureConducted();};
+                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['doctorId']=$proceduresTakenEdit->getDoctorId();};
                   ?>
-                  <label for="input-procedures-taken-procedure-conducted">Procedure&nbsp;Conducted*</label>
-  <input type="text" name="procedureConducted" id="input-procedures-taken-procedure-conducted" class="form-control " placeholder="Enter Procedure&nbsp;Conducted " value="<?php echo null!==($proceduresTakenEdit->getProcedureConducted())?($proceduresTakenEdit->getProcedureConducted()):(isset($defaultValues['procedureConducted'])?($defaultValues['procedureConducted']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-procedures-taken-doctor-id">Doctor</label>
+  <?php 
+    include_once("../classes/staff.php");
+    include_once("../daos/staff-dao.php");
+
+    $staffDao = new StaffDao(); 
+    $objects = $staffDao->selectAll(); 
+    ?>
+    <select name="doctorId" id="input-procedures-taken-doctor-id" class="form-control "  <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Staff--</option>
+      <?php
+        foreach($objects as $staff){
+          $optionValue  = $staff->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['doctorId']) && $defaultValues['doctorId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['doctorId']) && $defaultValues['doctorId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['doctorId']) && $defaultValues['doctorId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$staff->toString().'</option>';
+        }
+      ?>
+    </select>
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-procedures-taken-conducted-by">
+
+                 <?php
+                  $readonly = in_array('conductedBy',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['conductedBy']=$proceduresTakenEdit->getConductedBy();};
+                  ?>
+                  <label for="input-procedures-taken-conducted-by">Conducted&nbsp;By*</label>
+  <?php 
+    include_once("../classes/staff.php");
+    include_once("../daos/staff-dao.php");
+
+    $staffDao = new StaffDao(); 
+    $objects = $staffDao->selectAll(); 
+    ?>
+    <select name="conductedBy" id="input-procedures-taken-conducted-by" class="form-control " required <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Staff--</option>
+      <?php
+        foreach($objects as $staff){
+          $optionValue  = $staff->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['conductedBy']) && $defaultValues['conductedBy']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['conductedBy']) && $defaultValues['conductedBy']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['conductedBy']) && $defaultValues['conductedBy']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$staff->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -84,51 +168,39 @@ if(isset($id)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-procedures-taken-doctors-name">
+<div class="form-group input-procedures-taken-remarks">
 
                  <?php
-                  $readonly = in_array('doctorsName',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('remarks',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['doctorsName']=$proceduresTakenEdit->getDoctorsName();};
+                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['remarks']=$proceduresTakenEdit->getRemarks();};
                   ?>
-                  <label for="input-procedures-taken-doctors-name">Doctors&nbsp;Name*</label>
-  <input type="text" name="doctorsName" id="input-procedures-taken-doctors-name" class="form-control " placeholder="Enter Doctors&nbsp;Name " value="<?php echo null!==($proceduresTakenEdit->getDoctorsName())?($proceduresTakenEdit->getDoctorsName()):(isset($defaultValues['doctorsName'])?($defaultValues['doctorsName']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-procedures-taken-remarks">Remarks</label>
+  <textarea rows="5" name="remarks" id="input-procedures-taken-remarks" class="form-control " placeholder="Enter Remarks " <?php echo $readonly;?>   ><?php echo null!==($proceduresTakenEdit->getRemarks())?($proceduresTakenEdit->getRemarks()):(isset($defaultValues['remarks'])?($defaultValues['remarks']): "");?></textarea>
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-procedures-taken-lab-tech">
+<div class="form-group input-procedures-taken-date-conducted">
 
                  <?php
-                  $readonly = in_array('labTech',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('dateConducted',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['labTech']=$proceduresTakenEdit->getLabTech();};
+                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['dateConducted']=$proceduresTakenEdit->getDateConducted();};
                   ?>
-                  <label for="input-procedures-taken-lab-tech">Lab&nbsp;Tech*</label>
-  <input type="text" name="labTech" id="input-procedures-taken-lab-tech" class="form-control " placeholder="Enter Lab&nbsp;Tech " value="<?php echo null!==($proceduresTakenEdit->getLabTech())?($proceduresTakenEdit->getLabTech()):(isset($defaultValues['labTech'])?($defaultValues['labTech']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-procedures-taken-date-conducted">Date&nbsp;Conducted*</label>
+  <input type="text" name="dateConducted" id="input-procedures-taken-date-conducted" class="form-control datepicker " placeholder="Enter Date&nbsp;Conducted " value="<?php echo null!==($proceduresTakenEdit->getDateConducted()))?(date("d/m/Y",strtotime($proceduresTakenEdit->getDateConducted()))):(isset($defaultValues['dateConducted'])?($defaultValues['dateConducted']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-procedures-taken-fee">
+<div class="form-group input-procedures-taken-time-conducted">
 
                  <?php
-                  $readonly = in_array('fee',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('timeConducted',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['fee']=$proceduresTakenEdit->getFee();};
+                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['timeConducted']=$proceduresTakenEdit->getTimeConducted();};
                   ?>
-                  <label for="input-procedures-taken-fee">Fee*</label>
-  <input type="number" name="fee" id="input-procedures-taken-fee" class="form-control " placeholder="Enter Fee " value="<?php echo null!==($proceduresTakenEdit->getFee())?($proceduresTakenEdit->getFee()):(isset($defaultValues['fee'])?($defaultValues['fee']): "");?>" required <?php echo $readonly;?>   />
-</div> <!--end form-group-->
-
- <!--start of form group-->
-<div class="form-group input-procedures-taken-time-tested">
-
-                 <?php
-                  $readonly = in_array('timeTested',$uneditableFields)?'readonly':'';
-                  //override default value with actual value if object is sent
-                  if($proceduresTakenEdit->getId()!=null){ $defaultValues['timeTested']=$proceduresTakenEdit->getTimeTested();};
-                  ?>
-                  <label for="input-procedures-taken-time-tested">Time&nbsp;Tested*</label>
-  <input type="text" name="timeTested" id="input-procedures-taken-time-tested" class="form-control datepicker " placeholder="Enter Time&nbsp;Tested " value="<?php echo null!==($proceduresTakenEdit->getTimeTested()))?(date("d/m/Y",strtotime($proceduresTakenEdit->getTimeTested()))):(isset($defaultValues['timeTested'])?($defaultValues['timeTested']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-procedures-taken-time-conducted">Time&nbsp;Conducted*</label>
+  <input type="time" name="timeConducted" id="input-procedures-taken-time-conducted" class="form-control " placeholder="Enter Time&nbsp;Conducted " value="<?php echo null!==($proceduresTakenEdit->getTimeConducted())?($proceduresTakenEdit->getTimeConducted()):(isset($defaultValues['timeConducted'])?($defaultValues['timeConducted']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

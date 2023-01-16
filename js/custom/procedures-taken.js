@@ -146,12 +146,17 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-procedures-taken-department' +'_row_' + i;
+  id = 'input-procedures-taken-procedure-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-procedures-taken-procedure-conducted' +'_row_' + i;
+  id = 'input-procedures-taken-doctor-id' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-procedures-taken-conducted-by' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -161,22 +166,17 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-procedures-taken-doctors-name' +'_row_' + i;
+  id = 'input-procedures-taken-remarks' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-procedures-taken-lab-tech' +'_row_' + i;
+  id = 'input-procedures-taken-date-conducted' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-procedures-taken-fee' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-procedures-taken-time-tested' +'_row_' + i;
+  id = 'input-procedures-taken-time-conducted' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);

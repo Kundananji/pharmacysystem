@@ -39,12 +39,60 @@ if(isset($id)){
 <div class="form-group input-regular-checkups-patient-id">
 
                  <?php
-                  $readonly = in_array('patient_id',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('patientId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($regularCheckupsEdit->getId()!=null){ $defaultValues['patient_id']=$regularCheckupsEdit->getPatientId();};
+                  if($regularCheckupsEdit->getId()!=null){ $defaultValues['patientId']=$regularCheckupsEdit->getPatientId();};
                   ?>
-                  <label for="input-regular-checkups-patient-id">Patient&nbsp;*</label>
-  <input type="text" name="patientId" id="input-regular-checkups-patient-id" class="form-control " placeholder="Enter Patient&nbsp; " value="<?php echo null!==($regularCheckupsEdit->getPatientId())?($regularCheckupsEdit->getPatientId()):(isset($defaultValues['patient_id'])?($defaultValues['patient_id']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-regular-checkups-patient-id">Patient*</label>
+  <?php 
+    include_once("../classes/patients.php");
+    include_once("../daos/patients-dao.php");
+
+    $patientsDao = new PatientsDao(); 
+    $objects = $patientsDao->selectAll(); 
+    ?>
+    <select name="patientId" id="input-regular-checkups-patient-id" class="form-control " required <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Patients--</option>
+      <?php
+        foreach($objects as $patients){
+          $optionValue  = $patients->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['patientId']) && $defaultValues['patientId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$patients->toString().'</option>';
+        }
+      ?>
+    </select>
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-regular-checkups-conducted-by">
+
+                 <?php
+                  $readonly = in_array('conductedBy',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($regularCheckupsEdit->getId()!=null){ $defaultValues['conductedBy']=$regularCheckupsEdit->getConductedBy();};
+                  ?>
+                  <label for="input-regular-checkups-conducted-by">Conducted&nbsp;By*</label>
+  <?php 
+    include_once("../classes/staff.php");
+    include_once("../daos/staff-dao.php");
+
+    $staffDao = new StaffDao(); 
+    $objects = $staffDao->selectAll(); 
+    ?>
+    <select name="conductedBy" id="input-regular-checkups-conducted-by" class="form-control " required <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Staff--</option>
+      <?php
+        foreach($objects as $staff){
+          $optionValue  = $staff->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['conductedBy']) && $defaultValues['conductedBy']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['conductedBy']) && $defaultValues['conductedBy']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['conductedBy']) && $defaultValues['conductedBy']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$staff->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -96,27 +144,27 @@ if(isset($id)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-regular-checkups-status">
+<div class="form-group input-regular-checkups-date-taken">
 
                  <?php
-                  $readonly = in_array('status',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('dateTaken',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($regularCheckupsEdit->getId()!=null){ $defaultValues['status']=$regularCheckupsEdit->getStatus();};
+                  if($regularCheckupsEdit->getId()!=null){ $defaultValues['dateTaken']=$regularCheckupsEdit->getDateTaken();};
                   ?>
-                  <label for="input-regular-checkups-status">Status*</label>
-  <input type="number" name="status" id="input-regular-checkups-status" class="form-control " placeholder="Enter Status " value="<?php echo null!==($regularCheckupsEdit->getStatus())?($regularCheckupsEdit->getStatus()):(isset($defaultValues['status'])?($defaultValues['status']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-regular-checkups-date-taken">Date&nbsp;Taken*</label>
+  <input type="text" name="dateTaken" id="input-regular-checkups-date-taken" class="form-control datepicker " placeholder="Enter Date&nbsp;Taken " value="<?php echo null!==($regularCheckupsEdit->getDateTaken()))?(date("d/m/Y",strtotime($regularCheckupsEdit->getDateTaken()))):(isset($defaultValues['dateTaken'])?($defaultValues['dateTaken']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-regular-checkups-time-tested">
+<div class="form-group input-regular-checkups-time-taken">
 
                  <?php
-                  $readonly = in_array('timeTested',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('timeTaken',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($regularCheckupsEdit->getId()!=null){ $defaultValues['timeTested']=$regularCheckupsEdit->getTimeTested();};
+                  if($regularCheckupsEdit->getId()!=null){ $defaultValues['timeTaken']=$regularCheckupsEdit->getTimeTaken();};
                   ?>
-                  <label for="input-regular-checkups-time-tested">Time&nbsp;Tested*</label>
-  <input type="text" name="timeTested" id="input-regular-checkups-time-tested" class="form-control datepicker " placeholder="Enter Time&nbsp;Tested " value="<?php echo null!==($regularCheckupsEdit->getTimeTested()))?(date("d/m/Y",strtotime($regularCheckupsEdit->getTimeTested()))):(isset($defaultValues['timeTested'])?($defaultValues['timeTested']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-regular-checkups-time-taken">Time&nbsp;Taken*</label>
+  <input type="time" name="timeTaken" id="input-regular-checkups-time-taken" class="form-control " placeholder="Enter Time&nbsp;Taken " value="<?php echo null!==($regularCheckupsEdit->getTimeTaken())?($regularCheckupsEdit->getTimeTaken()):(isset($defaultValues['timeTaken'])?($defaultValues['timeTaken']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

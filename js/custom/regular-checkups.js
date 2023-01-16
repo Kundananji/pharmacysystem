@@ -146,6 +146,11 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
+  id = 'input-regular-checkups-conducted-by' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
   id = 'input-regular-checkups-temperature' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
@@ -166,12 +171,12 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-regular-checkups-status' +'_row_' + i;
+  id = 'input-regular-checkups-date-taken' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-regular-checkups-time-tested' +'_row_' + i;
+  id = 'input-regular-checkups-time-taken' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);

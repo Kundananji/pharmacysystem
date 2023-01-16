@@ -141,6 +141,36 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
+  id = 'input-invoices-fee-id' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-invoices-medicine-id' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-invoices-item' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-invoices-description' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-invoices-unit-price' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-invoices-quantity' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
   id = 'input-invoices-net-total' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){

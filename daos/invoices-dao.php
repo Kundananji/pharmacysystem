@@ -8,15 +8,21 @@ class InvoicesDao{
 */
   public function insert($invoices){
     $invoiceId=  $invoices->getInvoiceId();
+    $feeId=  $invoices->getFeeId();
+    $medicineId=  $invoices->getMedicineId();
+    $item=  $invoices->getItem();
+    $description=  $invoices->getDescription();
+    $unitPrice=  $invoices->getUnitPrice();
+    $quantity=  $invoices->getQuantity();
     $netTotal=  $invoices->getNetTotal();
     $invoiceDate=  $invoices->getInvoiceDate();
     $customerId=  $invoices->getCustomerId();
     $totalAmount=  $invoices->getTotalAmount();
     $totalDiscount=  $invoices->getTotalDiscount();
     try{
-      $sql="INSERT INTO invoices(`invoice_id`,`net_total`,`invoice_date`,`customer_id`,`total_amount`,`total_discount`) VALUES(?,?,?,?,?,?)";
+      $sql="INSERT INTO invoices(`invoice_id`,`feeId`,`medicineId`,`item`,`description`,`unitPrice`,`quantity`,`net_total`,`invoice_date`,`customer_id`,`total_amount`,`total_discount`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ississ",$invoiceId,$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount);
+      $stmt->bind_param("iiisssississ",$invoiceId,$feeId,$medicineId,$item,$description,$unitPrice,$quantity,$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -48,15 +54,21 @@ class InvoicesDao{
 */
   public function update($invoices){
     $invoiceId=  $invoices->getInvoiceId();
+    $feeId=  $invoices->getFeeId();
+    $medicineId=  $invoices->getMedicineId();
+    $item=  $invoices->getItem();
+    $description=  $invoices->getDescription();
+    $unitPrice=  $invoices->getUnitPrice();
+    $quantity=  $invoices->getQuantity();
     $netTotal=  $invoices->getNetTotal();
     $invoiceDate=  $invoices->getInvoiceDate();
     $customerId=  $invoices->getCustomerId();
     $totalAmount=  $invoices->getTotalAmount();
     $totalDiscount=  $invoices->getTotalDiscount();
     try{
-      $sql="UPDATE invoices SET `net_total`=?,`invoice_date`=?,`customer_id`=?,`total_amount`=?,`total_discount`=? WHERE invoice_id =?";
+      $sql="UPDATE invoices SET `feeId`=?,`medicineId`=?,`item`=?,`description`=?,`unitPrice`=?,`quantity`=?,`net_total`=?,`invoice_date`=?,`customer_id`=?,`total_amount`=?,`total_discount`=? WHERE invoice_id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssissi",$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount,$invoiceId);
+      $stmt->bind_param("iisssississi",$feeId,$medicineId,$item,$description,$unitPrice,$quantity,$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount,$invoiceId);
       $stmt->execute();
       $stmt->close();
 
@@ -299,6 +311,12 @@ class InvoicesDao{
   public function getFields($row){
     $invoices= new Invoices();
       $invoices->setInvoiceId($row['invoice_id']);
+      $invoices->setFeeId($row['feeId']);
+      $invoices->setMedicineId($row['medicineId']);
+      $invoices->setItem($row['item']);
+      $invoices->setDescription($row['description']);
+      $invoices->setUnitPrice($row['unitPrice']);
+      $invoices->setQuantity($row['quantity']);
       $invoices->setNetTotal($row['net_total']);
       $invoices->setInvoiceDate($row['invoice_date']);
       $invoices->setCustomerId($row['customer_id']);

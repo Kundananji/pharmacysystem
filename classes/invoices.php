@@ -5,6 +5,12 @@ class Invoices implements \JsonSerializable{
 * member variables
 */
   private $invoiceId;
+  private $feeId;
+  private $medicineId;
+  private $item;
+  private $description;
+  private $unitPrice;
+  private $quantity;
   private $netTotal;
   private $invoiceDate;
   private $customerId;
@@ -33,6 +39,114 @@ class Invoices implements \JsonSerializable{
 */
   public function getInvoiceId(){
     return $this->invoiceId;
+
+  }
+
+/**
+* function to set the value of feeId
+* @param feeId : value to set
+*/
+  public function setFeeId($feeId){
+    $this->feeId=$feeId;
+
+  }
+
+/**
+* function to get the value of feeId
+* @return int(10)
+*/
+  public function getFeeId(){
+    return $this->feeId;
+
+  }
+
+/**
+* function to set the value of medicineId
+* @param medicineId : value to set
+*/
+  public function setMedicineId($medicineId){
+    $this->medicineId=$medicineId;
+
+  }
+
+/**
+* function to get the value of medicineId
+* @return int(10)
+*/
+  public function getMedicineId(){
+    return $this->medicineId;
+
+  }
+
+/**
+* function to set the value of item
+* @param item : value to set
+*/
+  public function setItem($item){
+    $this->item=$item;
+
+  }
+
+/**
+* function to get the value of item
+* @return String
+*/
+  public function getItem(){
+    return $this->item;
+
+  }
+
+/**
+* function to set the value of description
+* @param description : value to set
+*/
+  public function setDescription($description){
+    $this->description=$description;
+
+  }
+
+/**
+* function to get the value of description
+* @return text
+*/
+  public function getDescription(){
+    return $this->description;
+
+  }
+
+/**
+* function to set the value of unitPrice
+* @param unitPrice : value to set
+*/
+  public function setUnitPrice($unitPrice){
+    $this->unitPrice=$unitPrice;
+
+  }
+
+/**
+* function to get the value of unitPrice
+* @return decimal(10,2)
+*/
+  public function getUnitPrice(){
+    return $this->unitPrice;
+
+  }
+
+/**
+* function to set the value of quantity
+* @param quantity : value to set
+*/
+  public function setQuantity($quantity){
+    $this->quantity=$quantity;
+
+  }
+
+/**
+* function to get the value of quantity
+* @return int(10)
+*/
+  public function getQuantity(){
+    return $this->quantity;
 
   }
 
@@ -131,7 +245,7 @@ class Invoices implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->invoiceId.' | '.$this->netTotal.' | '.$this->invoiceDate.' | '.$this->customerId;
+    return $this->invoiceId.' | '.$this->feeId.' | '.$this->medicineId.' | '.$this->item;
 
   }
 

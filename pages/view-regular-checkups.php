@@ -18,6 +18,22 @@ $arguments = array();
 foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
+//make available variables of patients available in scope for use:
+if(isset($_POST['id']) && $_POST['id']!=''){
+  include_once("../classes/patients.php");
+  include_once("../daos/patients-dao.php");
+
+  $patientsDao = new PatientsDao(); 
+  $patients =  $patientsDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+}
+//make available variables of staff available in scope for use:
+if(isset($_POST['id']) && $_POST['id']!=''){
+  include_once("../classes/staff.php");
+  include_once("../daos/staff-dao.php");
+
+  $staffDao = new StaffDao(); 
+  $staff =  $staffDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+}
 include("../daos/regular-checkups-dao.php");
 include("../classes/regular-checkups.php");
 include("../config/database.php");
@@ -39,6 +55,9 @@ $dao = new RegularCheckupsdao();
         Patient
       </th>
       <th>
+        Conducted&nbsp;By
+      </th>
+      <th>
         Temperature
       </th>
       <th>
@@ -51,10 +70,10 @@ $dao = new RegularCheckupsdao();
         Other
       </th>
       <th>
-        Status
+        Date&nbsp;Taken
       </th>
       <th>
-        Time&nbsp;Tested
+        Time&nbsp;Taken
       </th>
       <th>
       </th>
@@ -78,7 +97,22 @@ $dao = new RegularCheckupsdao();
         </td>
         <td>
         <?php
-          echo $regularCheckups->getPatientId();
+          include_once("../classes/patients.php");
+          include_once("../daos/patients-dao.php");
+
+          $fpatientsDao = new PatientsDao(); 
+          $fpatients = $fpatientsDao->select($regularCheckups->getPatientId()); 
+          echo  $fpatients==null?"-": $fpatients->toString();
+        ?>
+        </td>
+        <td>
+        <?php
+          include_once("../classes/staff.php");
+          include_once("../daos/staff-dao.php");
+
+          $fstaffDao = new StaffDao(); 
+          $fstaff = $fstaffDao->select($regularCheckups->getConductedBy()); 
+          echo  $fstaff==null?"-": $fstaff->toString();
         ?>
         </td>
         <td>
@@ -103,12 +137,12 @@ $dao = new RegularCheckupsdao();
         </td>
         <td>
         <?php
-          echo $regularCheckups->getStatus();
+          echo $regularCheckups->getDateTaken();
         ?>
         </td>
         <td>
         <?php
-          echo $regularCheckups->getTimeTested();
+          echo $regularCheckups->getTimeTaken();
         ?>
         </td>
         <td>

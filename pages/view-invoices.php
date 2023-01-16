@@ -36,6 +36,24 @@ $dao = new InvoicesDao();
         Invoice
       </th>
       <th>
+        Fee
+      </th>
+      <th>
+        Medicine
+      </th>
+      <th>
+        Item
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Unit&nbsp;Price
+      </th>
+      <th>
+        Quantity
+      </th>
+      <th>
         Net&nbsp;Total
       </th>
       <th>
@@ -68,6 +86,36 @@ $dao = new InvoicesDao();
         <td>
         <?php
           echo $invoices->getInvoiceId();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $invoices->getFeeId();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $invoices->getMedicineId();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $invoices->getItem();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $invoices->getDescription();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $invoices->getUnitPrice();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $invoices->getQuantity();
         ?>
         </td>
         <td>

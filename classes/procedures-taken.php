@@ -6,13 +6,13 @@ class ProceduresTaken implements \JsonSerializable{
 */
   private $id;
   private $patientId;
-  private $department;
-  private $procedureConducted;
+  private $procedureId;
+  private $doctorId;
+  private $conductedBy;
   private $resultsDetails;
-  private $doctorsName;
-  private $labTech;
-  private $fee;
-  private $timeTested;
+  private $remarks;
+  private $dateConducted;
+  private $timeConducted;
 
 /**
 * function to initialize object
@@ -50,7 +50,7 @@ class ProceduresTaken implements \JsonSerializable{
 
 /**
 * function to get the value of patientId
-* @return String
+* @return int(10)
 */
   public function getPatientId(){
     return $this->patientId;
@@ -58,38 +58,56 @@ class ProceduresTaken implements \JsonSerializable{
   }
 
 /**
-* function to set the value of department
-* @param department : value to set
+* function to set the value of procedureId
+* @param procedureId : value to set
 */
-  public function setDepartment($department){
-    $this->department=$department;
+  public function setProcedureId($procedureId){
+    $this->procedureId=$procedureId;
 
   }
 
 /**
-* function to get the value of department
-* @return String
+* function to get the value of procedureId
+* @return int(10)
 */
-  public function getDepartment(){
-    return $this->department;
+  public function getProcedureId(){
+    return $this->procedureId;
 
   }
 
 /**
-* function to set the value of procedureConducted
-* @param procedureConducted : value to set
+* function to set the value of doctorId
+* @param doctorId : value to set
 */
-  public function setProcedureConducted($procedureConducted){
-    $this->procedureConducted=$procedureConducted;
+  public function setDoctorId($doctorId){
+    $this->doctorId=$doctorId;
 
   }
 
 /**
-* function to get the value of procedureConducted
-* @return String
+* function to get the value of doctorId
+* @return int(10)
 */
-  public function getProcedureConducted(){
-    return $this->procedureConducted;
+  public function getDoctorId(){
+    return $this->doctorId;
+
+  }
+
+/**
+* function to set the value of conductedBy
+* @param conductedBy : value to set
+*/
+  public function setConductedBy($conductedBy){
+    $this->conductedBy=$conductedBy;
+
+  }
+
+/**
+* function to get the value of conductedBy
+* @return int(10)
+*/
+  public function getConductedBy(){
+    return $this->conductedBy;
 
   }
 
@@ -112,74 +130,56 @@ class ProceduresTaken implements \JsonSerializable{
   }
 
 /**
-* function to set the value of doctorsName
-* @param doctorsName : value to set
+* function to set the value of remarks
+* @param remarks : value to set
 */
-  public function setDoctorsName($doctorsName){
-    $this->doctorsName=$doctorsName;
+  public function setRemarks($remarks){
+    $this->remarks=$remarks;
 
   }
 
 /**
-* function to get the value of doctorsName
-* @return String
+* function to get the value of remarks
+* @return text
 */
-  public function getDoctorsName(){
-    return $this->doctorsName;
+  public function getRemarks(){
+    return $this->remarks;
 
   }
 
 /**
-* function to set the value of labTech
-* @param labTech : value to set
+* function to set the value of dateConducted
+* @param dateConducted : value to set
 */
-  public function setLabTech($labTech){
-    $this->labTech=$labTech;
+  public function setDateConducted($dateConducted){
+    $this->dateConducted=$dateConducted;
 
   }
 
 /**
-* function to get the value of labTech
-* @return String
+* function to get the value of dateConducted
+* @return date
 */
-  public function getLabTech(){
-    return $this->labTech;
+  public function getDateConducted(){
+    return $this->dateConducted;
 
   }
 
 /**
-* function to set the value of fee
-* @param fee : value to set
+* function to set the value of timeConducted
+* @param timeConducted : value to set
 */
-  public function setFee($fee){
-    $this->fee=$fee;
+  public function setTimeConducted($timeConducted){
+    $this->timeConducted=$timeConducted;
 
   }
 
 /**
-* function to get the value of fee
-* @return int(10)
+* function to get the value of timeConducted
+* @return time
 */
-  public function getFee(){
-    return $this->fee;
-
-  }
-
-/**
-* function to set the value of timeTested
-* @param timeTested : value to set
-*/
-  public function setTimeTested($timeTested){
-    $this->timeTested=$timeTested;
-
-  }
-
-/**
-* function to get the value of timeTested
-* @return datetime
-*/
-  public function getTimeTested(){
-    return $this->timeTested;
+  public function getTimeConducted(){
+    return $this->timeConducted;
 
   }
 
@@ -188,7 +188,7 @@ class ProceduresTaken implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->id.' | '.$this->patientId.' | '.$this->department.' | '.$this->procedureConducted;
+    return $this->id.' | '.$this->patientId.' | '.$this->procedureId.' | '.$this->doctorId;
 
   }
 

@@ -9,17 +9,17 @@ class ProceduresTakenDao{
   public function insert($proceduresTaken){
     $id=  $proceduresTaken->getId();
     $patientId=  $proceduresTaken->getPatientId();
-    $department=  $proceduresTaken->getDepartment();
-    $procedureConducted=  $proceduresTaken->getProcedureConducted();
+    $procedureId=  $proceduresTaken->getProcedureId();
+    $doctorId=  $proceduresTaken->getDoctorId();
+    $conductedBy=  $proceduresTaken->getConductedBy();
     $resultsDetails=  $proceduresTaken->getResultsDetails();
-    $doctorsName=  $proceduresTaken->getDoctorsName();
-    $labTech=  $proceduresTaken->getLabTech();
-    $fee=  $proceduresTaken->getFee();
-    $timeTested=  $proceduresTaken->getTimeTested();
+    $remarks=  $proceduresTaken->getRemarks();
+    $dateConducted=  $proceduresTaken->getDateConducted();
+    $timeConducted=  $proceduresTaken->getTimeConducted();
     try{
-      $sql="INSERT INTO procedures_taken(`id`,`patient_id`,`department`,`procedureConducted`,`resultsDetails`,`doctorsName`,`labTech`,`fee`,`timeTested`) VALUES(?,?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO procedures_taken(`id`,`patientId`,`procedureId`,`doctorId`,`conductedBy`,`resultsDetails`,`remarks`,`dateConducted`,`timeConducted`) VALUES(?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issssssis",$id,$patientId,$department,$procedureConducted,$resultsDetails,$doctorsName,$labTech,$fee,$timeTested);
+      $stmt->bind_param("iiiiissss",$id,$patientId,$procedureId,$doctorId,$conductedBy,$resultsDetails,$remarks,$dateConducted,$timeConducted);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -52,17 +52,17 @@ class ProceduresTakenDao{
   public function update($proceduresTaken){
     $id=  $proceduresTaken->getId();
     $patientId=  $proceduresTaken->getPatientId();
-    $department=  $proceduresTaken->getDepartment();
-    $procedureConducted=  $proceduresTaken->getProcedureConducted();
+    $procedureId=  $proceduresTaken->getProcedureId();
+    $doctorId=  $proceduresTaken->getDoctorId();
+    $conductedBy=  $proceduresTaken->getConductedBy();
     $resultsDetails=  $proceduresTaken->getResultsDetails();
-    $doctorsName=  $proceduresTaken->getDoctorsName();
-    $labTech=  $proceduresTaken->getLabTech();
-    $fee=  $proceduresTaken->getFee();
-    $timeTested=  $proceduresTaken->getTimeTested();
+    $remarks=  $proceduresTaken->getRemarks();
+    $dateConducted=  $proceduresTaken->getDateConducted();
+    $timeConducted=  $proceduresTaken->getTimeConducted();
     try{
-      $sql="UPDATE procedures_taken SET `patient_id`=?,`department`=?,`procedureConducted`=?,`resultsDetails`=?,`doctorsName`=?,`labTech`=?,`fee`=?,`timeTested`=? WHERE id =?";
+      $sql="UPDATE procedures_taken SET `patientId`=?,`procedureId`=?,`doctorId`=?,`conductedBy`=?,`resultsDetails`=?,`remarks`=?,`dateConducted`=?,`timeConducted`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssssssisi",$patientId,$department,$procedureConducted,$resultsDetails,$doctorsName,$labTech,$fee,$timeTested,$id);
+      $stmt->bind_param("iiiissssi",$patientId,$procedureId,$doctorId,$conductedBy,$resultsDetails,$remarks,$dateConducted,$timeConducted,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -305,14 +305,14 @@ class ProceduresTakenDao{
   public function getFields($row){
     $proceduresTaken= new ProceduresTaken();
       $proceduresTaken->setId($row['id']);
-      $proceduresTaken->setPatientId($row['patient_id']);
-      $proceduresTaken->setDepartment($row['department']);
-      $proceduresTaken->setProcedureConducted($row['procedureConducted']);
+      $proceduresTaken->setPatientId($row['patientId']);
+      $proceduresTaken->setProcedureId($row['procedureId']);
+      $proceduresTaken->setDoctorId($row['doctorId']);
+      $proceduresTaken->setConductedBy($row['conductedBy']);
       $proceduresTaken->setResultsDetails($row['resultsDetails']);
-      $proceduresTaken->setDoctorsName($row['doctorsName']);
-      $proceduresTaken->setLabTech($row['labTech']);
-      $proceduresTaken->setFee($row['fee']);
-      $proceduresTaken->setTimeTested($row['timeTested']);
+      $proceduresTaken->setRemarks($row['remarks']);
+      $proceduresTaken->setDateConducted($row['dateConducted']);
+      $proceduresTaken->setTimeConducted($row['timeConducted']);
     return $proceduresTaken;
   }
 }

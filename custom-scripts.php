@@ -1,9 +1,9 @@
-<script type="text/javascript" src="js/custom/_alternative-profile.js?v=1673847476"></script>
-<script type="text/javascript" src="js/custom/_profile.js?v=1673847476"></script>
-<script type="text/javascript" src="js/custom/invoices.js?v=1673847476"></script>
-<script type="text/javascript" src="js/custom/menu.js?v=1673847476"></script>
-<script type="text/javascript" src="js/custom/privilege.js?v=1673847476"></script>
-<script type="text/javascript" src="js/custom/users.js?v=1673847476"></script>
+<script type="text/javascript" src="js/custom/_alternative-profile.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/_profile.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/invoices.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/menu.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/privilege.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/users.js?v=1673857151"></script>
 <script>
   $(document).ready(()=>{
     <?php if(sizeof($_GET)<2){ ?>

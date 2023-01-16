@@ -36,6 +36,78 @@ if(isset($invoice_id)){
   <input type="hidden" name="invoiceId" id="input-invoices-invoice-id" value="<?php echo null!==($invoicesEdit->getInvoiceId())?($invoicesEdit->getInvoiceId()):(isset($defaultValues['invoice_id'])?($defaultValues['invoice_id']): "0");?>"/>
 
  <!--start of form group-->
+<div class="form-group input-invoices-fee-id">
+
+                 <?php
+                  $readonly = in_array('feeId',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['feeId']=$invoicesEdit->getFeeId();};
+                  ?>
+                  <label for="input-invoices-fee-id">Fee</label>
+  <input type="number" name="feeId" id="input-invoices-fee-id" class="form-control " placeholder="Enter Fee " value="<?php echo null!==($invoicesEdit->getFeeId())?($invoicesEdit->getFeeId()):(isset($defaultValues['feeId'])?($defaultValues['feeId']): "");?>"  <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-invoices-medicine-id">
+
+                 <?php
+                  $readonly = in_array('medicineId',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['medicineId']=$invoicesEdit->getMedicineId();};
+                  ?>
+                  <label for="input-invoices-medicine-id">Medicine</label>
+  <input type="number" name="medicineId" id="input-invoices-medicine-id" class="form-control " placeholder="Enter Medicine " value="<?php echo null!==($invoicesEdit->getMedicineId())?($invoicesEdit->getMedicineId()):(isset($defaultValues['medicineId'])?($defaultValues['medicineId']): "");?>"  <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-invoices-item">
+
+                 <?php
+                  $readonly = in_array('item',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['item']=$invoicesEdit->getItem();};
+                  ?>
+                  <label for="input-invoices-item">Item*</label>
+  <input type="text" name="item" id="input-invoices-item" class="form-control " placeholder="Enter Item " value="<?php echo null!==($invoicesEdit->getItem())?($invoicesEdit->getItem()):(isset($defaultValues['item'])?($defaultValues['item']): "");?>" required <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-invoices-description">
+
+                 <?php
+                  $readonly = in_array('description',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['description']=$invoicesEdit->getDescription();};
+                  ?>
+                  <label for="input-invoices-description">Description*</label>
+  <textarea rows="5" name="description" id="input-invoices-description" class="form-control " placeholder="Enter Description " required<?php echo $readonly;?>   ><?php echo null!==($invoicesEdit->getDescription())?($invoicesEdit->getDescription()):(isset($defaultValues['description'])?($defaultValues['description']): "");?></textarea>
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-invoices-unit-price">
+
+                 <?php
+                  $readonly = in_array('unitPrice',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['unitPrice']=$invoicesEdit->getUnitPrice();};
+                  ?>
+                  <label for="input-invoices-unit-price">Unit&nbsp;Price*</label>
+  <input type="number" step="any" name="unitPrice" id="input-invoices-unit-price" class="form-control " placeholder="Enter Unit&nbsp;Price " value="<?php echo null!==($invoicesEdit->getUnitPrice())?($invoicesEdit->getUnitPrice()):(isset($defaultValues['unitPrice'])?($defaultValues['unitPrice']): "");?>" required <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-invoices-quantity">
+
+                 <?php
+                  $readonly = in_array('quantity',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['quantity']=$invoicesEdit->getQuantity();};
+                  ?>
+                  <label for="input-invoices-quantity">Quantity*</label>
+  <input type="number" name="quantity" id="input-invoices-quantity" class="form-control " placeholder="Enter Quantity " value="<?php echo null!==($invoicesEdit->getQuantity())?($invoicesEdit->getQuantity()):(isset($defaultValues['quantity'])?($defaultValues['quantity']): "");?>" required <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
 <div class="form-group input-invoices-net-total">
 
                  <?php
@@ -67,8 +139,8 @@ if(isset($invoice_id)){
                   //override default value with actual value if object is sent
                   if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['customer_id']=$invoicesEdit->getCustomerId();};
                   ?>
-                  <label for="input-invoices-customer-id">Customer&nbsp;*</label>
-  <input type="number" name="customerId" id="input-invoices-customer-id" class="form-control " placeholder="Enter Customer&nbsp; " value="<?php echo null!==($invoicesEdit->getCustomerId())?($invoicesEdit->getCustomerId()):(isset($defaultValues['customer_id'])?($defaultValues['customer_id']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-invoices-customer-id">Customer&nbsp;</label>
+  <input type="number" name="customerId" id="input-invoices-customer-id" class="form-control " placeholder="Enter Customer&nbsp; " value="<?php echo null!==($invoicesEdit->getCustomerId())?($invoicesEdit->getCustomerId()):(isset($defaultValues['customer_id'])?($defaultValues['customer_id']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

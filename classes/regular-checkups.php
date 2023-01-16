@@ -6,12 +6,13 @@ class RegularCheckups implements \JsonSerializable{
 */
   private $id;
   private $patientId;
+  private $conductedBy;
   private $temperature;
   private $bloodPressure;
   private $weight;
   private $other;
-  private $status;
-  private $timeTested;
+  private $dateTaken;
+  private $timeTaken;
 
 /**
 * function to initialize object
@@ -49,10 +50,28 @@ class RegularCheckups implements \JsonSerializable{
 
 /**
 * function to get the value of patientId
-* @return String
+* @return int(10)
 */
   public function getPatientId(){
     return $this->patientId;
+
+  }
+
+/**
+* function to set the value of conductedBy
+* @param conductedBy : value to set
+*/
+  public function setConductedBy($conductedBy){
+    $this->conductedBy=$conductedBy;
+
+  }
+
+/**
+* function to get the value of conductedBy
+* @return int(10)
+*/
+  public function getConductedBy(){
+    return $this->conductedBy;
 
   }
 
@@ -129,38 +148,38 @@ class RegularCheckups implements \JsonSerializable{
   }
 
 /**
-* function to set the value of status
-* @param status : value to set
+* function to set the value of dateTaken
+* @param dateTaken : value to set
 */
-  public function setStatus($status){
-    $this->status=$status;
+  public function setDateTaken($dateTaken){
+    $this->dateTaken=$dateTaken;
 
   }
 
 /**
-* function to get the value of status
-* @return int(10)
+* function to get the value of dateTaken
+* @return date
 */
-  public function getStatus(){
-    return $this->status;
+  public function getDateTaken(){
+    return $this->dateTaken;
 
   }
 
 /**
-* function to set the value of timeTested
-* @param timeTested : value to set
+* function to set the value of timeTaken
+* @param timeTaken : value to set
 */
-  public function setTimeTested($timeTested){
-    $this->timeTested=$timeTested;
+  public function setTimeTaken($timeTaken){
+    $this->timeTaken=$timeTaken;
 
   }
 
 /**
-* function to get the value of timeTested
-* @return datetime
+* function to get the value of timeTaken
+* @return time
 */
-  public function getTimeTested(){
-    return $this->timeTested;
+  public function getTimeTaken(){
+    return $this->timeTaken;
 
   }
 
@@ -169,7 +188,7 @@ class RegularCheckups implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->id.' | '.$this->patientId.' | '.$this->temperature.' | '.$this->bloodPressure;
+    return $this->id.' | '.$this->patientId.' | '.$this->conductedBy.' | '.$this->temperature;
 
   }
 

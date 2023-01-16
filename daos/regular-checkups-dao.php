@@ -9,16 +9,17 @@ class RegularCheckupsDao{
   public function insert($regularCheckups){
     $id=  $regularCheckups->getId();
     $patientId=  $regularCheckups->getPatientId();
+    $conductedBy=  $regularCheckups->getConductedBy();
     $temperature=  $regularCheckups->getTemperature();
     $bloodPressure=  $regularCheckups->getBloodPressure();
     $weight=  $regularCheckups->getWeight();
     $other=  $regularCheckups->getOther();
-    $status=  $regularCheckups->getStatus();
-    $timeTested=  $regularCheckups->getTimeTested();
+    $dateTaken=  $regularCheckups->getDateTaken();
+    $timeTaken=  $regularCheckups->getTimeTaken();
     try{
-      $sql="INSERT INTO regular_checkups(`id`,`patient_id`,`temperature`,`bloodPressure`,`weight`,`other`,`status`,`timeTested`) VALUES(?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO regular_checkups(`id`,`patientId`,`conductedBy`,`temperature`,`bloodPressure`,`weight`,`other`,`dateTaken`,`timeTaken`) VALUES(?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssssis",$id,$patientId,$temperature,$bloodPressure,$weight,$other,$status,$timeTested);
+      $stmt->bind_param("iiissssss",$id,$patientId,$conductedBy,$temperature,$bloodPressure,$weight,$other,$dateTaken,$timeTaken);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -51,16 +52,17 @@ class RegularCheckupsDao{
   public function update($regularCheckups){
     $id=  $regularCheckups->getId();
     $patientId=  $regularCheckups->getPatientId();
+    $conductedBy=  $regularCheckups->getConductedBy();
     $temperature=  $regularCheckups->getTemperature();
     $bloodPressure=  $regularCheckups->getBloodPressure();
     $weight=  $regularCheckups->getWeight();
     $other=  $regularCheckups->getOther();
-    $status=  $regularCheckups->getStatus();
-    $timeTested=  $regularCheckups->getTimeTested();
+    $dateTaken=  $regularCheckups->getDateTaken();
+    $timeTaken=  $regularCheckups->getTimeTaken();
     try{
-      $sql="UPDATE regular_checkups SET `patient_id`=?,`temperature`=?,`bloodPressure`=?,`weight`=?,`other`=?,`status`=?,`timeTested`=? WHERE id =?";
+      $sql="UPDATE regular_checkups SET `patientId`=?,`conductedBy`=?,`temperature`=?,`bloodPressure`=?,`weight`=?,`other`=?,`dateTaken`=?,`timeTaken`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssssisi",$patientId,$temperature,$bloodPressure,$weight,$other,$status,$timeTested,$id);
+      $stmt->bind_param("iissssssi",$patientId,$conductedBy,$temperature,$bloodPressure,$weight,$other,$dateTaken,$timeTaken,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -303,13 +305,14 @@ class RegularCheckupsDao{
   public function getFields($row){
     $regularCheckups= new RegularCheckups();
       $regularCheckups->setId($row['id']);
-      $regularCheckups->setPatientId($row['patient_id']);
+      $regularCheckups->setPatientId($row['patientId']);
+      $regularCheckups->setConductedBy($row['conductedBy']);
       $regularCheckups->setTemperature($row['temperature']);
       $regularCheckups->setBloodPressure($row['bloodPressure']);
       $regularCheckups->setWeight($row['weight']);
       $regularCheckups->setOther($row['other']);
-      $regularCheckups->setStatus($row['status']);
-      $regularCheckups->setTimeTested($row['timeTested']);
+      $regularCheckups->setDateTaken($row['dateTaken']);
+      $regularCheckups->setTimeTaken($row['timeTaken']);
     return $regularCheckups;
   }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2023 at 12:07 PM
+-- Generation Time: Jan 16, 2023 at 09:17 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -51,14 +51,93 @@ INSERT INTO `customers` (`id`, `name`, `contact_number`, `address`, `doctor_name
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `id` int(10) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fee`
+--
+
+CREATE TABLE `fee` (
+  `id` int(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `status` int(10) NOT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hospital_procedure`
+--
+
+CREATE TABLE `hospital_procedure` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf16_bin NOT NULL,
+  `description` varchar(50) COLLATE utf16_bin NOT NULL,
+  `departmentId` int(10) NOT NULL,
+  `feeId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `insurance_provider`
+--
+
+CREATE TABLE `insurance_provider` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `contactNumber` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE `invoice` (
+  `id` int(50) NOT NULL,
+  `invoiceNo` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `invoiceDate` date NOT NULL,
+  `patientId` int(50) NOT NULL,
+  `taxAmount` decimal(10,2) DEFAULT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `isPaid` int(10) NOT NULL,
+  `patientSchemeId` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `invoices`
 --
 
 CREATE TABLE `invoices` (
   `invoice_id` int(11) NOT NULL,
+  `feeId` int(10) DEFAULT NULL,
+  `medicineId` int(10) DEFAULT NULL,
+  `item` varchar(100) COLLATE utf16_bin NOT NULL,
+  `description` text COLLATE utf16_bin NOT NULL,
+  `unitPrice` decimal(10,2) NOT NULL,
+  `quantity` int(10) NOT NULL,
   `net_total` double NOT NULL DEFAULT 0,
   `invoice_date` date NOT NULL DEFAULT current_timestamp(),
-  `customer_id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `total_amount` double NOT NULL,
   `total_discount` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
@@ -67,10 +146,50 @@ CREATE TABLE `invoices` (
 -- Dumping data for table `invoices`
 --
 
-INSERT INTO `invoices` (`invoice_id`, `net_total`, `invoice_date`, `customer_id`, `total_amount`, `total_discount`) VALUES
-(2, 2626, '2021-10-19', 6, 2626, 0),
-(3, 5282, '2023-01-03', 15, 5282, 0),
-(4, 30, '2023-01-03', 15, 30, 0);
+INSERT INTO `invoices` (`invoice_id`, `feeId`, `medicineId`, `item`, `description`, `unitPrice`, `quantity`, `net_total`, `invoice_date`, `customer_id`, `total_amount`, `total_discount`) VALUES
+(2, NULL, NULL, '', '', '0.00', 0, 2626, '2021-10-19', 6, 2626, 0),
+(3, NULL, NULL, '', '', '0.00', 0, 5282, '2023-01-03', 15, 5282, 0),
+(4, NULL, NULL, '', '', '0.00', 0, 30, '2023-01-03', 15, 30, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_detail`
+--
+
+CREATE TABLE `invoice_detail` (
+  `id` int(11) NOT NULL,
+  `invoiceId` int(50) NOT NULL,
+  `feeId` int(10) DEFAULT NULL,
+  `medicineId` int(10) DEFAULT NULL,
+  `item` varchar(100) COLLATE utf16_bin NOT NULL,
+  `description` text COLLATE utf16_bin NOT NULL,
+  `unitPrice` decimal(10,2) NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `discount` decimal(10,2) NOT NULL,
+  `totalAmount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_position`
+--
+
+CREATE TABLE `job_position` (
+  `id` int(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `job_position`
+--
+
+INSERT INTO `job_position` (`id`, `name`, `description`) VALUES
+(1, 'Doctor', NULL),
+(2, 'Lab Technician', NULL),
+(3, 'Nurse', NULL);
 
 -- --------------------------------------------------------
 
@@ -91,6 +210,7 @@ CREATE TABLE `medicines` (
 --
 
 INSERT INTO `medicines` (`id`, `name`, `packing`, `generic_name`, `supplier_name`) VALUES
+(0, 'None', '', '', ''),
 (1, 'Nicip Plus', '10tab', 'Paracetamole', 'BDPL PHARMA'),
 (2, 'Crosin', '10tab', 'Hdsgvkvajkcbja', 'Kiran Pharma'),
 (4, 'Dolo 650', '15tab', 'paracetamole', 'BDPL PHARMA'),
@@ -105,11 +225,11 @@ INSERT INTO `medicines` (`id`, `name`, `packing`, `generic_name`, `supplier_name
 
 CREATE TABLE `medicines_stock` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf16_bin NOT NULL,
+  `medicineId` int(10) NOT NULL,
   `batch_id` varchar(20) COLLATE utf16_bin NOT NULL,
   `expiry_date` varchar(10) COLLATE utf16_bin NOT NULL,
   `quantity` int(11) NOT NULL,
-  `mrp` double NOT NULL,
+  `mrp` double DEFAULT NULL,
   `rate` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
@@ -117,11 +237,11 @@ CREATE TABLE `medicines_stock` (
 -- Dumping data for table `medicines_stock`
 --
 
-INSERT INTO `medicines_stock` (`id`, `name`, `batch_id`, `expiry_date`, `quantity`, `mrp`, `rate`) VALUES
-(1, 'Crosin', 'CROS12', '12/34', 0, 2626, 26),
-(2, 'Gelusil', 'G327', '12/42', 0, 15, 12),
-(3, 'Dolo 650', 'DOLO327', '01/23', 1, 30, 24),
-(4, 'Nicip Plus', 'NI325', '05/22', 3, 32.65, 28);
+INSERT INTO `medicines_stock` (`id`, `medicineId`, `batch_id`, `expiry_date`, `quantity`, `mrp`, `rate`) VALUES
+(1, 2, 'CROS12', '12/34', 0, 2626, 26),
+(2, 0, 'G327', '12/42', 0, 15, 12),
+(3, 0, 'DOLO327', '01/23', 1, 30, 24),
+(4, 0, 'NI325', '05/22', 3, 32.65, 28);
 
 -- --------------------------------------------------------
 
@@ -172,6 +292,53 @@ INSERT INTO `menu_target` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `patients`
+--
+
+CREATE TABLE `patients` (
+  `id` int(50) NOT NULL,
+  `fileId` varchar(100) COLLATE utf16_bin NOT NULL,
+  `firstName` varchar(100) COLLATE utf16_bin NOT NULL,
+  `otherNames` varchar(100) COLLATE utf16_bin DEFAULT NULL,
+  `lastName` varchar(100) COLLATE utf16_bin NOT NULL,
+  `address` text COLLATE utf16_bin DEFAULT NULL,
+  `contactNumber` varchar(20) COLLATE utf16_bin DEFAULT NULL,
+  `dateOfBirth` date NOT NULL,
+  `nationality` varchar(50) COLLATE utf16_bin NOT NULL,
+  `status` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `patient_scheme`
+--
+
+CREATE TABLE `patient_scheme` (
+  `id` int(50) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `patientId` int(50) NOT NULL,
+  `insuranceProviderId` int(10) NOT NULL,
+  `status` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_methods`
+--
+
+CREATE TABLE `payment_methods` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `privilege`
 --
 
@@ -187,6 +354,24 @@ CREATE TABLE `privilege` (
 
 INSERT INTO `privilege` (`id`, `name`, `profileId`) VALUES
 (1, 'PRINT_INVOICE', 19);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `procedures_taken`
+--
+
+CREATE TABLE `procedures_taken` (
+  `id` int(11) NOT NULL,
+  `patientId` int(10) NOT NULL,
+  `procedureId` int(10) NOT NULL,
+  `doctorId` int(10) DEFAULT NULL,
+  `conductedBy` int(10) NOT NULL,
+  `resultsDetails` text COLLATE utf16_bin DEFAULT NULL,
+  `remarks` text COLLATE utf16_bin DEFAULT NULL,
+  `dateConducted` date NOT NULL,
+  `timeConducted` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 -- --------------------------------------------------------
 
@@ -209,6 +394,60 @@ CREATE TABLE `purchases` (
 
 INSERT INTO `purchases` (`supplier_name`, `invoice_number`, `voucher_number`, `purchase_date`, `total_amount`, `payment_status`) VALUES
 ('Kundananji Creations Limited', 11, 1, '2023-01-03', 180, 'PAID');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `receipt`
+--
+
+CREATE TABLE `receipt` (
+  `id` int(50) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `patientId` int(50) NOT NULL,
+  `receiptNo` varchar(1000) NOT NULL,
+  `receiptDate` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `paymentMethodId` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `receipt_detail`
+--
+
+CREATE TABLE `receipt_detail` (
+  `id` int(50) NOT NULL,
+  `receiptId` int(50) NOT NULL,
+  `item` int(11) NOT NULL,
+  `description` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `unitPrice` decimal(10,2) NOT NULL,
+  `totalAmount` decimal(10,2) NOT NULL,
+  `invoiceDetailId` int(50) DEFAULT NULL,
+  `feeId` int(10) DEFAULT NULL,
+  `medicineId` int(50) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `regular_checkups`
+--
+
+CREATE TABLE `regular_checkups` (
+  `id` int(11) NOT NULL,
+  `patientId` int(10) NOT NULL,
+  `conductedBy` int(10) NOT NULL,
+  `temperature` varchar(50) COLLATE utf16_bin NOT NULL,
+  `bloodPressure` varchar(50) COLLATE utf16_bin NOT NULL,
+  `weight` varchar(50) COLLATE utf16_bin NOT NULL,
+  `other` text COLLATE utf16_bin DEFAULT NULL,
+  `dateTaken` date NOT NULL,
+  `timeTaken` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 -- --------------------------------------------------------
 
@@ -238,6 +477,24 @@ INSERT INTO `sales` (`customer_id`, `invoice_number`, `medicine_name`, `batch_id
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `id` int(10) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `title` varchar(15) NOT NULL,
+  `position` int(10) NOT NULL,
+  `phoneNumber` varchar(20) NOT NULL,
+  `address` text NOT NULL,
+  `nationaility` varchar(100) NOT NULL,
+  `status` int(10) NOT NULL,
+  `manNo` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `status`
 --
 
@@ -261,7 +518,7 @@ INSERT INTO `status` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `suppliers` (
-  `id` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf16_bin NOT NULL,
   `email` varchar(100) COLLATE utf16_bin NOT NULL,
   `contact_number` varchar(10) COLLATE utf16_bin NOT NULL,
@@ -272,7 +529,7 @@ CREATE TABLE `suppliers` (
 -- Dumping data for table `suppliers`
 --
 
-INSERT INTO `suppliers` (`id`, `name`, `email`, `contact_number`, `address`) VALUES
+INSERT INTO `suppliers` (`ID`, `name`, `email`, `contact_number`, `address`) VALUES
 (1, 'Desai Pharma', 'desai@gmail.com', '9948724242', 'Mahim East'),
 (2, 'BDPL PHARMA', 'bdpl@gmail.com', '8645632963', 'Santacruz West'),
 (9, 'Kiran Pharma', 'kiranpharma@gmail.com', '7638683637', 'Andheri East'),
@@ -396,67 +653,6 @@ CREATE TABLE `_user_tokens` (
   `expiry` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ---------------------------------------
---
--- Table structure for `patients_details`
---
-
-CREATE TABLE `patients_details` (
-  `id` int(11) NOT NULL,
-  `fileId` varchar(50) COLLATE utf16_bin NOT NULL,
-  `firstName` varchar(50) COLLATE utf16_bin NOT NULL,
-  `lastName` varchar(50) COLLATE utf16_bin NOT NULL,
-  `address` text COLLATE utf16_bin DEFAULT NULL,
-  `contactNumber` varchar(20) COLLATE utf16_bin DEFAULT NULL,
-  `dateOfBirth` datetime NOT NULL,
-  `nationality` varchar(50) COLLATE utf16_bin NOT NULL,
-  `status` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
-
---	---------------------------------------
---
--- Table structure for `regular_checkups`
---
-
-CREATE TABLE `regular_checkups` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(50) COLLATE utf16_bin NOT NULL,
-  `temperature` varchar(50) COLLATE utf16_bin NOT NULL,
-  `bloodPressure` varchar(50) COLLATE utf16_bin NOT NULL,
-  `weight` varchar(20) COLLATE utf16_bin NOT NULL,
-  `other` text COLLATE utf16_bin DEFAULT NULL,  
-  `status` int(10) NOT NULL,
-  `timeTested` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
-
--- ---------------------------------------
---
--- Table structure for `regular_checkups`
---
-
-CREATE TABLE `procedures_taken` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(50) COLLATE utf16_bin NOT NULL,
-  `department` varchar(50) COLLATE utf16_bin NOT NULL,
-  `procedureConducted` varchar(50) COLLATE utf16_bin NOT NULL,
-  `resultsDetails` text COLLATE utf16_bin DEFAULT NULL,  
-  `doctorsName` varchar(20) COLLATE utf16_bin NOT NULL,
-  `labTech` varchar(20) COLLATE utf16_bin NOT NULL,  
-  `fee` int(10) NOT NULL,
-  `timeTested` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
-
--- ---------------------------------------
---
--- Table structure for `hospital_procedures`
---
-
-CREATE TABLE `hospital_procedures` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf16_bin NOT NULL,
-  `description` varchar(50) COLLATE utf16_bin NOT NULL,
-  `fee` varchar(50) COLLATE utf16_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 --
 -- Indexes for dumped tables
 --
@@ -467,32 +663,62 @@ CREATE TABLE `hospital_procedures` (
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
-  --
--- Indexes for table `patients_details`
 --
-ALTER TABLE `patients_details`
-  ADD PRIMARY KEY (`id`);
+-- Indexes for table `department`
 --
--- Indexes for table `regular_checkups`
---
-ALTER TABLE `regular_checkups`
-  ADD PRIMARY KEY (`id`);
---
--- Indexes for table `procedures_taken`
---
-ALTER TABLE `procedures_taken`
+ALTER TABLE `department`
   ADD PRIMARY KEY (`id`);
 
-  --
--- Indexes for table `hospital_procedures`
 --
-ALTER TABLE `hospital_procedures`
+-- Indexes for table `fee`
+--
+ALTER TABLE `fee`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `status` (`status`);
+
+--
+-- Indexes for table `hospital_procedure`
+--
+ALTER TABLE `hospital_procedure`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `feeId` (`feeId`),
+  ADD KEY `departmentId` (`departmentId`);
+
+--
+-- Indexes for table `insurance_provider`
+--
+ALTER TABLE `insurance_provider`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `invoiceNo` (`invoiceNo`),
+  ADD KEY `isPaid` (`isPaid`),
+  ADD KEY `patientSchemeId` (`patientSchemeId`);
+
 --
 -- Indexes for table `invoices`
 --
 ALTER TABLE `invoices`
   ADD PRIMARY KEY (`invoice_id`);
+
+--
+-- Indexes for table `invoice_detail`
+--
+ALTER TABLE `invoice_detail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `invoiceId` (`invoiceId`),
+  ADD KEY `feeId` (`feeId`),
+  ADD KEY `medicineId` (`medicineId`);
+
+--
+-- Indexes for table `job_position`
+--
+ALTER TABLE `job_position`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `medicines`
@@ -505,7 +731,8 @@ ALTER TABLE `medicines`
 --
 ALTER TABLE `medicines_stock`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `batch_id` (`batch_id`);
+  ADD UNIQUE KEY `batch_id` (`batch_id`),
+  ADD KEY `medicineId` (`medicineId`);
 
 --
 -- Indexes for table `menu`
@@ -523,6 +750,29 @@ ALTER TABLE `menu_target`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `patients`
+--
+ALTER TABLE `patients`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `fileId` (`fileId`),
+  ADD KEY `status` (`status`);
+
+--
+-- Indexes for table `patient_scheme`
+--
+ALTER TABLE `patient_scheme`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `insuranceProviderId` (`insuranceProviderId`),
+  ADD KEY `status` (`status`);
+
+--
+-- Indexes for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `status` (`status`);
+
+--
 -- Indexes for table `privilege`
 --
 ALTER TABLE `privilege`
@@ -530,10 +780,54 @@ ALTER TABLE `privilege`
   ADD KEY `profileId` (`profileId`);
 
 --
+-- Indexes for table `procedures_taken`
+--
+ALTER TABLE `procedures_taken`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `patientId` (`patientId`),
+  ADD KEY `procedureId` (`procedureId`),
+  ADD KEY `doctorId` (`doctorId`),
+  ADD KEY `conductedBy` (`conductedBy`);
+
+--
 -- Indexes for table `purchases`
 --
 ALTER TABLE `purchases`
   ADD PRIMARY KEY (`voucher_number`);
+
+--
+-- Indexes for table `receipt`
+--
+ALTER TABLE `receipt`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `patientId` (`patientId`),
+  ADD KEY `paymentMethodId` (`paymentMethodId`);
+
+--
+-- Indexes for table `receipt_detail`
+--
+ALTER TABLE `receipt_detail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `receiptId` (`receiptId`),
+  ADD KEY `invoiceDetailId` (`invoiceDetailId`),
+  ADD KEY `feeId` (`feeId`),
+  ADD KEY `medicineId` (`medicineId`);
+
+--
+-- Indexes for table `regular_checkups`
+--
+ALTER TABLE `regular_checkups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `patientId` (`patientId`),
+  ADD KEY `conductedBy` (`conductedBy`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `position` (`position`),
+  ADD KEY `status` (`status`);
 
 --
 -- Indexes for table `status`
@@ -545,7 +839,7 @@ ALTER TABLE `status`
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `users`
@@ -597,16 +891,52 @@ ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `fee`
+--
+ALTER TABLE `fee`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `insurance_provider`
+--
+ALTER TABLE `insurance_provider`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `invoice`
+--
+ALTER TABLE `invoice`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
   MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `invoice_detail`
+--
+ALTER TABLE `invoice_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `job_position`
+--
+ALTER TABLE `job_position`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `medicines`
 --
 ALTER TABLE `medicines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `medicines_stock`
@@ -627,6 +957,24 @@ ALTER TABLE `menu_target`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `patients`
+--
+ALTER TABLE `patients`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `patient_scheme`
+--
+ALTER TABLE `patient_scheme`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `privilege`
 --
 ALTER TABLE `privilege`
@@ -637,6 +985,24 @@ ALTER TABLE `privilege`
 --
 ALTER TABLE `purchases`
   MODIFY `voucher_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `receipt`
+--
+ALTER TABLE `receipt`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `receipt_detail`
+--
+ALTER TABLE `receipt_detail`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -679,6 +1045,40 @@ ALTER TABLE `_user_tokens`
 --
 
 --
+-- Constraints for table `fee`
+--
+ALTER TABLE `fee`
+  ADD CONSTRAINT `fee_ibfk_1` FOREIGN KEY (`status`) REFERENCES `status` (`id`);
+
+--
+-- Constraints for table `hospital_procedure`
+--
+ALTER TABLE `hospital_procedure`
+  ADD CONSTRAINT `hospital_procedure_ibfk_1` FOREIGN KEY (`feeId`) REFERENCES `fee` (`id`),
+  ADD CONSTRAINT `hospital_procedure_ibfk_2` FOREIGN KEY (`departmentId`) REFERENCES `department` (`id`);
+
+--
+-- Constraints for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`isPaid`) REFERENCES `yesno` (`id`),
+  ADD CONSTRAINT `invoice_ibfk_2` FOREIGN KEY (`patientSchemeId`) REFERENCES `patient_scheme` (`id`);
+
+--
+-- Constraints for table `invoice_detail`
+--
+ALTER TABLE `invoice_detail`
+  ADD CONSTRAINT `invoice_detail_ibfk_1` FOREIGN KEY (`invoiceId`) REFERENCES `invoice` (`id`),
+  ADD CONSTRAINT `invoice_detail_ibfk_2` FOREIGN KEY (`feeId`) REFERENCES `fee` (`id`),
+  ADD CONSTRAINT `invoice_detail_ibfk_3` FOREIGN KEY (`medicineId`) REFERENCES `medicines` (`id`);
+
+--
+-- Constraints for table `medicines_stock`
+--
+ALTER TABLE `medicines_stock`
+  ADD CONSTRAINT `medicines_stock_ibfk_1` FOREIGN KEY (`medicineId`) REFERENCES `medicines` (`id`);
+
+--
 -- Constraints for table `menu`
 --
 ALTER TABLE `menu`
@@ -687,10 +1087,72 @@ ALTER TABLE `menu`
   ADD CONSTRAINT `menu_ibfk_4` FOREIGN KEY (`target`) REFERENCES `menu_target` (`id`);
 
 --
+-- Constraints for table `patients`
+--
+ALTER TABLE `patients`
+  ADD CONSTRAINT `patients_ibfk_1` FOREIGN KEY (`status`) REFERENCES `status` (`id`);
+
+--
+-- Constraints for table `patient_scheme`
+--
+ALTER TABLE `patient_scheme`
+  ADD CONSTRAINT `patient_scheme_ibfk_1` FOREIGN KEY (`insuranceProviderId`) REFERENCES `insurance_provider` (`id`),
+  ADD CONSTRAINT `patient_scheme_ibfk_2` FOREIGN KEY (`status`) REFERENCES `status` (`id`);
+
+--
+-- Constraints for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  ADD CONSTRAINT `payment_methods_ibfk_1` FOREIGN KEY (`status`) REFERENCES `status` (`id`);
+
+--
 -- Constraints for table `privilege`
 --
 ALTER TABLE `privilege`
   ADD CONSTRAINT `privilege_ibfk_1` FOREIGN KEY (`profileId`) REFERENCES `_profile` (`id`);
+
+--
+-- Constraints for table `procedures_taken`
+--
+ALTER TABLE `procedures_taken`
+  ADD CONSTRAINT `procedures_taken_ibfk_1` FOREIGN KEY (`patientId`) REFERENCES `patients` (`id`),
+  ADD CONSTRAINT `procedures_taken_ibfk_2` FOREIGN KEY (`patientId`) REFERENCES `patients` (`id`),
+  ADD CONSTRAINT `procedures_taken_ibfk_3` FOREIGN KEY (`procedureId`) REFERENCES `hospital_procedure` (`id`),
+  ADD CONSTRAINT `procedures_taken_ibfk_4` FOREIGN KEY (`doctorId`) REFERENCES `staff` (`id`),
+  ADD CONSTRAINT `procedures_taken_ibfk_5` FOREIGN KEY (`conductedBy`) REFERENCES `staff` (`id`);
+
+--
+-- Constraints for table `receipt`
+--
+ALTER TABLE `receipt`
+  ADD CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`patientId`) REFERENCES `patients` (`id`),
+  ADD CONSTRAINT `receipt_ibfk_2` FOREIGN KEY (`paymentMethodId`) REFERENCES `payment_methods` (`id`);
+
+--
+-- Constraints for table `receipt_detail`
+--
+ALTER TABLE `receipt_detail`
+  ADD CONSTRAINT `receipt_detail_ibfk_1` FOREIGN KEY (`receiptId`) REFERENCES `receipt` (`id`),
+  ADD CONSTRAINT `receipt_detail_ibfk_2` FOREIGN KEY (`invoiceDetailId`) REFERENCES `invoice_detail` (`id`),
+  ADD CONSTRAINT `receipt_detail_ibfk_3` FOREIGN KEY (`feeId`) REFERENCES `fee` (`id`),
+  ADD CONSTRAINT `receipt_detail_ibfk_4` FOREIGN KEY (`receiptId`) REFERENCES `receipt` (`id`),
+  ADD CONSTRAINT `receipt_detail_ibfk_5` FOREIGN KEY (`invoiceDetailId`) REFERENCES `invoice_detail` (`id`),
+  ADD CONSTRAINT `receipt_detail_ibfk_6` FOREIGN KEY (`feeId`) REFERENCES `fee` (`id`),
+  ADD CONSTRAINT `receipt_detail_ibfk_7` FOREIGN KEY (`medicineId`) REFERENCES `medicines` (`id`);
+
+--
+-- Constraints for table `regular_checkups`
+--
+ALTER TABLE `regular_checkups`
+  ADD CONSTRAINT `regular_checkups_ibfk_1` FOREIGN KEY (`patientId`) REFERENCES `patients` (`id`),
+  ADD CONSTRAINT `regular_checkups_ibfk_2` FOREIGN KEY (`conductedBy`) REFERENCES `staff` (`id`);
+
+--
+-- Constraints for table `staff`
+--
+ALTER TABLE `staff`
+  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`position`) REFERENCES `job_position` (`id`),
+  ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`status`) REFERENCES `status` (`id`);
 
 --
 -- Constraints for table `users`

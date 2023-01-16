@@ -8,16 +8,16 @@ class MedicinesStockDao{
 */
   public function insert($medicinesStock){
     $id=  $medicinesStock->getId();
-    $name=  $medicinesStock->getName();
+    $medicineId=  $medicinesStock->getMedicineId();
     $batchId=  $medicinesStock->getBatchId();
     $expiryDate=  $medicinesStock->getExpiryDate();
     $quantity=  $medicinesStock->getQuantity();
     $mrp=  $medicinesStock->getMrp();
     $rate=  $medicinesStock->getRate();
     try{
-      $sql="INSERT INTO medicines_stock(`id`,`name`,`batch_id`,`expiry_date`,`quantity`,`mrp`,`rate`) VALUES(?,?,?,?,?,?,?)";
+      $sql="INSERT INTO medicines_stock(`id`,`medicineId`,`batch_id`,`expiry_date`,`quantity`,`mrp`,`rate`) VALUES(?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssiss",$id,$name,$batchId,$expiryDate,$quantity,$mrp,$rate);
+      $stmt->bind_param("iississ",$id,$medicineId,$batchId,$expiryDate,$quantity,$mrp,$rate);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -49,16 +49,16 @@ class MedicinesStockDao{
 */
   public function update($medicinesStock){
     $id=  $medicinesStock->getId();
-    $name=  $medicinesStock->getName();
+    $medicineId=  $medicinesStock->getMedicineId();
     $batchId=  $medicinesStock->getBatchId();
     $expiryDate=  $medicinesStock->getExpiryDate();
     $quantity=  $medicinesStock->getQuantity();
     $mrp=  $medicinesStock->getMrp();
     $rate=  $medicinesStock->getRate();
     try{
-      $sql="UPDATE medicines_stock SET `name`=?,`batch_id`=?,`expiry_date`=?,`quantity`=?,`mrp`=?,`rate`=? WHERE id =?";
+      $sql="UPDATE medicines_stock SET `medicineId`=?,`batch_id`=?,`expiry_date`=?,`quantity`=?,`mrp`=?,`rate`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssissi",$name,$batchId,$expiryDate,$quantity,$mrp,$rate,$id);
+      $stmt->bind_param("ississi",$medicineId,$batchId,$expiryDate,$quantity,$mrp,$rate,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -301,7 +301,7 @@ class MedicinesStockDao{
   public function getFields($row){
     $medicinesStock= new MedicinesStock();
       $medicinesStock->setId($row['id']);
-      $medicinesStock->setName($row['name']);
+      $medicinesStock->setMedicineId($row['medicineId']);
       $medicinesStock->setBatchId($row['batch_id']);
       $medicinesStock->setExpiryDate($row['expiry_date']);
       $medicinesStock->setQuantity($row['quantity']);

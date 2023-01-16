@@ -5,7 +5,7 @@ class MedicinesStock implements \JsonSerializable{
 * member variables
 */
   private $id;
-  private $name;
+  private $medicineId;
   private $batchId;
   private $expiryDate;
   private $quantity;
@@ -38,20 +38,20 @@ class MedicinesStock implements \JsonSerializable{
   }
 
 /**
-* function to set the value of name
-* @param name : value to set
+* function to set the value of medicineId
+* @param medicineId : value to set
 */
-  public function setName($name){
-    $this->name=$name;
+  public function setMedicineId($medicineId){
+    $this->medicineId=$medicineId;
 
   }
 
 /**
-* function to get the value of name
-* @return String
+* function to get the value of medicineId
+* @return int(10)
 */
-  public function getName(){
-    return $this->name;
+  public function getMedicineId(){
+    return $this->medicineId;
 
   }
 
@@ -150,7 +150,7 @@ class MedicinesStock implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->name;
+    return $this->id.' | '.$this->medicineId.' | '.$this->batchId.' | '.$this->expiryDate;
 
   }
 
