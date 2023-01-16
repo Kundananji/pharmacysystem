@@ -7,13 +7,13 @@ class UsersDao{
 * @return inserted objected of type Users
 */
   public function insert($users){
-    $id=  $users->getid();
+    $id=  $users->getId();
     $username=  $users->getUsername();
-    $firstName=  $users->getfirstName();
-    $lastName=  $users->getlastName();
+    $firstName=  $users->getFirstName();
+    $lastName=  $users->getLastName();
     $password=  $users->getPassword();
-    $address=  $users->getaddress();
-    $email=  $users->getemail();
+    $address=  $users->getAddress();
+    $email=  $users->getEmail();
     $contactNumber=  $users->getContactNumber();
     $isLoggedIn=  $users->getIsLoggedIn();
     $status=  $users->getStatus();
@@ -52,13 +52,13 @@ class UsersDao{
 * @return updated objected of type Users
 */
   public function update($users){
-    $id=  $users->getid();
+    $id=  $users->getId();
     $username=  $users->getUsername();
-    $firstName=  $users->getfirstName();
-    $lastName=  $users->getlastName();
+    $firstName=  $users->getFirstName();
+    $lastName=  $users->getLastName();
     $password=  $users->getPassword();
-    $address=  $users->getaddress();
-    $email=  $users->getemail();
+    $address=  $users->getAddress();
+    $email=  $users->getEmail();
     $contactNumber=  $users->getContactNumber();
     $isLoggedIn=  $users->getIsLoggedIn();
     $status=  $users->getStatus();
@@ -160,11 +160,11 @@ class UsersDao{
 * function to select single instance of object of type Users from database
 * @return object of type Users
 */
-  public function select($usersid){
+  public function select($usersId){
     try{
       $sql="SELECT * FROM `users` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$usersid);
+      $stmt->bind_param("i",$usersId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -235,11 +235,11 @@ class UsersDao{
 * function to delete a single instance of object of type Users from database
 * @return boolean
 */
-  public function delete($usersid){
+  public function delete($usersId){
     try{
       $sql="DELETE FROM `users` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$usersid);
+      $stmt->bind_param("i",$usersId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -308,13 +308,13 @@ class UsersDao{
 */
   public function getFields($row){
     $users= new Users();
-      $users->setid($row['id']);
+      $users->setId($row['id']);
       $users->setUsername($row['username']);
-      $users->setfirstName($row['firstName']);
-      $users->setlastName($row['lastName']);
+      $users->setFirstName($row['firstName']);
+      $users->setLastName($row['lastName']);
       $users->setPassword($row['password']);
-      $users->setaddress($row['address']);
-      $users->setemail($row['email']);
+      $users->setAddress($row['address']);
+      $users->setEmail($row['email']);
       $users->setContactNumber($row['contactNumber']);
       $users->setIsLoggedIn($row['isLoggedIn']);
       $users->setStatus($row['status']);

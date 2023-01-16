@@ -36,7 +36,7 @@ $dao = new MedicinesStockdao();
         
       </th>
       <th>
-        N&nbsp;A&nbsp;M&nbsp;E
+        Name
       </th>
       <th>
         Batch
@@ -45,13 +45,13 @@ $dao = new MedicinesStockdao();
         Expiry&nbsp;Date
       </th>
       <th>
-        Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y
+        Quantity
       </th>
       <th>
-        M&nbsp;R&nbsp;P
+        Mrp
       </th>
       <th>
-        R&nbsp;A&nbsp;T&nbsp;E
+        Rate
       </th>
       <th>
       </th>
@@ -70,12 +70,12 @@ $dao = new MedicinesStockdao();
       </th>
         <td>
         <?php
-          echo $medicinesStock->getID();
+          echo $medicinesStock->getId();
         ?>
         </td>
         <td>
         <?php
-          echo $medicinesStock->getNAME();
+          echo $medicinesStock->getName();
         ?>
         </td>
         <td>
@@ -90,27 +90,27 @@ $dao = new MedicinesStockdao();
         </td>
         <td>
         <?php
-          echo $medicinesStock->getquantity();
+          echo $medicinesStock->getQuantity();
         ?>
         </td>
         <td>
         <?php
-          echo $medicinesStock->getMRP();
+          echo $medicinesStock->getMrp();
         ?>
         </td>
         <td>
         <?php
-          echo $medicinesStock->getRATE();
+          echo $medicinesStock->getRate();
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="MedicinesStock.addNewMedicinesStock({ID : \''.$medicinesStock->getID.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="MedicinesStock.addNewMedicinesStock({id : \''.$medicinesStock->getId.'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="MedicinesStock.deleteMedicinesStock('.$medicinesStock->getID().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="MedicinesStock.deleteMedicinesStock('.$medicinesStock->getId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

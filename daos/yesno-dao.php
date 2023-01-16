@@ -7,8 +7,8 @@ class YesnoDao{
 * @return inserted objected of type Yesno
 */
   public function insert($yesno){
-    $id=  $yesno->getid();
-    $name=  $yesno->getname();
+    $id=  $yesno->getId();
+    $name=  $yesno->getName();
     try{
       $sql="INSERT INTO yesno(`id`,`name`) VALUES(?,?)";
       $stmt=Database::getConnection()->prepare($sql);
@@ -43,8 +43,8 @@ class YesnoDao{
 * @return updated objected of type Yesno
 */
   public function update($yesno){
-    $id=  $yesno->getid();
-    $name=  $yesno->getname();
+    $id=  $yesno->getId();
+    $name=  $yesno->getName();
     try{
       $sql="UPDATE yesno SET `name`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
@@ -142,11 +142,11 @@ class YesnoDao{
 * function to select single instance of object of type Yesno from database
 * @return object of type Yesno
 */
-  public function select($yesnoid){
+  public function select($yesnoId){
     try{
       $sql="SELECT * FROM `yesno` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$yesnoid);
+      $stmt->bind_param("i",$yesnoId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -217,11 +217,11 @@ class YesnoDao{
 * function to delete a single instance of object of type Yesno from database
 * @return boolean
 */
-  public function delete($yesnoid){
+  public function delete($yesnoId){
     try{
       $sql="DELETE FROM `yesno` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$yesnoid);
+      $stmt->bind_param("i",$yesnoId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -290,8 +290,8 @@ class YesnoDao{
 */
   public function getFields($row){
     $yesno= new Yesno();
-      $yesno->setid($row['id']);
-      $yesno->setname($row['name']);
+      $yesno->setId($row['id']);
+      $yesno->setName($row['name']);
     return $yesno;
   }
 }

@@ -7,15 +7,15 @@ class MedicinesDao{
 * @return inserted objected of type Medicines
 */
   public function insert($medicines){
-    $id=  $medicines->getid();
-    $name=  $medicines->getname();
-    $packing=  $medicines->getpacking();
-    $genericname=  $medicines->getGenericname();
-    $suppliername=  $medicines->getSuppliername();
+    $id=  $medicines->getId();
+    $name=  $medicines->getName();
+    $packing=  $medicines->getPacking();
+    $genericName=  $medicines->getGenericName();
+    $supplierName=  $medicines->getSupplierName();
     try{
       $sql="INSERT INTO medicines(`id`,`name`,`packing`,`generic_name`,`supplier_name`) VALUES(?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issss",$id,$name,$packing,$genericname,$suppliername);
+      $stmt->bind_param("issss",$id,$name,$packing,$genericName,$supplierName);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -46,15 +46,15 @@ class MedicinesDao{
 * @return updated objected of type Medicines
 */
   public function update($medicines){
-    $id=  $medicines->getid();
-    $name=  $medicines->getname();
-    $packing=  $medicines->getpacking();
-    $genericname=  $medicines->getGenericname();
-    $suppliername=  $medicines->getSuppliername();
+    $id=  $medicines->getId();
+    $name=  $medicines->getName();
+    $packing=  $medicines->getPacking();
+    $genericName=  $medicines->getGenericName();
+    $supplierName=  $medicines->getSupplierName();
     try{
       $sql="UPDATE medicines SET `name`=?,`packing`=?,`generic_name`=?,`supplier_name`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssssi",$name,$packing,$genericname,$suppliername,$id);
+      $stmt->bind_param("ssssi",$name,$packing,$genericName,$supplierName,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -148,11 +148,11 @@ class MedicinesDao{
 * function to select single instance of object of type Medicines from database
 * @return object of type Medicines
 */
-  public function select($medicinesid){
+  public function select($medicinesId){
     try{
       $sql="SELECT * FROM `medicines` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$medicinesid);
+      $stmt->bind_param("i",$medicinesId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -223,11 +223,11 @@ class MedicinesDao{
 * function to delete a single instance of object of type Medicines from database
 * @return boolean
 */
-  public function delete($medicinesid){
+  public function delete($medicinesId){
     try{
       $sql="DELETE FROM `medicines` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$medicinesid);
+      $stmt->bind_param("i",$medicinesId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -296,11 +296,11 @@ class MedicinesDao{
 */
   public function getFields($row){
     $medicines= new Medicines();
-      $medicines->setid($row['id']);
-      $medicines->setname($row['name']);
-      $medicines->setpacking($row['packing']);
-      $medicines->setGenericname($row['generic_name']);
-      $medicines->setSuppliername($row['supplier_name']);
+      $medicines->setId($row['id']);
+      $medicines->setName($row['name']);
+      $medicines->setPacking($row['packing']);
+      $medicines->setGenericName($row['generic_name']);
+      $medicines->setSupplierName($row['supplier_name']);
     return $medicines;
   }
 }

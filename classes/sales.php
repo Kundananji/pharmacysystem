@@ -10,9 +10,9 @@ class Sales implements \JsonSerializable{
   private $batchId;
   private $expiryDate;
   private $quantity;
-  private $mRP;
-  private $dISCOUNT;
-  private $tOTAL;
+  private $mrp;
+  private $discount;
+  private $total;
 
 /**
 * function to initialize object
@@ -115,7 +115,7 @@ class Sales implements \JsonSerializable{
 * function to set the value of quantity
 * @param quantity : value to set
 */
-  public function setquantity($quantity){
+  public function setQuantity($quantity){
     $this->quantity=$quantity;
 
   }
@@ -124,62 +124,62 @@ class Sales implements \JsonSerializable{
 * function to get the value of quantity
 * @return int(11)
 */
-  public function getquantity(){
+  public function getQuantity(){
     return $this->quantity;
 
   }
 
 /**
-* function to set the value of mRP
-* @param mRP : value to set
+* function to set the value of mrp
+* @param mrp : value to set
 */
-  public function setMRP($mRP){
-    $this->mRP=$mRP;
+  public function setMrp($mrp){
+    $this->mrp=$mrp;
 
   }
 
 /**
-* function to get the value of mRP
+* function to get the value of mrp
 * @return double
 */
-  public function getMRP(){
-    return $this->mRP;
+  public function getMrp(){
+    return $this->mrp;
 
   }
 
 /**
-* function to set the value of dISCOUNT
-* @param dISCOUNT : value to set
+* function to set the value of discount
+* @param discount : value to set
 */
-  public function setDISCOUNT($dISCOUNT){
-    $this->dISCOUNT=$dISCOUNT;
+  public function setDiscount($discount){
+    $this->discount=$discount;
 
   }
 
 /**
-* function to get the value of dISCOUNT
+* function to get the value of discount
 * @return decimal(10,2)
 */
-  public function getDISCOUNT(){
-    return $this->dISCOUNT;
+  public function getDiscount(){
+    return $this->discount;
 
   }
 
 /**
-* function to set the value of tOTAL
-* @param tOTAL : value to set
+* function to set the value of total
+* @param total : value to set
 */
-  public function setTOTAL($tOTAL){
-    $this->tOTAL=$tOTAL;
+  public function setTotal($total){
+    $this->total=$total;
 
   }
 
 /**
-* function to get the value of tOTAL
+* function to get the value of total
 * @return decimal(10,2)
 */
-  public function getTOTAL(){
-    return $this->tOTAL;
+  public function getTotal(){
+    return $this->total;
 
   }
 

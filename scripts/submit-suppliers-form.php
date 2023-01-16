@@ -11,24 +11,24 @@ $suppliersEdit = new Suppliers();
 if(!isset($_POST["iD"]) || $_POST["iD"]==''){ 
   exit(json_encode(array("title"=>"iD required","status"=>"error","message"=>"The field ID is required")));
 }
-if(!isset($_POST["nAME"]) || $_POST["nAME"]==''){ 
-  exit(json_encode(array("title"=>"nAME required","status"=>"error","message"=>"The field NAME is required")));
+if(!isset($_POST["name"]) || $_POST["name"]==''){ 
+  exit(json_encode(array("title"=>"name required","status"=>"error","message"=>"The field name is required")));
 }
-if(!isset($_POST["eMAIL"]) || $_POST["eMAIL"]==''){ 
-  exit(json_encode(array("title"=>"eMAIL required","status"=>"error","message"=>"The field EMAIL is required")));
+if(!isset($_POST["email"]) || $_POST["email"]==''){ 
+  exit(json_encode(array("title"=>"email required","status"=>"error","message"=>"The field email is required")));
 }
 if(!isset($_POST["contactNumber"]) || $_POST["contactNumber"]==''){ 
   exit(json_encode(array("title"=>"contactNumber required","status"=>"error","message"=>"The field contact_number is required")));
 }
-if(!isset($_POST["aDDRESS"]) || $_POST["aDDRESS"]==''){ 
-  exit(json_encode(array("title"=>"aDDRESS required","status"=>"error","message"=>"The field ADDRESS is required")));
+if(!isset($_POST["address"]) || $_POST["address"]==''){ 
+  exit(json_encode(array("title"=>"address required","status"=>"error","message"=>"The field address is required")));
 }
 
 $suppliersEdit->setID(!isset($_POST["iD"]) || $_POST["iD"]==""?NULL:filter_var($_POST["iD"],FILTER_SANITIZE_NUMBER_INT));
-$suppliersEdit->setNAME(!isset($_POST["nAME"]) || $_POST["nAME"]==""?NULL:filter_var($_POST["nAME"],FILTER_SANITIZE_STRING));
-$suppliersEdit->setEMAIL(!isset($_POST["eMAIL"]) || $_POST["eMAIL"]==""?NULL:filter_var($_POST["eMAIL"],FILTER_SANITIZE_STRING));
+$suppliersEdit->setName(!isset($_POST["name"]) || $_POST["name"]==""?NULL:filter_var($_POST["name"],FILTER_SANITIZE_STRING));
+$suppliersEdit->setEmail(!isset($_POST["email"]) || $_POST["email"]==""?NULL:filter_var($_POST["email"],FILTER_SANITIZE_STRING));
 $suppliersEdit->setContactNumber(!isset($_POST["contactNumber"]) || $_POST["contactNumber"]==""?NULL:filter_var($_POST["contactNumber"],FILTER_SANITIZE_STRING));
-$suppliersEdit->setADDRESS(!isset($_POST["aDDRESS"]) || $_POST["aDDRESS"]==""?NULL:filter_var($_POST["aDDRESS"],FILTER_SANITIZE_STRING));
+$suppliersEdit->setAddress(!isset($_POST["address"]) || $_POST["address"]==""?NULL:filter_var($_POST["address"],FILTER_SANITIZE_STRING));
 
 try{
   if(isset($_POST["ID"]) && (int)$_POST["ID"] > 0){

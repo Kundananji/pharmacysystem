@@ -9,13 +9,13 @@ $purchasesEditDao = new PurchasesDao();
 $purchasesEdit = new Purchases();
 
 if(!isset($_POST["supplierName"]) || $_POST["supplierName"]==''){ 
-  exit(json_encode(array("title"=>"supplierName required","status"=>"error","message"=>"The field SUPPLIER_NAME is required")));
+  exit(json_encode(array("title"=>"supplierName required","status"=>"error","message"=>"The field supplier_name is required")));
 }
 if(!isset($_POST["invoiceNumber"]) || $_POST["invoiceNumber"]==''){ 
-  exit(json_encode(array("title"=>"invoiceNumber required","status"=>"error","message"=>"The field INVOICE_NUMBER is required")));
+  exit(json_encode(array("title"=>"invoiceNumber required","status"=>"error","message"=>"The field invoice_number is required")));
 }
 if(!isset($_POST["voucherNumber"]) || $_POST["voucherNumber"]==''){ 
-  exit(json_encode(array("title"=>"voucherNumber required","status"=>"error","message"=>"The field VOUCHER_NUMBER is required")));
+  exit(json_encode(array("title"=>"voucherNumber required","status"=>"error","message"=>"The field voucher_number is required")));
 }
 if(!isset($_POST["purchaseDate"]) || $_POST["purchaseDate"]==''){ 
   exit(json_encode(array("title"=>"purchaseDate required","status"=>"error","message"=>"The field purchase_date is required")));
@@ -24,7 +24,7 @@ if(!isset($_POST["totalAmount"]) || $_POST["totalAmount"]==''){
   exit(json_encode(array("title"=>"totalAmount required","status"=>"error","message"=>"The field total_amount is required")));
 }
 if(!isset($_POST["paymentStatus"]) || $_POST["paymentStatus"]==''){ 
-  exit(json_encode(array("title"=>"paymentStatus required","status"=>"error","message"=>"The field PAYMENT_STATUS is required")));
+  exit(json_encode(array("title"=>"paymentStatus required","status"=>"error","message"=>"The field payment_status is required")));
 }
 
 $purchasesEdit->setSupplierName(!isset($_POST["supplierName"]) || $_POST["supplierName"]==""?NULL:filter_var($_POST["supplierName"],FILTER_SANITIZE_STRING));
@@ -35,7 +35,7 @@ $purchasesEdit->setTotalAmount(!isset($_POST["totalAmount"]) || $_POST["totalAmo
 $purchasesEdit->setPaymentStatus(!isset($_POST["paymentStatus"]) || $_POST["paymentStatus"]==""?NULL:filter_var($_POST["paymentStatus"],FILTER_SANITIZE_STRING));
 
 try{
-  if(isset($_POST["VOUCHER_NUMBER"]) && (int)$_POST["VOUCHER_NUMBER"] > 0){
+  if(isset($_POST["voucher_number"]) && (int)$_POST["voucher_number"] > 0){
     $tempObject = $purchasesEditDao->update($purchasesEdit);
   }else{
     $tempObject = $purchasesEditDao->insert($purchasesEdit);

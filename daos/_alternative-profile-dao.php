@@ -7,9 +7,9 @@ class AlternativeProfileDao{
 * @return inserted objected of type AlternativeProfile
 */
   public function insert($alternativeProfile){
-    $id=  $alternativeProfile->getid();
-    $userId=  $alternativeProfile->getuserId();
-    $profileId=  $alternativeProfile->getprofileId();
+    $id=  $alternativeProfile->getId();
+    $userId=  $alternativeProfile->getUserId();
+    $profileId=  $alternativeProfile->getProfileId();
     try{
       $sql="INSERT INTO _alternative_profile(`id`,`userId`,`profileId`) VALUES(?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
@@ -44,9 +44,9 @@ class AlternativeProfileDao{
 * @return updated objected of type AlternativeProfile
 */
   public function update($alternativeProfile){
-    $id=  $alternativeProfile->getid();
-    $userId=  $alternativeProfile->getuserId();
-    $profileId=  $alternativeProfile->getprofileId();
+    $id=  $alternativeProfile->getId();
+    $userId=  $alternativeProfile->getUserId();
+    $profileId=  $alternativeProfile->getProfileId();
     try{
       $sql="UPDATE _alternative_profile SET `userId`=?,`profileId`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
@@ -144,11 +144,11 @@ class AlternativeProfileDao{
 * function to select single instance of object of type AlternativeProfile from database
 * @return object of type AlternativeProfile
 */
-  public function select($alternativeprofileId){
+  public function select($alternativeProfileId){
     try{
       $sql="SELECT * FROM `_alternative_profile` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$alternativeprofileId);
+      $stmt->bind_param("i",$alternativeProfileId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -219,11 +219,11 @@ class AlternativeProfileDao{
 * function to delete a single instance of object of type AlternativeProfile from database
 * @return boolean
 */
-  public function delete($alternativeprofileId){
+  public function delete($alternativeProfileId){
     try{
       $sql="DELETE FROM `_alternative_profile` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$alternativeprofileId);
+      $stmt->bind_param("i",$alternativeProfileId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -292,9 +292,9 @@ class AlternativeProfileDao{
 */
   public function getFields($row){
     $alternativeProfile= new AlternativeProfile();
-      $alternativeProfile->setid($row['id']);
-      $alternativeProfile->setuserId($row['userId']);
-      $alternativeProfile->setprofileId($row['profileId']);
+      $alternativeProfile->setId($row['id']);
+      $alternativeProfile->setUserId($row['userId']);
+      $alternativeProfile->setProfileId($row['profileId']);
     return $alternativeProfile;
   }
 }

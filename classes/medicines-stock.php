@@ -4,13 +4,13 @@ class MedicinesStock implements \JsonSerializable{
 /**
 * member variables
 */
-  private $iD;
-  private $nAME;
+  private $id;
+  private $name;
   private $batchId;
   private $expiryDate;
   private $quantity;
-  private $mRP;
-  private $rATE;
+  private $mrp;
+  private $rate;
 
 /**
 * function to initialize object
@@ -20,38 +20,38 @@ class MedicinesStock implements \JsonSerializable{
   }
 
 /**
-* function to set the value of iD
-* @param iD : value to set
+* function to set the value of id
+* @param id : value to set
 */
-  public function setID($iD){
-    $this->iD=$iD;
+  public function setId($id){
+    $this->id=$id;
 
   }
 
 /**
-* function to get the value of iD
+* function to get the value of id
 * @return int(11)
 */
-  public function getID(){
-    return $this->iD;
+  public function getId(){
+    return $this->id;
 
   }
 
 /**
-* function to set the value of nAME
-* @param nAME : value to set
+* function to set the value of name
+* @param name : value to set
 */
-  public function setNAME($nAME){
-    $this->nAME=$nAME;
+  public function setName($name){
+    $this->name=$name;
 
   }
 
 /**
-* function to get the value of nAME
+* function to get the value of name
 * @return String
 */
-  public function getNAME(){
-    return $this->nAME;
+  public function getName(){
+    return $this->name;
 
   }
 
@@ -95,7 +95,7 @@ class MedicinesStock implements \JsonSerializable{
 * function to set the value of quantity
 * @param quantity : value to set
 */
-  public function setquantity($quantity){
+  public function setQuantity($quantity){
     $this->quantity=$quantity;
 
   }
@@ -104,44 +104,44 @@ class MedicinesStock implements \JsonSerializable{
 * function to get the value of quantity
 * @return int(11)
 */
-  public function getquantity(){
+  public function getQuantity(){
     return $this->quantity;
 
   }
 
 /**
-* function to set the value of mRP
-* @param mRP : value to set
+* function to set the value of mrp
+* @param mrp : value to set
 */
-  public function setMRP($mRP){
-    $this->mRP=$mRP;
+  public function setMrp($mrp){
+    $this->mrp=$mrp;
 
   }
 
 /**
-* function to get the value of mRP
+* function to get the value of mrp
 * @return double
 */
-  public function getMRP(){
-    return $this->mRP;
+  public function getMrp(){
+    return $this->mrp;
 
   }
 
 /**
-* function to set the value of rATE
-* @param rATE : value to set
+* function to set the value of rate
+* @param rate : value to set
 */
-  public function setRATE($rATE){
-    $this->rATE=$rATE;
+  public function setRate($rate){
+    $this->rate=$rate;
 
   }
 
 /**
-* function to get the value of rATE
+* function to get the value of rate
 * @return double
 */
-  public function getRATE(){
-    return $this->rATE;
+  public function getRate(){
+    return $this->rate;
 
   }
 
@@ -150,7 +150,7 @@ class MedicinesStock implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->iD.' | '.$this->nAME.' | '.$this->batchId.' | '.$this->expiryDate;
+    return $this->name;
 
   }
 

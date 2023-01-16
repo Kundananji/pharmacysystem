@@ -8,30 +8,30 @@ include_once("../daos/medicines-dao.php");
 $medicinesEditDao = new MedicinesDao();
 $medicinesEdit = new Medicines();
 
-if(!isset($_POST["iD"]) || $_POST["iD"]==''){ 
-  exit(json_encode(array("title"=>"iD required","status"=>"error","message"=>"The field ID is required")));
+if(!isset($_POST["id"]) || $_POST["id"]==''){ 
+  exit(json_encode(array("title"=>"id required","status"=>"error","message"=>"The field id is required")));
 }
-if(!isset($_POST["nAME"]) || $_POST["nAME"]==''){ 
-  exit(json_encode(array("title"=>"nAME required","status"=>"error","message"=>"The field NAME is required")));
+if(!isset($_POST["name"]) || $_POST["name"]==''){ 
+  exit(json_encode(array("title"=>"name required","status"=>"error","message"=>"The field name is required")));
 }
-if(!isset($_POST["pACKING"]) || $_POST["pACKING"]==''){ 
-  exit(json_encode(array("title"=>"pACKING required","status"=>"error","message"=>"The field PACKING is required")));
+if(!isset($_POST["packing"]) || $_POST["packing"]==''){ 
+  exit(json_encode(array("title"=>"packing required","status"=>"error","message"=>"The field packing is required")));
 }
 if(!isset($_POST["genericName"]) || $_POST["genericName"]==''){ 
-  exit(json_encode(array("title"=>"genericName required","status"=>"error","message"=>"The field GENERIC_NAME is required")));
+  exit(json_encode(array("title"=>"genericName required","status"=>"error","message"=>"The field generic_name is required")));
 }
 if(!isset($_POST["supplierName"]) || $_POST["supplierName"]==''){ 
-  exit(json_encode(array("title"=>"supplierName required","status"=>"error","message"=>"The field SUPPLIER_NAME is required")));
+  exit(json_encode(array("title"=>"supplierName required","status"=>"error","message"=>"The field supplier_name is required")));
 }
 
-$medicinesEdit->setID(!isset($_POST["iD"]) || $_POST["iD"]==""?NULL:filter_var($_POST["iD"],FILTER_SANITIZE_NUMBER_INT));
-$medicinesEdit->setNAME(!isset($_POST["nAME"]) || $_POST["nAME"]==""?NULL:filter_var($_POST["nAME"],FILTER_SANITIZE_STRING));
-$medicinesEdit->setPACKING(!isset($_POST["pACKING"]) || $_POST["pACKING"]==""?NULL:filter_var($_POST["pACKING"],FILTER_SANITIZE_STRING));
+$medicinesEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
+$medicinesEdit->setName(!isset($_POST["name"]) || $_POST["name"]==""?NULL:filter_var($_POST["name"],FILTER_SANITIZE_STRING));
+$medicinesEdit->setPacking(!isset($_POST["packing"]) || $_POST["packing"]==""?NULL:filter_var($_POST["packing"],FILTER_SANITIZE_STRING));
 $medicinesEdit->setGenericName(!isset($_POST["genericName"]) || $_POST["genericName"]==""?NULL:filter_var($_POST["genericName"],FILTER_SANITIZE_STRING));
 $medicinesEdit->setSupplierName(!isset($_POST["supplierName"]) || $_POST["supplierName"]==""?NULL:filter_var($_POST["supplierName"],FILTER_SANITIZE_STRING));
 
 try{
-  if(isset($_POST["ID"]) && (int)$_POST["ID"] > 0){
+  if(isset($_POST["id"]) && (int)$_POST["id"] > 0){
     $tempObject = $medicinesEditDao->update($medicinesEdit);
   }else{
     $tempObject = $medicinesEditDao->insert($medicinesEdit);

@@ -36,10 +36,10 @@ $dao = new MedicinesDao();
         
       </th>
       <th>
-        N&nbsp;A&nbsp;M&nbsp;E
+        Name
       </th>
       <th>
-        P&nbsp;A&nbsp;C&nbsp;K&nbsp;I&nbsp;N&nbsp;G
+        Packing
       </th>
       <th>
         Generic&nbsp;Name
@@ -64,17 +64,17 @@ $dao = new MedicinesDao();
       </th>
         <td>
         <?php
-          echo $medicines->getID();
+          echo $medicines->getId();
         ?>
         </td>
         <td>
         <?php
-          echo $medicines->getNAME();
+          echo $medicines->getName();
         ?>
         </td>
         <td>
         <?php
-          echo $medicines->getPACKING();
+          echo $medicines->getPacking();
         ?>
         </td>
         <td>
@@ -89,12 +89,12 @@ $dao = new MedicinesDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Medicines.addNewMedicines({ID : \''.$medicines->getID.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Medicines.addNewMedicines({id : \''.$medicines->getId.'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Medicines.deleteMedicines('.$medicines->getID().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Medicines.deleteMedicines('.$medicines->getId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

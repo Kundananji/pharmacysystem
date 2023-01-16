@@ -173,14 +173,14 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
 }
 
 let divPageContent = $('#page-content');
-let viewPurchases=( VOUCHER_NUMBER)=>{
+let viewPurchases=( voucher_number)=>{
   let viewInModal = $('#link-view-purchases').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-purchases.php",
     type: "post",
     data: { 
-      VOUCHER_NUMBER:VOUCHER_NUMBER
+      voucher_number:voucher_number
      },
     success: (data)=>{
         divPageContent.html(data);

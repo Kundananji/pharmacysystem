@@ -136,17 +136,17 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-medicines-i-d' +'_row_' + i;
+  id = 'input-medicines-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-medicines-n-a-m-e' +'_row_' + i;
+  id = 'input-medicines-name' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-medicines-p-a-c-k-i-n-g' +'_row_' + i;
+  id = 'input-medicines-packing' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -168,14 +168,14 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
 }
 
 let divPageContent = $('#page-content');
-let viewMedicines=( ID)=>{
+let viewMedicines=( id)=>{
   let viewInModal = $('#link-view-medicines').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-medicines.php",
     type: "post",
     data: { 
-      ID:ID
+      id:id
      },
     success: (data)=>{
         divPageContent.html(data);

@@ -7,15 +7,15 @@ class MenuDao{
 * @return inserted objected of type Menu
 */
   public function insert($menu){
-    $id=  $menu->getid();
+    $id=  $menu->getId();
     $icon=  $menu->getIcon();
-    $name=  $menu->getname();
+    $name=  $menu->getName();
     $label=  $menu->getLabel();
     $url=  $menu->getUrl();
     $target=  $menu->getTarget();
-    $parentId=  $menu->getparentId();
-    $profileId=  $menu->getprofileId();
-    $idName=  $menu->getidName();
+    $parentId=  $menu->getParentId();
+    $profileId=  $menu->getProfileId();
+    $idName=  $menu->getIdName();
     try{
       $sql="INSERT INTO menu(`id`,`icon`,`name`,`label`,`url`,`target`,`parentId`,`profileId`,`idName`) VALUES(?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
@@ -50,15 +50,15 @@ class MenuDao{
 * @return updated objected of type Menu
 */
   public function update($menu){
-    $id=  $menu->getid();
+    $id=  $menu->getId();
     $icon=  $menu->getIcon();
-    $name=  $menu->getname();
+    $name=  $menu->getName();
     $label=  $menu->getLabel();
     $url=  $menu->getUrl();
     $target=  $menu->getTarget();
-    $parentId=  $menu->getparentId();
-    $profileId=  $menu->getprofileId();
-    $idName=  $menu->getidName();
+    $parentId=  $menu->getParentId();
+    $profileId=  $menu->getProfileId();
+    $idName=  $menu->getIdName();
     try{
       $sql="UPDATE menu SET `icon`=?,`name`=?,`label`=?,`url`=?,`target`=?,`parentId`=?,`profileId`=?,`idName`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
@@ -156,11 +156,11 @@ class MenuDao{
 * function to select single instance of object of type Menu from database
 * @return object of type Menu
 */
-  public function select($menuid){
+  public function select($menuId){
     try{
       $sql="SELECT * FROM `menu` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$menuid);
+      $stmt->bind_param("i",$menuId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -231,11 +231,11 @@ class MenuDao{
 * function to delete a single instance of object of type Menu from database
 * @return boolean
 */
-  public function delete($menuid){
+  public function delete($menuId){
     try{
       $sql="DELETE FROM `menu` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$menuid);
+      $stmt->bind_param("i",$menuId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -304,15 +304,15 @@ class MenuDao{
 */
   public function getFields($row){
     $menu= new Menu();
-      $menu->setid($row['id']);
+      $menu->setId($row['id']);
       $menu->setIcon($row['icon']);
-      $menu->setname($row['name']);
+      $menu->setName($row['name']);
       $menu->setLabel($row['label']);
       $menu->setUrl($row['url']);
       $menu->setTarget($row['target']);
-      $menu->setparentId($row['parentId']);
-      $menu->setprofileId($row['profileId']);
-      $menu->setidName($row['idName']);
+      $menu->setParentId($row['parentId']);
+      $menu->setProfileId($row['profileId']);
+      $menu->setIdName($row['idName']);
     return $menu;
   }
 }

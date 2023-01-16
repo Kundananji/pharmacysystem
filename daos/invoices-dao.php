@@ -7,16 +7,16 @@ class InvoicesDao{
 * @return inserted objected of type Invoices
 */
   public function insert($invoices){
-    $invoiceid=  $invoices->getInvoiceid();
-    $nettotal=  $invoices->getNettotal();
+    $invoiceId=  $invoices->getInvoiceId();
+    $netTotal=  $invoices->getNetTotal();
     $invoiceDate=  $invoices->getInvoiceDate();
-    $customerid=  $invoices->getCustomerid();
-    $totalAmount=  $invoices->gettotalAmount();
-    $totaldiscount=  $invoices->gettotaldiscount();
+    $customerId=  $invoices->getCustomerId();
+    $totalAmount=  $invoices->getTotalAmount();
+    $totalDiscount=  $invoices->getTotalDiscount();
     try{
       $sql="INSERT INTO invoices(`invoice_id`,`net_total`,`invoice_date`,`customer_id`,`total_amount`,`total_discount`) VALUES(?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ississ",$invoiceid,$nettotal,$invoiceDate,$customerid,$totalAmount,$totaldiscount);
+      $stmt->bind_param("ississ",$invoiceId,$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -47,22 +47,22 @@ class InvoicesDao{
 * @return updated objected of type Invoices
 */
   public function update($invoices){
-    $invoiceid=  $invoices->getInvoiceid();
-    $nettotal=  $invoices->getNettotal();
+    $invoiceId=  $invoices->getInvoiceId();
+    $netTotal=  $invoices->getNetTotal();
     $invoiceDate=  $invoices->getInvoiceDate();
-    $customerid=  $invoices->getCustomerid();
-    $totalAmount=  $invoices->gettotalAmount();
-    $totaldiscount=  $invoices->gettotaldiscount();
+    $customerId=  $invoices->getCustomerId();
+    $totalAmount=  $invoices->getTotalAmount();
+    $totalDiscount=  $invoices->getTotalDiscount();
     try{
       $sql="UPDATE invoices SET `net_total`=?,`invoice_date`=?,`customer_id`=?,`total_amount`=?,`total_discount`=? WHERE invoice_id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssissi",$nettotal,$invoiceDate,$customerid,$totalAmount,$totaldiscount,$invoiceid);
+      $stmt->bind_param("ssissi",$netTotal,$invoiceDate,$customerId,$totalAmount,$totalDiscount,$invoiceId);
       $stmt->execute();
       $stmt->close();
 
       $sql="SELECT * FROM invoices WHERE `invoice_id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$invoiceid);
+      $stmt->bind_param("i",$invoiceId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -150,11 +150,11 @@ class InvoicesDao{
 * function to select single instance of object of type Invoices from database
 * @return object of type Invoices
 */
-  public function select($invoicesid){
+  public function select($invoicesId){
     try{
       $sql="SELECT * FROM `invoices` WHERE `invoice_id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$invoicesid);
+      $stmt->bind_param("i",$invoicesId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -225,11 +225,11 @@ class InvoicesDao{
 * function to delete a single instance of object of type Invoices from database
 * @return boolean
 */
-  public function delete($invoicesid){
+  public function delete($invoicesId){
     try{
       $sql="DELETE FROM `invoices` WHERE `invoice_id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$invoicesid);
+      $stmt->bind_param("i",$invoicesId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -298,12 +298,12 @@ class InvoicesDao{
 */
   public function getFields($row){
     $invoices= new Invoices();
-      $invoices->setInvoiceid($row['invoice_id']);
-      $invoices->setNettotal($row['net_total']);
+      $invoices->setInvoiceId($row['invoice_id']);
+      $invoices->setNetTotal($row['net_total']);
       $invoices->setInvoiceDate($row['invoice_date']);
-      $invoices->setCustomerid($row['customer_id']);
-      $invoices->settotalAmount($row['total_amount']);
-      $invoices->settotaldiscount($row['total_discount']);
+      $invoices->setCustomerId($row['customer_id']);
+      $invoices->setTotalAmount($row['total_amount']);
+      $invoices->setTotalDiscount($row['total_discount']);
     return $invoices;
   }
 }

@@ -5,10 +5,10 @@ class Suppliers implements \JsonSerializable{
 * member variables
 */
   private $iD;
-  private $nAME;
-  private $eMAIL;
+  private $name;
+  private $email;
   private $contactNumber;
-  private $aDDRESS;
+  private $address;
 
 /**
 * function to initialize object
@@ -36,38 +36,38 @@ class Suppliers implements \JsonSerializable{
   }
 
 /**
-* function to set the value of nAME
-* @param nAME : value to set
+* function to set the value of name
+* @param name : value to set
 */
-  public function setNAME($nAME){
-    $this->nAME=$nAME;
+  public function setName($name){
+    $this->name=$name;
 
   }
 
 /**
-* function to get the value of nAME
+* function to get the value of name
 * @return String
 */
-  public function getNAME(){
-    return $this->nAME;
+  public function getName(){
+    return $this->name;
 
   }
 
 /**
-* function to set the value of eMAIL
-* @param eMAIL : value to set
+* function to set the value of email
+* @param email : value to set
 */
-  public function setEMAIL($eMAIL){
-    $this->eMAIL=$eMAIL;
+  public function setEmail($email){
+    $this->email=$email;
 
   }
 
 /**
-* function to get the value of eMAIL
+* function to get the value of email
 * @return String
 */
-  public function getEMAIL(){
-    return $this->eMAIL;
+  public function getEmail(){
+    return $this->email;
 
   }
 
@@ -90,20 +90,20 @@ class Suppliers implements \JsonSerializable{
   }
 
 /**
-* function to set the value of aDDRESS
-* @param aDDRESS : value to set
+* function to set the value of address
+* @param address : value to set
 */
-  public function setADDRESS($aDDRESS){
-    $this->aDDRESS=$aDDRESS;
+  public function setAddress($address){
+    $this->address=$address;
 
   }
 
 /**
-* function to get the value of aDDRESS
+* function to get the value of address
 * @return String
 */
-  public function getADDRESS(){
-    return $this->aDDRESS;
+  public function getAddress(){
+    return $this->address;
 
   }
 
@@ -112,7 +112,7 @@ class Suppliers implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->iD.' | '.$this->nAME.' | '.$this->eMAIL.' | '.$this->contactNumber;
+    return $this->name;
 
   }
 

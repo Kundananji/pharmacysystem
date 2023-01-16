@@ -36,51 +36,51 @@ if(isset($ID)){
   <input type="hidden" name="iD" id="input-suppliers--i-d" value="<?php echo null!==($suppliersEdit->getID())?($suppliersEdit->getID()):(isset($defaultValues['ID'])?($defaultValues['ID']): "0");?>"/>
 
  <!--start of form group-->
-<div class="form-group input-suppliers--n-a-m-e">
+<div class="form-group input-suppliers-name">
 
                  <?php
-                  $readonly = in_array('NAME',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('name',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($suppliersEdit->getID()!=null){ $defaultValues['NAME']=$suppliersEdit->getNAME();};
+                  if($suppliersEdit->getID()!=null){ $defaultValues['name']=$suppliersEdit->getName();};
                   ?>
-                  <label for="input-suppliers--n-a-m-e">&nbsp;N&nbsp;A&nbsp;M&nbsp;E*</label>
-  <input type="text" name="nAME" id="input-suppliers--n-a-m-e" class="form-control " placeholder="Enter &nbsp;N&nbsp;A&nbsp;M&nbsp;E " value="<?php echo null!==($suppliersEdit->getNAME())?($suppliersEdit->getNAME()):(isset($defaultValues['NAME'])?($defaultValues['NAME']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-suppliers-name">Name*</label>
+  <input type="text" name="name" id="input-suppliers-name" class="form-control " placeholder="Enter Name " value="<?php echo null!==($suppliersEdit->getName())?($suppliersEdit->getName()):(isset($defaultValues['name'])?($defaultValues['name']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-suppliers--e-m-a-i-l">
+<div class="form-group input-suppliers-email">
 
                  <?php
-                  $readonly = in_array('EMAIL',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('email',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($suppliersEdit->getID()!=null){ $defaultValues['EMAIL']=$suppliersEdit->getEMAIL();};
+                  if($suppliersEdit->getID()!=null){ $defaultValues['email']=$suppliersEdit->getEmail();};
                   ?>
-                  <label for="input-suppliers--e-m-a-i-l">&nbsp;E&nbsp;M&nbsp;A&nbsp;I&nbsp;L*</label>
-  <input type="text" name="eMAIL" id="input-suppliers--e-m-a-i-l" class="form-control " placeholder="Enter &nbsp;E&nbsp;M&nbsp;A&nbsp;I&nbsp;L " value="<?php echo null!==($suppliersEdit->getEMAIL())?($suppliersEdit->getEMAIL()):(isset($defaultValues['EMAIL'])?($defaultValues['EMAIL']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-suppliers-email">Email*</label>
+  <input type="text" name="email" id="input-suppliers-email" class="form-control " placeholder="Enter Email " value="<?php echo null!==($suppliersEdit->getEmail())?($suppliersEdit->getEmail()):(isset($defaultValues['email'])?($defaultValues['email']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-suppliers--c-o-n-t-a-c-t--n-u-m-b-e-r">
+<div class="form-group input-suppliers-contact-number">
 
                  <?php
                   $readonly = in_array('contact_number',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
                   if($suppliersEdit->getID()!=null){ $defaultValues['contact_number']=$suppliersEdit->getContactNumber();};
                   ?>
-                  <label for="input-suppliers--c-o-n-t-a-c-t--n-u-m-b-e-r">Contact&nbsp;Number*</label>
-  <input type="text" name="contactNumber" id="input-suppliers--c-o-n-t-a-c-t--n-u-m-b-e-r" class="form-control " placeholder="Enter Contact&nbsp;Number " value="<?php echo null!==($suppliersEdit->getContactNumber())?($suppliersEdit->getContactNumber()):(isset($defaultValues['contact_number'])?($defaultValues['contact_number']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-suppliers-contact-number">Contact&nbsp;Number*</label>
+  <input type="text" name="contactNumber" id="input-suppliers-contact-number" class="form-control " placeholder="Enter Contact&nbsp;Number " value="<?php echo null!==($suppliersEdit->getContactNumber())?($suppliersEdit->getContactNumber()):(isset($defaultValues['contact_number'])?($defaultValues['contact_number']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-suppliers--a-d-d-r-e-s-s">
+<div class="form-group input-suppliers-address">
 
                  <?php
-                  $readonly = in_array('ADDRESS',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('address',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($suppliersEdit->getID()!=null){ $defaultValues['ADDRESS']=$suppliersEdit->getADDRESS();};
+                  if($suppliersEdit->getID()!=null){ $defaultValues['address']=$suppliersEdit->getAddress();};
                   ?>
-                  <label for="input-suppliers--a-d-d-r-e-s-s">&nbsp;A&nbsp;D&nbsp;D&nbsp;R&nbsp;E&nbsp;S&nbsp;S*</label>
-  <input type="text" name="aDDRESS" id="input-suppliers--a-d-d-r-e-s-s" class="form-control " placeholder="Enter &nbsp;A&nbsp;D&nbsp;D&nbsp;R&nbsp;E&nbsp;S&nbsp;S " value="<?php echo null!==($suppliersEdit->getADDRESS())?($suppliersEdit->getADDRESS()):(isset($defaultValues['ADDRESS'])?($defaultValues['ADDRESS']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-suppliers-address">Address*</label>
+  <input type="text" name="address" id="input-suppliers-address" class="form-control " placeholder="Enter Address " value="<?php echo null!==($suppliersEdit->getAddress())?($suppliersEdit->getAddress()):(isset($defaultValues['address'])?($defaultValues['address']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

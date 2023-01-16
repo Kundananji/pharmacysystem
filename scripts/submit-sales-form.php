@@ -17,10 +17,10 @@ $salesEdit->setInvoiceNumber(!isset($_POST["invoiceNumber"]) || $_POST["invoiceN
 $salesEdit->setMedicineName(!isset($_POST["medicineName"]) || $_POST["medicineName"]==""?NULL:filter_var($_POST["medicineName"],FILTER_SANITIZE_STRING));
 $salesEdit->setBatchId(!isset($_POST["batchId"]) || $_POST["batchId"]==""?NULL:filter_var($_POST["batchId"],FILTER_SANITIZE_STRING));
 $salesEdit->setExpiryDate(!isset($_POST["expiryDate"]) || $_POST["expiryDate"]==""?NULL:filter_var($_POST["expiryDate"],FILTER_SANITIZE_STRING));
-$salesEdit->setquantity(!isset($_POST["quantity"]) || $_POST["quantity"]==""?NULL:filter_var($_POST["quantity"],FILTER_SANITIZE_NUMBER_INT));
-$salesEdit->setMRP(!isset($_POST["mRP"]) || $_POST["mRP"]==""?NULL:filter_var($_POST["mRP"],FILTER_SANITIZE_STRING));
-$salesEdit->setDISCOUNT(!isset($_POST["dISCOUNT"]) || $_POST["dISCOUNT"]==""?NULL:filter_var($_POST["dISCOUNT"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
-$salesEdit->setTOTAL(!isset($_POST["tOTAL"]) || $_POST["tOTAL"]==""?NULL:filter_var($_POST["tOTAL"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
+$salesEdit->setQuantity(!isset($_POST["quantity"]) || $_POST["quantity"]==""?NULL:filter_var($_POST["quantity"],FILTER_SANITIZE_NUMBER_INT));
+$salesEdit->setMrp(!isset($_POST["mrp"]) || $_POST["mrp"]==""?NULL:filter_var($_POST["mrp"],FILTER_SANITIZE_STRING));
+$salesEdit->setDiscount(!isset($_POST["discount"]) || $_POST["discount"]==""?NULL:filter_var($_POST["discount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
+$salesEdit->setTotal(!isset($_POST["total"]) || $_POST["total"]==""?NULL:filter_var($_POST["total"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 
 try{
   if(isset($_POST[""]) && (int)$_POST[""] > 0){

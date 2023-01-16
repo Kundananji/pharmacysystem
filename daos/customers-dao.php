@@ -7,16 +7,16 @@ class CustomersDao{
 * @return inserted objected of type Customers
 */
   public function insert($customers){
-    $id=  $customers->getid();
-    $name=  $customers->getname();
+    $id=  $customers->getId();
+    $name=  $customers->getName();
     $contactNumber=  $customers->getContactNumber();
-    $address=  $customers->getaddress();
-    $doctorname=  $customers->getDoctorname();
-    $doctoraddress=  $customers->getDoctoraddress();
+    $address=  $customers->getAddress();
+    $doctorName=  $customers->getDoctorName();
+    $doctorAddress=  $customers->getDoctorAddress();
     try{
       $sql="INSERT INTO customers(`id`,`name`,`contact_number`,`address`,`doctor_name`,`doctor_address`) VALUES(?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssss",$id,$name,$contactNumber,$address,$doctorname,$doctoraddress);
+      $stmt->bind_param("isssss",$id,$name,$contactNumber,$address,$doctorName,$doctorAddress);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -47,16 +47,16 @@ class CustomersDao{
 * @return updated objected of type Customers
 */
   public function update($customers){
-    $id=  $customers->getid();
-    $name=  $customers->getname();
+    $id=  $customers->getId();
+    $name=  $customers->getName();
     $contactNumber=  $customers->getContactNumber();
-    $address=  $customers->getaddress();
-    $doctorname=  $customers->getDoctorname();
-    $doctoraddress=  $customers->getDoctoraddress();
+    $address=  $customers->getAddress();
+    $doctorName=  $customers->getDoctorName();
+    $doctorAddress=  $customers->getDoctorAddress();
     try{
       $sql="UPDATE customers SET `name`=?,`contact_number`=?,`address`=?,`doctor_name`=?,`doctor_address`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssssi",$name,$contactNumber,$address,$doctorname,$doctoraddress,$id);
+      $stmt->bind_param("sssssi",$name,$contactNumber,$address,$doctorName,$doctorAddress,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -150,11 +150,11 @@ class CustomersDao{
 * function to select single instance of object of type Customers from database
 * @return object of type Customers
 */
-  public function select($customersid){
+  public function select($customersId){
     try{
       $sql="SELECT * FROM `customers` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$customersid);
+      $stmt->bind_param("i",$customersId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -225,11 +225,11 @@ class CustomersDao{
 * function to delete a single instance of object of type Customers from database
 * @return boolean
 */
-  public function delete($customersid){
+  public function delete($customersId){
     try{
       $sql="DELETE FROM `customers` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$customersid);
+      $stmt->bind_param("i",$customersId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -298,12 +298,12 @@ class CustomersDao{
 */
   public function getFields($row){
     $customers= new Customers();
-      $customers->setid($row['id']);
-      $customers->setname($row['name']);
+      $customers->setId($row['id']);
+      $customers->setName($row['name']);
       $customers->setContactNumber($row['contact_number']);
-      $customers->setaddress($row['address']);
-      $customers->setDoctorname($row['doctor_name']);
-      $customers->setDoctoraddress($row['doctor_address']);
+      $customers->setAddress($row['address']);
+      $customers->setDoctorName($row['doctor_name']);
+      $customers->setDoctorAddress($row['doctor_address']);
     return $customers;
   }
 }

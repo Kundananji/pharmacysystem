@@ -36,13 +36,13 @@ $dao = new CustomersDao();
         
       </th>
       <th>
-        N&nbsp;A&nbsp;M&nbsp;E
+        Name
       </th>
       <th>
         Contact&nbsp;Number
       </th>
       <th>
-        A&nbsp;D&nbsp;D&nbsp;R&nbsp;E&nbsp;S&nbsp;S
+        Address
       </th>
       <th>
         Doctor&nbsp;Name
@@ -67,12 +67,12 @@ $dao = new CustomersDao();
       </th>
         <td>
         <?php
-          echo $customers->getID();
+          echo $customers->getId();
         ?>
         </td>
         <td>
         <?php
-          echo $customers->getNAME();
+          echo $customers->getName();
         ?>
         </td>
         <td>
@@ -82,7 +82,7 @@ $dao = new CustomersDao();
         </td>
         <td>
         <?php
-          echo $customers->getADDRESS();
+          echo $customers->getAddress();
         ?>
         </td>
         <td>
@@ -97,12 +97,12 @@ $dao = new CustomersDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Customers.addNewCustomers({ID : \''.$customers->getID.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Customers.addNewCustomers({id : \''.$customers->getId.'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Customers.deleteCustomers('.$customers->getID().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Customers.deleteCustomers('.$customers->getId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

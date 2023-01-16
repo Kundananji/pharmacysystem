@@ -136,12 +136,12 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-medicines-stock-i-d' +'_row_' + i;
+  id = 'input-medicines-stock-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-medicines-stock-n-a-m-e' +'_row_' + i;
+  id = 'input-medicines-stock-name' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -156,17 +156,17 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-medicines-stock-q-u-a-n-t-i-t-y' +'_row_' + i;
+  id = 'input-medicines-stock-quantity' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-medicines-stock-m-r-p' +'_row_' + i;
+  id = 'input-medicines-stock-mrp' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-medicines-stock-r-a-t-e' +'_row_' + i;
+  id = 'input-medicines-stock-rate' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -178,14 +178,14 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
 }
 
 let divPageContent = $('#page-content');
-let viewMedicinesStock=( ID)=>{
+let viewMedicinesStock=( id)=>{
   let viewInModal = $('#link-view-medicines-stock').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-medicines-stock.php",
     type: "post",
     data: { 
-      ID:ID
+      id:id
      },
     success: (data)=>{
         divPageContent.html(data);

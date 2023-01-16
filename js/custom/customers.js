@@ -136,12 +136,12 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-customers-i-d' +'_row_' + i;
+  id = 'input-customers-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-customers-n-a-m-e' +'_row_' + i;
+  id = 'input-customers-name' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -151,7 +151,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-customers-a-d-d-r-e-s-s' +'_row_' + i;
+  id = 'input-customers-address' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -173,14 +173,14 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
 }
 
 let divPageContent = $('#page-content');
-let viewCustomers=( ID)=>{
+let viewCustomers=( id)=>{
   let viewInModal = $('#link-view-customers').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-customers.php",
     type: "post",
     data: { 
-      ID:ID
+      id:id
      },
     success: (data)=>{
         divPageContent.html(data);

@@ -7,8 +7,8 @@ class ProfileDao{
 * @return inserted objected of type Profile
 */
   public function insert($profile){
-    $id=  $profile->getid();
-    $name=  $profile->getname();
+    $id=  $profile->getId();
+    $name=  $profile->getName();
     $description=  $profile->getDescription();
     $isActive=  $profile->getIsActive();
     $isDefault=  $profile->getIsDefault();
@@ -46,8 +46,8 @@ class ProfileDao{
 * @return updated objected of type Profile
 */
   public function update($profile){
-    $id=  $profile->getid();
-    $name=  $profile->getname();
+    $id=  $profile->getId();
+    $name=  $profile->getName();
     $description=  $profile->getDescription();
     $isActive=  $profile->getIsActive();
     $isDefault=  $profile->getIsDefault();
@@ -296,8 +296,8 @@ class ProfileDao{
 */
   public function getFields($row){
     $profile= new Profile();
-      $profile->setid($row['id']);
-      $profile->setname($row['name']);
+      $profile->setId($row['id']);
+      $profile->setName($row['name']);
       $profile->setDescription($row['description']);
       $profile->setIsActive($row['isActive']);
       $profile->setIsDefault($row['isDefault']);

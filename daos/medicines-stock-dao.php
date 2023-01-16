@@ -7,17 +7,17 @@ class MedicinesStockDao{
 * @return inserted objected of type MedicinesStock
 */
   public function insert($medicinesStock){
-    $id=  $medicinesStock->getid();
-    $name=  $medicinesStock->getname();
-    $batchid=  $medicinesStock->getBatchid();
+    $id=  $medicinesStock->getId();
+    $name=  $medicinesStock->getName();
+    $batchId=  $medicinesStock->getBatchId();
     $expiryDate=  $medicinesStock->getExpiryDate();
-    $quantity=  $medicinesStock->getquantity();
-    $mrp=  $medicinesStock->getmrp();
-    $rate=  $medicinesStock->getrate();
+    $quantity=  $medicinesStock->getQuantity();
+    $mrp=  $medicinesStock->getMrp();
+    $rate=  $medicinesStock->getRate();
     try{
       $sql="INSERT INTO medicines_stock(`id`,`name`,`batch_id`,`expiry_date`,`quantity`,`mrp`,`rate`) VALUES(?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssiss",$id,$name,$batchid,$expiryDate,$quantity,$mrp,$rate);
+      $stmt->bind_param("isssiss",$id,$name,$batchId,$expiryDate,$quantity,$mrp,$rate);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -48,17 +48,17 @@ class MedicinesStockDao{
 * @return updated objected of type MedicinesStock
 */
   public function update($medicinesStock){
-    $id=  $medicinesStock->getid();
-    $name=  $medicinesStock->getname();
-    $batchid=  $medicinesStock->getBatchid();
+    $id=  $medicinesStock->getId();
+    $name=  $medicinesStock->getName();
+    $batchId=  $medicinesStock->getBatchId();
     $expiryDate=  $medicinesStock->getExpiryDate();
-    $quantity=  $medicinesStock->getquantity();
-    $mrp=  $medicinesStock->getmrp();
-    $rate=  $medicinesStock->getrate();
+    $quantity=  $medicinesStock->getQuantity();
+    $mrp=  $medicinesStock->getMrp();
+    $rate=  $medicinesStock->getRate();
     try{
       $sql="UPDATE medicines_stock SET `name`=?,`batch_id`=?,`expiry_date`=?,`quantity`=?,`mrp`=?,`rate`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssissi",$name,$batchid,$expiryDate,$quantity,$mrp,$rate,$id);
+      $stmt->bind_param("sssissi",$name,$batchId,$expiryDate,$quantity,$mrp,$rate,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -152,11 +152,11 @@ class MedicinesStockDao{
 * function to select single instance of object of type MedicinesStock from database
 * @return object of type MedicinesStock
 */
-  public function select($medicinesStockid){
+  public function select($medicinesStockId){
     try{
       $sql="SELECT * FROM `medicines_stock` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$medicinesStockid);
+      $stmt->bind_param("i",$medicinesStockId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -227,11 +227,11 @@ class MedicinesStockDao{
 * function to delete a single instance of object of type MedicinesStock from database
 * @return boolean
 */
-  public function delete($medicinesStockid){
+  public function delete($medicinesStockId){
     try{
       $sql="DELETE FROM `medicines_stock` WHERE `id`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$medicinesStockid);
+      $stmt->bind_param("i",$medicinesStockId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -300,13 +300,13 @@ class MedicinesStockDao{
 */
   public function getFields($row){
     $medicinesStock= new MedicinesStock();
-      $medicinesStock->setid($row['id']);
-      $medicinesStock->setname($row['name']);
-      $medicinesStock->setBatchid($row['batch_id']);
+      $medicinesStock->setId($row['id']);
+      $medicinesStock->setName($row['name']);
+      $medicinesStock->setBatchId($row['batch_id']);
       $medicinesStock->setExpiryDate($row['expiry_date']);
-      $medicinesStock->setquantity($row['quantity']);
-      $medicinesStock->setmrp($row['mrp']);
-      $medicinesStock->setrate($row['rate']);
+      $medicinesStock->setQuantity($row['quantity']);
+      $medicinesStock->setMrp($row['mrp']);
+      $medicinesStock->setRate($row['rate']);
     return $medicinesStock;
   }
 }

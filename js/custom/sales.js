@@ -161,22 +161,22 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-sales-q-u-a-n-t-i-t-y' +'_row_' + i;
+  id = 'input-sales-quantity' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-sales-m-r-p' +'_row_' + i;
+  id = 'input-sales-mrp' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-sales-d-i-s-c-o-u-n-t' +'_row_' + i;
+  id = 'input-sales-discount' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-sales-t-o-t-a-l' +'_row_' + i;
+  id = 'input-sales-total' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);

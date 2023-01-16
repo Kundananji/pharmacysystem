@@ -19,12 +19,12 @@ foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
 //make available variables of users available in scope for use:
-if(isset($_POST['ID']) && $_POST['ID']!=''){
+if(isset($_POST['id']) && $_POST['id']!=''){
   include_once("../classes/users.php");
   include_once("../daos/users-dao.php");
 
   $usersDao = new UsersDao(); 
-  $users =  $usersDao->select(filter_var($_GET['ID'],FILTER_SANITIZE_NUMBER_INT)); 
+  $users =  $usersDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 include("../daos/_user-tokens-dao.php");
 include("../classes/_user-tokens.php");

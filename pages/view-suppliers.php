@@ -36,16 +36,16 @@ $dao = new SuppliersDao();
         
       </th>
       <th>
-        N&nbsp;A&nbsp;M&nbsp;E
+        Name
       </th>
       <th>
-        E&nbsp;M&nbsp;A&nbsp;I&nbsp;L
+        Email
       </th>
       <th>
         Contact&nbsp;Number
       </th>
       <th>
-        A&nbsp;D&nbsp;D&nbsp;R&nbsp;E&nbsp;S&nbsp;S
+        Address
       </th>
       <th>
       </th>
@@ -69,12 +69,12 @@ $dao = new SuppliersDao();
         </td>
         <td>
         <?php
-          echo $suppliers->getNAME();
+          echo $suppliers->getName();
         ?>
         </td>
         <td>
         <?php
-          echo $suppliers->getEMAIL();
+          echo $suppliers->getEmail();
         ?>
         </td>
         <td>
@@ -84,7 +84,7 @@ $dao = new SuppliersDao();
         </td>
         <td>
         <?php
-          echo $suppliers->getADDRESS();
+          echo $suppliers->getAddress();
         ?>
         </td>
         <td>

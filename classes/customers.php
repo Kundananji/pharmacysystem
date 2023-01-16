@@ -4,10 +4,10 @@ class Customers implements \JsonSerializable{
 /**
 * member variables
 */
-  private $iD;
-  private $nAME;
+  private $id;
+  private $name;
   private $contactNumber;
-  private $aDDRESS;
+  private $address;
   private $doctorName;
   private $doctorAddress;
 
@@ -19,38 +19,38 @@ class Customers implements \JsonSerializable{
   }
 
 /**
-* function to set the value of iD
-* @param iD : value to set
+* function to set the value of id
+* @param id : value to set
 */
-  public function setID($iD){
-    $this->iD=$iD;
+  public function setId($id){
+    $this->id=$id;
 
   }
 
 /**
-* function to get the value of iD
+* function to get the value of id
 * @return int(11)
 */
-  public function getID(){
-    return $this->iD;
+  public function getId(){
+    return $this->id;
 
   }
 
 /**
-* function to set the value of nAME
-* @param nAME : value to set
+* function to set the value of name
+* @param name : value to set
 */
-  public function setNAME($nAME){
-    $this->nAME=$nAME;
+  public function setName($name){
+    $this->name=$name;
 
   }
 
 /**
-* function to get the value of nAME
+* function to get the value of name
 * @return String
 */
-  public function getNAME(){
-    return $this->nAME;
+  public function getName(){
+    return $this->name;
 
   }
 
@@ -73,20 +73,20 @@ class Customers implements \JsonSerializable{
   }
 
 /**
-* function to set the value of aDDRESS
-* @param aDDRESS : value to set
+* function to set the value of address
+* @param address : value to set
 */
-  public function setADDRESS($aDDRESS){
-    $this->aDDRESS=$aDDRESS;
+  public function setAddress($address){
+    $this->address=$address;
 
   }
 
 /**
-* function to get the value of aDDRESS
+* function to get the value of address
 * @return String
 */
-  public function getADDRESS(){
-    return $this->aDDRESS;
+  public function getAddress(){
+    return $this->address;
 
   }
 
@@ -131,7 +131,7 @@ class Customers implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->iD.' | '.$this->nAME.' | '.$this->contactNumber.' | '.$this->aDDRESS;
+    return $this->name;
 
   }
 

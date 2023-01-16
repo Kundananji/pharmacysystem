@@ -34,12 +34,12 @@ if(isset($_GET['id']) && $_GET['id']!=''){
   $profile =  $profileDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of users available in scope for use:
-if(isset($_GET['ID']) && $_GET['ID']!=''){
+if(isset($_GET['id']) && $_GET['id']!=''){
   include_once("../classes/users.php");
   include_once("../daos/users-dao.php");
 
   $usersDao = new UsersDao(); 
-  $users =  $usersDao->select(filter_var($_GET['ID'],FILTER_SANITIZE_NUMBER_INT)); 
+  $users =  $usersDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 
 

@@ -20,11 +20,11 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/medicines.php");
 include_once("../daos/medicines-dao.php");
-$ID = isset($_GET['ID'])?filter_var($_GET['ID'], FILTER_VALIDATE_INT):null;
+$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $medicinesEdit = new Medicines();
 $medicinesEditDao = new MedicinesDao();
-if(isset($ID)){
-  $tempObject = $medicinesEditDao->select($ID);
+if(isset($id)){
+  $tempObject = $medicinesEditDao->select($id);
   if($tempObject !=null){
     $medicinesEdit = $tempObject;
   }
@@ -33,54 +33,54 @@ if(isset($ID)){
 <form onsubmit = "Medicines.submitFormMedicines(event,{<?php echo sizeof($arguments)>0?(implode(",",$arguments)):null ?>})" method="post" enctype="multipart/form-data" action="#" id="form-medicines">
 <div class="alert alert-info">Fields marked with an asterisk(*) are required.</div>
 
-  <input type="hidden" name="iD" id="input-medicines--i-d" value="<?php echo null!==($medicinesEdit->getID())?($medicinesEdit->getID()):(isset($defaultValues['ID'])?($defaultValues['ID']): "0");?>"/>
+  <input type="hidden" name="id" id="input-medicines-id" value="<?php echo null!==($medicinesEdit->getId())?($medicinesEdit->getId()):(isset($defaultValues['id'])?($defaultValues['id']): "0");?>"/>
 
  <!--start of form group-->
-<div class="form-group input-medicines--n-a-m-e">
+<div class="form-group input-medicines-name">
 
                  <?php
-                  $readonly = in_array('NAME',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('name',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesEdit->getID()!=null){ $defaultValues['NAME']=$medicinesEdit->getNAME();};
+                  if($medicinesEdit->getId()!=null){ $defaultValues['name']=$medicinesEdit->getName();};
                   ?>
-                  <label for="input-medicines--n-a-m-e">&nbsp;N&nbsp;A&nbsp;M&nbsp;E*</label>
-  <input type="text" name="nAME" id="input-medicines--n-a-m-e" class="form-control " placeholder="Enter &nbsp;N&nbsp;A&nbsp;M&nbsp;E " value="<?php echo null!==($medicinesEdit->getNAME())?($medicinesEdit->getNAME()):(isset($defaultValues['NAME'])?($defaultValues['NAME']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-name">Name*</label>
+  <input type="text" name="name" id="input-medicines-name" class="form-control " placeholder="Enter Name " value="<?php echo null!==($medicinesEdit->getName())?($medicinesEdit->getName()):(isset($defaultValues['name'])?($defaultValues['name']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-medicines--p-a-c-k-i-n-g">
+<div class="form-group input-medicines-packing">
 
                  <?php
-                  $readonly = in_array('PACKING',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('packing',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesEdit->getID()!=null){ $defaultValues['PACKING']=$medicinesEdit->getPACKING();};
+                  if($medicinesEdit->getId()!=null){ $defaultValues['packing']=$medicinesEdit->getPacking();};
                   ?>
-                  <label for="input-medicines--p-a-c-k-i-n-g">&nbsp;P&nbsp;A&nbsp;C&nbsp;K&nbsp;I&nbsp;N&nbsp;G*</label>
-  <input type="text" name="pACKING" id="input-medicines--p-a-c-k-i-n-g" class="form-control " placeholder="Enter &nbsp;P&nbsp;A&nbsp;C&nbsp;K&nbsp;I&nbsp;N&nbsp;G " value="<?php echo null!==($medicinesEdit->getPACKING())?($medicinesEdit->getPACKING()):(isset($defaultValues['PACKING'])?($defaultValues['PACKING']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-packing">Packing*</label>
+  <input type="text" name="packing" id="input-medicines-packing" class="form-control " placeholder="Enter Packing " value="<?php echo null!==($medicinesEdit->getPacking())?($medicinesEdit->getPacking()):(isset($defaultValues['packing'])?($defaultValues['packing']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-medicines--g-e-n-e-r-i-c--n-a-m-e">
+<div class="form-group input-medicines-generic-name">
 
                  <?php
-                  $readonly = in_array('GENERIC_NAME',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('generic_name',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesEdit->getID()!=null){ $defaultValues['GENERIC_NAME']=$medicinesEdit->getGenericName();};
+                  if($medicinesEdit->getId()!=null){ $defaultValues['generic_name']=$medicinesEdit->getGenericName();};
                   ?>
-                  <label for="input-medicines--g-e-n-e-r-i-c--n-a-m-e">Generic&nbsp;Name*</label>
-  <input type="text" name="genericName" id="input-medicines--g-e-n-e-r-i-c--n-a-m-e" class="form-control " placeholder="Enter Generic&nbsp;Name " value="<?php echo null!==($medicinesEdit->getGenericName())?($medicinesEdit->getGenericName()):(isset($defaultValues['GENERIC_NAME'])?($defaultValues['GENERIC_NAME']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-generic-name">Generic&nbsp;Name*</label>
+  <input type="text" name="genericName" id="input-medicines-generic-name" class="form-control " placeholder="Enter Generic&nbsp;Name " value="<?php echo null!==($medicinesEdit->getGenericName())?($medicinesEdit->getGenericName()):(isset($defaultValues['generic_name'])?($defaultValues['generic_name']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-medicines--s-u-p-p-l-i-e-r--n-a-m-e">
+<div class="form-group input-medicines-supplier-name">
 
                  <?php
-                  $readonly = in_array('SUPPLIER_NAME',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('supplier_name',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesEdit->getID()!=null){ $defaultValues['SUPPLIER_NAME']=$medicinesEdit->getSupplierName();};
+                  if($medicinesEdit->getId()!=null){ $defaultValues['supplier_name']=$medicinesEdit->getSupplierName();};
                   ?>
-                  <label for="input-medicines--s-u-p-p-l-i-e-r--n-a-m-e">Supplier&nbsp;Name*</label>
-  <input type="text" name="supplierName" id="input-medicines--s-u-p-p-l-i-e-r--n-a-m-e" class="form-control " placeholder="Enter Supplier&nbsp;Name " value="<?php echo null!==($medicinesEdit->getSupplierName())?($medicinesEdit->getSupplierName()):(isset($defaultValues['SUPPLIER_NAME'])?($defaultValues['SUPPLIER_NAME']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-supplier-name">Supplier&nbsp;Name*</label>
+  <input type="text" name="supplierName" id="input-medicines-supplier-name" class="form-control " placeholder="Enter Supplier&nbsp;Name " value="<?php echo null!==($medicinesEdit->getSupplierName())?($medicinesEdit->getSupplierName()):(isset($defaultValues['supplier_name'])?($defaultValues['supplier_name']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

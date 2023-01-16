@@ -48,16 +48,16 @@ $dao = new SalesDao();
         Expiry&nbsp;Date
       </th>
       <th>
-        Q&nbsp;U&nbsp;A&nbsp;N&nbsp;T&nbsp;I&nbsp;T&nbsp;Y
+        Quantity
       </th>
       <th>
-        M&nbsp;R&nbsp;P
+        Mrp
       </th>
       <th>
-        D&nbsp;I&nbsp;S&nbsp;C&nbsp;O&nbsp;U&nbsp;N&nbsp;T
+        Discount
       </th>
       <th>
-        T&nbsp;O&nbsp;T&nbsp;A&nbsp;L
+        Total
       </th>
       <th>
       </th>
@@ -101,22 +101,22 @@ $dao = new SalesDao();
         </td>
         <td>
         <?php
-          echo $sales->getquantity();
+          echo $sales->getQuantity();
         ?>
         </td>
         <td>
         <?php
-          echo $sales->getMRP();
+          echo $sales->getMrp();
         ?>
         </td>
         <td>
         <?php
-          echo $sales->getDISCOUNT();
+          echo $sales->getDiscount();
         ?>
         </td>
         <td>
         <?php
-          echo $sales->getTOTAL();
+          echo $sales->getTotal();
         ?>
         </td>
         <td>

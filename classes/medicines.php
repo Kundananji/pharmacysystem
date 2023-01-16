@@ -4,9 +4,9 @@ class Medicines implements \JsonSerializable{
 /**
 * member variables
 */
-  private $iD;
-  private $nAME;
-  private $pACKING;
+  private $id;
+  private $name;
+  private $packing;
   private $genericName;
   private $supplierName;
 
@@ -18,56 +18,56 @@ class Medicines implements \JsonSerializable{
   }
 
 /**
-* function to set the value of iD
-* @param iD : value to set
+* function to set the value of id
+* @param id : value to set
 */
-  public function setID($iD){
-    $this->iD=$iD;
+  public function setId($id){
+    $this->id=$id;
 
   }
 
 /**
-* function to get the value of iD
+* function to get the value of id
 * @return int(11)
 */
-  public function getID(){
-    return $this->iD;
+  public function getId(){
+    return $this->id;
 
   }
 
 /**
-* function to set the value of nAME
-* @param nAME : value to set
+* function to set the value of name
+* @param name : value to set
 */
-  public function setNAME($nAME){
-    $this->nAME=$nAME;
+  public function setName($name){
+    $this->name=$name;
 
   }
 
 /**
-* function to get the value of nAME
+* function to get the value of name
 * @return String
 */
-  public function getNAME(){
-    return $this->nAME;
+  public function getName(){
+    return $this->name;
 
   }
 
 /**
-* function to set the value of pACKING
-* @param pACKING : value to set
+* function to set the value of packing
+* @param packing : value to set
 */
-  public function setPACKING($pACKING){
-    $this->pACKING=$pACKING;
+  public function setPacking($packing){
+    $this->packing=$packing;
 
   }
 
 /**
-* function to get the value of pACKING
+* function to get the value of packing
 * @return String
 */
-  public function getPACKING(){
-    return $this->pACKING;
+  public function getPacking(){
+    return $this->packing;
 
   }
 
@@ -112,7 +112,7 @@ class Medicines implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->iD.' | '.$this->nAME.' | '.$this->pACKING.' | '.$this->genericName;
+    return $this->name;
 
   }
 

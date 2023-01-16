@@ -7,19 +7,19 @@ class SalesDao{
 * @return inserted objected of type Sales
 */
   public function insert($sales){
-    $customerid=  $sales->getCustomerid();
+    $customerId=  $sales->getCustomerId();
     $invoiceNumber=  $sales->getInvoiceNumber();
-    $medicinename=  $sales->getMedicinename();
-    $batchid=  $sales->getBatchid();
+    $medicineName=  $sales->getMedicineName();
+    $batchId=  $sales->getBatchId();
     $expiryDate=  $sales->getExpiryDate();
-    $quantity=  $sales->getquantity();
-    $mrp=  $sales->getmrp();
-    $discount=  $sales->getdiscount();
-    $total=  $sales->gettotal();
+    $quantity=  $sales->getQuantity();
+    $mrp=  $sales->getMrp();
+    $discount=  $sales->getDiscount();
+    $total=  $sales->getTotal();
     try{
       $sql="INSERT INTO sales(`customer_id`,`invoice_number`,`medicine_name`,`batch_id`,`expiry_date`,`quantity`,`mrp`,`discount`,`total`) VALUES(?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issssisss",$customerid,$invoiceNumber,$medicinename,$batchid,$expiryDate,$quantity,$mrp,$discount,$total);
+      $stmt->bind_param("issssisss",$customerId,$invoiceNumber,$medicineName,$batchId,$expiryDate,$quantity,$mrp,$discount,$total);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -115,11 +115,11 @@ class SalesDao{
 * function to select single instance of object of type Sales from database
 * @return object of type Sales
 */
-  public function select($salesid){
+  public function select($salesId){
     try{
       $sql="SELECT * FROM `sales` WHERE ``=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$salesid);
+      $stmt->bind_param("i",$salesId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -190,11 +190,11 @@ class SalesDao{
 * function to delete a single instance of object of type Sales from database
 * @return boolean
 */
-  public function delete($salesid){
+  public function delete($salesId){
     try{
       $sql="DELETE FROM `sales` WHERE ``=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$salesid);
+      $stmt->bind_param("i",$salesId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -263,15 +263,15 @@ class SalesDao{
 */
   public function getFields($row){
     $sales= new Sales();
-      $sales->setCustomerid($row['customer_id']);
+      $sales->setCustomerId($row['customer_id']);
       $sales->setInvoiceNumber($row['invoice_number']);
-      $sales->setMedicinename($row['medicine_name']);
-      $sales->setBatchid($row['batch_id']);
+      $sales->setMedicineName($row['medicine_name']);
+      $sales->setBatchId($row['batch_id']);
       $sales->setExpiryDate($row['expiry_date']);
-      $sales->setquantity($row['quantity']);
-      $sales->setmrp($row['mrp']);
-      $sales->setdiscount($row['discount']);
-      $sales->settotal($row['total']);
+      $sales->setQuantity($row['quantity']);
+      $sales->setMrp($row['mrp']);
+      $sales->setDiscount($row['discount']);
+      $sales->setTotal($row['total']);
     return $sales;
   }
 }
