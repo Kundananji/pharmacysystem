@@ -24,7 +24,7 @@
                   // logic
                   $count = 0;
                   while($row = mysqli_fetch_array($result)) {
-                    $expiry_date = $row['EXPIRY_DATE'];
+                    $expiry_date = $row['expiry_date'];
                     if(substr($expiry_date, 3) < date('y'))
                       $count++;
                     else if(substr($expiry_date, 3) == date('y')) {
