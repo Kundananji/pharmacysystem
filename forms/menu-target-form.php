@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/menu-target.php");
 include_once("../daos/menu-target-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $menuTargetEdit = new MenuTarget();
 $menuTargetEditDao = new MenuTargetDao();
 if(isset($id)){

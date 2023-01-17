@@ -97,7 +97,7 @@ $dao = new PurchasesDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Purchases.addNewPurchases({voucher_number : \''.$purchases->getVoucherNumber.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Purchases.addNewPurchases({voucher_number : \''.$purchases->getVoucherNumber().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

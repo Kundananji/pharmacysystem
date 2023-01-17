@@ -59,7 +59,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 //include scripts
 include_once("../classes/menu.php");
 include_once("../daos/menu-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $menuEdit = new Menu();
 $menuEditDao = new MenuDao();
 if(isset($id)){

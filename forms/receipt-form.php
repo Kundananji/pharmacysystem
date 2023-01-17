@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/receipt.php");
 include_once("../daos/receipt-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $receiptEdit = new Receipt();
 $receiptEditDao = new ReceiptDao();
 if(isset($id)){
@@ -98,7 +98,7 @@ if(isset($id)){
                   if($receiptEdit->getId()!=null){ $defaultValues['receiptDate']=$receiptEdit->getReceiptDate();};
                   ?>
                   <label for="input-receipt-receipt-date">Receipt&nbsp;Date*</label>
-  <input type="text" name="receiptDate" id="input-receipt-receipt-date" class="form-control datepicker " placeholder="Enter Receipt&nbsp;Date " value="<?php echo null!==($receiptEdit->getReceiptDate()))?(date("d/m/Y",strtotime($receiptEdit->getReceiptDate()))):(isset($defaultValues['receiptDate'])?($defaultValues['receiptDate']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="receiptDate" id="input-receipt-receipt-date" class="form-control datepicker " placeholder="Enter Receipt&nbsp;Date " value="<?php echo null!==($receiptEdit->getReceiptDate())?(date("d/m/Y",strtotime($receiptEdit->getReceiptDate()))):(isset($defaultValues['receiptDate'])?($defaultValues['receiptDate']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

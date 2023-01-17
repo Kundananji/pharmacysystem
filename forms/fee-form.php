@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/fee.php");
 include_once("../daos/fee-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $feeEdit = new Fee();
 $feeEditDao = new FeeDao();
 if(isset($id)){
@@ -98,7 +98,7 @@ if(isset($id)){
                   if($feeEdit->getId()!=null){ $defaultValues['startDate']=$feeEdit->getStartDate();};
                   ?>
                   <label for="input-fee-start-date">Start&nbsp;Date</label>
-  <input type="text" name="startDate" id="input-fee-start-date" class="form-control datepicker " placeholder="Enter Start&nbsp;Date " value="<?php echo null!==($feeEdit->getStartDate()))?(date("d/m/Y",strtotime($feeEdit->getStartDate()))):(isset($defaultValues['startDate'])?($defaultValues['startDate']): "");?>"  <?php echo $readonly;?>   />
+  <input type="text" name="startDate" id="input-fee-start-date" class="form-control datepicker " placeholder="Enter Start&nbsp;Date " value="<?php echo null!==($feeEdit->getStartDate())?(date("d/m/Y",strtotime($feeEdit->getStartDate()))):(isset($defaultValues['startDate'])?($defaultValues['startDate']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -110,7 +110,7 @@ if(isset($id)){
                   if($feeEdit->getId()!=null){ $defaultValues['endDate']=$feeEdit->getEndDate();};
                   ?>
                   <label for="input-fee-end-date">End&nbsp;Date</label>
-  <input type="text" name="endDate" id="input-fee-end-date" class="form-control datepicker " placeholder="Enter End&nbsp;Date " value="<?php echo null!==($feeEdit->getEndDate()))?(date("d/m/Y",strtotime($feeEdit->getEndDate()))):(isset($defaultValues['endDate'])?($defaultValues['endDate']): "");?>"  <?php echo $readonly;?>   />
+  <input type="text" name="endDate" id="input-fee-end-date" class="form-control datepicker " placeholder="Enter End&nbsp;Date " value="<?php echo null!==($feeEdit->getEndDate())?(date("d/m/Y",strtotime($feeEdit->getEndDate()))):(isset($defaultValues['endDate'])?($defaultValues['endDate']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

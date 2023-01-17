@@ -142,7 +142,7 @@ $dao = new PatientsDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Patients.addNewPatients({id : \''.$patients->getId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Patients.addNewPatients({id : \''.$patients->getId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

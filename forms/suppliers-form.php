@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/suppliers.php");
 include_once("../daos/suppliers-dao.php");
-$ID = isset($_GET['ID'])?filter_var($_GET['ID'], FILTER_VALIDATE_INT):null;
+$arguments=array();$ID = isset($_GET['ID'])?filter_var($_GET['ID'], FILTER_VALIDATE_INT):null;
 $suppliersEdit = new Suppliers();
 $suppliersEditDao = new SuppliersDao();
 if(isset($ID)){

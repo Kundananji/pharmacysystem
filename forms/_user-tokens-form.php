@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/_user-tokens.php");
 include_once("../daos/_user-tokens-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $userTokensEdit = new UserTokens();
 $userTokensEditDao = new UserTokensDao();
 if(isset($id)){
@@ -98,7 +98,7 @@ if(isset($id)){
                   if($userTokensEdit->getId()!=null){ $defaultValues['expiry']=$userTokensEdit->getExpiry();};
                   ?>
                   <label for="input-_user-tokens-expiry">Expiry*</label>
-  <input type="text" name="expiry" id="input-_user-tokens-expiry" class="form-control datepicker " placeholder="Enter Expiry " value="<?php echo null!==($userTokensEdit->getExpiry()))?(date("d/m/Y",strtotime($userTokensEdit->getExpiry()))):(isset($defaultValues['expiry'])?($defaultValues['expiry']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="expiry" id="input-_user-tokens-expiry" class="form-control datepicker " placeholder="Enter Expiry " value="<?php echo null!==($userTokensEdit->getExpiry())?(date("d/m/Y",strtotime($userTokensEdit->getExpiry()))):(isset($defaultValues['expiry'])?($defaultValues['expiry']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

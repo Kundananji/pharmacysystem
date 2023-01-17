@@ -65,7 +65,7 @@ $dao = new StatusDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Status.addNewStatus({id : \''.$status->getId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Status.addNewStatus({id : \''.$status->getId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

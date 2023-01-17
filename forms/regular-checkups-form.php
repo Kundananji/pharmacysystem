@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/regular-checkups.php");
 include_once("../daos/regular-checkups-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $regularCheckupsEdit = new RegularCheckups();
 $regularCheckupsEditDao = new RegularCheckupsDao();
 if(isset($id)){
@@ -152,7 +152,7 @@ if(isset($id)){
                   if($regularCheckupsEdit->getId()!=null){ $defaultValues['dateTaken']=$regularCheckupsEdit->getDateTaken();};
                   ?>
                   <label for="input-regular-checkups-date-taken">Date&nbsp;Taken*</label>
-  <input type="text" name="dateTaken" id="input-regular-checkups-date-taken" class="form-control datepicker " placeholder="Enter Date&nbsp;Taken " value="<?php echo null!==($regularCheckupsEdit->getDateTaken()))?(date("d/m/Y",strtotime($regularCheckupsEdit->getDateTaken()))):(isset($defaultValues['dateTaken'])?($defaultValues['dateTaken']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="dateTaken" id="input-regular-checkups-date-taken" class="form-control datepicker " placeholder="Enter Date&nbsp;Taken " value="<?php echo null!==($regularCheckupsEdit->getDateTaken())?(date("d/m/Y",strtotime($regularCheckupsEdit->getDateTaken()))):(isset($defaultValues['dateTaken'])?($defaultValues['dateTaken']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

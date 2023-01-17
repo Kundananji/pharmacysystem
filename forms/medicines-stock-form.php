@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/medicines-stock.php");
 include_once("../daos/medicines-stock-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $medicinesStockEdit = new MedicinesStock();
 $medicinesStockEditDao = new MedicinesStockDao();
 if(isset($id)){

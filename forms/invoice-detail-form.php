@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/invoice-detail.php");
 include_once("../daos/invoice-detail-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $invoiceDetailEdit = new InvoiceDetail();
 $invoiceDetailEditDao = new InvoiceDetailDao();
 if(isset($id)){

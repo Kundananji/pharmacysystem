@@ -51,7 +51,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 //include scripts
 include_once("../classes/_profile.php");
 include_once("../daos/_profile-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $profileEdit = new Profile();
 $profileEditDao = new ProfileDao();
 if(isset($id)){

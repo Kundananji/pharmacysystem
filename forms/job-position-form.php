@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/job-position.php");
 include_once("../daos/job-position-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $jobPositionEdit = new JobPosition();
 $jobPositionEditDao = new JobPositionDao();
 if(isset($id)){

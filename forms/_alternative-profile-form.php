@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/_alternative-profile.php");
 include_once("../daos/_alternative-profile-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $alternativeProfileEdit = new AlternativeProfile();
 $alternativeProfileEditDao = new AlternativeProfileDao();
 if(isset($id)){

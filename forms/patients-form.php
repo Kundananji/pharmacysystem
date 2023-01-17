@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/patients.php");
 include_once("../daos/patients-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $patientsEdit = new Patients();
 $patientsEditDao = new PatientsDao();
 if(isset($id)){
@@ -116,7 +116,7 @@ if(isset($id)){
                   if($patientsEdit->getId()!=null){ $defaultValues['dateOfBirth']=$patientsEdit->getDateOfBirth();};
                   ?>
                   <label for="input-patients-date-of-birth">Date&nbsp;Of&nbsp;Birth*</label>
-  <input type="text" name="dateOfBirth" id="input-patients-date-of-birth" class="form-control datepicker " placeholder="Enter Date&nbsp;Of&nbsp;Birth " value="<?php echo null!==($patientsEdit->getDateOfBirth()))?(date("d/m/Y",strtotime($patientsEdit->getDateOfBirth()))):(isset($defaultValues['dateOfBirth'])?($defaultValues['dateOfBirth']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="dateOfBirth" id="input-patients-date-of-birth" class="form-control datepicker " placeholder="Enter Date&nbsp;Of&nbsp;Birth " value="<?php echo null!==($patientsEdit->getDateOfBirth())?(date("d/m/Y",strtotime($patientsEdit->getDateOfBirth()))):(isset($defaultValues['dateOfBirth'])?($defaultValues['dateOfBirth']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

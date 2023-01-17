@@ -35,7 +35,7 @@ foreach($_GET as $key=>$value){
 //include scripts
 include_once("../classes/invoices.php");
 include_once("../daos/invoices-dao.php");
-$invoice_id = isset($_GET['invoice_id'])?filter_var($_GET['invoice_id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$invoice_id = isset($_GET['invoice_id'])?filter_var($_GET['invoice_id'], FILTER_VALIDATE_INT):null;
 $invoicesEdit = new Invoices();
 $invoicesEditDao = new InvoicesDao();
 if(isset($invoice_id)){

@@ -97,7 +97,7 @@ $dao = new CustomersDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Customers.addNewCustomers({id : \''.$customers->getId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Customers.addNewCustomers({id : \''.$customers->getId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

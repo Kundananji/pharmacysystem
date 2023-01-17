@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/procedures-taken.php");
 include_once("../daos/procedures-taken-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $proceduresTakenEdit = new ProceduresTaken();
 $proceduresTakenEditDao = new ProceduresTakenDao();
 if(isset($id)){
@@ -188,7 +188,7 @@ if(isset($id)){
                   if($proceduresTakenEdit->getId()!=null){ $defaultValues['dateConducted']=$proceduresTakenEdit->getDateConducted();};
                   ?>
                   <label for="input-procedures-taken-date-conducted">Date&nbsp;Conducted*</label>
-  <input type="text" name="dateConducted" id="input-procedures-taken-date-conducted" class="form-control datepicker " placeholder="Enter Date&nbsp;Conducted " value="<?php echo null!==($proceduresTakenEdit->getDateConducted()))?(date("d/m/Y",strtotime($proceduresTakenEdit->getDateConducted()))):(isset($defaultValues['dateConducted'])?($defaultValues['dateConducted']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="dateConducted" id="input-procedures-taken-date-conducted" class="form-control datepicker " placeholder="Enter Date&nbsp;Conducted " value="<?php echo null!==($proceduresTakenEdit->getDateConducted())?(date("d/m/Y",strtotime($proceduresTakenEdit->getDateConducted()))):(isset($defaultValues['dateConducted'])?($defaultValues['dateConducted']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

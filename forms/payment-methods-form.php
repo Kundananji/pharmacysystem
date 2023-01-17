@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/payment-methods.php");
 include_once("../daos/payment-methods-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $paymentMethodsEdit = new PaymentMethods();
 $paymentMethodsEditDao = new PaymentMethodsDao();
 if(isset($id)){

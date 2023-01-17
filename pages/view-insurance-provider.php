@@ -89,7 +89,7 @@ $dao = new InsuranceProviderdao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="InsuranceProvider.addNewInsuranceProvider({id : \''.$insuranceProvider->getId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="InsuranceProvider.addNewInsuranceProvider({id : \''.$insuranceProvider->getId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

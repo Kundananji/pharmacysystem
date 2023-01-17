@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/purchases.php");
 include_once("../daos/purchases-dao.php");
-$voucher_number = isset($_GET['voucher_number'])?filter_var($_GET['voucher_number'], FILTER_VALIDATE_INT):null;
+$arguments=array();$voucher_number = isset($_GET['voucher_number'])?filter_var($_GET['voucher_number'], FILTER_VALIDATE_INT):null;
 $purchasesEdit = new Purchases();
 $purchasesEditDao = new PurchasesDao();
 if(isset($voucher_number)){

@@ -115,7 +115,7 @@ $dao = new HospitalProceduredao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="HospitalProcedure.addNewHospitalProcedure({id : \''.$hospitalProcedure->getId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="HospitalProcedure.addNewHospitalProcedure({id : \''.$hospitalProcedure->getId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

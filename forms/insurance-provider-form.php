@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/insurance-provider.php");
 include_once("../daos/insurance-provider-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $insuranceProviderEdit = new InsuranceProvider();
 $insuranceProviderEditDao = new InsuranceProviderDao();
 if(isset($id)){

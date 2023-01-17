@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/sales.php");
 include_once("../daos/sales-dao.php");
-$ = isset($_GET[''])?filter_var($_GET[''], FILTER_VALIDATE_INT):null;
+$arguments=array();$ = isset($_GET[''])?filter_var($_GET[''], FILTER_VALIDATE_INT):null;
 $salesEdit = new Sales();
 $salesEditDao = new SalesDao();
 if(isset($)){

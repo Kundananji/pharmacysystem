@@ -147,7 +147,7 @@ $dao = new StaffDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Staff.addNewStaff({id : \''.$staff->getId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Staff.addNewStaff({id : \''.$staff->getId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

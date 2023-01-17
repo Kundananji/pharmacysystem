@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/privilege.php");
 include_once("../daos/privilege-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $privilegeEdit = new Privilege();
 $privilegeEditDao = new PrivilegeDao();
 if(isset($id)){

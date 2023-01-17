@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/hospital-procedure.php");
 include_once("../daos/hospital-procedure-dao.php");
-$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
 $hospitalProcedureEdit = new HospitalProcedure();
 $hospitalProcedureEditDao = new HospitalProcedureDao();
 if(isset($id)){

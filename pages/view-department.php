@@ -73,7 +73,7 @@ $dao = new DepartmentDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Department.addNewDepartment({id : \''.$department->getId.'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Department.addNewDepartment({id : \''.$department->getId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>

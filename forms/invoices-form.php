@@ -20,7 +20,7 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/invoices.php");
 include_once("../daos/invoices-dao.php");
-$invoice_id = isset($_GET['invoice_id'])?filter_var($_GET['invoice_id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$invoice_id = isset($_GET['invoice_id'])?filter_var($_GET['invoice_id'], FILTER_VALIDATE_INT):null;
 $invoicesEdit = new Invoices();
 $invoicesEditDao = new InvoicesDao();
 if(isset($invoice_id)){
@@ -128,7 +128,7 @@ if(isset($invoice_id)){
                   if($invoicesEdit->getInvoiceId()!=null){ $defaultValues['invoice_date']=$invoicesEdit->getInvoiceDate();};
                   ?>
                   <label for="input-invoices-invoice-date">Invoice&nbsp;Date*</label>
-  <input type="text" name="invoiceDate" id="input-invoices-invoice-date" class="form-control datepicker " placeholder="Enter Invoice&nbsp;Date " value="<?php echo null!==($invoicesEdit->getInvoiceDate()))?(date("d/m/Y",strtotime($invoicesEdit->getInvoiceDate()))):(isset($defaultValues['invoice_date'])?($defaultValues['invoice_date']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="invoiceDate" id="input-invoices-invoice-date" class="form-control datepicker " placeholder="Enter Invoice&nbsp;Date " value="<?php echo null!==($invoicesEdit->getInvoiceDate())?(date("d/m/Y",strtotime($invoicesEdit->getInvoiceDate()))):(isset($defaultValues['invoice_date'])?($defaultValues['invoice_date']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
