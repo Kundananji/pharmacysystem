@@ -129,7 +129,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   tableBody.insertRow().innerHTML =rowHtml;
   var lastDate = localStorage.getItem('_date_cache_');
   $('.datepicker').datepicker({
-    format:'dd/mm/yyyy',
+    format:'yyyy-mm-dd',
     todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
   }) ;
@@ -169,12 +169,12 @@ let viewPrivilegePrivileges_admin=(data)=>{
 //assign global fields current values
   loader(divPageContent);
   $.ajax({
-    url: "pages/view-privilege-privileges_admin.php",
+    url: "pages/view-privilege-privileges-admin.php",
     type: "post",
     data:data,
     success: (data)=>{
       divPageContent.html(data);
-      $('#table-privilege--privileges_admin').DataTable({});
+      $('#table-privilege--privileges-admin').DataTable({});
     }
   });
   };
@@ -182,7 +182,7 @@ let addNewPrivilegePrivileges_admin=(data)=>{
   $('#dataInputModalBody').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Loading... Please wait...</div>');
   $('#dataInputModal').modal('show');
   $.ajax({
-    url: "forms/privilege-privileges_admin-form.php",
+    url: "forms/privilege-privileges-admin-form.php",
     type: "get",
     data: data, 
     success: (data)=>{
@@ -190,7 +190,7 @@ let addNewPrivilegePrivileges_admin=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;
@@ -218,7 +218,7 @@ let addNewPrivilegePrivileges_admin=(data)=>{
   $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
   $('#form-submit-button').prop('disabled', true);
   $.ajax({
-    url: "scripts/submit-privilege-privileges_admin-form.php",
+    url: "scripts/submit-privilege-privileges-admin-form.php",
     type: "post",
     dataType:"json",
     data:data,
@@ -296,7 +296,7 @@ let addNewPrivilege=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;

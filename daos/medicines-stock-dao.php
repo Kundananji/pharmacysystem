@@ -12,12 +12,11 @@ class MedicinesStockDao{
     $batchId=  $medicinesStock->getBatchId();
     $expiryDate=  $medicinesStock->getExpiryDate();
     $quantity=  $medicinesStock->getQuantity();
-    $mrp=  $medicinesStock->getMrp();
-    $rate=  $medicinesStock->getRate();
+    $amount=  $medicinesStock->getAmount();
     try{
-      $sql="INSERT INTO medicines_stock(`id`,`medicineId`,`batch_id`,`expiry_date`,`quantity`,`mrp`,`rate`) VALUES(?,?,?,?,?,?,?)";
+      $sql="INSERT INTO medicines_stock(`id`,`medicineId`,`batch_id`,`expiry_date`,`quantity`,`amount`) VALUES(?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("iississ",$id,$medicineId,$batchId,$expiryDate,$quantity,$mrp,$rate);
+      $stmt->bind_param("iissis",$id,$medicineId,$batchId,$expiryDate,$quantity,$amount);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -53,12 +52,11 @@ class MedicinesStockDao{
     $batchId=  $medicinesStock->getBatchId();
     $expiryDate=  $medicinesStock->getExpiryDate();
     $quantity=  $medicinesStock->getQuantity();
-    $mrp=  $medicinesStock->getMrp();
-    $rate=  $medicinesStock->getRate();
+    $amount=  $medicinesStock->getAmount();
     try{
-      $sql="UPDATE medicines_stock SET `medicineId`=?,`batch_id`=?,`expiry_date`=?,`quantity`=?,`mrp`=?,`rate`=? WHERE id =?";
+      $sql="UPDATE medicines_stock SET `medicineId`=?,`batch_id`=?,`expiry_date`=?,`quantity`=?,`amount`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ississi",$medicineId,$batchId,$expiryDate,$quantity,$mrp,$rate,$id);
+      $stmt->bind_param("issisi",$medicineId,$batchId,$expiryDate,$quantity,$amount,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -305,8 +303,7 @@ class MedicinesStockDao{
       $medicinesStock->setBatchId($row['batch_id']);
       $medicinesStock->setExpiryDate($row['expiry_date']);
       $medicinesStock->setQuantity($row['quantity']);
-      $medicinesStock->setMrp($row['mrp']);
-      $medicinesStock->setRate($row['rate']);
+      $medicinesStock->setAmount($row['amount']);
     return $medicinesStock;
   }
 }

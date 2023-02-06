@@ -20,19 +20,12 @@ if(!isset($_POST["contactNumber"]) || $_POST["contactNumber"]==''){
 if(!isset($_POST["address"]) || $_POST["address"]==''){ 
   exit(json_encode(array("title"=>"address required","status"=>"error","message"=>"The field address is required")));
 }
-if(!isset($_POST["doctorName"]) || $_POST["doctorName"]==''){ 
-  exit(json_encode(array("title"=>"doctorName required","status"=>"error","message"=>"The field doctor_name is required")));
-}
-if(!isset($_POST["doctorAddress"]) || $_POST["doctorAddress"]==''){ 
-  exit(json_encode(array("title"=>"doctorAddress required","status"=>"error","message"=>"The field doctor_address is required")));
-}
 
 $customersEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
 $customersEdit->setName(!isset($_POST["name"]) || $_POST["name"]==""?NULL:filter_var($_POST["name"],FILTER_SANITIZE_STRING));
 $customersEdit->setContactNumber(!isset($_POST["contactNumber"]) || $_POST["contactNumber"]==""?NULL:filter_var($_POST["contactNumber"],FILTER_SANITIZE_STRING));
 $customersEdit->setAddress(!isset($_POST["address"]) || $_POST["address"]==""?NULL:filter_var($_POST["address"],FILTER_SANITIZE_STRING));
-$customersEdit->setDoctorName(!isset($_POST["doctorName"]) || $_POST["doctorName"]==""?NULL:filter_var($_POST["doctorName"],FILTER_SANITIZE_STRING));
-$customersEdit->setDoctorAddress(!isset($_POST["doctorAddress"]) || $_POST["doctorAddress"]==""?NULL:filter_var($_POST["doctorAddress"],FILTER_SANITIZE_STRING));
+$customersEdit->setDoctorId(!isset($_POST["doctorId"]) || $_POST["doctorId"]==""?NULL:filter_var($_POST["doctorId"],FILTER_SANITIZE_NUMBER_INT));
 
 try{
   if(isset($_POST["id"]) && (int)$_POST["id"] > 0){

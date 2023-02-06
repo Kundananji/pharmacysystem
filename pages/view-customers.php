@@ -18,6 +18,14 @@ $arguments = array();
 foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
+//make available variables of staff available in scope for use:
+if(isset($_POST['id']) && $_POST['id']!=''){
+  include_once("../classes/staff.php");
+  include_once("../daos/staff-dao.php");
+
+  $staffDao = new StaffDao(); 
+  $staff =  $staffDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+}
 include("../daos/customers-dao.php");
 include("../classes/customers.php");
 include("../config/database.php");
@@ -45,10 +53,7 @@ $dao = new CustomersDao();
         Address
       </th>
       <th>
-        Doctor&nbsp;Name
-      </th>
-      <th>
-        Doctor&nbsp;Address
+        Doctor
       </th>
       <th>
       </th>
@@ -87,12 +92,12 @@ $dao = new CustomersDao();
         </td>
         <td>
         <?php
-          echo $customers->getDoctorName();
-        ?>
-        </td>
-        <td>
-        <?php
-          echo $customers->getDoctorAddress();
+          include_once("../classes/staff.php");
+          include_once("../daos/staff-dao.php");
+
+          $fstaffDao = new StaffDao(); 
+          $fstaff = $fstaffDao->select($customers->getDoctorId()); 
+          echo  $fstaff==null?"-": $fstaff->toString();
         ?>
         </td>
         <td>

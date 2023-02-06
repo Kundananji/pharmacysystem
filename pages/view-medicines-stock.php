@@ -56,10 +56,7 @@ $dao = new MedicinesStockdao();
         Quantity
       </th>
       <th>
-        Mrp
-      </th>
-      <th>
-        Rate
+        Amount
       </th>
       <th>
       </th>
@@ -108,12 +105,7 @@ $dao = new MedicinesStockdao();
         </td>
         <td>
         <?php
-          echo $medicinesStock->getMrp();
-        ?>
-        </td>
-        <td>
-        <?php
-          echo $medicinesStock->getRate();
+          echo $medicinesStock->getAmount();
         ?>
         </td>
         <td>

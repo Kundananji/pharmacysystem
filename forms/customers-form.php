@@ -72,27 +72,33 @@ if(isset($id)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-customers-doctor-name">
+<div class="form-group input-customers-doctor-id">
 
                  <?php
-                  $readonly = in_array('doctor_name',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('doctorId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($customersEdit->getId()!=null){ $defaultValues['doctor_name']=$customersEdit->getDoctorName();};
+                  if($customersEdit->getId()!=null){ $defaultValues['doctorId']=$customersEdit->getDoctorId();};
                   ?>
-                  <label for="input-customers-doctor-name">Doctor&nbsp;Name*</label>
-  <input type="text" name="doctorName" id="input-customers-doctor-name" class="form-control " placeholder="Enter Doctor&nbsp;Name " value="<?php echo null!==($customersEdit->getDoctorName())?($customersEdit->getDoctorName()):(isset($defaultValues['doctor_name'])?($defaultValues['doctor_name']): "");?>" required <?php echo $readonly;?>   />
-</div> <!--end form-group-->
+                  <label for="input-customers-doctor-id">Doctor</label>
+  <?php 
+    include_once("../classes/staff.php");
+    include_once("../daos/staff-dao.php");
 
- <!--start of form group-->
-<div class="form-group input-customers-doctor-address">
-
-                 <?php
-                  $readonly = in_array('doctor_address',$uneditableFields)?'readonly':'';
-                  //override default value with actual value if object is sent
-                  if($customersEdit->getId()!=null){ $defaultValues['doctor_address']=$customersEdit->getDoctorAddress();};
-                  ?>
-                  <label for="input-customers-doctor-address">Doctor&nbsp;Address*</label>
-  <input type="text" name="doctorAddress" id="input-customers-doctor-address" class="form-control " placeholder="Enter Doctor&nbsp;Address " value="<?php echo null!==($customersEdit->getDoctorAddress())?($customersEdit->getDoctorAddress()):(isset($defaultValues['doctor_address'])?($defaultValues['doctor_address']): "");?>" required <?php echo $readonly;?>   />
+    $staffDao = new StaffDao(); 
+    $objects = $staffDao->selectAll(); 
+    ?>
+    <select name="doctorId" id="input-customers-doctor-id" class="form-control "  <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Staff--</option>
+      <?php
+        foreach($objects as $staff){
+          $optionValue  = $staff->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['doctorId']) && $defaultValues['doctorId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['doctorId']) && $defaultValues['doctorId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['doctorId']) && $defaultValues['doctorId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$staff->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

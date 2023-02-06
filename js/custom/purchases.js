@@ -129,7 +129,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   tableBody.insertRow().innerHTML =rowHtml;
   var lastDate = localStorage.getItem('_date_cache_');
   $('.datepicker').datepicker({
-    format:'dd/mm/yyyy',
+    format:'yyyy-mm-dd',
     todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
   }) ;
@@ -200,7 +200,7 @@ let addNewPurchases=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;

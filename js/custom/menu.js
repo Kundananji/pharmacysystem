@@ -129,7 +129,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   tableBody.insertRow().innerHTML =rowHtml;
   var lastDate = localStorage.getItem('_date_cache_');
   $('.datepicker').datepicker({
-    format:'dd/mm/yyyy',
+    format:'yyyy-mm-dd',
     todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
   }) ;
@@ -199,12 +199,12 @@ let viewMenuMenus_admin=(data)=>{
 //assign global fields current values
   loader(divPageContent);
   $.ajax({
-    url: "pages/view-menu-menus_admin.php",
+    url: "pages/view-menu-menus-admin.php",
     type: "post",
     data:data,
     success: (data)=>{
       divPageContent.html(data);
-      $('#table-menu--menus_admin').DataTable({});
+      $('#table-menu--menus-admin').DataTable({});
     }
   });
   };
@@ -212,7 +212,7 @@ let addNewMenuMenus_admin=(data)=>{
   $('#dataInputModalBody').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Loading... Please wait...</div>');
   $('#dataInputModal').modal('show');
   $.ajax({
-    url: "forms/menu-menus_admin-form.php",
+    url: "forms/menu-menus-admin-form.php",
     type: "get",
     data: data, 
     success: (data)=>{
@@ -220,7 +220,7 @@ let addNewMenuMenus_admin=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;
@@ -248,7 +248,7 @@ let addNewMenuMenus_admin=(data)=>{
   $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
   $('#form-submit-button').prop('disabled', true);
   $.ajax({
-    url: "scripts/submit-menu-menus_admin-form.php",
+    url: "scripts/submit-menu-menus-admin-form.php",
     type: "post",
     dataType:"json",
     data:data,
@@ -326,7 +326,7 @@ let addNewMenu=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;

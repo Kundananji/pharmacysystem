@@ -7,9 +7,9 @@ class HospitalProceduresDao{
 * @return inserted objected of type HospitalProcedures
 */
   public function insert($hospitalProcedures){
-    $id=  $hospitalProcedures->getId();
-    $name=  $hospitalProcedures->getName();
-    $description=  $hospitalProcedures->getDescription();
+    $id=$hospitalProcedures->getId();
+    $name=$hospitalProcedures->getName();
+    $description= $hospitalProcedures->getDescription();
     $fee=  $hospitalProcedures->getFee();
     try{
       $sql="INSERT INTO hospital_procedures(`id`,`name`,`description`,`fee`) VALUES(?,?,?,?)";

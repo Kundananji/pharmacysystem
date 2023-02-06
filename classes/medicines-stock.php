@@ -9,8 +9,7 @@ class MedicinesStock implements \JsonSerializable{
   private $batchId;
   private $expiryDate;
   private $quantity;
-  private $mrp;
-  private $rate;
+  private $amount;
 
 /**
 * function to initialize object
@@ -110,38 +109,20 @@ class MedicinesStock implements \JsonSerializable{
   }
 
 /**
-* function to set the value of mrp
-* @param mrp : value to set
+* function to set the value of amount
+* @param amount : value to set
 */
-  public function setMrp($mrp){
-    $this->mrp=$mrp;
+  public function setAmount($amount){
+    $this->amount=$amount;
 
   }
 
 /**
-* function to get the value of mrp
+* function to get the value of amount
 * @return double
 */
-  public function getMrp(){
-    return $this->mrp;
-
-  }
-
-/**
-* function to set the value of rate
-* @param rate : value to set
-*/
-  public function setRate($rate){
-    $this->rate=$rate;
-
-  }
-
-/**
-* function to get the value of rate
-* @return double
-*/
-  public function getRate(){
-    return $this->rate;
+  public function getAmount(){
+    return $this->amount;
 
   }
 

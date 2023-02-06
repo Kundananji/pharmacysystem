@@ -11,12 +11,11 @@ class CustomersDao{
     $name=  $customers->getName();
     $contactNumber=  $customers->getContactNumber();
     $address=  $customers->getAddress();
-    $doctorName=  $customers->getDoctorName();
-    $doctorAddress=  $customers->getDoctorAddress();
+    $doctorId=  $customers->getDoctorId();
     try{
-      $sql="INSERT INTO customers(`id`,`name`,`contact_number`,`address`,`doctor_name`,`doctor_address`) VALUES(?,?,?,?,?,?)";
+      $sql="INSERT INTO customers(`id`,`name`,`contact_number`,`address`,`doctorId`) VALUES(?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssss",$id,$name,$contactNumber,$address,$doctorName,$doctorAddress);
+      $stmt->bind_param("isssi",$id,$name,$contactNumber,$address,$doctorId);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -51,12 +50,11 @@ class CustomersDao{
     $name=  $customers->getName();
     $contactNumber=  $customers->getContactNumber();
     $address=  $customers->getAddress();
-    $doctorName=  $customers->getDoctorName();
-    $doctorAddress=  $customers->getDoctorAddress();
+    $doctorId=  $customers->getDoctorId();
     try{
-      $sql="UPDATE customers SET `name`=?,`contact_number`=?,`address`=?,`doctor_name`=?,`doctor_address`=? WHERE id =?";
+      $sql="UPDATE customers SET `name`=?,`contact_number`=?,`address`=?,`doctorId`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssssi",$name,$contactNumber,$address,$doctorName,$doctorAddress,$id);
+      $stmt->bind_param("sssii",$name,$contactNumber,$address,$doctorId,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -302,8 +300,7 @@ class CustomersDao{
       $customers->setName($row['name']);
       $customers->setContactNumber($row['contact_number']);
       $customers->setAddress($row['address']);
-      $customers->setDoctorName($row['doctor_name']);
-      $customers->setDoctorAddress($row['doctor_address']);
+      $customers->setDoctorId($row['doctorId']);
     return $customers;
   }
 }

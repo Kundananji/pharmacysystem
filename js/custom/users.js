@@ -129,7 +129,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   tableBody.insertRow().innerHTML =rowHtml;
   var lastDate = localStorage.getItem('_date_cache_');
   $('.datepicker').datepicker({
-    format:'dd/mm/yyyy',
+    format:'yyyy-mm-dd',
     todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
   }) ;
@@ -209,12 +209,12 @@ let viewUsersUsers_admin=(data)=>{
 //assign global fields current values
   loader(divPageContent);
   $.ajax({
-    url: "pages/view-users-users_admin.php",
+    url: "pages/view-users-users-admin.php",
     type: "post",
     data:data,
     success: (data)=>{
       divPageContent.html(data);
-      $('#table-users--users_admin').DataTable({});
+      $('#table-users--users-admin').DataTable({});
     }
   });
   };
@@ -222,7 +222,7 @@ let addNewUsersUsers_admin=(data)=>{
   $('#dataInputModalBody').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Loading... Please wait...</div>');
   $('#dataInputModal').modal('show');
   $.ajax({
-    url: "forms/users-users_admin-form.php",
+    url: "forms/users-users-admin-form.php",
     type: "get",
     data: data, 
     success: (data)=>{
@@ -230,7 +230,7 @@ let addNewUsersUsers_admin=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;
@@ -258,7 +258,7 @@ let addNewUsersUsers_admin=(data)=>{
   $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
   $('#form-submit-button').prop('disabled', true);
   $.ajax({
-    url: "scripts/submit-users-users_admin-form.php",
+    url: "scripts/submit-users-users-admin-form.php",
     type: "post",
     dataType:"json",
     data:data,
@@ -336,7 +336,7 @@ let addNewUsers=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;

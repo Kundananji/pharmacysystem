@@ -129,7 +129,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   tableBody.insertRow().innerHTML =rowHtml;
   var lastDate = localStorage.getItem('_date_cache_');
   $('.datepicker').datepicker({
-    format:'dd/mm/yyyy',
+    format:'yyyy-mm-dd',
     todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
   }) ;
@@ -156,12 +156,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-customers-doctor-name' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-customers-doctor-address' +'_row_' + i;
+  id = 'input-customers-doctor-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -200,7 +195,7 @@ let addNewCustomers=(data)=>{
       initializePlugins();
       var lastDate = localStorage.getItem('_date_cache_');
       $('.datepicker').datepicker({
-        format:'dd/mm/yyyy',
+        format:'yyyy-mm-dd',
         todayBtn:'linked',
         defaultViewDate:isEmpty(lastDate)?'today':lastDate,
       }) ;

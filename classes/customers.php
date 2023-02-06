@@ -8,8 +8,7 @@ class Customers implements \JsonSerializable{
   private $name;
   private $contactNumber;
   private $address;
-  private $doctorName;
-  private $doctorAddress;
+  private $doctorId;
 
 /**
 * function to initialize object
@@ -91,38 +90,20 @@ class Customers implements \JsonSerializable{
   }
 
 /**
-* function to set the value of doctorName
-* @param doctorName : value to set
+* function to set the value of doctorId
+* @param doctorId : value to set
 */
-  public function setDoctorName($doctorName){
-    $this->doctorName=$doctorName;
+  public function setDoctorId($doctorId){
+    $this->doctorId=$doctorId;
 
   }
 
 /**
-* function to get the value of doctorName
-* @return String
+* function to get the value of doctorId
+* @return int(10)
 */
-  public function getDoctorName(){
-    return $this->doctorName;
-
-  }
-
-/**
-* function to set the value of doctorAddress
-* @param doctorAddress : value to set
-*/
-  public function setDoctorAddress($doctorAddress){
-    $this->doctorAddress=$doctorAddress;
-
-  }
-
-/**
-* function to get the value of doctorAddress
-* @return String
-*/
-  public function getDoctorAddress(){
-    return $this->doctorAddress;
+  public function getDoctorId(){
+    return $this->doctorId;
 
   }
 

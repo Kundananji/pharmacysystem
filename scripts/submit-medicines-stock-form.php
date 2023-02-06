@@ -23,8 +23,8 @@ if(!isset($_POST["expiryDate"]) || $_POST["expiryDate"]==''){
 if(!isset($_POST["quantity"]) || $_POST["quantity"]==''){ 
   exit(json_encode(array("title"=>"quantity required","status"=>"error","message"=>"The field quantity is required")));
 }
-if(!isset($_POST["rate"]) || $_POST["rate"]==''){ 
-  exit(json_encode(array("title"=>"rate required","status"=>"error","message"=>"The field rate is required")));
+if(!isset($_POST["amount"]) || $_POST["amount"]==''){ 
+  exit(json_encode(array("title"=>"amount required","status"=>"error","message"=>"The field amount is required")));
 }
 
 $medicinesStockEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
@@ -32,8 +32,7 @@ $medicinesStockEdit->setMedicineId(!isset($_POST["medicineId"]) || $_POST["medic
 $medicinesStockEdit->setBatchId(!isset($_POST["batchId"]) || $_POST["batchId"]==""?NULL:filter_var($_POST["batchId"],FILTER_SANITIZE_STRING));
 $medicinesStockEdit->setExpiryDate(!isset($_POST["expiryDate"]) || $_POST["expiryDate"]==""?NULL:filter_var($_POST["expiryDate"],FILTER_SANITIZE_STRING));
 $medicinesStockEdit->setQuantity(!isset($_POST["quantity"]) || $_POST["quantity"]==""?NULL:filter_var($_POST["quantity"],FILTER_SANITIZE_NUMBER_INT));
-$medicinesStockEdit->setMrp(!isset($_POST["mrp"]) || $_POST["mrp"]==""?NULL:filter_var($_POST["mrp"],FILTER_SANITIZE_STRING));
-$medicinesStockEdit->setRate(!isset($_POST["rate"]) || $_POST["rate"]==""?NULL:filter_var($_POST["rate"],FILTER_SANITIZE_STRING));
+$medicinesStockEdit->setAmount(!isset($_POST["amount"]) || $_POST["amount"]==""?NULL:filter_var($_POST["amount"],FILTER_SANITIZE_STRING));
 
 try{
   if(isset($_POST["id"]) && (int)$_POST["id"] > 0){

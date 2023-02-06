@@ -102,27 +102,15 @@ if(isset($id)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-medicines-stock-mrp">
+<div class="form-group input-medicines-stock-amount">
 
                  <?php
-                  $readonly = in_array('mrp',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('amount',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesStockEdit->getId()!=null){ $defaultValues['mrp']=$medicinesStockEdit->getMrp();};
+                  if($medicinesStockEdit->getId()!=null){ $defaultValues['amount']=$medicinesStockEdit->getAmount();};
                   ?>
-                  <label for="input-medicines-stock-mrp">Mrp</label>
-  <input type="text" name="mrp" id="input-medicines-stock-mrp" class="form-control " placeholder="Enter Mrp " value="<?php echo null!==($medicinesStockEdit->getMrp())?($medicinesStockEdit->getMrp()):(isset($defaultValues['mrp'])?($defaultValues['mrp']): "");?>"  <?php echo $readonly;?>   />
-</div> <!--end form-group-->
-
- <!--start of form group-->
-<div class="form-group input-medicines-stock-rate">
-
-                 <?php
-                  $readonly = in_array('rate',$uneditableFields)?'readonly':'';
-                  //override default value with actual value if object is sent
-                  if($medicinesStockEdit->getId()!=null){ $defaultValues['rate']=$medicinesStockEdit->getRate();};
-                  ?>
-                  <label for="input-medicines-stock-rate">Rate*</label>
-  <input type="text" name="rate" id="input-medicines-stock-rate" class="form-control " placeholder="Enter Rate " value="<?php echo null!==($medicinesStockEdit->getRate())?($medicinesStockEdit->getRate()):(isset($defaultValues['rate'])?($defaultValues['rate']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-stock-amount">Amount*</label>
+  <input type="text" name="amount" id="input-medicines-stock-amount" class="form-control " placeholder="Enter Amount " value="<?php echo null!==($medicinesStockEdit->getAmount())?($medicinesStockEdit->getAmount()):(isset($defaultValues['amount'])?($defaultValues['amount']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->
