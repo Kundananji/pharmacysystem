@@ -5,6 +5,8 @@
 <script type="text/javascript" src="js/custom/privilege.js?v=1673857151"></script>
 <script type="text/javascript" src="js/custom/users.js?v=1673857151"></script>
 <script type="text/javascript" src="js/custom/patients.js?v=1673857157"></script>
+<script type="text/javascript" src="js/custom/medicines.js?v=1673547157"></script>
+<script type="text/javascript" src="js/custom/medicines-stock.js?v=1455857157"></script>
 <script>
   $(document).ready(()=>{
     <?php if(sizeof($_GET)<2){ ?>
