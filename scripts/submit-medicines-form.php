@@ -20,15 +20,12 @@ if(!isset($_POST["packing"]) || $_POST["packing"]==''){
 if(!isset($_POST["genericName"]) || $_POST["genericName"]==''){ 
   exit(json_encode(array("title"=>"genericName required","status"=>"error","message"=>"The field generic_name is required")));
 }
-if(!isset($_POST["supplierName"]) || $_POST["supplierName"]==''){ 
-  exit(json_encode(array("title"=>"supplierName required","status"=>"error","message"=>"The field supplier_name is required")));
-}
 
 $medicinesEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
 $medicinesEdit->setName(!isset($_POST["name"]) || $_POST["name"]==""?NULL:filter_var($_POST["name"],FILTER_SANITIZE_STRING));
 $medicinesEdit->setPacking(!isset($_POST["packing"]) || $_POST["packing"]==""?NULL:filter_var($_POST["packing"],FILTER_SANITIZE_STRING));
 $medicinesEdit->setGenericName(!isset($_POST["genericName"]) || $_POST["genericName"]==""?NULL:filter_var($_POST["genericName"],FILTER_SANITIZE_STRING));
-$medicinesEdit->setSupplierName(!isset($_POST["supplierName"]) || $_POST["supplierName"]==""?NULL:filter_var($_POST["supplierName"],FILTER_SANITIZE_STRING));
+$medicinesEdit->setSupplierId(!isset($_POST["supplierId"]) || $_POST["supplierId"]==""?NULL:filter_var($_POST["supplierId"],FILTER_SANITIZE_NUMBER_INT));
 
 try{
   if(isset($_POST["id"]) && (int)$_POST["id"] > 0){

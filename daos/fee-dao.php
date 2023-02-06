@@ -10,13 +10,12 @@ class FeeDao{
     $id=  $fee->getId();
     $name=  $fee->getName();
     $description=  $fee->getDescription();
+    $amount=  $fee->getAmount();
     $status=  $fee->getStatus();
-    $startDate=  $fee->getStartDate();
-    $endDate=  $fee->getEndDate();
     try{
-      $sql="INSERT INTO fee(`id`,`name`,`description`,`status`,`startDate`,`endDate`) VALUES(?,?,?,?,?,?)";
+      $sql="INSERT INTO fee(`id`,`name`,`description`,`amount`,`status`) VALUES(?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ississ",$id,$name,$description,$status,$startDate,$endDate);
+      $stmt->bind_param("isssi",$id,$name,$description,$amount,$status);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -50,13 +49,12 @@ class FeeDao{
     $id=  $fee->getId();
     $name=  $fee->getName();
     $description=  $fee->getDescription();
+    $amount=  $fee->getAmount();
     $status=  $fee->getStatus();
-    $startDate=  $fee->getStartDate();
-    $endDate=  $fee->getEndDate();
     try{
-      $sql="UPDATE fee SET `name`=?,`description`=?,`status`=?,`startDate`=?,`endDate`=? WHERE id =?";
+      $sql="UPDATE fee SET `name`=?,`description`=?,`amount`=?,`status`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssissi",$name,$description,$status,$startDate,$endDate,$id);
+      $stmt->bind_param("sssii",$name,$description,$amount,$status,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -301,9 +299,8 @@ class FeeDao{
       $fee->setId($row['id']);
       $fee->setName($row['name']);
       $fee->setDescription($row['description']);
+      $fee->setAmount($row['amount']);
       $fee->setStatus($row['status']);
-      $fee->setStartDate($row['startDate']);
-      $fee->setEndDate($row['endDate']);
     return $fee;
   }
 }

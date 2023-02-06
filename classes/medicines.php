@@ -8,7 +8,7 @@ class Medicines implements \JsonSerializable{
   private $name;
   private $packing;
   private $genericName;
-  private $supplierName;
+  private $supplierId;
 
 /**
 * function to initialize object
@@ -90,20 +90,20 @@ class Medicines implements \JsonSerializable{
   }
 
 /**
-* function to set the value of supplierName
-* @param supplierName : value to set
+* function to set the value of supplierId
+* @param supplierId : value to set
 */
-  public function setSupplierName($supplierName){
-    $this->supplierName=$supplierName;
+  public function setSupplierId($supplierId){
+    $this->supplierId=$supplierId;
 
   }
 
 /**
-* function to get the value of supplierName
-* @return String
+* function to get the value of supplierId
+* @return int(10)
 */
-  public function getSupplierName(){
-    return $this->supplierName;
+  public function getSupplierId(){
+    return $this->supplierId;
 
   }
 

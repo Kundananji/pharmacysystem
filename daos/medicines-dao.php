@@ -11,11 +11,11 @@ class MedicinesDao{
     $name=  $medicines->getName();
     $packing=  $medicines->getPacking();
     $genericName=  $medicines->getGenericName();
-    $supplierName=  $medicines->getSupplierName();
+    $supplierId=  $medicines->getSupplierId();
     try{
-      $sql="INSERT INTO medicines(`id`,`name`,`packing`,`generic_name`,`supplier_name`) VALUES(?,?,?,?,?)";
+      $sql="INSERT INTO medicines(`id`,`name`,`packing`,`generic_name`,`supplierId`) VALUES(?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issss",$id,$name,$packing,$genericName,$supplierName);
+      $stmt->bind_param("isssi",$id,$name,$packing,$genericName,$supplierId);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -50,11 +50,11 @@ class MedicinesDao{
     $name=  $medicines->getName();
     $packing=  $medicines->getPacking();
     $genericName=  $medicines->getGenericName();
-    $supplierName=  $medicines->getSupplierName();
+    $supplierId=  $medicines->getSupplierId();
     try{
-      $sql="UPDATE medicines SET `name`=?,`packing`=?,`generic_name`=?,`supplier_name`=? WHERE id =?";
+      $sql="UPDATE medicines SET `name`=?,`packing`=?,`generic_name`=?,`supplierId`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssssi",$name,$packing,$genericName,$supplierName,$id);
+      $stmt->bind_param("sssii",$name,$packing,$genericName,$supplierId,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -300,7 +300,7 @@ class MedicinesDao{
       $medicines->setName($row['name']);
       $medicines->setPacking($row['packing']);
       $medicines->setGenericName($row['generic_name']);
-      $medicines->setSupplierName($row['supplier_name']);
+      $medicines->setSupplierId($row['supplierId']);
     return $medicines;
   }
 }

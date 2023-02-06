@@ -14,6 +14,9 @@ if(!isset($_POST["id"]) || $_POST["id"]==''){
 if(!isset($_POST["name"]) || $_POST["name"]==''){ 
   exit(json_encode(array("title"=>"name required","status"=>"error","message"=>"The field name is required")));
 }
+if(!isset($_POST["amount"]) || $_POST["amount"]==''){ 
+  exit(json_encode(array("title"=>"amount required","status"=>"error","message"=>"The field amount is required")));
+}
 if(!isset($_POST["status"]) || $_POST["status"]==''){ 
   exit(json_encode(array("title"=>"status required","status"=>"error","message"=>"The field status is required")));
 }
@@ -21,9 +24,8 @@ if(!isset($_POST["status"]) || $_POST["status"]==''){
 $feeEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
 $feeEdit->setName(!isset($_POST["name"]) || $_POST["name"]==""?NULL:filter_var($_POST["name"],FILTER_SANITIZE_STRING));
 $feeEdit->setDescription(!isset($_POST["description"]) || $_POST["description"]==""?NULL:filter_var($_POST["description"],FILTER_SANITIZE_STRING));
+$feeEdit->setAmount(!isset($_POST["amount"]) || $_POST["amount"]==""?NULL:filter_var($_POST["amount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 $feeEdit->setStatus(!isset($_POST["status"]) || $_POST["status"]==""?NULL:filter_var($_POST["status"],FILTER_SANITIZE_NUMBER_INT));
-$feeEdit->setStartDate(!isset($_POST["startDate"]) || $_POST["startDate"]==""?NULL:convertDate($_POST["startDate"]));
-$feeEdit->setEndDate(!isset($_POST["endDate"]) || $_POST["endDate"]==""?NULL:convertDate($_POST["endDate"]));
 
 try{
   if(isset($_POST["id"]) && (int)$_POST["id"] > 0){

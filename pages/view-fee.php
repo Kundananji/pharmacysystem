@@ -50,13 +50,10 @@ $dao = new FeeDao();
         Description
       </th>
       <th>
+        Amount
+      </th>
+      <th>
         Status
-      </th>
-      <th>
-        Start&nbsp;Date
-      </th>
-      <th>
-        End&nbsp;Date
       </th>
       <th>
       </th>
@@ -90,22 +87,17 @@ $dao = new FeeDao();
         </td>
         <td>
         <?php
+          echo $fee->getAmount();
+        ?>
+        </td>
+        <td>
+        <?php
           include_once("../classes/status.php");
           include_once("../daos/status-dao.php");
 
           $fstatusDao = new StatusDao(); 
           $fstatus = $fstatusDao->select($fee->getStatus()); 
           echo  $fstatus==null?"-": $fstatus->toString();
-        ?>
-        </td>
-        <td>
-        <?php
-          echo $fee->getStartDate();
-        ?>
-        </td>
-        <td>
-        <?php
-          echo $fee->getEndDate();
         ?>
         </td>
         <td>

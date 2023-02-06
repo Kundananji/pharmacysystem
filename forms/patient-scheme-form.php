@@ -68,7 +68,25 @@ if(isset($id)){
                   if($patientSchemeEdit->getId()!=null){ $defaultValues['patientId']=$patientSchemeEdit->getPatientId();};
                   ?>
                   <label for="input-patient-scheme-patient-id">Patient*</label>
-  <input type="number" name="patientId" id="input-patient-scheme-patient-id" class="form-control " placeholder="Enter Patient " value="<?php echo null!==($patientSchemeEdit->getPatientId())?($patientSchemeEdit->getPatientId()):(isset($defaultValues['patientId'])?($defaultValues['patientId']): "");?>" required <?php echo $readonly;?>   />
+  <?php 
+    include_once("../classes/patients.php");
+    include_once("../daos/patients-dao.php");
+
+    $patientsDao = new PatientsDao(); 
+    $objects = $patientsDao->selectAll(); 
+    ?>
+    <select name="patientId" id="input-patient-scheme-patient-id" class="form-control " required <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Patients--</option>
+      <?php
+        foreach($objects as $patients){
+          $optionValue  = $patients->getId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['patientId']) && $defaultValues['patientId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$patients->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 
  <!--start of form group-->

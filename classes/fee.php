@@ -7,9 +7,8 @@ class Fee implements \JsonSerializable{
   private $id;
   private $name;
   private $description;
+  private $amount;
   private $status;
-  private $startDate;
-  private $endDate;
 
 /**
 * function to initialize object
@@ -73,6 +72,24 @@ class Fee implements \JsonSerializable{
   }
 
 /**
+* function to set the value of amount
+* @param amount : value to set
+*/
+  public function setAmount($amount){
+    $this->amount=$amount;
+
+  }
+
+/**
+* function to get the value of amount
+* @return decimal(10,2)
+*/
+  public function getAmount(){
+    return $this->amount;
+
+  }
+
+/**
 * function to set the value of status
 * @param status : value to set
 */
@@ -87,42 +104,6 @@ class Fee implements \JsonSerializable{
 */
   public function getStatus(){
     return $this->status;
-
-  }
-
-/**
-* function to set the value of startDate
-* @param startDate : value to set
-*/
-  public function setStartDate($startDate){
-    $this->startDate=$startDate;
-
-  }
-
-/**
-* function to get the value of startDate
-* @return date
-*/
-  public function getStartDate(){
-    return $this->startDate;
-
-  }
-
-/**
-* function to set the value of endDate
-* @param endDate : value to set
-*/
-  public function setEndDate($endDate){
-    $this->endDate=$endDate;
-
-  }
-
-/**
-* function to get the value of endDate
-* @return date
-*/
-  public function getEndDate(){
-    return $this->endDate;
 
   }
 

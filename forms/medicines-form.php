@@ -72,15 +72,33 @@ if(isset($id)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-medicines-supplier-name">
+<div class="form-group input-medicines-supplier-id">
 
                  <?php
-                  $readonly = in_array('supplier_name',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('supplierId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($medicinesEdit->getId()!=null){ $defaultValues['supplier_name']=$medicinesEdit->getSupplierName();};
+                  if($medicinesEdit->getId()!=null){ $defaultValues['supplierId']=$medicinesEdit->getSupplierId();};
                   ?>
-                  <label for="input-medicines-supplier-name">Supplier&nbsp;Name*</label>
-  <input type="text" name="supplierName" id="input-medicines-supplier-name" class="form-control " placeholder="Enter Supplier&nbsp;Name " value="<?php echo null!==($medicinesEdit->getSupplierName())?($medicinesEdit->getSupplierName()):(isset($defaultValues['supplier_name'])?($defaultValues['supplier_name']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-supplier-id">Supplier</label>
+  <?php 
+    include_once("../classes/suppliers.php");
+    include_once("../daos/suppliers-dao.php");
+
+    $suppliersDao = new SuppliersDao(); 
+    $objects = $suppliersDao->selectAll(); 
+    ?>
+    <select name="supplierId" id="input-medicines-supplier-id" class="form-control "  <?php echo $readonly;?> >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Suppliers--</option>
+      <?php
+        foreach($objects as $suppliers){
+          $optionValue  = $suppliers->getID();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['supplierId']) && $defaultValues['supplierId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['supplierId']) && $defaultValues['supplierId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['supplierId']) && $defaultValues['supplierId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$suppliers->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

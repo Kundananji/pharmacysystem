@@ -18,6 +18,14 @@ $arguments = array();
 foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
+//make available variables of suppliers available in scope for use:
+if(isset($_POST['ID']) && $_POST['ID']!=''){
+  include_once("../classes/suppliers.php");
+  include_once("../daos/suppliers-dao.php");
+
+  $suppliersDao = new SuppliersDao(); 
+  $suppliers =  $suppliersDao->select(filter_var($_GET['ID'],FILTER_SANITIZE_NUMBER_INT)); 
+}
 include("../daos/medicines-dao.php");
 include("../classes/medicines.php");
 include("../config/database.php");
@@ -45,7 +53,7 @@ $dao = new MedicinesDao();
         Generic&nbsp;Name
       </th>
       <th>
-        Supplier&nbsp;Name
+        Supplier
       </th>
       <th>
       </th>
@@ -84,7 +92,12 @@ $dao = new MedicinesDao();
         </td>
         <td>
         <?php
-          echo $medicines->getSupplierName();
+          include_once("../classes/suppliers.php");
+          include_once("../daos/suppliers-dao.php");
+
+          $fsuppliersDao = new SuppliersDao(); 
+          $fsuppliers = $fsuppliersDao->select($medicines->getSupplierId()); 
+          echo  $fsuppliers==null?"-": $fsuppliers->toString();
         ?>
         </td>
         <td>

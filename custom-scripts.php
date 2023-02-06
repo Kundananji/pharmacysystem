@@ -5,6 +5,15 @@
 <script type="text/javascript" src="js/custom/privilege.js?v=1673857151"></script>
 <script type="text/javascript" src="js/custom/users.js?v=1673857151"></script>
 <script type="text/javascript" src="js/custom/medicines.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/medicines-stock.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/patients.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/suppliers.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/staff.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/fee.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/invoice.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/invoice-detail.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/patient-scheme.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/insurance-provider.js?v=1673857151"></script>
 <script>
   $(document).ready(()=>{
     <?php if(sizeof($_GET)<2){ ?>

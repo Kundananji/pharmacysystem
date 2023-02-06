@@ -60,6 +60,18 @@ if(isset($id)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
+<div class="form-group input-fee-amount">
+
+                 <?php
+                  $readonly = in_array('amount',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($feeEdit->getId()!=null){ $defaultValues['amount']=$feeEdit->getAmount();};
+                  ?>
+                  <label for="input-fee-amount">Amount*</label>
+  <input type="number" step="any" name="amount" id="input-fee-amount" class="form-control " placeholder="Enter Amount " value="<?php echo null!==($feeEdit->getAmount())?($feeEdit->getAmount()):(isset($defaultValues['amount'])?($defaultValues['amount']): "");?>" required <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
 <div class="form-group input-fee-status">
 
                  <?php
@@ -87,30 +99,6 @@ if(isset($id)){
         }
       ?>
     </select>
-</div> <!--end form-group-->
-
- <!--start of form group-->
-<div class="form-group input-fee-start-date">
-
-                 <?php
-                  $readonly = in_array('startDate',$uneditableFields)?'readonly':'';
-                  //override default value with actual value if object is sent
-                  if($feeEdit->getId()!=null){ $defaultValues['startDate']=$feeEdit->getStartDate();};
-                  ?>
-                  <label for="input-fee-start-date">Start&nbsp;Date</label>
-  <input type="text" name="startDate" id="input-fee-start-date" class="form-control datepicker " placeholder="Enter Start&nbsp;Date " value="<?php echo null!==($feeEdit->getStartDate())?(date("d/m/Y",strtotime($feeEdit->getStartDate()))):(isset($defaultValues['startDate'])?($defaultValues['startDate']): "");?>"  <?php echo $readonly;?>   />
-</div> <!--end form-group-->
-
- <!--start of form group-->
-<div class="form-group input-fee-end-date">
-
-                 <?php
-                  $readonly = in_array('endDate',$uneditableFields)?'readonly':'';
-                  //override default value with actual value if object is sent
-                  if($feeEdit->getId()!=null){ $defaultValues['endDate']=$feeEdit->getEndDate();};
-                  ?>
-                  <label for="input-fee-end-date">End&nbsp;Date</label>
-  <input type="text" name="endDate" id="input-fee-end-date" class="form-control datepicker " placeholder="Enter End&nbsp;Date " value="<?php echo null!==($feeEdit->getEndDate())?(date("d/m/Y",strtotime($feeEdit->getEndDate()))):(isset($defaultValues['endDate'])?($defaultValues['endDate']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->
