@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -75,7 +76,7 @@ if(isset($id)){
     $jobPositionDao = new JobPositionDao(); 
     $objects = $jobPositionDao->selectAll(); 
     ?>
-    <select name="position" id="input-staff-position" class="form-control " required <?php echo $readonly;?> >
+    <select name="position" id="input-staff-position" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Job&nbsp;position--</option>
       <?php
         foreach($objects as $jobPosition){
@@ -141,7 +142,7 @@ if(isset($id)){
     $statusDao = new StatusDao(); 
     $objects = $statusDao->selectAll(); 
     ?>
-    <select name="status" id="input-staff-status" class="form-control " required <?php echo $readonly;?> >
+    <select name="status" id="input-staff-status" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Status--</option>
       <?php
         foreach($objects as $status){

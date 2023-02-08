@@ -11,16 +11,15 @@ class InvoiceDetailDao{
     $invoiceId=  $invoiceDetail->getInvoiceId();
     $feeId=  $invoiceDetail->getFeeId();
     $medicineId=  $invoiceDetail->getMedicineId();
-    $item=  $invoiceDetail->getItem();
     $description=  $invoiceDetail->getDescription();
     $unitPrice=  $invoiceDetail->getUnitPrice();
     $quantity=  $invoiceDetail->getQuantity();
     $discount=  $invoiceDetail->getDiscount();
     $totalAmount=  $invoiceDetail->getTotalAmount();
     try{
-      $sql="INSERT INTO invoice_detail(`id`,`invoiceId`,`feeId`,`medicineId`,`item`,`description`,`unitPrice`,`quantity`,`discount`,`totalAmount`) VALUES(?,?,?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO invoice_detail(`id`,`invoiceId`,`feeId`,`medicineId`,`description`,`unitPrice`,`quantity`,`discount`,`totalAmount`) VALUES(?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("iiiisssiss",$id,$invoiceId,$feeId,$medicineId,$item,$description,$unitPrice,$quantity,$discount,$totalAmount);
+      $stmt->bind_param("iiiississ",$id,$invoiceId,$feeId,$medicineId,$description,$unitPrice,$quantity,$discount,$totalAmount);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -55,16 +54,15 @@ class InvoiceDetailDao{
     $invoiceId=  $invoiceDetail->getInvoiceId();
     $feeId=  $invoiceDetail->getFeeId();
     $medicineId=  $invoiceDetail->getMedicineId();
-    $item=  $invoiceDetail->getItem();
     $description=  $invoiceDetail->getDescription();
     $unitPrice=  $invoiceDetail->getUnitPrice();
     $quantity=  $invoiceDetail->getQuantity();
     $discount=  $invoiceDetail->getDiscount();
     $totalAmount=  $invoiceDetail->getTotalAmount();
     try{
-      $sql="UPDATE invoice_detail SET `invoiceId`=?,`feeId`=?,`medicineId`=?,`item`=?,`description`=?,`unitPrice`=?,`quantity`=?,`discount`=?,`totalAmount`=? WHERE id =?";
+      $sql="UPDATE invoice_detail SET `invoiceId`=?,`feeId`=?,`medicineId`=?,`description`=?,`unitPrice`=?,`quantity`=?,`discount`=?,`totalAmount`=? WHERE id =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("iiisssissi",$invoiceId,$feeId,$medicineId,$item,$description,$unitPrice,$quantity,$discount,$totalAmount,$id);
+      $stmt->bind_param("iiississi",$invoiceId,$feeId,$medicineId,$description,$unitPrice,$quantity,$discount,$totalAmount,$id);
       $stmt->execute();
       $stmt->close();
 
@@ -310,7 +308,6 @@ class InvoiceDetailDao{
       $invoiceDetail->setInvoiceId($row['invoiceId']);
       $invoiceDetail->setFeeId($row['feeId']);
       $invoiceDetail->setMedicineId($row['medicineId']);
-      $invoiceDetail->setItem($row['item']);
       $invoiceDetail->setDescription($row['description']);
       $invoiceDetail->setUnitPrice($row['unitPrice']);
       $invoiceDetail->setQuantity($row['quantity']);

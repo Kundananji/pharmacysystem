@@ -14,6 +14,7 @@
 <script type="text/javascript" src="js/custom/invoice-detail.js?v=1673857151"></script>
 <script type="text/javascript" src="js/custom/patient-scheme.js?v=1673857151"></script>
 <script type="text/javascript" src="js/custom/insurance-provider.js?v=1673857151"></script>
+<script type="text/javascript" src="js/custom/receipt.js?v=1673857152"></script>
 <script>
   $(document).ready(()=>{
     <?php if(sizeof($_GET)<2){ ?>

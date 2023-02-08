@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -41,8 +42,8 @@ if(isset($)){
                   //override default value with actual value if object is sent
                   if($salesEdit->get()!=null){ $defaultValues['customer_id']=$salesEdit->getCustomerId();};
                   ?>
-                  <label for="input-sales-customer-id">Customer&nbsp;*</label>
-  <input type="number" name="customerId" id="input-sales-customer-id" class="form-control " placeholder="Enter Customer&nbsp; " value="<?php echo null!==($salesEdit->getCustomerId())?($salesEdit->getCustomerId()):(isset($defaultValues['customer_id'])?($defaultValues['customer_id']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-sales-customer-id">Customer&nbsp;Id*</label>
+  <input type="number" name="customerId" id="input-sales-customer-id" class="form-control " placeholder="Enter Customer&nbsp;Id " value="<?php echo null!==($salesEdit->getCustomerId())?($salesEdit->getCustomerId()):(isset($defaultValues['customer_id'])?($defaultValues['customer_id']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -77,8 +78,8 @@ if(isset($)){
                   //override default value with actual value if object is sent
                   if($salesEdit->get()!=null){ $defaultValues['batch_id']=$salesEdit->getBatchId();};
                   ?>
-                  <label for="input-sales-batch-id">Batch&nbsp;</label>
-  <input type="text" name="batchId" id="input-sales-batch-id" class="form-control " placeholder="Enter Batch&nbsp; " value="<?php echo null!==($salesEdit->getBatchId())?($salesEdit->getBatchId()):(isset($defaultValues['batch_id'])?($defaultValues['batch_id']): "");?>"  <?php echo $readonly;?>   />
+                  <label for="input-sales-batch-id">Batch&nbsp;Id</label>
+  <input type="text" name="batchId" id="input-sales-batch-id" class="form-control " placeholder="Enter Batch&nbsp;Id " value="<?php echo null!==($salesEdit->getBatchId())?($salesEdit->getBatchId()):(isset($defaultValues['batch_id'])?($defaultValues['batch_id']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

@@ -41,7 +41,7 @@ $dao = new CustomersDao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

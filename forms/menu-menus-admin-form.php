@@ -138,7 +138,7 @@ if(isset($id)){
     $menuTargetDao = new MenuTargetDao(); 
     $objects = $menuTargetDao->selectAll(); 
     ?>
-    <select name="target" id="input-menu-target" class="form-control "  <?php echo $readonly;?> >
+    <select name="target" id="input-menu-target" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Target--</option>
       <?php
         foreach($objects as $menuTarget){
@@ -167,7 +167,7 @@ if(isset($id)){
     $menuDao = new MenuDao(); 
     $objects = $menuDao->selectAll(); 
     ?>
-    <select name="parentId" id="input-menu-parent-id" class="form-control "  <?php echo $readonly;?> >
+    <select name="parentId" id="input-menu-parent-id" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Parent--</option>
       <?php
         foreach($objects as $menu){
@@ -196,7 +196,7 @@ if(isset($id)){
     $profileDao = new ProfileDao(); 
     $objects = $profileDao->selectAll(); 
     ?>
-    <select name="profileId" id="input-menu-profile-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="profileId" id="input-menu-profile-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Profile*--</option>
       <?php
         foreach($objects as $profile){

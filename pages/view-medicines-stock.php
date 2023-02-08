@@ -41,7 +41,7 @@ $dao = new MedicinesStockdao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Medicine

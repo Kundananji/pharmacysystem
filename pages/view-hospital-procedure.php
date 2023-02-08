@@ -19,12 +19,12 @@ foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
 //make available variables of fee available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['feeId']) && $_POST['feeId']!=''){
   include_once("../classes/fee.php");
   include_once("../daos/fee-dao.php");
 
   $feeDao = new FeeDao(); 
-  $fee =  $feeDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $fee =  $feeDao->select(filter_var($_GET['feeId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of department available in scope for use:
 if(isset($_POST['id']) && $_POST['id']!=''){
@@ -49,7 +49,7 @@ $dao = new HospitalProceduredao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

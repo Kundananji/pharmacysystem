@@ -41,7 +41,7 @@ $dao = new FeeDao();
       <th>
       </th>
       <th>
-        
+        Fee
       </th>
       <th>
         Name
@@ -72,7 +72,7 @@ $dao = new FeeDao();
       </th>
         <td>
         <?php
-          echo $fee->getId();
+          echo $fee->getFeeId();
         ?>
         </td>
         <td>
@@ -102,12 +102,12 @@ $dao = new FeeDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Fee.addNewFee({id : \''.$fee->getId().'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Fee.addNewFee({feeId : \''.$fee->getFeeId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Fee.deleteFee('.$fee->getId().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Fee.deleteFee('.$fee->getFeeId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

@@ -19,20 +19,20 @@ foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
 //make available variables of patients available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['patientId']) && $_POST['patientId']!=''){
   include_once("../classes/patients.php");
   include_once("../daos/patients-dao.php");
 
   $patientsDao = new PatientsDao(); 
-  $patients =  $patientsDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $patients =  $patientsDao->select(filter_var($_GET['patientId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of patients available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['patientId']) && $_POST['patientId']!=''){
   include_once("../classes/patients.php");
   include_once("../daos/patients-dao.php");
 
   $patientsDao = new PatientsDao(); 
-  $patients =  $patientsDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $patients =  $patientsDao->select(filter_var($_GET['patientId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of hospital_procedure available in scope for use:
 if(isset($_POST['id']) && $_POST['id']!=''){
@@ -73,7 +73,7 @@ $dao = new ProceduresTakendao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Patient

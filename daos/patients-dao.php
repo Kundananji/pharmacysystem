@@ -7,7 +7,7 @@ class PatientsDao{
 * @return inserted objected of type Patients
 */
   public function insert($patients){
-    $id=  $patients->getId();
+    $patientId=  $patients->getPatientId();
     $fileId=  $patients->getFileId();
     $firstName=  $patients->getFirstName();
     $otherNames=  $patients->getOtherNames();
@@ -18,15 +18,15 @@ class PatientsDao{
     $nationality=  $patients->getNationality();
     $status=  $patients->getStatus();
     try{
-      $sql="INSERT INTO patients(`id`,`fileId`,`firstName`,`otherNames`,`lastName`,`address`,`contactNumber`,`dateOfBirth`,`nationality`,`status`) VALUES(?,?,?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO patients(`patientId`,`fileId`,`firstName`,`otherNames`,`lastName`,`address`,`contactNumber`,`dateOfBirth`,`nationality`,`status`) VALUES(?,?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issssssssi",$id,$fileId,$firstName,$otherNames,$lastName,$address,$contactNumber,$dateOfBirth,$nationality,$status);
+      $stmt->bind_param("issssssssi",$patientId,$fileId,$firstName,$otherNames,$lastName,$address,$contactNumber,$dateOfBirth,$nationality,$status);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM patients WHERE `id`=?";
+      $sql="SELECT * FROM patients WHERE `patientId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -51,7 +51,7 @@ class PatientsDao{
 * @return updated objected of type Patients
 */
   public function update($patients){
-    $id=  $patients->getId();
+    $patientId=  $patients->getPatientId();
     $fileId=  $patients->getFileId();
     $firstName=  $patients->getFirstName();
     $otherNames=  $patients->getOtherNames();
@@ -62,15 +62,15 @@ class PatientsDao{
     $nationality=  $patients->getNationality();
     $status=  $patients->getStatus();
     try{
-      $sql="UPDATE patients SET `fileId`=?,`firstName`=?,`otherNames`=?,`lastName`=?,`address`=?,`contactNumber`=?,`dateOfBirth`=?,`nationality`=?,`status`=? WHERE id =?";
+      $sql="UPDATE patients SET `fileId`=?,`firstName`=?,`otherNames`=?,`lastName`=?,`address`=?,`contactNumber`=?,`dateOfBirth`=?,`nationality`=?,`status`=? WHERE patientId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssssssssii",$fileId,$firstName,$otherNames,$lastName,$address,$contactNumber,$dateOfBirth,$nationality,$status,$id);
+      $stmt->bind_param("ssssssssii",$fileId,$firstName,$otherNames,$lastName,$address,$contactNumber,$dateOfBirth,$nationality,$status,$patientId);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM patients WHERE `id`=?";
+      $sql="SELECT * FROM patients WHERE `patientId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$id);
+      $stmt->bind_param("i",$patientId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -160,7 +160,7 @@ class PatientsDao{
 */
   public function select($patientsId){
     try{
-      $sql="SELECT * FROM `patients` WHERE `id`=?";
+      $sql="SELECT * FROM `patients` WHERE `patientId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$patientsId);
       $stmt->execute();
@@ -235,7 +235,7 @@ class PatientsDao{
 */
   public function delete($patientsId){
     try{
-      $sql="DELETE FROM `patients` WHERE `id`=?";
+      $sql="DELETE FROM `patients` WHERE `patientId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$patientsId);
       $stmt->execute();
@@ -306,7 +306,7 @@ class PatientsDao{
 */
   public function getFields($row){
     $patients= new Patients();
-      $patients->setId($row['id']);
+      $patients->setPatientId($row['patientId']);
       $patients->setFileId($row['fileId']);
       $patients->setFirstName($row['firstName']);
       $patients->setOtherNames($row['otherNames']);

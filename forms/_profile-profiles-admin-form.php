@@ -108,7 +108,7 @@ if(isset($id)){
     $yesnoDao = new YesnoDao(); 
     $objects = $yesnoDao->selectAll(); 
     ?>
-    <select name="isActive" id="input-_profile-is-active" class="form-control " required <?php echo $readonly;?> >
+    <select name="isActive" id="input-_profile-is-active" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Is&nbsp;Active*--</option>
       <?php
         foreach($objects as $yesno){
@@ -137,7 +137,7 @@ if(isset($id)){
     $yesnoDao = new YesnoDao(); 
     $objects = $yesnoDao->selectAll(); 
     ?>
-    <select name="isDefault" id="input-_profile-is-default" class="form-control " required <?php echo $readonly;?> >
+    <select name="isDefault" id="input-_profile-is-default" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Is&nbsp;Default*--</option>
       <?php
         foreach($objects as $yesno){

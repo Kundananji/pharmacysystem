@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -20,11 +21,11 @@ $defaultValues = array();
 include("../config/database.php");
 include_once("../classes/receipt.php");
 include_once("../daos/receipt-dao.php");
-$arguments=array();$id = isset($_GET['id'])?filter_var($_GET['id'], FILTER_VALIDATE_INT):null;
+$arguments=array();$receiptId = isset($_GET['receiptId'])?filter_var($_GET['receiptId'], FILTER_VALIDATE_INT):null;
 $receiptEdit = new Receipt();
 $receiptEditDao = new ReceiptDao();
-if(isset($id)){
-  $tempObject = $receiptEditDao->select($id);
+if(isset($receiptId)){
+  $tempObject = $receiptEditDao->select($receiptId);
   if($tempObject !=null){
     $receiptEdit = $tempObject;
   }
@@ -33,7 +34,7 @@ if(isset($id)){
 <form onsubmit = "Receipt.submitFormReceipt(event,{<?php echo sizeof($arguments)>0?(implode(",",$arguments)):null ?>})" method="post" enctype="multipart/form-data" action="#" id="form-receipt">
 <div class="alert alert-info">Fields marked with an asterisk(*) are required.</div>
 
-  <input type="hidden" name="id" id="input-receipt-id" value="<?php echo null!==($receiptEdit->getId())?($receiptEdit->getId()):(isset($defaultValues['id'])?($defaultValues['id']): "0");?>"/>
+  <input type="hidden" name="receiptId" id="input-receipt-receipt-id" value="<?php echo null!==($receiptEdit->getReceiptId())?($receiptEdit->getReceiptId()):(isset($defaultValues['receiptId'])?($defaultValues['receiptId']): "0");?>"/>
 
  <!--start of form group-->
 <div class="form-group input-receipt-description">
@@ -41,10 +42,10 @@ if(isset($id)){
                  <?php
                   $readonly = in_array('description',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($receiptEdit->getId()!=null){ $defaultValues['description']=$receiptEdit->getDescription();};
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['description']=$receiptEdit->getDescription();};
                   ?>
-                  <label for="input-receipt-description">Description*</label>
-  <input type="text" name="description" id="input-receipt-description" class="form-control " placeholder="Enter Description " value="<?php echo null!==($receiptEdit->getDescription())?($receiptEdit->getDescription()):(isset($defaultValues['description'])?($defaultValues['description']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-receipt-description">Description</label>
+  <input type="text" name="description" id="input-receipt-description" class="form-control " placeholder="Enter Description " value="<?php echo null!==($receiptEdit->getDescription())?($receiptEdit->getDescription()):(isset($defaultValues['description'])?($defaultValues['description']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -53,9 +54,9 @@ if(isset($id)){
                  <?php
                   $readonly = in_array('patientId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($receiptEdit->getId()!=null){ $defaultValues['patientId']=$receiptEdit->getPatientId();};
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['patientId']=$receiptEdit->getPatientId();};
                   ?>
-                  <label for="input-receipt-patient-id">Patient*</label>
+                  <label for="input-receipt-patient-id">Patient</label>
   <?php 
     include_once("../classes/patients.php");
     include_once("../daos/patients-dao.php");
@@ -63,11 +64,11 @@ if(isset($id)){
     $patientsDao = new PatientsDao(); 
     $objects = $patientsDao->selectAll(); 
     ?>
-    <select name="patientId" id="input-receipt-patient-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="patientId" id="input-receipt-patient-id" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Patients--</option>
       <?php
         foreach($objects as $patients){
-          $optionValue  = $patients->getId();
+          $optionValue  = $patients->getPatientId();
           $hidden  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"hidden":"" ;
           $disabled  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['patientId']) && $defaultValues['patientId']==$optionValue? "selected" : "" ;
@@ -83,10 +84,40 @@ if(isset($id)){
                  <?php
                   $readonly = in_array('receiptNo',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($receiptEdit->getId()!=null){ $defaultValues['receiptNo']=$receiptEdit->getReceiptNo();};
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['receiptNo']=$receiptEdit->getReceiptNo();};
                   ?>
-                  <label for="input-receipt-receipt-no">Receipt&nbsp;No*</label>
-  <input type="text" name="receiptNo" id="input-receipt-receipt-no" class="form-control " placeholder="Enter Receipt&nbsp;No " value="<?php echo null!==($receiptEdit->getReceiptNo())?($receiptEdit->getReceiptNo()):(isset($defaultValues['receiptNo'])?($defaultValues['receiptNo']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-receipt-receipt-no">Receipt&nbsp;No</label>
+  <input type="text" name="receiptNo" id="input-receipt-receipt-no" class="form-control " placeholder="Enter Receipt&nbsp;No " value="<?php echo null!==($receiptEdit->getReceiptNo())?($receiptEdit->getReceiptNo()):(isset($defaultValues['receiptNo'])?($defaultValues['receiptNo']): "");?>"  <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-receipt-invoice-id">
+
+                 <?php
+                  $readonly = in_array('invoiceId',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['invoiceId']=$receiptEdit->getInvoiceId();};
+                  ?>
+                  <label for="input-receipt-invoice-id">Invoice</label>
+  <?php 
+    include_once("../classes/invoice.php");
+    include_once("../daos/invoice-dao.php");
+
+    $invoiceDao = new InvoiceDao(); 
+    $objects = $invoiceDao->selectAll(); 
+    ?>
+    <select name="invoiceId" id="input-receipt-invoice-id" class=" form-control"  <?php echo $readonly;?>  >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Invoice--</option>
+      <?php
+        foreach($objects as $invoice){
+          $optionValue  = $invoice->getInvoiceId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['invoiceId']) && $defaultValues['invoiceId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['invoiceId']) && $defaultValues['invoiceId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['invoiceId']) && $defaultValues['invoiceId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$invoice->toString().'</option>';
+        }
+      ?>
+    </select>
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -95,22 +126,34 @@ if(isset($id)){
                  <?php
                   $readonly = in_array('receiptDate',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($receiptEdit->getId()!=null){ $defaultValues['receiptDate']=$receiptEdit->getReceiptDate();};
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['receiptDate']=$receiptEdit->getReceiptDate();};
                   ?>
-                  <label for="input-receipt-receipt-date">Receipt&nbsp;Date*</label>
-  <input type="text" name="receiptDate" id="input-receipt-receipt-date" class="form-control datepicker " placeholder="Enter Receipt&nbsp;Date " value="<?php echo null!==($receiptEdit->getReceiptDate())?(date("d/m/Y",strtotime($receiptEdit->getReceiptDate()))):(isset($defaultValues['receiptDate'])?($defaultValues['receiptDate']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-receipt-receipt-date">Receipt&nbsp;Date</label>
+  <input type="text" name="receiptDate" id="input-receipt-receipt-date" class="form-control datepicker " placeholder="Enter Receipt&nbsp;Date " value="<?php echo null!==($receiptEdit->getReceiptDate())?(date("d/m/Y",strtotime($receiptEdit->getReceiptDate()))):(isset($defaultValues['receiptDate'])?($defaultValues['receiptDate']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-receipt-amount">
+<div class="form-group input-receipt-invoice-amount">
 
                  <?php
-                  $readonly = in_array('amount',$uneditableFields)?'readonly':'';
+                  $readonly = in_array('invoiceAmount',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($receiptEdit->getId()!=null){ $defaultValues['amount']=$receiptEdit->getAmount();};
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['invoiceAmount']=$receiptEdit->getInvoiceAmount();};
                   ?>
-                  <label for="input-receipt-amount">Amount*</label>
-  <input type="number" step="any" name="amount" id="input-receipt-amount" class="form-control " placeholder="Enter Amount " value="<?php echo null!==($receiptEdit->getAmount())?($receiptEdit->getAmount()):(isset($defaultValues['amount'])?($defaultValues['amount']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-receipt-invoice-amount">Invoice&nbsp;Amount</label>
+  <input type="number" step="any" name="invoiceAmount" id="input-receipt-invoice-amount" class="form-control " placeholder="Enter Invoice&nbsp;Amount " value="<?php echo null!==($receiptEdit->getInvoiceAmount())?($receiptEdit->getInvoiceAmount()):(isset($defaultValues['invoiceAmount'])?($defaultValues['invoiceAmount']): "");?>"  <?php echo $readonly;?>   />
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-receipt-amount-paid">
+
+                 <?php
+                  $readonly = in_array('amountPaid',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['amountPaid']=$receiptEdit->getAmountPaid();};
+                  ?>
+                  <label for="input-receipt-amount-paid">Amount&nbsp;Paid*</label>
+  <input type="number" step="any" name="amountPaid" id="input-receipt-amount-paid" class="form-control " placeholder="Enter Amount&nbsp;Paid " value="<?php echo null!==($receiptEdit->getAmountPaid())?($receiptEdit->getAmountPaid()):(isset($defaultValues['amountPaid'])?($defaultValues['amountPaid']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -119,7 +162,7 @@ if(isset($id)){
                  <?php
                   $readonly = in_array('paymentMethodId',$uneditableFields)?'readonly':'';
                   //override default value with actual value if object is sent
-                  if($receiptEdit->getId()!=null){ $defaultValues['paymentMethodId']=$receiptEdit->getPaymentMethodId();};
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['paymentMethodId']=$receiptEdit->getPaymentMethodId();};
                   ?>
                   <label for="input-receipt-payment-method-id">Payment&nbsp;Method*</label>
   <?php 
@@ -129,11 +172,11 @@ if(isset($id)){
     $paymentMethodsDao = new PaymentMethodsDao(); 
     $objects = $paymentMethodsDao->selectAll(); 
     ?>
-    <select name="paymentMethodId" id="input-receipt-payment-method-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="paymentMethodId" id="input-receipt-payment-method-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Payment&nbsp;methods--</option>
       <?php
         foreach($objects as $paymentMethods){
-          $optionValue  = $paymentMethods->getId();
+          $optionValue  = $paymentMethods->getPaymentMethodId();
           $hidden  =  $readonly=='readonly' && isset($defaultValues['paymentMethodId']) && $defaultValues['paymentMethodId']!=$optionValue?"hidden":"" ;
           $disabled  =  $readonly=='readonly' && isset($defaultValues['paymentMethodId']) && $defaultValues['paymentMethodId']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['paymentMethodId']) && $defaultValues['paymentMethodId']==$optionValue? "selected" : "" ;
@@ -141,6 +184,18 @@ if(isset($id)){
         }
       ?>
     </select>
+</div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-receipt-change-amount">
+
+                 <?php
+                  $readonly = in_array('changeAmount',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($receiptEdit->getReceiptId()!=null){ $defaultValues['changeAmount']=$receiptEdit->getChangeAmount();};
+                  ?>
+                  <label for="input-receipt-change-amount">Change&nbsp;Amount</label>
+  <input type="number" step="any" name="changeAmount" id="input-receipt-change-amount" class="form-control " placeholder="Enter Change&nbsp;Amount " value="<?php echo null!==($receiptEdit->getChangeAmount())?($receiptEdit->getChangeAmount()):(isset($defaultValues['changeAmount'])?($defaultValues['changeAmount']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

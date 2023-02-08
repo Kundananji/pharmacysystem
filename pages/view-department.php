@@ -33,7 +33,7 @@ $dao = new DepartmentDao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

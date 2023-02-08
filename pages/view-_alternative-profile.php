@@ -49,7 +49,7 @@ $dao = new AlternativeProfiledao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         User

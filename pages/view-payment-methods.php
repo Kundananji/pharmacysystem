@@ -41,7 +41,7 @@ $dao = new PaymentMethodsdao();
       <th>
       </th>
       <th>
-        
+        Payment&nbsp;Method
       </th>
       <th>
         Name
@@ -69,7 +69,7 @@ $dao = new PaymentMethodsdao();
       </th>
         <td>
         <?php
-          echo $paymentMethods->getId();
+          echo $paymentMethods->getPaymentMethodId();
         ?>
         </td>
         <td>
@@ -94,12 +94,12 @@ $dao = new PaymentMethodsdao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="PaymentMethods.addNewPaymentMethods({id : \''.$paymentMethods->getId().'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="PaymentMethods.addNewPaymentMethods({paymentMethodId : \''.$paymentMethods->getPaymentMethodId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="PaymentMethods.deletePaymentMethods('.$paymentMethods->getId().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="PaymentMethods.deletePaymentMethods('.$paymentMethods->getPaymentMethodId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

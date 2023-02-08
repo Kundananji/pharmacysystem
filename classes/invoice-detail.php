@@ -8,7 +8,6 @@ class InvoiceDetail implements \JsonSerializable{
   private $invoiceId;
   private $feeId;
   private $medicineId;
-  private $item;
   private $description;
   private $unitPrice;
   private $quantity;
@@ -91,24 +90,6 @@ class InvoiceDetail implements \JsonSerializable{
 */
   public function getMedicineId(){
     return $this->medicineId;
-
-  }
-
-/**
-* function to set the value of item
-* @param item : value to set
-*/
-  public function setItem($item){
-    $this->item=$item;
-
-  }
-
-/**
-* function to get the value of item
-* @return String
-*/
-  public function getItem(){
-    return $this->item;
 
   }
 

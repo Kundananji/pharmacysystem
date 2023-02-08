@@ -19,20 +19,28 @@ foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
 //make available variables of patients available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['patientId']) && $_POST['patientId']!=''){
   include_once("../classes/patients.php");
   include_once("../daos/patients-dao.php");
 
   $patientsDao = new PatientsDao(); 
-  $patients =  $patientsDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $patients =  $patientsDao->select(filter_var($_GET['patientId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of payment_methods available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['paymentMethodId']) && $_POST['paymentMethodId']!=''){
   include_once("../classes/payment-methods.php");
   include_once("../daos/payment-methods-dao.php");
 
   $paymentMethodsDao = new PaymentMethodsDao(); 
-  $paymentMethods =  $paymentMethodsDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $paymentMethods =  $paymentMethodsDao->select(filter_var($_GET['paymentMethodId'],FILTER_SANITIZE_NUMBER_INT)); 
+}
+//make available variables of invoice available in scope for use:
+if(isset($_POST['invoiceId']) && $_POST['invoiceId']!=''){
+  include_once("../classes/invoice.php");
+  include_once("../daos/invoice-dao.php");
+
+  $invoiceDao = new InvoiceDao(); 
+  $invoice =  $invoiceDao->select(filter_var($_GET['invoiceId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 include("../daos/receipt-dao.php");
 include("../classes/receipt.php");
@@ -49,7 +57,7 @@ $dao = new ReceiptDao();
       <th>
       </th>
       <th>
-        
+        Receipt
       </th>
       <th>
         Description
@@ -61,13 +69,22 @@ $dao = new ReceiptDao();
         Receipt&nbsp;No
       </th>
       <th>
+        Invoice
+      </th>
+      <th>
         Receipt&nbsp;Date
       </th>
       <th>
-        Amount
+        Invoice&nbsp;Amount
+      </th>
+      <th>
+        Amount&nbsp;Paid
       </th>
       <th>
         Payment&nbsp;Method
+      </th>
+      <th>
+        Change&nbsp;Amount
       </th>
       <th>
       </th>
@@ -86,7 +103,7 @@ $dao = new ReceiptDao();
       </th>
         <td>
         <?php
-          echo $receipt->getId();
+          echo $receipt->getReceiptId();
         ?>
         </td>
         <td>
@@ -111,12 +128,27 @@ $dao = new ReceiptDao();
         </td>
         <td>
         <?php
+          include_once("../classes/invoice.php");
+          include_once("../daos/invoice-dao.php");
+
+          $finvoiceDao = new InvoiceDao(); 
+          $finvoice = $finvoiceDao->select($receipt->getInvoiceId()); 
+          echo  $finvoice==null?"-": $finvoice->toString();
+        ?>
+        </td>
+        <td>
+        <?php
           echo $receipt->getReceiptDate();
         ?>
         </td>
         <td>
         <?php
-          echo $receipt->getAmount();
+          echo $receipt->getInvoiceAmount();
+        ?>
+        </td>
+        <td>
+        <?php
+          echo $receipt->getAmountPaid();
         ?>
         </td>
         <td>
@@ -131,12 +163,17 @@ $dao = new ReceiptDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Receipt.addNewReceipt({id : \''.$receipt->getId().'\',})"> <em class="fa fa-edit"></em></a>';
+          echo $receipt->getChangeAmount();
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Receipt.deleteReceipt('.$receipt->getId().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Receipt.addNewReceipt({receiptId : \''.$receipt->getReceiptId().'\',})"> <em class="fa fa-edit"></em></a>';
+        ?>
+        </td>
+        <td>
+        <?php
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Receipt.deleteReceipt('.$receipt->getReceiptId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

@@ -298,7 +298,7 @@ let addNewUsersUsers_admin=(data)=>{
       data:{usersId: usersId},
       success: (data)=>{
         if(data.status == "success"){
-          viewUsersUsers_admin(args);
+             viewUsersUsers_admin(args);
                     swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');

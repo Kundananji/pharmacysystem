@@ -57,7 +57,7 @@ $dao = new UsersDao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Username

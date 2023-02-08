@@ -41,7 +41,7 @@ $dao = new PatientsDao();
       <th>
       </th>
       <th>
-        
+        Patient
       </th>
       <th>
         File
@@ -87,7 +87,7 @@ $dao = new PatientsDao();
       </th>
         <td>
         <?php
-          echo $patients->getId();
+          echo $patients->getPatientId();
         ?>
         </td>
         <td>
@@ -142,12 +142,12 @@ $dao = new PatientsDao();
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Patients.addNewPatients({id : \''.$patients->getId().'\',})"> <em class="fa fa-edit"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Patients.addNewPatients({patientId : \''.$patients->getPatientId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Patients.deletePatients('.$patients->getId().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Patients.deletePatients('.$patients->getPatientId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

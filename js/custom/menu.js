@@ -288,7 +288,7 @@ let addNewMenuMenus_admin=(data)=>{
       data:{menuId: menuId},
       success: (data)=>{
         if(data.status == "success"){
-          viewMenuMenus_admin(args);
+             viewMenuMenus_admin(args);
                     swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');

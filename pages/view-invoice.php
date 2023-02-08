@@ -26,21 +26,13 @@ if(isset($_POST['id']) && $_POST['id']!=''){
   $yesnoDao = new YesnoDao(); 
   $yesno =  $yesnoDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
 }
-//make available variables of patient_scheme available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
-  include_once("../classes/patient-scheme.php");
-  include_once("../daos/patient-scheme-dao.php");
-
-  $patientSchemeDao = new PatientSchemeDao(); 
-  $patientScheme =  $patientSchemeDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
-}
 //make available variables of patients available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['patientId']) && $_POST['patientId']!=''){
   include_once("../classes/patients.php");
   include_once("../daos/patients-dao.php");
 
   $patientsDao = new PatientsDao(); 
-  $patients =  $patientsDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $patients =  $patientsDao->select(filter_var($_GET['patientId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 include("../daos/invoice-dao.php");
 include("../classes/invoice.php");
@@ -57,7 +49,7 @@ $dao = new InvoiceDao();
       <th>
       </th>
       <th>
-        
+        Invoice
       </th>
       <th>
         Invoice&nbsp;No
@@ -78,10 +70,7 @@ $dao = new InvoiceDao();
         Amount
       </th>
       <th>
-        Is&nbsp;Pa
-      </th>
-      <th>
-        Patient&nbsp;Scheme
+        Is&nbsp;Paid&nbsp;For
       </th>
       <th>
       </th>
@@ -100,7 +89,7 @@ $dao = new InvoiceDao();
       </th>
         <td>
         <?php
-          echo $invoice->getId();
+          echo $invoice->getInvoiceId();
         ?>
         </td>
         <td>
@@ -144,28 +133,18 @@ $dao = new InvoiceDao();
           include_once("../daos/yesno-dao.php");
 
           $fyesnoDao = new YesnoDao(); 
-          $fyesno = $fyesnoDao->select($invoice->getIsPaid()); 
+          $fyesno = $fyesnoDao->select($invoice->getIsPaidFor()); 
           echo  $fyesno==null?"-": $fyesno->toString();
         ?>
         </td>
         <td>
         <?php
-          include_once("../classes/patient-scheme.php");
-          include_once("../daos/patient-scheme-dao.php");
-
-          $fpatientSchemeDao = new PatientSchemeDao(); 
-          $fpatientScheme = $fpatientSchemeDao->select($invoice->getPatientSchemeId()); 
-          echo  $fpatientScheme==null?"-": $fpatientScheme->toString();
+          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Invoice.addNewInvoice({invoiceId : \''.$invoice->getInvoiceId().'\',})"> <em class="fa fa-edit"></em></a>';
         ?>
         </td>
         <td>
         <?php
-          echo '<a href="javascript:void(0)" class="btn btn-primary" onclick="Invoice.addNewInvoice({id : \''.$invoice->getId().'\',})"> <em class="fa fa-edit"></em></a>';
-        ?>
-        </td>
-        <td>
-        <?php
-          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Invoice.deleteInvoice('.$invoice->getId().' )"><em class="fa fa-trash"></em></a>';
+          echo '<a href="javascript:void(0)" class="btn btn-danger" onclick="Invoice.deleteInvoice('.$invoice->getInvoiceId().' )"><em class="fa fa-trash"></em></a>';
         ?>
         </td>
       </tr>

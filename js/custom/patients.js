@@ -136,7 +136,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-patients-id' +'_row_' + i;
+  id = 'input-patients-patient-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -193,14 +193,14 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
 }
 
 let divPageContent = $('#page-content');
-let viewPatients=( id)=>{
+let viewPatients=( patientId)=>{
   let viewInModal = $('#link-view-patients').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-patients.php",
     type: "post",
     data: { 
-      id:id
+      patientId:patientId
      },
     success: (data)=>{
         divPageContent.html(data);

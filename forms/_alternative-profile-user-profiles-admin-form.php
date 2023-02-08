@@ -86,7 +86,7 @@ if(isset($id)){
     $usersDao = new UsersDao(); 
     $objects = $usersDao->selectAll(); 
     ?>
-    <select name="userId" id="input-_alternative-profile-user-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="userId" id="input-_alternative-profile-user-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select User*--</option>
       <?php
         foreach($objects as $users){
@@ -115,7 +115,7 @@ if(isset($id)){
     $profileDao = new ProfileDao(); 
     $objects = $profileDao->selectAll(); 
     ?>
-    <select name="profileId" id="input-_alternative-profile-profile-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="profileId" id="input-_alternative-profile-profile-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Profile*--</option>
       <?php
         foreach($objects as $profile){

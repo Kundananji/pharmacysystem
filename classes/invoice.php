@@ -4,15 +4,14 @@ class Invoice implements \JsonSerializable{
 /**
 * member variables
 */
-  private $id;
+  private $invoiceId;
   private $invoiceNo;
   private $description;
   private $invoiceDate;
   private $patientId;
   private $taxAmount;
   private $amount;
-  private $isPaid;
-  private $patientSchemeId;
+  private $isPaidFor;
 
 /**
 * function to initialize object
@@ -22,20 +21,20 @@ class Invoice implements \JsonSerializable{
   }
 
 /**
-* function to set the value of id
-* @param id : value to set
+* function to set the value of invoiceId
+* @param invoiceId : value to set
 */
-  public function setId($id){
-    $this->id=$id;
+  public function setInvoiceId($invoiceId){
+    $this->invoiceId=$invoiceId;
 
   }
 
 /**
-* function to get the value of id
+* function to get the value of invoiceId
 * @return int(50)
 */
-  public function getId(){
-    return $this->id;
+  public function getInvoiceId(){
+    return $this->invoiceId;
 
   }
 
@@ -148,38 +147,20 @@ class Invoice implements \JsonSerializable{
   }
 
 /**
-* function to set the value of isPaid
-* @param isPaid : value to set
+* function to set the value of isPaidFor
+* @param isPaidFor : value to set
 */
-  public function setIsPaid($isPaid){
-    $this->isPaid=$isPaid;
+  public function setIsPaidFor($isPaidFor){
+    $this->isPaidFor=$isPaidFor;
 
   }
 
 /**
-* function to get the value of isPaid
+* function to get the value of isPaidFor
 * @return int(10)
 */
-  public function getIsPaid(){
-    return $this->isPaid;
-
-  }
-
-/**
-* function to set the value of patientSchemeId
-* @param patientSchemeId : value to set
-*/
-  public function setPatientSchemeId($patientSchemeId){
-    $this->patientSchemeId=$patientSchemeId;
-
-  }
-
-/**
-* function to get the value of patientSchemeId
-* @return int(10)
-*/
-  public function getPatientSchemeId(){
-    return $this->patientSchemeId;
+  public function getIsPaidFor(){
+    return $this->isPaidFor;
 
   }
 
@@ -188,7 +169,7 @@ class Invoice implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->id.' | '.$this->invoiceNo.' | '.$this->description.' | '.$this->invoiceDate;
+    return $this->description;
 
   }
 

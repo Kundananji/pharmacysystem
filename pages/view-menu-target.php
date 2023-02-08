@@ -33,7 +33,7 @@ $dao = new MenuTargetdao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

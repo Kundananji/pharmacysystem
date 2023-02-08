@@ -136,7 +136,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-receipt-id' +'_row_' + i;
+  id = 'input-receipt-receipt-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -156,17 +156,32 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
+  id = 'input-receipt-invoice-id' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
   id = 'input-receipt-receipt-date' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-receipt-amount' +'_row_' + i;
+  id = 'input-receipt-invoice-amount' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-receipt-amount-paid' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
   id = 'input-receipt-payment-method-id' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
+  id = 'input-receipt-change-amount' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -177,15 +192,252 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   localStorage.setItem("table_receipt_id",tableId);
 }
 
+/**
+/*
+/* function to insert InvoiceIssureReceipt 
+/*
+**/
+ let InvoiceIssureReceipt = (data) =>{
+  let completeAction = ()=>{
+    Receipt.addNewReceiptManagereceipts_pharamacyuser(data)
+  }
+  completeAction();
+};
+
+
+//declare fields in scope
+
+/**
+*
+*function to view items for permission 
+*
+ **/
+let viewReceiptManagereceipts_pharamacyuser=(data)=>{
+//assign global fields current values
+  loader(divPageContent);
+  $.ajax({
+    url: "pages/view-receipt-manage-receipts-pharamacy-user.php",
+    type: "post",
+    data:data,
+    success: (data)=>{
+      divPageContent.html(data);
+      $('#table-receipt--manage-receipts-pharamacy-user').DataTable({});
+    }
+  });
+  };
+let addNewReceiptManagereceipts_pharamacyuser=(data)=>{
+  $('#dataInputModalBody').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Loading... Please wait...</div>');
+  $('#dataInputModal').modal('show');
+  $.ajax({
+    url: "forms/receipt-manage-receipts-pharamacy-user-form.php",
+    type: "get",
+    data: data, 
+    success: (data)=>{
+      $('#dataInputModalBody').html(data);
+      initializePlugins();
+      var lastDate = localStorage.getItem('_date_cache_');
+      $('.datepicker').datepicker({
+        format:'yyyy-mm-dd',
+        todayBtn:'linked',
+        defaultViewDate:isEmpty(lastDate)?'today':lastDate,
+      }) ;
+    }
+  });
+}
+
+ let submitFormReceiptManagereceipts_pharamacyuser = (e,args) =>{
+  e.preventDefault();
+  let oForm = document.getElementById('form-receipt');
+  let elements = oForm.elements;
+  let data = {};
+  let tinyFields = [];
+  for(let i=0; i<elements.length; i++){
+    let element = elements[i];
+    
+    if(tinyFields.indexOf(element.name)!=-1){
+      data[element.name] =  tinymce.activeEditor.getContent();
+    }else{
+      data[element.name]=element.value;
+    }
+    console.log('receipt',element);
+  };
+  console.log('receipt',data);
+  $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
+  $('#form-submit-button').prop('disabled', true);
+  $.ajax({
+    url: "scripts/submit-receipt-manage-receipts-pharamacy-user-form.php",
+    type: "post",
+    dataType:"json",
+    data:data,
+    success: (resp)=>{
+      $('#form-submit-button').prop('disabled', false);
+      if(resp.status == "success"){
+        $('#dataInputModal').modal('hide');
+        $('#form-submit-feedback').html('<div class="alert alert-success"><i class="fa fa-check"></i> '+data.message+'</div>');
+        Receipt.viewReceiptManagereceipts_pharamacyuser(args);
+        swal(resp.title,resp.message,'success');
+      }else{
+        $('#form-submit-feedback').html('<div class="alert alert-danger"><i class="fa fa-times"></i> '+resp.message+'</div>');
+        swal(resp.title,resp.message,'warning');
+      }
+    }
+  });
+}
+
+/**
+/*
+/* function to delete item 
+/*
+**/
+ let deleteReceiptManagereceipts_pharamacyuser = (receiptId, args) =>{
+  swal({
+    title:" Are you sure you want to delete this item?",
+    text: "If you are sure you want to delete; proceed and click okay below. Otherwise, cancel to abort.",
+    type: "warning",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    showLoaderOnConfirm: true,
+  },  ()=> {
+    $.ajax({
+      url: "scripts/delete-receipt-item.php",
+      type: "post",
+      dataType: "json",
+      data:{receiptId: receiptId},
+      success: (data)=>{
+        if(data.status == "success"){
+        Receipt.viewReceiptManagereceipts_pharamacyuser(args);
+          Invoice.viewInvoiceManageinvoices_pharamacyuser(args);
+          swal(data.title,data.message,'success');
+      }else{
+          swal(data.title,data.message,'warning');
+        }
+      }
+    });
+  });
+};
+
+
+//declare fields in scope
+
+/**
+*
+*function to view items for permission 
+*
+ **/
+let viewReceiptViewreceipt_pharamacyuser=(data)=>{
+//assign global fields current values
+  $('#generalModal').modal('show');
+  loader($('#generalModalBody'));
+  $.ajax({
+    url: "pages/view-receipt-view-receipt-pharamacy-user.php",
+    type: "post",
+    data:data,
+    success: (data)=>{
+      $('#generalModalBody').html(data);
+    }
+  });
+  };
+let addNewReceiptViewreceipt_pharamacyuser=(data)=>{
+  $('#dataInputModalBody').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Loading... Please wait...</div>');
+  $('#dataInputModal').modal('show');
+  $.ajax({
+    url: "forms/receipt-view-receipt-pharamacy-user-form.php",
+    type: "get",
+    data: data, 
+    success: (data)=>{
+      $('#dataInputModalBody').html(data);
+      initializePlugins();
+      var lastDate = localStorage.getItem('_date_cache_');
+      $('.datepicker').datepicker({
+        format:'yyyy-mm-dd',
+        todayBtn:'linked',
+        defaultViewDate:isEmpty(lastDate)?'today':lastDate,
+      }) ;
+    }
+  });
+}
+
+ let submitFormReceiptViewreceipt_pharamacyuser = (e,args) =>{
+  e.preventDefault();
+  let oForm = document.getElementById('form-receipt');
+  let elements = oForm.elements;
+  let data = {};
+  let tinyFields = [];
+  for(let i=0; i<elements.length; i++){
+    let element = elements[i];
+    
+    if(tinyFields.indexOf(element.name)!=-1){
+      data[element.name] =  tinymce.activeEditor.getContent();
+    }else{
+      data[element.name]=element.value;
+    }
+    console.log('receipt',element);
+  };
+  console.log('receipt',data);
+  $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
+  $('#form-submit-button').prop('disabled', true);
+  $.ajax({
+    url: "scripts/submit-receipt-view-receipt-pharamacy-user-form.php",
+    type: "post",
+    dataType:"json",
+    data:data,
+    success: (resp)=>{
+      $('#form-submit-button').prop('disabled', false);
+      if(resp.status == "success"){
+        $('#dataInputModal').modal('hide');
+        $('#form-submit-feedback').html('<div class="alert alert-success"><i class="fa fa-check"></i> '+data.message+'</div>');
+        Receipt.viewReceiptManagereceipts_pharamacyuser(args);
+        viewReceiptViewreceipt_pharamacyuser(args);
+        swal(resp.title,resp.message,'success');
+      }else{
+        $('#form-submit-feedback').html('<div class="alert alert-danger"><i class="fa fa-times"></i> '+resp.message+'</div>');
+        swal(resp.title,resp.message,'warning');
+      }
+    }
+  });
+}
+
+/**
+/*
+/* function to delete item 
+/*
+**/
+ let deleteReceiptViewreceipt_pharamacyuser = (receiptId, args) =>{
+  swal({
+    title:" Are you sure you want to delete this item?",
+    text: "If you are sure you want to delete; proceed and click okay below. Otherwise, cancel to abort.",
+    type: "warning",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    showLoaderOnConfirm: true,
+  },  ()=> {
+    $.ajax({
+      url: "scripts/delete-receipt-item.php",
+      type: "post",
+      dataType: "json",
+      data:{receiptId: receiptId},
+      success: (data)=>{
+        if(data.status == "success"){
+             viewReceiptViewreceipt_pharamacyuser(args);
+          Receipt.viewReceiptManagereceipts_pharamacyuser(args);
+          swal(data.title,data.message,'success');
+      }else{
+          swal(data.title,data.message,'warning');
+        }
+      }
+    });
+  });
+};
+
 let divPageContent = $('#page-content');
-let viewReceipt=( id)=>{
+let viewReceipt=( receiptId)=>{
   let viewInModal = $('#link-view-receipt').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-receipt.php",
     type: "post",
     data: { 
-      id:id
+      receiptId:receiptId
      },
     success: (data)=>{
         divPageContent.html(data);
@@ -300,5 +552,14 @@ $(document).ready(()=>{
    submitFormReceipt : submitFormReceipt, 
    uploadFile : uploadFile, 
    deleteFile : deleteFile, 
+   InvoiceIssureReceipt : InvoiceIssureReceipt, 
+   viewReceiptManagereceipts_pharamacyuser : viewReceiptManagereceipts_pharamacyuser, 
+    addNewReceiptManagereceipts_pharamacyuser :  addNewReceiptManagereceipts_pharamacyuser, 
+   submitFormReceiptManagereceipts_pharamacyuser : submitFormReceiptManagereceipts_pharamacyuser, 
+   deleteReceiptManagereceipts_pharamacyuser : deleteReceiptManagereceipts_pharamacyuser, 
+   viewReceiptViewreceipt_pharamacyuser : viewReceiptViewreceipt_pharamacyuser, 
+    addNewReceiptViewreceipt_pharamacyuser :  addNewReceiptViewreceipt_pharamacyuser, 
+   submitFormReceiptViewreceipt_pharamacyuser : submitFormReceiptViewreceipt_pharamacyuser, 
+   deleteReceiptViewreceipt_pharamacyuser : deleteReceiptViewreceipt_pharamacyuser, 
 }
 })(jQuery); // End of use strict

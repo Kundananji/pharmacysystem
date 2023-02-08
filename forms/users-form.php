@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -135,7 +136,7 @@ if(isset($id)){
     $yesnoDao = new YesnoDao(); 
     $objects = $yesnoDao->selectAll(); 
     ?>
-    <select name="isLoggedIn" id="input-users-is-logged-in" class="form-control "  <?php echo $readonly;?> >
+    <select name="isLoggedIn" id="input-users-is-logged-in" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Yesno--</option>
       <?php
         foreach($objects as $yesno){
@@ -165,7 +166,7 @@ if(isset($id)){
     $statusDao = new StatusDao(); 
     $objects = $statusDao->selectAll(); 
     ?>
-    <select name="status" id="input-users-status" class="form-control " required <?php echo $readonly;?> >
+    <select name="status" id="input-users-status" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Status--</option>
       <?php
         foreach($objects as $status){
@@ -195,7 +196,7 @@ if(isset($id)){
     $profileDao = new ProfileDao(); 
     $objects = $profileDao->selectAll(); 
     ?>
-    <select name="profile" id="input-users-profile" class="form-control "  <?php echo $readonly;?> >
+    <select name="profile" id="input-users-profile" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select &nbsp;profile--</option>
       <?php
         foreach($objects as $profile){

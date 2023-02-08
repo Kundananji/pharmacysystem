@@ -19,20 +19,20 @@ foreach($_POST as $key=>$value){
   $arguments[]="'".$value."'";
 }
 //make available variables of invoice available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['invoiceId']) && $_POST['invoiceId']!=''){
   include_once("../classes/invoice.php");
   include_once("../daos/invoice-dao.php");
 
   $invoiceDao = new InvoiceDao(); 
-  $invoice =  $invoiceDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $invoice =  $invoiceDao->select(filter_var($_GET['invoiceId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of fee available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['feeId']) && $_POST['feeId']!=''){
   include_once("../classes/fee.php");
   include_once("../daos/fee-dao.php");
 
   $feeDao = new FeeDao(); 
-  $fee =  $feeDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $fee =  $feeDao->select(filter_var($_GET['feeId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of medicines available in scope for use:
 if(isset($_POST['id']) && $_POST['id']!=''){
@@ -57,7 +57,7 @@ $dao = new InvoiceDetaildao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Invoice
@@ -67,9 +67,6 @@ $dao = new InvoiceDetaildao();
       </th>
       <th>
         Medicine
-      </th>
-      <th>
-        Item
       </th>
       <th>
         Description
@@ -134,11 +131,6 @@ $dao = new InvoiceDetaildao();
           $fmedicinesDao = new MedicinesDao(); 
           $fmedicines = $fmedicinesDao->select($invoiceDetail->getMedicineId()); 
           echo  $fmedicines==null?"-": $fmedicines->toString();
-        ?>
-        </td>
-        <td>
-        <?php
-          echo $invoiceDetail->getItem();
         ?>
         </td>
         <td>

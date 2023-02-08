@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -75,7 +76,7 @@ if(isset($id)){
     $departmentDao = new DepartmentDao(); 
     $objects = $departmentDao->selectAll(); 
     ?>
-    <select name="departmentId" id="input-hospital-procedure-department-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="departmentId" id="input-hospital-procedure-department-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Department--</option>
       <?php
         foreach($objects as $department){
@@ -105,11 +106,11 @@ if(isset($id)){
     $feeDao = new FeeDao(); 
     $objects = $feeDao->selectAll(); 
     ?>
-    <select name="feeId" id="input-hospital-procedure-fee-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="feeId" id="input-hospital-procedure-fee-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Fee--</option>
       <?php
         foreach($objects as $fee){
-          $optionValue  = $fee->getId();
+          $optionValue  = $fee->getFeeId();
           $hidden  =  $readonly=='readonly' && isset($defaultValues['feeId']) && $defaultValues['feeId']!=$optionValue?"hidden":"" ;
           $disabled  =  $readonly=='readonly' && isset($defaultValues['feeId']) && $defaultValues['feeId']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['feeId']) && $defaultValues['feeId']==$optionValue? "selected" : "" ;

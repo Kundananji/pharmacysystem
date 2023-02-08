@@ -89,7 +89,7 @@ if(isset($id)){
     $profileDao = new ProfileDao(); 
     $objects = $profileDao->selectAll(); 
     ?>
-    <select name="profileId" id="input-privilege-profile-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="profileId" id="input-privilege-profile-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Profile*--</option>
       <?php
         foreach($objects as $profile){

@@ -35,12 +35,12 @@ if(isset($_POST['id']) && $_POST['id']!=''){
   $status =  $statusDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 //make available variables of patients available in scope for use:
-if(isset($_POST['id']) && $_POST['id']!=''){
+if(isset($_POST['patientId']) && $_POST['patientId']!=''){
   include_once("../classes/patients.php");
   include_once("../daos/patients-dao.php");
 
   $patientsDao = new PatientsDao(); 
-  $patients =  $patientsDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
+  $patients =  $patientsDao->select(filter_var($_GET['patientId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
 include("../daos/patient-scheme-dao.php");
 include("../classes/patient-scheme.php");
@@ -57,7 +57,7 @@ $dao = new PatientSchemedao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name
@@ -69,7 +69,7 @@ $dao = new PatientSchemedao();
         Patient
       </th>
       <th>
-        Insurance&nbsp;Provider&nbsp;Id
+        Insurance&nbsp;Provider
       </th>
       <th>
         Status

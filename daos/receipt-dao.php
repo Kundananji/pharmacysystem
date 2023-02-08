@@ -7,23 +7,26 @@ class ReceiptDao{
 * @return inserted objected of type Receipt
 */
   public function insert($receipt){
-    $id=  $receipt->getId();
+    $receiptId=  $receipt->getReceiptId();
     $description=  $receipt->getDescription();
     $patientId=  $receipt->getPatientId();
     $receiptNo=  $receipt->getReceiptNo();
+    $invoiceId=  $receipt->getInvoiceId();
     $receiptDate=  $receipt->getReceiptDate();
-    $amount=  $receipt->getAmount();
+    $invoiceAmount=  $receipt->getInvoiceAmount();
+    $amountPaid=  $receipt->getAmountPaid();
     $paymentMethodId=  $receipt->getPaymentMethodId();
+    $changeAmount=  $receipt->getChangeAmount();
     try{
-      $sql="INSERT INTO receipt(`id`,`description`,`patientId`,`receiptNo`,`receiptDate`,`amount`,`paymentMethodId`) VALUES(?,?,?,?,?,?,?)";
+      $sql="INSERT INTO receipt(`receiptId`,`description`,`patientId`,`receiptNo`,`invoiceId`,`receiptDate`,`invoiceAmount`,`amountPaid`,`paymentMethodId`,`changeAmount`) VALUES(?,?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isisssi",$id,$description,$patientId,$receiptNo,$receiptDate,$amount,$paymentMethodId);
+      $stmt->bind_param("isisisssis",$receiptId,$description,$patientId,$receiptNo,$invoiceId,$receiptDate,$invoiceAmount,$amountPaid,$paymentMethodId,$changeAmount);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM receipt WHERE `id`=?";
+      $sql="SELECT * FROM receipt WHERE `receiptId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -48,23 +51,26 @@ class ReceiptDao{
 * @return updated objected of type Receipt
 */
   public function update($receipt){
-    $id=  $receipt->getId();
+    $receiptId=  $receipt->getReceiptId();
     $description=  $receipt->getDescription();
     $patientId=  $receipt->getPatientId();
     $receiptNo=  $receipt->getReceiptNo();
+    $invoiceId=  $receipt->getInvoiceId();
     $receiptDate=  $receipt->getReceiptDate();
-    $amount=  $receipt->getAmount();
+    $invoiceAmount=  $receipt->getInvoiceAmount();
+    $amountPaid=  $receipt->getAmountPaid();
     $paymentMethodId=  $receipt->getPaymentMethodId();
+    $changeAmount=  $receipt->getChangeAmount();
     try{
-      $sql="UPDATE receipt SET `description`=?,`patientId`=?,`receiptNo`=?,`receiptDate`=?,`amount`=?,`paymentMethodId`=? WHERE id =?";
+      $sql="UPDATE receipt SET `description`=?,`patientId`=?,`receiptNo`=?,`invoiceId`=?,`receiptDate`=?,`invoiceAmount`=?,`amountPaid`=?,`paymentMethodId`=?,`changeAmount`=? WHERE receiptId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sisssii",$description,$patientId,$receiptNo,$receiptDate,$amount,$paymentMethodId,$id);
+      $stmt->bind_param("sisisssisi",$description,$patientId,$receiptNo,$invoiceId,$receiptDate,$invoiceAmount,$amountPaid,$paymentMethodId,$changeAmount,$receiptId);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM receipt WHERE `id`=?";
+      $sql="SELECT * FROM receipt WHERE `receiptId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$id);
+      $stmt->bind_param("i",$receiptId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -154,7 +160,7 @@ class ReceiptDao{
 */
   public function select($receiptId){
     try{
-      $sql="SELECT * FROM `receipt` WHERE `id`=?";
+      $sql="SELECT * FROM `receipt` WHERE `receiptId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$receiptId);
       $stmt->execute();
@@ -229,7 +235,7 @@ class ReceiptDao{
 */
   public function delete($receiptId){
     try{
-      $sql="DELETE FROM `receipt` WHERE `id`=?";
+      $sql="DELETE FROM `receipt` WHERE `receiptId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$receiptId);
       $stmt->execute();
@@ -300,13 +306,16 @@ class ReceiptDao{
 */
   public function getFields($row){
     $receipt= new Receipt();
-      $receipt->setId($row['id']);
+      $receipt->setReceiptId($row['receiptId']);
       $receipt->setDescription($row['description']);
       $receipt->setPatientId($row['patientId']);
       $receipt->setReceiptNo($row['receiptNo']);
+      $receipt->setInvoiceId($row['invoiceId']);
       $receipt->setReceiptDate($row['receiptDate']);
-      $receipt->setAmount($row['amount']);
+      $receipt->setInvoiceAmount($row['invoiceAmount']);
+      $receipt->setAmountPaid($row['amountPaid']);
       $receipt->setPaymentMethodId($row['paymentMethodId']);
+      $receipt->setChangeAmount($row['changeAmount']);
     return $receipt;
   }
 }

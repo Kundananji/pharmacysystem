@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -67,7 +68,7 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($userTokensEdit->getId()!=null){ $defaultValues['user_id']=$userTokensEdit->getUserId();};
                   ?>
-                  <label for="input-_user-tokens-user-id">User&nbsp;*</label>
+                  <label for="input-_user-tokens-user-id">User&nbsp;Id*</label>
   <?php 
     include_once("../classes/users.php");
     include_once("../daos/users-dao.php");
@@ -75,7 +76,7 @@ if(isset($id)){
     $usersDao = new UsersDao(); 
     $objects = $usersDao->selectAll(); 
     ?>
-    <select name="userId" id="input-_user-tokens-user-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="userId" id="input-_user-tokens-user-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Users--</option>
       <?php
         foreach($objects as $users){

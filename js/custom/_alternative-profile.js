@@ -258,7 +258,7 @@ let addNewAlternativeProfileUserprofiles_admin=(data)=>{
       data:{alternativeProfileId: alternativeProfileId},
       success: (data)=>{
         if(data.status == "success"){
-          viewAlternativeProfileUserprofiles_admin(args);
+             viewAlternativeProfileUserprofiles_admin(args);
                     swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');

@@ -7,25 +7,24 @@ class InvoiceDao{
 * @return inserted objected of type Invoice
 */
   public function insert($invoice){
-    $id=  $invoice->getId();
+    $invoiceId=  $invoice->getInvoiceId();
     $invoiceNo=  $invoice->getInvoiceNo();
     $description=  $invoice->getDescription();
     $invoiceDate=  $invoice->getInvoiceDate();
     $patientId=  $invoice->getPatientId();
     $taxAmount=  $invoice->getTaxAmount();
     $amount=  $invoice->getAmount();
-    $isPaid=  $invoice->getIsPaid();
-    $patientSchemeId=  $invoice->getPatientSchemeId();
+    $isPaidFor=  $invoice->getIsPaidFor();
     try{
-      $sql="INSERT INTO invoice(`id`,`invoiceNo`,`description`,`invoiceDate`,`patientId`,`taxAmount`,`amount`,`isPaid`,`patientSchemeId`) VALUES(?,?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO invoice(`invoiceId`,`invoiceNo`,`description`,`invoiceDate`,`patientId`,`taxAmount`,`amount`,`isPaidFor`) VALUES(?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssissii",$id,$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaid,$patientSchemeId);
+      $stmt->bind_param("isssissi",$invoiceId,$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaidFor);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM invoice WHERE `id`=?";
+      $sql="SELECT * FROM invoice WHERE `invoiceId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -50,25 +49,24 @@ class InvoiceDao{
 * @return updated objected of type Invoice
 */
   public function update($invoice){
-    $id=  $invoice->getId();
+    $invoiceId=  $invoice->getInvoiceId();
     $invoiceNo=  $invoice->getInvoiceNo();
     $description=  $invoice->getDescription();
     $invoiceDate=  $invoice->getInvoiceDate();
     $patientId=  $invoice->getPatientId();
     $taxAmount=  $invoice->getTaxAmount();
     $amount=  $invoice->getAmount();
-    $isPaid=  $invoice->getIsPaid();
-    $patientSchemeId=  $invoice->getPatientSchemeId();
+    $isPaidFor=  $invoice->getIsPaidFor();
     try{
-      $sql="UPDATE invoice SET `invoiceNo`=?,`description`=?,`invoiceDate`=?,`patientId`=?,`taxAmount`=?,`amount`=?,`isPaid`=?,`patientSchemeId`=? WHERE id =?";
+      $sql="UPDATE invoice SET `invoiceNo`=?,`description`=?,`invoiceDate`=?,`patientId`=?,`taxAmount`=?,`amount`=?,`isPaidFor`=? WHERE invoiceId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssissiii",$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaid,$patientSchemeId,$id);
+      $stmt->bind_param("sssissii",$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaidFor,$invoiceId);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM invoice WHERE `id`=?";
+      $sql="SELECT * FROM invoice WHERE `invoiceId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$id);
+      $stmt->bind_param("i",$invoiceId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -158,7 +156,7 @@ class InvoiceDao{
 */
   public function select($invoiceId){
     try{
-      $sql="SELECT * FROM `invoice` WHERE `id`=?";
+      $sql="SELECT * FROM `invoice` WHERE `invoiceId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$invoiceId);
       $stmt->execute();
@@ -233,7 +231,7 @@ class InvoiceDao{
 */
   public function delete($invoiceId){
     try{
-      $sql="DELETE FROM `invoice` WHERE `id`=?";
+      $sql="DELETE FROM `invoice` WHERE `invoiceId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$invoiceId);
       $stmt->execute();
@@ -304,15 +302,14 @@ class InvoiceDao{
 */
   public function getFields($row){
     $invoice= new Invoice();
-      $invoice->setId($row['id']);
+      $invoice->setInvoiceId($row['invoiceId']);
       $invoice->setInvoiceNo($row['invoiceNo']);
       $invoice->setDescription($row['description']);
       $invoice->setInvoiceDate($row['invoiceDate']);
       $invoice->setPatientId($row['patientId']);
       $invoice->setTaxAmount($row['taxAmount']);
       $invoice->setAmount($row['amount']);
-      $invoice->setIsPaid($row['isPaid']);
-      $invoice->setPatientSchemeId($row['patientSchemeId']);
+      $invoice->setIsPaidFor($row['isPaidFor']);
     return $invoice;
   }
 }

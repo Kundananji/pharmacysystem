@@ -172,7 +172,7 @@ if(isset($id)){
     $yesnoDao = new YesnoDao(); 
     $objects = $yesnoDao->selectAll(); 
     ?>
-    <select name="isLoggedIn" id="input-users-is-logged-in" class="form-control "  <?php echo $readonly;?> >
+    <select name="isLoggedIn" id="input-users-is-logged-in" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Is&nbsp;Logged&nbsp;In--</option>
       <?php
         foreach($objects as $yesno){
@@ -201,7 +201,7 @@ if(isset($id)){
     $statusDao = new StatusDao(); 
     $objects = $statusDao->selectAll(); 
     ?>
-    <select name="status" id="input-users-status" class="form-control " required <?php echo $readonly;?> >
+    <select name="status" id="input-users-status" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Status*--</option>
       <?php
         foreach($objects as $status){
@@ -230,7 +230,7 @@ if(isset($id)){
     $profileDao = new ProfileDao(); 
     $objects = $profileDao->selectAll(); 
     ?>
-    <select name="profile" id="input-users-profile" class="form-control "  <?php echo $readonly;?> >
+    <select name="profile" id="input-users-profile" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Profile--</option>
       <?php
         foreach($objects as $profile){

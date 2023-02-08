@@ -4,7 +4,7 @@ class Patients implements \JsonSerializable{
 /**
 * member variables
 */
-  private $id;
+  private $patientId;
   private $fileId;
   private $firstName;
   private $otherNames;
@@ -23,20 +23,20 @@ class Patients implements \JsonSerializable{
   }
 
 /**
-* function to set the value of id
-* @param id : value to set
+* function to set the value of patientId
+* @param patientId : value to set
 */
-  public function setId($id){
-    $this->id=$id;
+  public function setPatientId($patientId){
+    $this->patientId=$patientId;
 
   }
 
 /**
-* function to get the value of id
+* function to get the value of patientId
 * @return int(50)
 */
-  public function getId(){
-    return $this->id;
+  public function getPatientId(){
+    return $this->patientId;
 
   }
 
@@ -207,7 +207,7 @@ class Patients implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->id.' | '.$this->fileId.' | '.$this->firstName.' | '.$this->otherNames;
+    return $this->firstName.'&nbsp;'.$this->otherNames.'&nbsp;'.$this->lastName;
 
   }
 

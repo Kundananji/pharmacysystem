@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -51,7 +52,7 @@ if(isset($id)){
     $medicinesDao = new MedicinesDao(); 
     $objects = $medicinesDao->selectAll(); 
     ?>
-    <select name="medicineId" id="input-medicines-stock-medicine-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="medicineId" id="input-medicines-stock-medicine-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Medicines--</option>
       <?php
         foreach($objects as $medicines){
@@ -73,8 +74,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($medicinesStockEdit->getId()!=null){ $defaultValues['batch_id']=$medicinesStockEdit->getBatchId();};
                   ?>
-                  <label for="input-medicines-stock-batch-id">Batch&nbsp;*</label>
-  <input type="text" name="batchId" id="input-medicines-stock-batch-id" class="form-control " placeholder="Enter Batch&nbsp; " value="<?php echo null!==($medicinesStockEdit->getBatchId())?($medicinesStockEdit->getBatchId()):(isset($defaultValues['batch_id'])?($defaultValues['batch_id']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-medicines-stock-batch-id">Batch&nbsp;Id*</label>
+  <input type="text" name="batchId" id="input-medicines-stock-batch-id" class="form-control " placeholder="Enter Batch&nbsp;Id " value="<?php echo null!==($medicinesStockEdit->getBatchId())?($medicinesStockEdit->getBatchId()):(isset($defaultValues['batch_id'])?($defaultValues['batch_id']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -86,7 +87,7 @@ if(isset($id)){
                   if($medicinesStockEdit->getId()!=null){ $defaultValues['expiry_date']=$medicinesStockEdit->getExpiryDate();};
                   ?>
                   <label for="input-medicines-stock-expiry-date">Expiry&nbsp;Date*</label>
-  <input type="text" name="expiryDate" id="input-medicines-stock-expiry-date" class="form-control " placeholder="Enter Expiry&nbsp;Date " value="<?php echo null!==($medicinesStockEdit->getExpiryDate())?($medicinesStockEdit->getExpiryDate()):(isset($defaultValues['expiry_date'])?($defaultValues['expiry_date']): "");?>" required <?php echo $readonly;?>   />
+  <input type="text" name="expiryDate" id="input-medicines-stock-expiry-date" class="form-control datepicker " placeholder="Enter Expiry&nbsp;Date " value="<?php echo null!==($medicinesStockEdit->getExpiryDate())?(date("d/m/Y",strtotime($medicinesStockEdit->getExpiryDate()))):(isset($defaultValues['expiry_date'])?($defaultValues['expiry_date']): "");?>" required <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->

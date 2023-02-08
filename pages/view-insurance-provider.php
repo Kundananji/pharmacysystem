@@ -33,7 +33,7 @@ $dao = new InsuranceProviderdao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

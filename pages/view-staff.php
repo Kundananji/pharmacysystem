@@ -49,7 +49,7 @@ $dao = new StaffDao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

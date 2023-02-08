@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -51,11 +52,11 @@ if(isset($id)){
     $patientsDao = new PatientsDao(); 
     $objects = $patientsDao->selectAll(); 
     ?>
-    <select name="patientId" id="input-regular-checkups-patient-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="patientId" id="input-regular-checkups-patient-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Patients--</option>
       <?php
         foreach($objects as $patients){
-          $optionValue  = $patients->getId();
+          $optionValue  = $patients->getPatientId();
           $hidden  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"hidden":"" ;
           $disabled  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['patientId']) && $defaultValues['patientId']==$optionValue? "selected" : "" ;
@@ -81,7 +82,7 @@ if(isset($id)){
     $staffDao = new StaffDao(); 
     $objects = $staffDao->selectAll(); 
     ?>
-    <select name="conductedBy" id="input-regular-checkups-conducted-by" class="form-control " required <?php echo $readonly;?> >
+    <select name="conductedBy" id="input-regular-checkups-conducted-by" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Staff--</option>
       <?php
         foreach($objects as $staff){

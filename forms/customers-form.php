@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -87,7 +88,7 @@ if(isset($id)){
     $staffDao = new StaffDao(); 
     $objects = $staffDao->selectAll(); 
     ?>
-    <select name="doctorId" id="input-customers-doctor-id" class="form-control "  <?php echo $readonly;?> >
+    <select name="doctorId" id="input-customers-doctor-id" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Staff--</option>
       <?php
         foreach($objects as $staff){

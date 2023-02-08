@@ -33,7 +33,7 @@ $dao = new JobPositiondao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

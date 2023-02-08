@@ -33,7 +33,7 @@ $dao = new StatusDao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

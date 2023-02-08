@@ -14,30 +14,14 @@ if(!isset($_POST["id"]) || $_POST["id"]==''){
 if(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==''){ 
   exit(json_encode(array("title"=>"invoiceId required","status"=>"error","message"=>"The field invoiceId is required")));
 }
-if(!isset($_POST["item"]) || $_POST["item"]==''){ 
-  exit(json_encode(array("title"=>"item required","status"=>"error","message"=>"The field item is required")));
-}
-if(!isset($_POST["description"]) || $_POST["description"]==''){ 
-  exit(json_encode(array("title"=>"description required","status"=>"error","message"=>"The field description is required")));
-}
-if(!isset($_POST["unitPrice"]) || $_POST["unitPrice"]==''){ 
-  exit(json_encode(array("title"=>"unitPrice required","status"=>"error","message"=>"The field unitPrice is required")));
-}
 if(!isset($_POST["quantity"]) || $_POST["quantity"]==''){ 
   exit(json_encode(array("title"=>"quantity required","status"=>"error","message"=>"The field quantity is required")));
-}
-if(!isset($_POST["discount"]) || $_POST["discount"]==''){ 
-  exit(json_encode(array("title"=>"discount required","status"=>"error","message"=>"The field discount is required")));
-}
-if(!isset($_POST["totalAmount"]) || $_POST["totalAmount"]==''){ 
-  exit(json_encode(array("title"=>"totalAmount required","status"=>"error","message"=>"The field totalAmount is required")));
 }
 
 $invoiceDetailEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
 $invoiceDetailEdit->setInvoiceId(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==""?NULL:filter_var($_POST["invoiceId"],FILTER_SANITIZE_NUMBER_INT));
 $invoiceDetailEdit->setFeeId(!isset($_POST["feeId"]) || $_POST["feeId"]==""?NULL:filter_var($_POST["feeId"],FILTER_SANITIZE_NUMBER_INT));
 $invoiceDetailEdit->setMedicineId(!isset($_POST["medicineId"]) || $_POST["medicineId"]==""?NULL:filter_var($_POST["medicineId"],FILTER_SANITIZE_NUMBER_INT));
-$invoiceDetailEdit->setItem(!isset($_POST["item"]) || $_POST["item"]==""?NULL:filter_var($_POST["item"],FILTER_SANITIZE_STRING));
 $invoiceDetailEdit->setDescription(!isset($_POST["description"]) || $_POST["description"]==""?NULL:filter_var($_POST["description"],FILTER_SANITIZE_STRING));
 $invoiceDetailEdit->setUnitPrice(!isset($_POST["unitPrice"]) || $_POST["unitPrice"]==""?NULL:filter_var($_POST["unitPrice"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 $invoiceDetailEdit->setQuantity(!isset($_POST["quantity"]) || $_POST["quantity"]==""?NULL:filter_var($_POST["quantity"],FILTER_SANITIZE_NUMBER_INT));

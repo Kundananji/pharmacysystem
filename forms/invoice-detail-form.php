@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -51,11 +52,11 @@ if(isset($id)){
     $invoiceDao = new InvoiceDao(); 
     $objects = $invoiceDao->selectAll(); 
     ?>
-    <select name="invoiceId" id="input-invoice-detail-invoice-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="invoiceId" id="input-invoice-detail-invoice-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Invoice--</option>
       <?php
         foreach($objects as $invoice){
-          $optionValue  = $invoice->getId();
+          $optionValue  = $invoice->getInvoiceId();
           $hidden  =  $readonly=='readonly' && isset($defaultValues['invoiceId']) && $defaultValues['invoiceId']!=$optionValue?"hidden":"" ;
           $disabled  =  $readonly=='readonly' && isset($defaultValues['invoiceId']) && $defaultValues['invoiceId']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['invoiceId']) && $defaultValues['invoiceId']==$optionValue? "selected" : "" ;
@@ -81,11 +82,11 @@ if(isset($id)){
     $feeDao = new FeeDao(); 
     $objects = $feeDao->selectAll(); 
     ?>
-    <select name="feeId" id="input-invoice-detail-fee-id" class="form-control "  <?php echo $readonly;?> >
+    <select name="feeId" id="input-invoice-detail-fee-id" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Fee--</option>
       <?php
         foreach($objects as $fee){
-          $optionValue  = $fee->getId();
+          $optionValue  = $fee->getFeeId();
           $hidden  =  $readonly=='readonly' && isset($defaultValues['feeId']) && $defaultValues['feeId']!=$optionValue?"hidden":"" ;
           $disabled  =  $readonly=='readonly' && isset($defaultValues['feeId']) && $defaultValues['feeId']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['feeId']) && $defaultValues['feeId']==$optionValue? "selected" : "" ;
@@ -111,7 +112,7 @@ if(isset($id)){
     $medicinesDao = new MedicinesDao(); 
     $objects = $medicinesDao->selectAll(); 
     ?>
-    <select name="medicineId" id="input-invoice-detail-medicine-id" class="form-control "  <?php echo $readonly;?> >
+    <select name="medicineId" id="input-invoice-detail-medicine-id" class=" form-control"  <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Medicines--</option>
       <?php
         foreach($objects as $medicines){
@@ -126,18 +127,6 @@ if(isset($id)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
-<div class="form-group input-invoice-detail-item">
-
-                 <?php
-                  $readonly = in_array('item',$uneditableFields)?'readonly':'';
-                  //override default value with actual value if object is sent
-                  if($invoiceDetailEdit->getId()!=null){ $defaultValues['item']=$invoiceDetailEdit->getItem();};
-                  ?>
-                  <label for="input-invoice-detail-item">Item*</label>
-  <input type="text" name="item" id="input-invoice-detail-item" class="form-control " placeholder="Enter Item " value="<?php echo null!==($invoiceDetailEdit->getItem())?($invoiceDetailEdit->getItem()):(isset($defaultValues['item'])?($defaultValues['item']): "");?>" required <?php echo $readonly;?>   />
-</div> <!--end form-group-->
-
- <!--start of form group-->
 <div class="form-group input-invoice-detail-description">
 
                  <?php
@@ -145,8 +134,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($invoiceDetailEdit->getId()!=null){ $defaultValues['description']=$invoiceDetailEdit->getDescription();};
                   ?>
-                  <label for="input-invoice-detail-description">Description*</label>
-  <textarea rows="5" name="description" id="input-invoice-detail-description" class="form-control " placeholder="Enter Description " required<?php echo $readonly;?>   ><?php echo null!==($invoiceDetailEdit->getDescription())?($invoiceDetailEdit->getDescription()):(isset($defaultValues['description'])?($defaultValues['description']): "");?></textarea>
+                  <label for="input-invoice-detail-description">Description</label>
+  <textarea rows="5" name="description" id="input-invoice-detail-description" class="form-control " placeholder="Enter Description " <?php echo $readonly;?>   ><?php echo null!==($invoiceDetailEdit->getDescription())?($invoiceDetailEdit->getDescription()):(isset($defaultValues['description'])?($defaultValues['description']): "");?></textarea>
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -157,8 +146,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($invoiceDetailEdit->getId()!=null){ $defaultValues['unitPrice']=$invoiceDetailEdit->getUnitPrice();};
                   ?>
-                  <label for="input-invoice-detail-unit-price">Unit&nbsp;Price*</label>
-  <input type="number" step="any" name="unitPrice" id="input-invoice-detail-unit-price" class="form-control " placeholder="Enter Unit&nbsp;Price " value="<?php echo null!==($invoiceDetailEdit->getUnitPrice())?($invoiceDetailEdit->getUnitPrice()):(isset($defaultValues['unitPrice'])?($defaultValues['unitPrice']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-invoice-detail-unit-price">Unit&nbsp;Price</label>
+  <input type="number" step="any" name="unitPrice" id="input-invoice-detail-unit-price" class="form-control " placeholder="Enter Unit&nbsp;Price " value="<?php echo null!==($invoiceDetailEdit->getUnitPrice())?($invoiceDetailEdit->getUnitPrice()):(isset($defaultValues['unitPrice'])?($defaultValues['unitPrice']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -181,8 +170,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($invoiceDetailEdit->getId()!=null){ $defaultValues['discount']=$invoiceDetailEdit->getDiscount();};
                   ?>
-                  <label for="input-invoice-detail-discount">Discount*</label>
-  <input type="number" step="any" name="discount" id="input-invoice-detail-discount" class="form-control " placeholder="Enter Discount " value="<?php echo null!==($invoiceDetailEdit->getDiscount())?($invoiceDetailEdit->getDiscount()):(isset($defaultValues['discount'])?($defaultValues['discount']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-invoice-detail-discount">Discount</label>
+  <input type="number" step="any" name="discount" id="input-invoice-detail-discount" class="form-control " placeholder="Enter Discount " value="<?php echo null!==($invoiceDetailEdit->getDiscount())?($invoiceDetailEdit->getDiscount()):(isset($defaultValues['discount'])?($defaultValues['discount']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 
  <!--start of form group-->
@@ -193,8 +182,8 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($invoiceDetailEdit->getId()!=null){ $defaultValues['totalAmount']=$invoiceDetailEdit->getTotalAmount();};
                   ?>
-                  <label for="input-invoice-detail-total-amount">Total&nbsp;Amount*</label>
-  <input type="text" name="totalAmount" id="input-invoice-detail-total-amount" class="form-control " placeholder="Enter Total&nbsp;Amount " value="<?php echo null!==($invoiceDetailEdit->getTotalAmount())?($invoiceDetailEdit->getTotalAmount()):(isset($defaultValues['totalAmount'])?($defaultValues['totalAmount']): "");?>" required <?php echo $readonly;?>   />
+                  <label for="input-invoice-detail-total-amount">Total&nbsp;Amount</label>
+  <input type="text" name="totalAmount" id="input-invoice-detail-total-amount" class="form-control " placeholder="Enter Total&nbsp;Amount " value="<?php echo null!==($invoiceDetailEdit->getTotalAmount())?($invoiceDetailEdit->getTotalAmount()):(isset($defaultValues['totalAmount'])?($defaultValues['totalAmount']): "");?>"  <?php echo $readonly;?>   />
 </div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->

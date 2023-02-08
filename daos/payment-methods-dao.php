@@ -7,20 +7,20 @@ class PaymentMethodsDao{
 * @return inserted objected of type PaymentMethods
 */
   public function insert($paymentMethods){
-    $id=  $paymentMethods->getId();
+    $paymentMethodId=  $paymentMethods->getPaymentMethodId();
     $name=  $paymentMethods->getName();
     $description=  $paymentMethods->getDescription();
     $status=  $paymentMethods->getStatus();
     try{
-      $sql="INSERT INTO payment_methods(`id`,`name`,`description`,`status`) VALUES(?,?,?,?)";
+      $sql="INSERT INTO payment_methods(`paymentMethodId`,`name`,`description`,`status`) VALUES(?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issi",$id,$name,$description,$status);
+      $stmt->bind_param("issi",$paymentMethodId,$name,$description,$status);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM payment_methods WHERE `id`=?";
+      $sql="SELECT * FROM payment_methods WHERE `paymentMethodId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -45,20 +45,20 @@ class PaymentMethodsDao{
 * @return updated objected of type PaymentMethods
 */
   public function update($paymentMethods){
-    $id=  $paymentMethods->getId();
+    $paymentMethodId=  $paymentMethods->getPaymentMethodId();
     $name=  $paymentMethods->getName();
     $description=  $paymentMethods->getDescription();
     $status=  $paymentMethods->getStatus();
     try{
-      $sql="UPDATE payment_methods SET `name`=?,`description`=?,`status`=? WHERE id =?";
+      $sql="UPDATE payment_methods SET `name`=?,`description`=?,`status`=? WHERE paymentMethodId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssii",$name,$description,$status,$id);
+      $stmt->bind_param("ssii",$name,$description,$status,$paymentMethodId);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM payment_methods WHERE `id`=?";
+      $sql="SELECT * FROM payment_methods WHERE `paymentMethodId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$id);
+      $stmt->bind_param("i",$paymentMethodId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -148,7 +148,7 @@ class PaymentMethodsDao{
 */
   public function select($paymentMethodsId){
     try{
-      $sql="SELECT * FROM `payment_methods` WHERE `id`=?";
+      $sql="SELECT * FROM `payment_methods` WHERE `paymentMethodId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$paymentMethodsId);
       $stmt->execute();
@@ -223,7 +223,7 @@ class PaymentMethodsDao{
 */
   public function delete($paymentMethodsId){
     try{
-      $sql="DELETE FROM `payment_methods` WHERE `id`=?";
+      $sql="DELETE FROM `payment_methods` WHERE `paymentMethodId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$paymentMethodsId);
       $stmt->execute();
@@ -294,7 +294,7 @@ class PaymentMethodsDao{
 */
   public function getFields($row){
     $paymentMethods= new PaymentMethods();
-      $paymentMethods->setId($row['id']);
+      $paymentMethods->setPaymentMethodId($row['paymentMethodId']);
       $paymentMethods->setName($row['name']);
       $paymentMethods->setDescription($row['description']);
       $paymentMethods->setStatus($row['status']);

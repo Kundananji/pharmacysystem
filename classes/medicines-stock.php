@@ -83,7 +83,7 @@ class MedicinesStock implements \JsonSerializable{
 
 /**
 * function to get the value of expiryDate
-* @return String
+* @return date
 */
   public function getExpiryDate(){
     return $this->expiryDate;

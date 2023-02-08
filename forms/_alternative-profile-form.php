@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -51,7 +52,7 @@ if(isset($id)){
     $usersDao = new UsersDao(); 
     $objects = $usersDao->selectAll(); 
     ?>
-    <select name="userId" id="input-_alternative-profile-user-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="userId" id="input-_alternative-profile-user-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Users--</option>
       <?php
         foreach($objects as $users){
@@ -81,7 +82,7 @@ if(isset($id)){
     $profileDao = new ProfileDao(); 
     $objects = $profileDao->selectAll(); 
     ?>
-    <select name="profileId" id="input-_alternative-profile-profile-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="profileId" id="input-_alternative-profile-profile-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select &nbsp;profile--</option>
       <?php
         foreach($objects as $profile){

@@ -8,8 +8,8 @@ include_once("../daos/patients-dao.php");
 $patientsEditDao = new PatientsDao();
 $patientsEdit = new Patients();
 
-if(!isset($_POST["id"]) || $_POST["id"]==''){ 
-  exit(json_encode(array("title"=>"id required","status"=>"error","message"=>"The field id is required")));
+if(!isset($_POST["patientId"]) || $_POST["patientId"]==''){ 
+  exit(json_encode(array("title"=>"patientId required","status"=>"error","message"=>"The field patientId is required")));
 }
 if(!isset($_POST["fileId"]) || $_POST["fileId"]==''){ 
   exit(json_encode(array("title"=>"fileId required","status"=>"error","message"=>"The field fileId is required")));
@@ -30,7 +30,7 @@ if(!isset($_POST["status"]) || $_POST["status"]==''){
   exit(json_encode(array("title"=>"status required","status"=>"error","message"=>"The field status is required")));
 }
 
-$patientsEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
+$patientsEdit->setPatientId(!isset($_POST["patientId"]) || $_POST["patientId"]==""?NULL:filter_var($_POST["patientId"],FILTER_SANITIZE_NUMBER_INT));
 $patientsEdit->setFileId(!isset($_POST["fileId"]) || $_POST["fileId"]==""?NULL:filter_var($_POST["fileId"],FILTER_SANITIZE_STRING));
 $patientsEdit->setFirstName(!isset($_POST["firstName"]) || $_POST["firstName"]==""?NULL:filter_var($_POST["firstName"],FILTER_SANITIZE_STRING));
 $patientsEdit->setOtherNames(!isset($_POST["otherNames"]) || $_POST["otherNames"]==""?NULL:filter_var($_POST["otherNames"],FILTER_SANITIZE_STRING));
@@ -42,7 +42,7 @@ $patientsEdit->setNationality(!isset($_POST["nationality"]) || $_POST["nationali
 $patientsEdit->setStatus(!isset($_POST["status"]) || $_POST["status"]==""?NULL:filter_var($_POST["status"],FILTER_SANITIZE_NUMBER_INT));
 
 try{
-  if(isset($_POST["id"]) && (int)$_POST["id"] > 0){
+  if(isset($_POST["patientId"]) && (int)$_POST["patientId"] > 0){
     $tempObject = $patientsEditDao->update($patientsEdit);
   }else{
     $tempObject = $patientsEditDao->insert($patientsEdit);

@@ -4,7 +4,7 @@ class PaymentMethods implements \JsonSerializable{
 /**
 * member variables
 */
-  private $id;
+  private $paymentMethodId;
   private $name;
   private $description;
   private $status;
@@ -17,20 +17,20 @@ class PaymentMethods implements \JsonSerializable{
   }
 
 /**
-* function to set the value of id
-* @param id : value to set
+* function to set the value of paymentMethodId
+* @param paymentMethodId : value to set
 */
-  public function setId($id){
-    $this->id=$id;
+  public function setPaymentMethodId($paymentMethodId){
+    $this->paymentMethodId=$paymentMethodId;
 
   }
 
 /**
-* function to get the value of id
+* function to get the value of paymentMethodId
 * @return int(11)
 */
-  public function getId(){
-    return $this->id;
+  public function getPaymentMethodId(){
+    return $this->paymentMethodId;
 
   }
 

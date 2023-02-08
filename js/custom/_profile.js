@@ -268,7 +268,7 @@ let addNewProfileProfiles_admin=(data)=>{
       data:{profileId: profileId},
       success: (data)=>{
         if(data.status == "success"){
-          viewProfileProfiles_admin(args);
+             viewProfileProfiles_admin(args);
                     swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');

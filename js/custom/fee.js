@@ -136,7 +136,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-fee-id' +'_row_' + i;
+  id = 'input-fee-fee-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -168,14 +168,14 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
 }
 
 let divPageContent = $('#page-content');
-let viewFee=( id)=>{
+let viewFee=( feeId)=>{
   let viewInModal = $('#link-view-fee').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-fee.php",
     type: "post",
     data: { 
-      id:id
+      feeId:feeId
      },
     success: (data)=>{
         divPageContent.html(data);

@@ -4,13 +4,16 @@ class Receipt implements \JsonSerializable{
 /**
 * member variables
 */
-  private $id;
+  private $receiptId;
   private $description;
   private $patientId;
   private $receiptNo;
+  private $invoiceId;
   private $receiptDate;
-  private $amount;
+  private $invoiceAmount;
+  private $amountPaid;
   private $paymentMethodId;
+  private $changeAmount;
 
 /**
 * function to initialize object
@@ -20,20 +23,20 @@ class Receipt implements \JsonSerializable{
   }
 
 /**
-* function to set the value of id
-* @param id : value to set
+* function to set the value of receiptId
+* @param receiptId : value to set
 */
-  public function setId($id){
-    $this->id=$id;
+  public function setReceiptId($receiptId){
+    $this->receiptId=$receiptId;
 
   }
 
 /**
-* function to get the value of id
+* function to get the value of receiptId
 * @return int(50)
 */
-  public function getId(){
-    return $this->id;
+  public function getReceiptId(){
+    return $this->receiptId;
 
   }
 
@@ -92,6 +95,24 @@ class Receipt implements \JsonSerializable{
   }
 
 /**
+* function to set the value of invoiceId
+* @param invoiceId : value to set
+*/
+  public function setInvoiceId($invoiceId){
+    $this->invoiceId=$invoiceId;
+
+  }
+
+/**
+* function to get the value of invoiceId
+* @return int(50)
+*/
+  public function getInvoiceId(){
+    return $this->invoiceId;
+
+  }
+
+/**
 * function to set the value of receiptDate
 * @param receiptDate : value to set
 */
@@ -110,20 +131,38 @@ class Receipt implements \JsonSerializable{
   }
 
 /**
-* function to set the value of amount
-* @param amount : value to set
+* function to set the value of invoiceAmount
+* @param invoiceAmount : value to set
 */
-  public function setAmount($amount){
-    $this->amount=$amount;
+  public function setInvoiceAmount($invoiceAmount){
+    $this->invoiceAmount=$invoiceAmount;
 
   }
 
 /**
-* function to get the value of amount
+* function to get the value of invoiceAmount
 * @return decimal(10,2)
 */
-  public function getAmount(){
-    return $this->amount;
+  public function getInvoiceAmount(){
+    return $this->invoiceAmount;
+
+  }
+
+/**
+* function to set the value of amountPaid
+* @param amountPaid : value to set
+*/
+  public function setAmountPaid($amountPaid){
+    $this->amountPaid=$amountPaid;
+
+  }
+
+/**
+* function to get the value of amountPaid
+* @return decimal(10,2)
+*/
+  public function getAmountPaid(){
+    return $this->amountPaid;
 
   }
 
@@ -146,11 +185,29 @@ class Receipt implements \JsonSerializable{
   }
 
 /**
+* function to set the value of changeAmount
+* @param changeAmount : value to set
+*/
+  public function setChangeAmount($changeAmount){
+    $this->changeAmount=$changeAmount;
+
+  }
+
+/**
+* function to get the value of changeAmount
+* @return decimal(10,2)
+*/
+  public function getChangeAmount(){
+    return $this->changeAmount;
+
+  }
+
+/**
 * function to get the string value of  Receipt
 * @return string
 */
   public function toString(){
-    return $this->id.' | '.$this->description.' | '.$this->patientId.' | '.$this->receiptNo;
+    return $this->receiptId.' | '.$this->description.' | '.$this->patientId.' | '.$this->receiptNo;
 
   }
 

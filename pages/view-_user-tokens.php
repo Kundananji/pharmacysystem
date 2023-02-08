@@ -41,7 +41,7 @@ $dao = new UserTokensdao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Selector

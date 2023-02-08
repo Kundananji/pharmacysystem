@@ -94,6 +94,11 @@ let uploadFile=(obj,typeOfFile,fieldId,fieldName)=>{
 * Function to initialize plugins on the form
 **/
 let initializePlugins=()=>{
+  //initialize select 2 on selects
+   $('.select-2-basic-single').select2({
+                    width:"resolve"
+                  });
+                
 }
 /**
 * Function to remove row from form table
@@ -136,7 +141,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-invoice-id' +'_row_' + i;
+  id = 'input-invoice-invoice-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -171,12 +176,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-invoice-is-paid' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-invoice-patient-scheme-id' +'_row_' + i;
+  id = 'input-invoice-is-paid-for' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -187,15 +187,125 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   localStorage.setItem("table_invoice_id",tableId);
 }
 
+
+//declare fields in scope
+
+/**
+*
+*function to view items for permission 
+*
+ **/
+let viewInvoiceManageinvoices_pharamacyuser=(data)=>{
+//assign global fields current values
+  loader(divPageContent);
+  $.ajax({
+    url: "pages/view-invoice-manage-invoices-pharamacy-user.php",
+    type: "post",
+    data:data,
+    success: (data)=>{
+      divPageContent.html(data);
+    }
+  });
+  };
+let addNewInvoiceManageinvoices_pharamacyuser=(data)=>{
+  $('#dataInputModalBody').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Loading... Please wait...</div>');
+  $('#dataInputModal').modal('show');
+  $.ajax({
+    url: "forms/invoice-manage-invoices-pharamacy-user-form.php",
+    type: "get",
+    data: data, 
+    success: (data)=>{
+      $('#dataInputModalBody').html(data);
+      initializePlugins();
+      var lastDate = localStorage.getItem('_date_cache_');
+      $('.datepicker').datepicker({
+        format:'yyyy-mm-dd',
+        todayBtn:'linked',
+        defaultViewDate:isEmpty(lastDate)?'today':lastDate,
+      }) ;
+    }
+  });
+}
+
+ let submitFormInvoiceManageinvoices_pharamacyuser = (e,args) =>{
+  e.preventDefault();
+  let oForm = document.getElementById('form-invoice');
+  let elements = oForm.elements;
+  let data = {};
+  let tinyFields = [];
+  for(let i=0; i<elements.length; i++){
+    let element = elements[i];
+    
+    if(tinyFields.indexOf(element.name)!=-1){
+      data[element.name] =  tinymce.activeEditor.getContent();
+    }else{
+      data[element.name]=element.value;
+    }
+    console.log('invoice',element);
+  };
+  console.log('invoice',data);
+  $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
+  $('#form-submit-button').prop('disabled', true);
+  $.ajax({
+    url: "scripts/submit-invoice-manage-invoices-pharamacy-user-form.php",
+    type: "post",
+    dataType:"json",
+    data:data,
+    success: (resp)=>{
+      $('#form-submit-button').prop('disabled', false);
+      if(resp.status == "success"){
+        $('#dataInputModal').modal('hide');
+        $('#form-submit-feedback').html('<div class="alert alert-success"><i class="fa fa-check"></i> '+data.message+'</div>');
+                viewInvoiceManageinvoices_pharamacyuser(args);
+        swal(resp.title,resp.message,'success');
+      }else{
+        $('#form-submit-feedback').html('<div class="alert alert-danger"><i class="fa fa-times"></i> '+resp.message+'</div>');
+        swal(resp.title,resp.message,'warning');
+      }
+    }
+  });
+}
+
+/**
+/*
+/* function to delete item 
+/*
+**/
+ let deleteInvoiceManageinvoices_pharamacyuser = (invoiceId, args) =>{
+  swal({
+    title:" Are you sure you want to delete this item?",
+    text: "If you are sure you want to delete; proceed and click okay below. Otherwise, cancel to abort.",
+    type: "warning",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    showLoaderOnConfirm: true,
+  },  ()=> {
+    $.ajax({
+      url: "scripts/delete-invoice-item.php",
+      type: "post",
+      dataType: "json",
+      data:{invoiceId: invoiceId},
+      success: (data)=>{
+        if(data.status == "success"){
+             viewInvoiceManageinvoices_pharamacyuser(args);
+                    swal(data.title,data.message,'success');
+      }else{
+          swal(data.title,data.message,'warning');
+        }
+      }
+    });
+  });
+};
+
 let divPageContent = $('#page-content');
-let viewInvoice=( id)=>{
+let viewInvoice=( invoiceId)=>{
   let viewInModal = $('#link-view-invoice').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-invoice.php",
     type: "post",
     data: { 
-      id:id
+      invoiceId:invoiceId
      },
     success: (data)=>{
         divPageContent.html(data);
@@ -310,5 +420,9 @@ $(document).ready(()=>{
    submitFormInvoice : submitFormInvoice, 
    uploadFile : uploadFile, 
    deleteFile : deleteFile, 
+   viewInvoiceManageinvoices_pharamacyuser : viewInvoiceManageinvoices_pharamacyuser, 
+    addNewInvoiceManageinvoices_pharamacyuser :  addNewInvoiceManageinvoices_pharamacyuser, 
+   submitFormInvoiceManageinvoices_pharamacyuser : submitFormInvoiceManageinvoices_pharamacyuser, 
+   deleteInvoiceManageinvoices_pharamacyuser : deleteInvoiceManageinvoices_pharamacyuser, 
 }
 })(jQuery); // End of use strict

@@ -7,21 +7,21 @@ class FeeDao{
 * @return inserted objected of type Fee
 */
   public function insert($fee){
-    $id=  $fee->getId();
+    $feeId=  $fee->getFeeId();
     $name=  $fee->getName();
     $description=  $fee->getDescription();
     $amount=  $fee->getAmount();
     $status=  $fee->getStatus();
     try{
-      $sql="INSERT INTO fee(`id`,`name`,`description`,`amount`,`status`) VALUES(?,?,?,?,?)";
+      $sql="INSERT INTO fee(`feeId`,`name`,`description`,`amount`,`status`) VALUES(?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssi",$id,$name,$description,$amount,$status);
+      $stmt->bind_param("isssi",$feeId,$name,$description,$amount,$status);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM fee WHERE `id`=?";
+      $sql="SELECT * FROM fee WHERE `feeId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
@@ -46,21 +46,21 @@ class FeeDao{
 * @return updated objected of type Fee
 */
   public function update($fee){
-    $id=  $fee->getId();
+    $feeId=  $fee->getFeeId();
     $name=  $fee->getName();
     $description=  $fee->getDescription();
     $amount=  $fee->getAmount();
     $status=  $fee->getStatus();
     try{
-      $sql="UPDATE fee SET `name`=?,`description`=?,`amount`=?,`status`=? WHERE id =?";
+      $sql="UPDATE fee SET `name`=?,`description`=?,`amount`=?,`status`=? WHERE feeId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssii",$name,$description,$amount,$status,$id);
+      $stmt->bind_param("sssii",$name,$description,$amount,$status,$feeId);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM fee WHERE `id`=?";
+      $sql="SELECT * FROM fee WHERE `feeId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$id);
+      $stmt->bind_param("i",$feeId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
@@ -150,7 +150,7 @@ class FeeDao{
 */
   public function select($feeId){
     try{
-      $sql="SELECT * FROM `fee` WHERE `id`=?";
+      $sql="SELECT * FROM `fee` WHERE `feeId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$feeId);
       $stmt->execute();
@@ -225,7 +225,7 @@ class FeeDao{
 */
   public function delete($feeId){
     try{
-      $sql="DELETE FROM `fee` WHERE `id`=?";
+      $sql="DELETE FROM `fee` WHERE `feeId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$feeId);
       $stmt->execute();
@@ -296,7 +296,7 @@ class FeeDao{
 */
   public function getFields($row){
     $fee= new Fee();
-      $fee->setId($row['id']);
+      $fee->setFeeId($row['feeId']);
       $fee->setName($row['name']);
       $fee->setDescription($row['description']);
       $fee->setAmount($row['amount']);

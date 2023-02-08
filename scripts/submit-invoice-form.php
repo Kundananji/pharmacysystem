@@ -8,14 +8,8 @@ include_once("../daos/invoice-dao.php");
 $invoiceEditDao = new InvoiceDao();
 $invoiceEdit = new Invoice();
 
-if(!isset($_POST["id"]) || $_POST["id"]==''){ 
-  exit(json_encode(array("title"=>"id required","status"=>"error","message"=>"The field id is required")));
-}
-if(!isset($_POST["invoiceNo"]) || $_POST["invoiceNo"]==''){ 
-  exit(json_encode(array("title"=>"invoiceNo required","status"=>"error","message"=>"The field invoiceNo is required")));
-}
-if(!isset($_POST["description"]) || $_POST["description"]==''){ 
-  exit(json_encode(array("title"=>"description required","status"=>"error","message"=>"The field description is required")));
+if(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==''){ 
+  exit(json_encode(array("title"=>"invoiceId required","status"=>"error","message"=>"The field invoiceId is required")));
 }
 if(!isset($_POST["invoiceDate"]) || $_POST["invoiceDate"]==''){ 
   exit(json_encode(array("title"=>"invoiceDate required","status"=>"error","message"=>"The field invoiceDate is required")));
@@ -23,25 +17,18 @@ if(!isset($_POST["invoiceDate"]) || $_POST["invoiceDate"]==''){
 if(!isset($_POST["patientId"]) || $_POST["patientId"]==''){ 
   exit(json_encode(array("title"=>"patientId required","status"=>"error","message"=>"The field patientId is required")));
 }
-if(!isset($_POST["amount"]) || $_POST["amount"]==''){ 
-  exit(json_encode(array("title"=>"amount required","status"=>"error","message"=>"The field amount is required")));
-}
-if(!isset($_POST["isPaid"]) || $_POST["isPaid"]==''){ 
-  exit(json_encode(array("title"=>"isPaid required","status"=>"error","message"=>"The field isPaid is required")));
-}
 
-$invoiceEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
+$invoiceEdit->setInvoiceId(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==""?NULL:filter_var($_POST["invoiceId"],FILTER_SANITIZE_NUMBER_INT));
 $invoiceEdit->setInvoiceNo(!isset($_POST["invoiceNo"]) || $_POST["invoiceNo"]==""?NULL:filter_var($_POST["invoiceNo"],FILTER_SANITIZE_STRING));
 $invoiceEdit->setDescription(!isset($_POST["description"]) || $_POST["description"]==""?NULL:filter_var($_POST["description"],FILTER_SANITIZE_STRING));
 $invoiceEdit->setInvoiceDate(!isset($_POST["invoiceDate"]) || $_POST["invoiceDate"]==""?NULL:convertDate($_POST["invoiceDate"]));
 $invoiceEdit->setPatientId(!isset($_POST["patientId"]) || $_POST["patientId"]==""?NULL:filter_var($_POST["patientId"],FILTER_SANITIZE_NUMBER_INT));
 $invoiceEdit->setTaxAmount(!isset($_POST["taxAmount"]) || $_POST["taxAmount"]==""?NULL:filter_var($_POST["taxAmount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 $invoiceEdit->setAmount(!isset($_POST["amount"]) || $_POST["amount"]==""?NULL:filter_var($_POST["amount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
-$invoiceEdit->setIsPaid(!isset($_POST["isPaid"]) || $_POST["isPaid"]==""?NULL:filter_var($_POST["isPaid"],FILTER_SANITIZE_NUMBER_INT));
-$invoiceEdit->setPatientSchemeId(!isset($_POST["patientSchemeId"]) || $_POST["patientSchemeId"]==""?NULL:filter_var($_POST["patientSchemeId"],FILTER_SANITIZE_NUMBER_INT));
+$invoiceEdit->setIsPaidFor(!isset($_POST["isPaidFor"]) || $_POST["isPaidFor"]==""?NULL:filter_var($_POST["isPaidFor"],FILTER_SANITIZE_NUMBER_INT));
 
 try{
-  if(isset($_POST["id"]) && (int)$_POST["id"] > 0){
+  if(isset($_POST["invoiceId"]) && (int)$_POST["invoiceId"] > 0){
     $tempObject = $invoiceEditDao->update($invoiceEdit);
   }else{
     $tempObject = $invoiceEditDao->insert($invoiceEdit);

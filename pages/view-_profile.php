@@ -49,7 +49,7 @@ $dao = new Profiledao();
       <th>
       </th>
       <th>
-        
+        Id
       </th>
       <th>
         Name

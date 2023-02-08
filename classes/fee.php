@@ -4,7 +4,7 @@ class Fee implements \JsonSerializable{
 /**
 * member variables
 */
-  private $id;
+  private $feeId;
   private $name;
   private $description;
   private $amount;
@@ -18,20 +18,20 @@ class Fee implements \JsonSerializable{
   }
 
 /**
-* function to set the value of id
-* @param id : value to set
+* function to set the value of feeId
+* @param feeId : value to set
 */
-  public function setId($id){
-    $this->id=$id;
+  public function setFeeId($feeId){
+    $this->feeId=$feeId;
 
   }
 
 /**
-* function to get the value of id
+* function to get the value of feeId
 * @return int(10)
 */
-  public function getId(){
-    return $this->id;
+  public function getFeeId(){
+    return $this->feeId;
 
   }
 

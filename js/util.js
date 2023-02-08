@@ -13,7 +13,7 @@
 
     }
 
-    let printDocument =()=>{
+    let printDocument =(div)=>{
 		/*
         let printdivname = "print-area";
         var headstr = "<html><head><title>Booking Details</title></head><body>";
@@ -25,9 +25,12 @@
         document.body.innerHTML = oldstr;
         return false;
 		*/
-		
+        var contents = $("#print-area").html();
+        if(div){
+            contents = $("#"+div).html();
+         }	
 				
-		var contents = $("#print-area").html();
+	
         var frame1 = $('<iframe />');
         frame1[0].name = "frame1";
         frame1.css({ "position": "absolute", "top": "-1000000px" });

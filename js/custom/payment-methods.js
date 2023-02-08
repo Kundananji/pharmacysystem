@@ -136,7 +136,7 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-payment-methods-id' +'_row_' + i;
+  id = 'input-payment-methods-payment-method-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
@@ -163,14 +163,14 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
 }
 
 let divPageContent = $('#page-content');
-let viewPaymentMethods=( id)=>{
+let viewPaymentMethods=( paymentMethodId)=>{
   let viewInModal = $('#link-view-payment-methods').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
     url: "pages/view-payment-methods.php",
     type: "post",
     data: { 
-      id:id
+      paymentMethodId:paymentMethodId
      },
     success: (data)=>{
         divPageContent.html(data);

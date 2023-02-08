@@ -258,7 +258,7 @@ let addNewPrivilegePrivileges_admin=(data)=>{
       data:{privilegeId: privilegeId},
       success: (data)=>{
         if(data.status == "success"){
-          viewPrivilegePrivileges_admin(args);
+             viewPrivilegePrivileges_admin(args);
                     swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');

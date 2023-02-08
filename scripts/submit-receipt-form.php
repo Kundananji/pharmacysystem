@@ -8,38 +8,29 @@ include_once("../daos/receipt-dao.php");
 $receiptEditDao = new ReceiptDao();
 $receiptEdit = new Receipt();
 
-if(!isset($_POST["id"]) || $_POST["id"]==''){ 
-  exit(json_encode(array("title"=>"id required","status"=>"error","message"=>"The field id is required")));
+if(!isset($_POST["receiptId"]) || $_POST["receiptId"]==''){ 
+  exit(json_encode(array("title"=>"receiptId required","status"=>"error","message"=>"The field receiptId is required")));
 }
-if(!isset($_POST["description"]) || $_POST["description"]==''){ 
-  exit(json_encode(array("title"=>"description required","status"=>"error","message"=>"The field description is required")));
-}
-if(!isset($_POST["patientId"]) || $_POST["patientId"]==''){ 
-  exit(json_encode(array("title"=>"patientId required","status"=>"error","message"=>"The field patientId is required")));
-}
-if(!isset($_POST["receiptNo"]) || $_POST["receiptNo"]==''){ 
-  exit(json_encode(array("title"=>"receiptNo required","status"=>"error","message"=>"The field receiptNo is required")));
-}
-if(!isset($_POST["receiptDate"]) || $_POST["receiptDate"]==''){ 
-  exit(json_encode(array("title"=>"receiptDate required","status"=>"error","message"=>"The field receiptDate is required")));
-}
-if(!isset($_POST["amount"]) || $_POST["amount"]==''){ 
-  exit(json_encode(array("title"=>"amount required","status"=>"error","message"=>"The field amount is required")));
+if(!isset($_POST["amountPaid"]) || $_POST["amountPaid"]==''){ 
+  exit(json_encode(array("title"=>"amountPaid required","status"=>"error","message"=>"The field amountPaid is required")));
 }
 if(!isset($_POST["paymentMethodId"]) || $_POST["paymentMethodId"]==''){ 
   exit(json_encode(array("title"=>"paymentMethodId required","status"=>"error","message"=>"The field paymentMethodId is required")));
 }
 
-$receiptEdit->setId(!isset($_POST["id"]) || $_POST["id"]==""?NULL:filter_var($_POST["id"],FILTER_SANITIZE_NUMBER_INT));
+$receiptEdit->setReceiptId(!isset($_POST["receiptId"]) || $_POST["receiptId"]==""?NULL:filter_var($_POST["receiptId"],FILTER_SANITIZE_NUMBER_INT));
 $receiptEdit->setDescription(!isset($_POST["description"]) || $_POST["description"]==""?NULL:filter_var($_POST["description"],FILTER_SANITIZE_STRING));
 $receiptEdit->setPatientId(!isset($_POST["patientId"]) || $_POST["patientId"]==""?NULL:filter_var($_POST["patientId"],FILTER_SANITIZE_NUMBER_INT));
 $receiptEdit->setReceiptNo(!isset($_POST["receiptNo"]) || $_POST["receiptNo"]==""?NULL:filter_var($_POST["receiptNo"],FILTER_SANITIZE_STRING));
+$receiptEdit->setInvoiceId(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==""?NULL:filter_var($_POST["invoiceId"],FILTER_SANITIZE_NUMBER_INT));
 $receiptEdit->setReceiptDate(!isset($_POST["receiptDate"]) || $_POST["receiptDate"]==""?NULL:convertDate($_POST["receiptDate"]));
-$receiptEdit->setAmount(!isset($_POST["amount"]) || $_POST["amount"]==""?NULL:filter_var($_POST["amount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
+$receiptEdit->setInvoiceAmount(!isset($_POST["invoiceAmount"]) || $_POST["invoiceAmount"]==""?NULL:filter_var($_POST["invoiceAmount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
+$receiptEdit->setAmountPaid(!isset($_POST["amountPaid"]) || $_POST["amountPaid"]==""?NULL:filter_var($_POST["amountPaid"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 $receiptEdit->setPaymentMethodId(!isset($_POST["paymentMethodId"]) || $_POST["paymentMethodId"]==""?NULL:filter_var($_POST["paymentMethodId"],FILTER_SANITIZE_NUMBER_INT));
+$receiptEdit->setChangeAmount(!isset($_POST["changeAmount"]) || $_POST["changeAmount"]==""?NULL:filter_var($_POST["changeAmount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 
 try{
-  if(isset($_POST["id"]) && (int)$_POST["id"] > 0){
+  if(isset($_POST["receiptId"]) && (int)$_POST["receiptId"] > 0){
     $tempObject = $receiptEditDao->update($receiptEdit);
   }else{
     $tempObject = $receiptEditDao->insert($receiptEdit);

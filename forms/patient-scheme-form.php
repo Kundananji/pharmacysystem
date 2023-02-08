@@ -4,7 +4,8 @@ $session_userId = isset($_SESSION['user_id'])?$_SESSION['user_id']:null; //read 
 $session_profile = isset($_SESSION['user_profile'])?$_SESSION['user_profile']:null; //read userId from session
 
 //declare env variables for use
-$env_dateNow = date("d/m/Y");
+$env_dateNowHuman = date("d/m/Y");
+$env_dateNow = date("Y-m-d");
 $env_timeNow = date("H:i:s");
 $env_YearNow = date("Y");
 $env_MonthNow = date("m");
@@ -75,11 +76,11 @@ if(isset($id)){
     $patientsDao = new PatientsDao(); 
     $objects = $patientsDao->selectAll(); 
     ?>
-    <select name="patientId" id="input-patient-scheme-patient-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="patientId" id="input-patient-scheme-patient-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Patients--</option>
       <?php
         foreach($objects as $patients){
-          $optionValue  = $patients->getId();
+          $optionValue  = $patients->getPatientId();
           $hidden  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"hidden":"" ;
           $disabled  =  $readonly=='readonly' && isset($defaultValues['patientId']) && $defaultValues['patientId']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['patientId']) && $defaultValues['patientId']==$optionValue? "selected" : "" ;
@@ -97,7 +98,7 @@ if(isset($id)){
                   //override default value with actual value if object is sent
                   if($patientSchemeEdit->getId()!=null){ $defaultValues['insuranceProviderId']=$patientSchemeEdit->getInsuranceProviderId();};
                   ?>
-                  <label for="input-patient-scheme-insurance-provider-id">Insurance&nbsp;Provider&nbsp;Id*</label>
+                  <label for="input-patient-scheme-insurance-provider-id">Insurance&nbsp;Provider*</label>
   <?php 
     include_once("../classes/insurance-provider.php");
     include_once("../daos/insurance-provider-dao.php");
@@ -105,7 +106,7 @@ if(isset($id)){
     $insuranceProviderDao = new InsuranceProviderDao(); 
     $objects = $insuranceProviderDao->selectAll(); 
     ?>
-    <select name="insuranceProviderId" id="input-patient-scheme-insurance-provider-id" class="form-control " required <?php echo $readonly;?> >
+    <select name="insuranceProviderId" id="input-patient-scheme-insurance-provider-id" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Insurance&nbsp;provider--</option>
       <?php
         foreach($objects as $insuranceProvider){
@@ -135,7 +136,7 @@ if(isset($id)){
     $statusDao = new StatusDao(); 
     $objects = $statusDao->selectAll(); 
     ?>
-    <select name="status" id="input-patient-scheme-status" class="form-control " required <?php echo $readonly;?> >
+    <select name="status" id="input-patient-scheme-status" class=" form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Status--</option>
       <?php
         foreach($objects as $status){
