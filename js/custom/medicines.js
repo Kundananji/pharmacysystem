@@ -284,9 +284,9 @@ $(document).ready(()=>{
  return {
    addNewMedicines:addNewMedicines,
    deleteMedicines:deleteMedicines,
-  removeFormTableRow:removeFormTableRow,
-  addFormTableRow:addFormTableRow,
-  viewMedicines:viewMedicines,
+   removeFormTableRow:removeFormTableRow,
+   addFormTableRow:addFormTableRow,
+   viewMedicines:viewMedicines,
    submitFormMedicines : submitFormMedicines, 
    uploadFile : uploadFile, 
    deleteFile : deleteFile, 
