@@ -24,7 +24,7 @@
                   // logic
                   $count = 0;
                   while($row = mysqli_fetch_array($result)) {
-                    $expiry_date = $row['EXPIRY_DATE'];
+                    $expiry_date = $row['expiry_date'];
                     if(substr($expiry_date, 3) < date('y'))
                       $count++;
                     else if(substr($expiry_date, 3) == date('y')) {
@@ -36,7 +36,7 @@
 
                 echo '
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" style="padding: 10px">
-                    <div class="dashboard-stats" onclick="location.href=\''.$location.'\'">
+                    <div class="dashboard-stats" onclick="\''.$location.'\'">
                       <a class="text-dark text-decoration-none" href="'.$location.'">
                         <span class="h4">'.$count.'</span>
                         <span class="h6"><i class="fa fa-play fa-rotate-270 text-warning"></i></span>
@@ -46,12 +46,12 @@
                   </div>
                 ';
               }
-              createSection1('manage_customer.php', 'Total Customer', 'customers');
-              createSection1('manage_supplier.php', 'Total Supplier', 'suppliers');
-              createSection1('manage_medicine.php', 'Total Medicine', 'medicines');
-              createSection1('manage_medicine_stock.php?out_of_stock', 'Out of Stock', 'medicines_stock');
-              createSection1('manage_medicine_stock.php?expired', 'Expired', 'medicines_stock');
-              createSection1('manage_invoice.php', 'Total Invoice', 'invoices');
+              createSection1('javascript:Patients.viewPatients({})', 'Total Patients', 'patients');
+              createSection1('javascript:Suppliers.viewSuppliers({})', 'Total Supplier', 'suppliers');
+              createSection1('javascript:Medicines.viewMedicines({})', 'Total Medicine', 'medicines');
+              createSection1('void({})', 'Out of Stock', 'medicines_stock');
+              createSection1('void({})', 'Expired', 'medicines_stock');
+              createSection1('javascript:Invoice.viewInvoice({})', 'Total Invoice', 'invoices');
             ?>
 
           </div>
