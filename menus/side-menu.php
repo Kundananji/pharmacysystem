@@ -2,7 +2,7 @@
 
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
   <div class="sidebar-brand-icon">
-    <img src="images/prof.jpg" style="width:60px"/>
+    <img src="img/hms.png" style="width:60px"/> MULTI CARE
   </div>
 </a>
 

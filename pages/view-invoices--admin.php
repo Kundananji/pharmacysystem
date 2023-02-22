@@ -1,29 +1,34 @@
+<?php
+       require '../config/database.php';
+?>
+
 <div class="card">
 	<div class="card-header">
 	   <h2>Dashboard</h2>
 	</div>
 	<div class="body">
-	    <div class="container">
+	    <div class="container p-4">
 		       <!-- form content -->
 			   <div class="row">
           <div class="row col col-xs-8 col-sm-8 col-md-8 col-lg-8">
 
             <?php
               function createSection1($location, $title, $table) {
-                require '../php/db_connection.php';
+         
 
                 $query = "SELECT * FROM $table";
-                if($title == "Out of Stock")
-                  $query = "SELECT * FROM $table WHERE QUANTITY = 0";
+                if($title == "Out of Stock"){
+                  $query = "SELECT * FROM $table WHERE quantity = 0";
+                }
 
-                $result = mysqli_query($con, $query);
-                $count = mysqli_num_rows($result);
+                $result = Database::getConnection()->query($query);
+                $count = $result->num_rows;
 
 
                 if($title == "Expired") {
                   // logic
                   $count = 0;
-                  while($row = mysqli_fetch_array($result)) {
+                  while($row = $result->fetch_assoc()) {
                     $expiry_date = $row['expiry_date'];
                     if(substr($expiry_date, 3) < date('y'))
                       $count++;
@@ -51,7 +56,7 @@
               createSection1('javascript:Medicines.viewMedicines({})', 'Total Medicine', 'medicines');
               createSection1('void({})', 'Out of Stock', 'medicines_stock');
               createSection1('void({})', 'Expired', 'medicines_stock');
-              createSection1('javascript:Invoice.viewInvoice({})', 'Total Invoice', 'invoices');
+              createSection1('javascript:Invoice.viewInvoice({})', 'Total Invoice', 'invoice');
             ?>
 
           </div>
@@ -69,11 +74,11 @@
                   <tr>
                     <?php
                       $total = 0;
-                      $query = "SELECT NET_TOTAL FROM invoices WHERE INVOICE_DATE = '$date'";
-                      $result = mysqli_query($con, $query);
+                      $query = "SELECT amount FROM invoice WHERE invoiceDate = '$date'";
+                      $result = Database::getConnection()->query($query);
 
-                      while($row = mysqli_fetch_array($result))
-                        $total = $total + $row['NET_TOTAL'];
+                      while($row = $result->fetch_array())
+                        $total = $total + $row['amount'];
                     ?>
                     <th>Total Sales</th>
                     <th class="text-success">ZMW. <?php echo $total; ?></th>
@@ -82,9 +87,9 @@
                     <?php
                       //echo $date;
                       $total = 0;
-                      $query = "SELECT TOTAL_AMOUNT FROM purchases WHERE PURCHASE_DATE = '$date'";
-                      $result = mysqli_query($con, $query);
-                      while($row = mysqli_fetch_array($result))
+                      $query = "SELECT TOTAL_AMOUNT FROM purchases WHERE purchase_date = '$date'";
+                      $result = Database::getConnection()->query($query);
+                      while($row = $result->fetch_array())
                         $total = $total + $row['TOTAL_AMOUNT'];
                     }
                     ?>
