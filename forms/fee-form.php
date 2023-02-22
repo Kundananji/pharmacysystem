@@ -61,6 +61,36 @@ if(isset($feeId)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
+<div class="form-group input-fee-fee-category-id">
+
+                 <?php
+                  $readonly = in_array('feeCategoryId',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($feeEdit->getFeeId()!=null){ $defaultValues['feeCategoryId']=$feeEdit->getFeeCategoryId();};
+                  ?>
+                  <label for="input-fee-fee-category-id">Fee&nbsp;Category</label>
+  <?php 
+    include_once("../classes/fee-category.php");
+    include_once("../daos/fee-category-dao.php");
+
+    $feeCategoryDao = new FeeCategoryDao(); 
+    $objects = $feeCategoryDao->selectAll(); 
+    ?>
+    <select name="feeCategoryId" id="input-fee-fee-category-id" class=" form-control"  <?php echo $readonly;?>  >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Fee&nbsp;category--</option>
+      <?php
+        foreach($objects as $feeCategory){
+          $optionValue  = $feeCategory->getFeeCategoryId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['feeCategoryId']) && $defaultValues['feeCategoryId']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['feeCategoryId']) && $defaultValues['feeCategoryId']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['feeCategoryId']) && $defaultValues['feeCategoryId']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$feeCategory->toString().'</option>';
+        }
+      ?>
+    </select>
+</div> <!--end form-group-->
+
+ <!--start of form group-->
 <div class="form-group input-fee-amount">
 
                  <?php

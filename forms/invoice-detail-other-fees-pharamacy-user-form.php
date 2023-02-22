@@ -124,7 +124,7 @@ if(isset($id)){
     $feeDao = new FeeDao(); 
     $objects = $feeDao->selectAll(); 
     ?>
-    <select name="feeId" id="input-invoice-detail-fee-id" class=" form-control"  <?php echo $readonly;?>  >
+    <select name="feeId" id="input-invoice-detail-fee-id" class="select-2-basic-single w-100 form-control"  <?php echo $readonly;?>  style="width:100%">
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Fee--</option>
       <?php
         foreach($objects as $fee){
@@ -153,7 +153,7 @@ if(isset($id)){
     $medicinesDao = new MedicinesDao(); 
     $objects = $medicinesDao->selectAll(); 
     ?>
-    <select name="medicineId" id="input-invoice-detail-medicine-id" class=" form-control"  <?php echo $readonly;?>  >
+    <select name="medicineId" id="input-invoice-detail-medicine-id" class="select-2-basic-single w-100 form-control"  <?php echo $readonly;?>  style="width:100%">
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Medicine--</option>
       <?php
         foreach($objects as $medicines){

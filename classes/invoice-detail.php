@@ -188,7 +188,7 @@ class InvoiceDetail implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->id.' | '.$this->invoiceId.' | '.$this->feeId.' | '.$this->medicineId;
+    return $this->description;
 
   }
 

@@ -1,4 +1,4 @@
-let Fee  = (function($) {
+let FeeCategory  = (function($) {
 "use strict";
 
 /**
@@ -78,7 +78,7 @@ let uploadFile=(obj,typeOfFile,fieldId,fieldName)=>{
         } else if(typeOfFile =='file'){
           url='img/file-thumbnail.png';
         }
-        var output ='<div id="" class="row m-3"><div class="col-sm-12 col-md-2 col-lg-2"><img src="'+url+'" class="rounded" style="width:100%"/></div><div class="col-sm-12 col-md-10 col-lg-10"><a href="javascript:void(0)" onclick="Fee.deleteFile(\''+typeOfFile+'\',\''+fieldId+'\',\''+fieldName+'\')" class="btn"><i class="fa fa-trash"></i> Delete Image</a></div></div>';
+        var output ='<div id="" class="row m-3"><div class="col-sm-12 col-md-2 col-lg-2"><img src="'+url+'" class="rounded" style="width:100%"/></div><div class="col-sm-12 col-md-10 col-lg-10"><a href="javascript:void(0)" onclick="FeeCategory.deleteFile(\''+typeOfFile+'\',\''+fieldId+'\',\''+fieldName+'\')" class="btn"><i class="fa fa-trash"></i> Delete Image</a></div></div>';
         $('#input_feedback_'+fieldName+'_'+fieldId).html(output);
         //update input with new url
         $("#"+fieldId).val(response.url);
@@ -94,11 +94,6 @@ let uploadFile=(obj,typeOfFile,fieldId,fieldName)=>{
 * Function to initialize plugins on the form
 **/
 let initializePlugins=()=>{
-  //initialize select 2 on selects
-   $('.select-2-basic-single').select2({
-                    width:"resolve"
-                  });
-                
 }
 /**
 * Function to remove row from form table
@@ -114,8 +109,8 @@ let removeFormTableRow=(tableId,obj)=>{
   rows[i].innerHTML.replace(/_row_[0-9]/g,'_row_'+rowCount);
   rowCount += 1;
   }
-  localStorage.setItem("table_fee_id",tableId);
-    localStorage.setItem("table_fee",(rows.length-1));
+  localStorage.setItem("table_fee_category_id",tableId);
+    localStorage.setItem("table_fee_category",(rows.length-1));
 }
 
 /**
@@ -141,63 +136,43 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-fee-fee-id' +'_row_' + i;
+  id = 'input-fee-category-fee-category-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-fee-name' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-fee-description' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-fee-fee-category-id' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-fee-amount' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-fee-status' +'_row_' + i;
+  id = 'input-fee-category-name' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
   if(incrementRowCount){
-    localStorage.setItem("table_fee",rowCount-1);
+    localStorage.setItem("table_fee_category",rowCount-1);
   }
-  localStorage.setItem("table_fee_id",tableId);
+  localStorage.setItem("table_fee_category_id",tableId);
 }
 
 let divPageContent = $('#page-content');
-let viewFee=( feeId)=>{
-  let viewInModal = $('#link-view-fee').data('viewInModal'); 
+let viewFeeCategory=( feeCategoryId)=>{
+  let viewInModal = $('#link-view-fee-category').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
-    url: "pages/view-fee.php",
+    url: "pages/view-fee-category.php",
     type: "post",
     data: { 
-      feeId:feeId
+      feeCategoryId:feeCategoryId
      },
     success: (data)=>{
         divPageContent.html(data);
-      $('#table-fee').DataTable({});
+      $('#table-fee-category').DataTable({});
     }
   });
 }
 
-let addNewFee=(data)=>{
+let addNewFeeCategory=(data)=>{
   $('#dataInputModal').modal('show');
   $.ajax({
-    url: "forms/fee-form.php",
+    url: "forms/fee-category-form.php",
     type: "get",
     data:data,
     success: (data)=>{
@@ -213,9 +188,9 @@ let addNewFee=(data)=>{
   });
 }
 
- let submitFormFee = (e,args) =>{
+ let submitFormFeeCategory = (e,args) =>{
   e.preventDefault();
-  let oForm = document.getElementById('form-fee');
+  let oForm = document.getElementById('form-fee-category');
   let elements = oForm.elements;
   let data = {};
   let tinyFields = [];
@@ -227,11 +202,11 @@ let addNewFee=(data)=>{
       data[element.name]=element.value;
     }
   };
-  console.log('fee',data);
+  console.log('fee_category',data);
   $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
   $('#form-submit-button').prop('disabled', true);
   $.ajax({
-    url: "scripts/submit-fee-form.php",
+    url: "scripts/submit-fee-category-form.php",
     type: "post",
     dataType:"json",
     data:data,
@@ -240,7 +215,7 @@ let addNewFee=(data)=>{
       if(data.status == "success"){
         $('#form-submit-feedback').html('<div class="alert alert-success"><i class="fa fa-check"></i> '+data.message+'</div>');
   $('#dataInputModal').modal('hide');
-        viewFee(args);
+        viewFeeCategory(args);
         swal(data.title,data.message,'success');
       }else{
         $('#form-submit-feedback').html('<div class="alert alert-danger"><i class="fa fa-times"></i> '+data.message+'</div>');
@@ -255,7 +230,7 @@ let addNewFee=(data)=>{
 /* function to delete item 
 /*
 **/
- let deleteFee = (feeId) =>{
+ let deleteFeeCategory = (feeCategoryId) =>{
   swal({
     title: "Are you sure you want to delete this item?",
     text: "If you are sure you want to delete; proceed and click okay below. Otherwise, cancel to abort.",
@@ -265,13 +240,13 @@ let addNewFee=(data)=>{
     showLoaderOnConfirm: true,
   },  ()=> {
     $.ajax({
-      url: "scripts/delete-fee-item.php",
+      url: "scripts/delete-fee-category-item.php",
       type: "post",
       dataType: "json",
-      data:{feeId: feeId},
+      data:{feeCategoryId: feeCategoryId},
       success: (data)=>{
         if(data.status == "success"){
-          viewFee();
+          viewFeeCategory();
           swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');
@@ -282,22 +257,22 @@ let addNewFee=(data)=>{
 };
 
 $(document).ready(()=>{
-  $('#link-view-fee').off().on('click',()=>{
-    viewFee();
+  $('#link-view-fee-category').off().on('click',()=>{
+    viewFeeCategory();
   });
 
-  $('#add-new-fee').on('click',()=>{
-    addNewFee();
+  $('#add-new-fee-category').on('click',()=>{
+    addNewFeeCategory();
   });
 });
 
  return {
-   addNewFee:addNewFee,
-   deleteFee:deleteFee,
+   addNewFeeCategory:addNewFeeCategory,
+   deleteFeeCategory:deleteFeeCategory,
   removeFormTableRow:removeFormTableRow,
   addFormTableRow:addFormTableRow,
-  viewFee:viewFee,
-   submitFormFee : submitFormFee, 
+  viewFeeCategory:viewFeeCategory,
+   submitFormFeeCategory : submitFormFeeCategory, 
    uploadFile : uploadFile, 
    deleteFile : deleteFile, 
 }

@@ -189,6 +189,7 @@ class Menu implements \JsonSerializable{
 */
   public function toString(){
     return $this->name;
+    return ;
 
   }
 

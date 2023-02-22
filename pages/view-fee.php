@@ -26,6 +26,14 @@ if(isset($_POST['id']) && $_POST['id']!=''){
   $statusDao = new StatusDao(); 
   $status =  $statusDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
 }
+//make available variables of fee_category available in scope for use:
+if(isset($_POST['feeCategoryId']) && $_POST['feeCategoryId']!=''){
+  include_once("../classes/fee-category.php");
+  include_once("../daos/fee-category-dao.php");
+
+  $feeCategoryDao = new FeeCategoryDao(); 
+  $feeCategory =  $feeCategoryDao->select(filter_var($_GET['feeCategoryId'],FILTER_SANITIZE_NUMBER_INT)); 
+}
 include("../daos/fee-dao.php");
 include("../classes/fee.php");
 include("../config/database.php");
@@ -48,6 +56,9 @@ $dao = new FeeDao();
       </th>
       <th>
         Description
+      </th>
+      <th>
+        Fee&nbsp;Category
       </th>
       <th>
         Amount
@@ -83,6 +94,16 @@ $dao = new FeeDao();
         <td>
         <?php
           echo $fee->getDescription();
+        ?>
+        </td>
+        <td>
+        <?php
+          include_once("../classes/fee-category.php");
+          include_once("../daos/fee-category-dao.php");
+
+          $ffeeCategoryDao = new FeeCategoryDao(); 
+          $ffeeCategory = $ffeeCategoryDao->select($fee->getFeeCategoryId()); 
+          echo  $ffeeCategory==null?"-": $ffeeCategory->toString();
         ?>
         </td>
         <td>

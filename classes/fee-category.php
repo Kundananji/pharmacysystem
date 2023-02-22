@@ -1,10 +1,10 @@
 <?php
-class Yesno implements \JsonSerializable{
+class FeeCategory implements \JsonSerializable{
 
 /**
 * member variables
 */
-  private $id;
+  private $feeCategoryId;
   private $name;
 
 /**
@@ -15,20 +15,20 @@ class Yesno implements \JsonSerializable{
   }
 
 /**
-* function to set the value of id
-* @param id : value to set
+* function to set the value of feeCategoryId
+* @param feeCategoryId : value to set
 */
-  public function setId($id){
-    $this->id=$id;
+  public function setFeeCategoryId($feeCategoryId){
+    $this->feeCategoryId=$feeCategoryId;
 
   }
 
 /**
-* function to get the value of id
+* function to get the value of feeCategoryId
 * @return int(10)
 */
-  public function getId(){
-    return $this->id;
+  public function getFeeCategoryId(){
+    return $this->feeCategoryId;
 
   }
 
@@ -51,7 +51,7 @@ class Yesno implements \JsonSerializable{
   }
 
 /**
-* function to get the string value of  Yesno
+* function to get the string value of  FeeCategory
 * @return string
 */
   public function toString(){
@@ -61,7 +61,7 @@ class Yesno implements \JsonSerializable{
   }
 
 /**
-* function to get the json equivalent of  Yesno
+* function to get the json equivalent of  FeeCategory
 * @return json string
 */
   public function jsonSerialize(){

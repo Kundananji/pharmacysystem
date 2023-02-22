@@ -1,36 +1,32 @@
 <?php
-class FeeDao{
+class FeeCategoryDao{
 
 /**
-* function to insert single object of type Fee into database
-* @param object instance of type Fee
-* @return inserted objected of type Fee
+* function to insert single object of type FeeCategory into database
+* @param object instance of type FeeCategory
+* @return inserted objected of type FeeCategory
 */
-  public function insert($fee){
-    $feeId=  $fee->getFeeId();
-    $name=  $fee->getName();
-    $description=  $fee->getDescription();
-    $feeCategoryId=  $fee->getFeeCategoryId();
-    $amount=  $fee->getAmount();
-    $status=  $fee->getStatus();
+  public function insert($feeCategory){
+    $feeCategoryId=  $feeCategory->getFeeCategoryId();
+    $name=  $feeCategory->getName();
     try{
-      $sql="INSERT INTO fee(`feeId`,`name`,`description`,`feeCategoryId`,`amount`,`status`) VALUES(?,?,?,?,?,?)";
+      $sql="INSERT INTO fee_category(`feeCategoryId`,`name`) VALUES(?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issisi",$feeId,$name,$description,$feeCategoryId,$amount,$status);
+      $stmt->bind_param("is",$feeCategoryId,$name);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM fee WHERE `feeId`=?";
+      $sql="SELECT * FROM fee_category WHERE `feeCategoryId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
       $result = $stmt->get_result();
       if($row=$result->fetch_assoc()){
-      $insertedFee = $this->getFields($row);
+      $insertedFeeCategory = $this->getFields($row);
         $stmt->close();
-        return $insertedFee;
+        return $insertedFeeCategory;
       }
       $stmt->close();
       return null;
@@ -42,33 +38,29 @@ class FeeDao{
   }
 
 /**
-* function to update single object of type Fee
-* @param object instance of type Fee
-* @return updated objected of type Fee
+* function to update single object of type FeeCategory
+* @param object instance of type FeeCategory
+* @return updated objected of type FeeCategory
 */
-  public function update($fee){
-    $feeId=  $fee->getFeeId();
-    $name=  $fee->getName();
-    $description=  $fee->getDescription();
-    $feeCategoryId=  $fee->getFeeCategoryId();
-    $amount=  $fee->getAmount();
-    $status=  $fee->getStatus();
+  public function update($feeCategory){
+    $feeCategoryId=  $feeCategory->getFeeCategoryId();
+    $name=  $feeCategory->getName();
     try{
-      $sql="UPDATE fee SET `name`=?,`description`=?,`feeCategoryId`=?,`amount`=?,`status`=? WHERE feeId =?";
+      $sql="UPDATE fee_category SET `name`=? WHERE feeCategoryId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssisii",$name,$description,$feeCategoryId,$amount,$status,$feeId);
+      $stmt->bind_param("si",$name,$feeCategoryId);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM fee WHERE `feeId`=?";
+      $sql="SELECT * FROM fee_category WHERE `feeCategoryId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$feeId);
+      $stmt->bind_param("i",$feeCategoryId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
-        $updatedFee = $this->getFields($row);
+        $updatedFeeCategory = $this->getFields($row);
         $stmt->close();
-        return $updatedFee;
+        return $updatedFeeCategory;
       }
       $stmt->close();
       return null;
@@ -80,8 +72,8 @@ class FeeDao{
   }
 
 /**
-* function to select array of object of type Fee from database through the provided search term
-* @return array of objects of type Fee
+* function to select array of object of type FeeCategory from database through the provided search term
+* @return array of objects of type FeeCategory
 */
   public function search($term,$searchFields,$extra=null,$pageSize=0,$pageNo=null){
     //determine page size
@@ -97,14 +89,14 @@ class FeeDao{
       $whereClause[]=$searchField.' LIKE \'%'.$term.'%\'';
     }
     try{
-      $sql="SELECT * FROM fee WHERE (".implode(' OR ',$whereClause).") ".($extra!=null?("AND ".$extra):'')." $limitClause";
+      $sql="SELECT * FROM fee_category WHERE (".implode(' OR ',$whereClause).") ".($extra!=null?("AND ".$extra):'')." $limitClause";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $fee = $this->getFields($row);
-        $objects[]=$fee;
+        $feeCategory = $this->getFields($row);
+        $objects[]=$feeCategory;
       }
       $stmt->close();
       return $objects;
@@ -116,8 +108,8 @@ class FeeDao{
   }
 
 /**
-* function to select array of object of type Fee from database
-* @return array of objects of type Fee
+* function to select array of object of type FeeCategory from database
+* @return array of objects of type FeeCategory
 */
   public function selectAll($pageSize=0,$pageNo=null){
     //determine page size
@@ -128,14 +120,14 @@ class FeeDao{
       $limitClause = 'LIMIT '.($pageNo*$pageSize).','.$pageSize;
     }
     try{
-      $sql="SELECT * FROM fee $limitClause";
+      $sql="SELECT * FROM fee_category $limitClause";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $fee = $this->getFields($row);
-        $objects[]=$fee;
+        $feeCategory = $this->getFields($row);
+        $objects[]=$feeCategory;
       }
       $stmt->close();
       return $objects;
@@ -147,19 +139,19 @@ class FeeDao{
   }
 
 /**
-* function to select single instance of object of type Fee from database
-* @return object of type Fee
+* function to select single instance of object of type FeeCategory from database
+* @return object of type FeeCategory
 */
-  public function select($feeId){
+  public function select($feeCategoryId){
     try{
-      $sql="SELECT * FROM `fee` WHERE `feeId`=?";
+      $sql="SELECT * FROM `fee_category` WHERE `feeCategoryId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$feeId);
+      $stmt->bind_param("i",$feeCategoryId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
-        $fee = $this->getFields($row);
-        return $fee;
+        $feeCategory = $this->getFields($row);
+        return $feeCategory;
       }
       $stmt->close();
       return null;
@@ -171,10 +163,10 @@ class FeeDao{
   }
 
 /**
-* function to select array of object of type Fee from database
+* function to select array of object of type FeeCategory from database
 * @param fields: array of fields consisting of one or more fields to select by
 * @param values: array of values consisting of one or more values for corresponding fields. Number must correspond with fields number.
-* @return array of objects of type Fee
+* @return array of objects of type FeeCategory
 */
   public function selectBy($fields,$values,$types,$orderByFields=array(),$pageSize=0,$pageNo=null){
     //determine page size
@@ -203,14 +195,14 @@ class FeeDao{
     }
 
     try{
-      $sql="SELECT * FROM fee  WHERE ".implode(" AND ",$whereVars) .(sizeof($orderByFields)>0?("ORDER BY ".implode(",",$orderByFields)):"")." $limitClause";
+      $sql="SELECT * FROM fee_category  WHERE ".implode(" AND ",$whereVars) .(sizeof($orderByFields)>0?("ORDER BY ".implode(",",$orderByFields)):"")." $limitClause";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $fee = $this->getFields($row);
-        $objects[]=$fee;
+        $feeCategory = $this->getFields($row);
+        $objects[]=$feeCategory;
       }
       $stmt->close();
       return $objects;
@@ -222,14 +214,14 @@ class FeeDao{
   }
 
 /**
-* function to delete a single instance of object of type Fee from database
+* function to delete a single instance of object of type FeeCategory from database
 * @return boolean
 */
-  public function delete($feeId){
+  public function delete($feeCategoryId){
     try{
-      $sql="DELETE FROM `fee` WHERE `feeId`=?";
+      $sql="DELETE FROM `fee_category` WHERE `feeCategoryId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$feeId);
+      $stmt->bind_param("i",$feeCategoryId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -242,20 +234,20 @@ class FeeDao{
   }
 
 /**
-* function to select array of object of type Fee from database
+* function to select array of object of type FeeCategory from database
 * @param values: whereClause containing search conditions.
-* @return array of objects of type Fee
+* @return array of objects of type FeeCategory
 */
   public function selectByWhereClause($whereClause){
     try{
-      $sql="SELECT * FROM fee  WHERE ".$whereClause;
+      $sql="SELECT * FROM fee_category  WHERE ".$whereClause;
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $fee = $this->getFields($row);
-        $objects[]=$fee;
+        $feeCategory = $this->getFields($row);
+        $objects[]=$feeCategory;
       }
       $stmt->close();
       return $objects;
@@ -292,18 +284,14 @@ class FeeDao{
   }
 
 /**
-* function to select array of object of type Fee from database
+* function to select array of object of type FeeCategory from database
 * @param values: whereClause containing search conditions.
-* @return array of objects of type Fee
+* @return array of objects of type FeeCategory
 */
   public function getFields($row){
-    $fee= new Fee();
-      $fee->setFeeId($row['feeId']);
-      $fee->setName($row['name']);
-      $fee->setDescription($row['description']);
-      $fee->setFeeCategoryId($row['feeCategoryId']);
-      $fee->setAmount($row['amount']);
-      $fee->setStatus($row['status']);
-    return $fee;
+    $feeCategory= new FeeCategory();
+      $feeCategory->setFeeCategoryId($row['feeCategoryId']);
+      $feeCategory->setName($row['name']);
+    return $feeCategory;
   }
 }

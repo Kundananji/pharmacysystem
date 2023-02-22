@@ -113,6 +113,7 @@ class HospitalProcedure implements \JsonSerializable{
 */
   public function toString(){
     return $this->name;
+    return ;
 
   }
 

@@ -7,6 +7,7 @@ class Fee implements \JsonSerializable{
   private $feeId;
   private $name;
   private $description;
+  private $feeCategoryId;
   private $amount;
   private $status;
 
@@ -72,6 +73,24 @@ class Fee implements \JsonSerializable{
   }
 
 /**
+* function to set the value of feeCategoryId
+* @param feeCategoryId : value to set
+*/
+  public function setFeeCategoryId($feeCategoryId){
+    $this->feeCategoryId=$feeCategoryId;
+
+  }
+
+/**
+* function to get the value of feeCategoryId
+* @return int(10)
+*/
+  public function getFeeCategoryId(){
+    return $this->feeCategoryId;
+
+  }
+
+/**
 * function to set the value of amount
 * @param amount : value to set
 */
@@ -112,7 +131,7 @@ class Fee implements \JsonSerializable{
 * @return string
 */
   public function toString(){
-    return $this->name;
+    return $this->name.'&nbsp;-&nbsp;'.$this->amount;
 
   }
 

@@ -75,6 +75,7 @@ class JobPosition implements \JsonSerializable{
 */
   public function toString(){
     return $this->name;
+    return ;
 
   }
 
