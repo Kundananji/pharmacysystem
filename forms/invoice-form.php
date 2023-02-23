@@ -155,6 +155,36 @@ if(isset($invoiceId)){
       ?>
     </select>
 </div> <!--end form-group-->
+
+ <!--start of form group-->
+<div class="form-group input-invoice-status">
+
+                 <?php
+                  $readonly = in_array('status',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($invoiceEdit->getInvoiceId()!=null){ $defaultValues['status']=$invoiceEdit->getStatus();};
+                  ?>
+                  <label for="input-invoice-status">Status*</label>
+  <?php 
+    include_once("../classes/invoice-status.php");
+    include_once("../daos/invoice-status-dao.php");
+
+    $invoiceStatusDao = new InvoiceStatusDao(); 
+    $objects = $invoiceStatusDao->selectAll(); 
+    ?>
+    <select name="status" id="input-invoice-status" class=" form-control" required <?php echo $readonly;?>  >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Invoice&nbsp;status--</option>
+      <?php
+        foreach($objects as $invoiceStatus){
+          $optionValue  = $invoiceStatus->getInvoiceStatusId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['status']) && $defaultValues['status']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['status']) && $defaultValues['status']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['status']) && $defaultValues['status']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$invoiceStatus->toString().'</option>';
+        }
+      ?>
+    </select>
+</div> <!--end form-group-->
 <input id="form-submit-button" type="submit" name="submit" value="Save" class="btn btn-primary"/>
 <div id="form-submit-feedback mt-4"></div> <!--  form feedback -->
 </form> <!--  end of form -->

@@ -9,6 +9,7 @@ class Patients implements \JsonSerializable{
   private $firstName;
   private $otherNames;
   private $lastName;
+  private $gender;
   private $address;
   private $contactNumber;
   private $dateOfBirth;
@@ -109,6 +110,24 @@ class Patients implements \JsonSerializable{
 */
   public function getLastName(){
     return $this->lastName;
+
+  }
+
+/**
+* function to set the value of gender
+* @param gender : value to set
+*/
+  public function setGender($gender){
+    $this->gender=$gender;
+
+  }
+
+/**
+* function to get the value of gender
+* @return int(10)
+*/
+  public function getGender(){
+    return $this->gender;
 
   }
 

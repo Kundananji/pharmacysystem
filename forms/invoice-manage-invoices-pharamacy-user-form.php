@@ -41,6 +41,14 @@ if(isset($_GET['patientId']) && $_GET['patientId']!=''){
   $patientsDao = new PatientsDao(); 
   $patients =  $patientsDao->select(filter_var($_GET['patientId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
+//make available variables of invoice_status available in scope for use:
+if(isset($_GET['invoiceStatusId']) && $_GET['invoiceStatusId']!=''){
+  include_once("../classes/invoice-status.php");
+  include_once("../daos/invoice-status-dao.php");
+
+  $invoiceStatusDao = new InvoiceStatusDao(); 
+  $invoiceStatus =  $invoiceStatusDao->select(filter_var($_GET['invoiceStatusId'],FILTER_SANITIZE_NUMBER_INT)); 
+}
 
 
  if($_SESSION['user_profile'] == 'Pharamacy User'){
@@ -49,6 +57,7 @@ if(isset($_GET['patientId']) && $_GET['patientId']!=''){
   $defaultValues['taxAmount']="0";
   $defaultValues['amount']="0";
   $defaultValues['invoiceDate']=isset($env_dateNow)?$env_dateNow:null;
+  $defaultValues['status']="1";
 }
 ?> 
 <?php
@@ -183,6 +192,35 @@ if(isset($invoiceId)){
           $disabled  =  $readonly=='readonly' && isset($defaultValues['isPaidFor']) && $defaultValues['isPaidFor']!=$optionValue?"disabled":"" ;
           $selected  =  isset($defaultValues['isPaidFor']) && $defaultValues['isPaidFor']==$optionValue || $invoiceEdit->getIsPaidFor()==$yesno->getId() ?"selected":"" ;
           echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'          >'.$yesno->toString().'</option>';
+        }
+      ?>
+    </select>
+</div> <!--end form-group-->
+<?php
+  $readonly = in_array('status',$uneditableFields)?'readonly':'';
+  //override default value with actual value if object is sent
+    if($invoiceEdit->getInvoiceId()!=null){ $defaultValues['status']=$invoiceEdit->getStatus();};
+?>
+
+ <!--start of form group-->
+<div class="form-group d-none input-invoice-status">
+  <label for="input-invoice-status">Status*</label>
+  <?php 
+    include_once("../classes/invoice-status.php");
+    include_once("../daos/invoice-status-dao.php");
+
+    $invoiceStatusDao = new InvoiceStatusDao(); 
+    $objects = $invoiceStatusDao->selectAll(); 
+    ?>
+    <select name="status" id="input-invoice-status" class=" form-control" required <?php echo $readonly;?>  >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Status*--</option>
+      <?php
+        foreach($objects as $invoiceStatus){
+          $optionValue  = $invoiceStatus->getInvoiceStatusId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['status']) && $defaultValues['status']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['status']) && $defaultValues['status']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['status']) && $defaultValues['status']==$optionValue || $invoiceEdit->getStatus()==$invoiceStatus->getInvoiceStatusId() ?"selected":"" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'          >'.$invoiceStatus->toString().'</option>';
         }
       ?>
     </select>

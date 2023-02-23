@@ -29,7 +29,7 @@ $appendQuery='';
 foreach($_POST as $key=>$value){
   $$key =filter_var($_POST[$key],FILTER_SANITIZE_STRING);
   if($key == "_term") continue;
-  $appendQuery.=' AND '. $key.'='.$$key;
+    $appendQuery.=' AND '. $key.'='.$$key;
 }
 //make available variables of patients available in scope for use:
 if(isset($_POST['patientId']) && $_POST['patientId']!=''){

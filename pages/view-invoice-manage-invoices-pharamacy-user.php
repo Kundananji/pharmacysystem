@@ -69,7 +69,8 @@ if(isset($_POST['id']) && $_POST['id']!=''){
 }
 
 //echo $appendQuery;
-$currentInvoices = $dao->selectByWhereClause($appendQuery==null?'(isPaidFor = 0)':'(1'.$appendQuery.')');
+//get active invoices
+$currentInvoices = $dao->selectByWhereClause($appendQuery==null?'(isPaidFor = 0 AND status=1)':'(1'.$appendQuery.')');
 $objects=[];
 
 ?>
@@ -80,7 +81,7 @@ $objects=[];
   if(sizeof($currentInvoices) ==0){
 
    //load all invoices if current invoices do not exist
-   $objects = $dao->selectByWhereClause('1  ORDER BY invoiceDate Desc LIMIT 50');
+   $objects = $dao->selectByWhereClause('1 AND status =1 ORDER BY invoiceDate Desc LIMIT 50');
 ?>
 
  <div class="mb-3">
@@ -267,9 +268,13 @@ echo'</tr>';
    if(sizeof($receipts)>0){
     $receipt = $receipts[0];
    echo'
-   <a href="javascript:void(0)" onclick="Receipt.viewReceiptViewreceipt_pharamacyuser({receiptId:\''.$receipt->getReceiptId().'\',})" class="btn btn-success"><em class="fa fa-print"></em> Print Receipt</a>
+       <a href="javascript:void(0)" onclick="Receipt.viewReceiptViewreceipt_pharamacyuser({receiptId:\''.$receipt->getReceiptId().'\',})" class="btn btn-success"><em class="fa fa-print"></em> Print Receipt</a>
    ';
    }
+   }
+   //cancel invoice
+   if($invoice->getStatus()==1 && $invoice->getIsPaidFor()==0){
+    echo' <a href="javascript:void(0)" onclick="Invoice.CancelInvoice({ id:'. $invoice->getInvoiceId().',status:\'2\'})" class="btn btn-danger"><em class="fa fa-times"></em> Cancel Invoice</a>';
    }
    echo'
    </p>';

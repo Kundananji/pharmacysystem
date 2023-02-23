@@ -20,6 +20,9 @@ if(!isset($_POST["firstName"]) || $_POST["firstName"]==''){
 if(!isset($_POST["lastName"]) || $_POST["lastName"]==''){ 
   exit(json_encode(array("title"=>"lastName required","status"=>"error","message"=>"The field lastName is required")));
 }
+if(!isset($_POST["gender"]) || $_POST["gender"]==''){ 
+  exit(json_encode(array("title"=>"gender required","status"=>"error","message"=>"The field gender is required")));
+}
 if(!isset($_POST["dateOfBirth"]) || $_POST["dateOfBirth"]==''){ 
   exit(json_encode(array("title"=>"dateOfBirth required","status"=>"error","message"=>"The field dateOfBirth is required")));
 }
@@ -35,6 +38,7 @@ $patientsEdit->setFileId(!isset($_POST["fileId"]) || $_POST["fileId"]==""?NULL:f
 $patientsEdit->setFirstName(!isset($_POST["firstName"]) || $_POST["firstName"]==""?NULL:filter_var($_POST["firstName"],FILTER_SANITIZE_STRING));
 $patientsEdit->setOtherNames(!isset($_POST["otherNames"]) || $_POST["otherNames"]==""?NULL:filter_var($_POST["otherNames"],FILTER_SANITIZE_STRING));
 $patientsEdit->setLastName(!isset($_POST["lastName"]) || $_POST["lastName"]==""?NULL:filter_var($_POST["lastName"],FILTER_SANITIZE_STRING));
+$patientsEdit->setGender(!isset($_POST["gender"]) || $_POST["gender"]==""?NULL:filter_var($_POST["gender"],FILTER_SANITIZE_NUMBER_INT));
 $patientsEdit->setAddress(!isset($_POST["address"]) || $_POST["address"]==""?NULL:filter_var($_POST["address"],FILTER_SANITIZE_STRING));
 $patientsEdit->setContactNumber(!isset($_POST["contactNumber"]) || $_POST["contactNumber"]==""?NULL:filter_var($_POST["contactNumber"],FILTER_SANITIZE_STRING));
 $patientsEdit->setDateOfBirth(!isset($_POST["dateOfBirth"]) || $_POST["dateOfBirth"]==""?NULL:convertDate($_POST["dateOfBirth"]));

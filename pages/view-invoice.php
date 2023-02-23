@@ -34,6 +34,14 @@ if(isset($_POST['patientId']) && $_POST['patientId']!=''){
   $patientsDao = new PatientsDao(); 
   $patients =  $patientsDao->select(filter_var($_GET['patientId'],FILTER_SANITIZE_NUMBER_INT)); 
 }
+//make available variables of invoice_status available in scope for use:
+if(isset($_POST['invoiceStatusId']) && $_POST['invoiceStatusId']!=''){
+  include_once("../classes/invoice-status.php");
+  include_once("../daos/invoice-status-dao.php");
+
+  $invoiceStatusDao = new InvoiceStatusDao(); 
+  $invoiceStatus =  $invoiceStatusDao->select(filter_var($_GET['invoiceStatusId'],FILTER_SANITIZE_NUMBER_INT)); 
+}
 include("../daos/invoice-dao.php");
 include("../classes/invoice.php");
 include("../config/database.php");
@@ -71,6 +79,9 @@ $dao = new InvoiceDao();
       </th>
       <th>
         Is&nbsp;Paid&nbsp;For
+      </th>
+      <th>
+        Status
       </th>
       <th>
       </th>
@@ -135,6 +146,16 @@ $dao = new InvoiceDao();
           $fyesnoDao = new YesnoDao(); 
           $fyesno = $fyesnoDao->select($invoice->getIsPaidFor()); 
           echo  $fyesno==null?"-": $fyesno->toString();
+        ?>
+        </td>
+        <td>
+        <?php
+          include_once("../classes/invoice-status.php");
+          include_once("../daos/invoice-status-dao.php");
+
+          $finvoiceStatusDao = new InvoiceStatusDao(); 
+          $finvoiceStatus = $finvoiceStatusDao->select($invoice->getStatus()); 
+          echo  $finvoiceStatus==null?"-": $finvoiceStatus->toString();
         ?>
         </td>
         <td>

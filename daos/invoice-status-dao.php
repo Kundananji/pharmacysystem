@@ -1,41 +1,32 @@
 <?php
-class PatientsDao{
+class InvoiceStatusDao{
 
 /**
-* function to insert single object of type Patients into database
-* @param object instance of type Patients
-* @return inserted objected of type Patients
+* function to insert single object of type InvoiceStatus into database
+* @param object instance of type InvoiceStatus
+* @return inserted objected of type InvoiceStatus
 */
-  public function insert($patients){
-    $patientId=  $patients->getPatientId();
-    $fileId=  $patients->getFileId();
-    $firstName=  $patients->getFirstName();
-    $otherNames=  $patients->getOtherNames();
-    $lastName=  $patients->getLastName();
-    $gender=  $patients->getGender();
-    $address=  $patients->getAddress();
-    $contactNumber=  $patients->getContactNumber();
-    $dateOfBirth=  $patients->getDateOfBirth();
-    $nationality=  $patients->getNationality();
-    $status=  $patients->getStatus();
+  public function insert($invoiceStatus){
+    $invoiceStatusId=  $invoiceStatus->getInvoiceStatusId();
+    $name=  $invoiceStatus->getName();
     try{
-      $sql="INSERT INTO patients(`patientId`,`fileId`,`firstName`,`otherNames`,`lastName`,`gender`,`address`,`contactNumber`,`dateOfBirth`,`nationality`,`status`) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO invoice_status(`invoiceStatusId`,`name`) VALUES(?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("issssissssi",$patientId,$fileId,$firstName,$otherNames,$lastName,$gender,$address,$contactNumber,$dateOfBirth,$nationality,$status);
+      $stmt->bind_param("is",$invoiceStatusId,$name);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
       $stmt->close();
 
-      $sql="SELECT * FROM patients WHERE `patientId`=?";
+      $sql="SELECT * FROM invoice_status WHERE `invoiceStatusId`=?";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->bind_param("i",$inserted);
       $stmt->execute();
       $result = $stmt->get_result();
       if($row=$result->fetch_assoc()){
-      $insertedPatients = $this->getFields($row);
+      $insertedInvoiceStatus = $this->getFields($row);
         $stmt->close();
-        return $insertedPatients;
+        return $insertedInvoiceStatus;
       }
       $stmt->close();
       return null;
@@ -47,38 +38,29 @@ class PatientsDao{
   }
 
 /**
-* function to update single object of type Patients
-* @param object instance of type Patients
-* @return updated objected of type Patients
+* function to update single object of type InvoiceStatus
+* @param object instance of type InvoiceStatus
+* @return updated objected of type InvoiceStatus
 */
-  public function update($patients){
-    $patientId=  $patients->getPatientId();
-    $fileId=  $patients->getFileId();
-    $firstName=  $patients->getFirstName();
-    $otherNames=  $patients->getOtherNames();
-    $lastName=  $patients->getLastName();
-    $gender=  $patients->getGender();
-    $address=  $patients->getAddress();
-    $contactNumber=  $patients->getContactNumber();
-    $dateOfBirth=  $patients->getDateOfBirth();
-    $nationality=  $patients->getNationality();
-    $status=  $patients->getStatus();
+  public function update($invoiceStatus){
+    $invoiceStatusId=  $invoiceStatus->getInvoiceStatusId();
+    $name=  $invoiceStatus->getName();
     try{
-      $sql="UPDATE patients SET `fileId`=?,`firstName`=?,`otherNames`=?,`lastName`=?,`gender`=?,`address`=?,`contactNumber`=?,`dateOfBirth`=?,`nationality`=?,`status`=? WHERE patientId =?";
+      $sql="UPDATE invoice_status SET `name`=? WHERE invoiceStatusId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("ssssissssii",$fileId,$firstName,$otherNames,$lastName,$gender,$address,$contactNumber,$dateOfBirth,$nationality,$status,$patientId);
+      $stmt->bind_param("si",$name,$invoiceStatusId);
       $stmt->execute();
       $stmt->close();
 
-      $sql="SELECT * FROM patients WHERE `patientId`=?";
+      $sql="SELECT * FROM invoice_status WHERE `invoiceStatusId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$patientId);
+      $stmt->bind_param("i",$invoiceStatusId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
-        $updatedPatients = $this->getFields($row);
+        $updatedInvoiceStatus = $this->getFields($row);
         $stmt->close();
-        return $updatedPatients;
+        return $updatedInvoiceStatus;
       }
       $stmt->close();
       return null;
@@ -90,8 +72,8 @@ class PatientsDao{
   }
 
 /**
-* function to select array of object of type Patients from database through the provided search term
-* @return array of objects of type Patients
+* function to select array of object of type InvoiceStatus from database through the provided search term
+* @return array of objects of type InvoiceStatus
 */
   public function search($term,$searchFields,$extra=null,$pageSize=0,$pageNo=null){
     //determine page size
@@ -107,14 +89,14 @@ class PatientsDao{
       $whereClause[]=$searchField.' LIKE \'%'.$term.'%\'';
     }
     try{
-      $sql="SELECT * FROM patients WHERE (".implode(' OR ',$whereClause).") ".($extra!=null?("AND ".$extra):'')." $limitClause";
+      $sql="SELECT * FROM invoice_status WHERE (".implode(' OR ',$whereClause).") ".($extra!=null?("AND ".$extra):'')." $limitClause";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $patients = $this->getFields($row);
-        $objects[]=$patients;
+        $invoiceStatus = $this->getFields($row);
+        $objects[]=$invoiceStatus;
       }
       $stmt->close();
       return $objects;
@@ -126,8 +108,8 @@ class PatientsDao{
   }
 
 /**
-* function to select array of object of type Patients from database
-* @return array of objects of type Patients
+* function to select array of object of type InvoiceStatus from database
+* @return array of objects of type InvoiceStatus
 */
   public function selectAll($pageSize=0,$pageNo=null){
     //determine page size
@@ -138,14 +120,14 @@ class PatientsDao{
       $limitClause = 'LIMIT '.($pageNo*$pageSize).','.$pageSize;
     }
     try{
-      $sql="SELECT * FROM patients $limitClause";
+      $sql="SELECT * FROM invoice_status $limitClause";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $patients = $this->getFields($row);
-        $objects[]=$patients;
+        $invoiceStatus = $this->getFields($row);
+        $objects[]=$invoiceStatus;
       }
       $stmt->close();
       return $objects;
@@ -157,19 +139,19 @@ class PatientsDao{
   }
 
 /**
-* function to select single instance of object of type Patients from database
-* @return object of type Patients
+* function to select single instance of object of type InvoiceStatus from database
+* @return object of type InvoiceStatus
 */
-  public function select($patientsId){
+  public function select($invoiceStatusId){
     try{
-      $sql="SELECT * FROM `patients` WHERE `patientId`=?";
+      $sql="SELECT * FROM `invoice_status` WHERE `invoiceStatusId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$patientsId);
+      $stmt->bind_param("i",$invoiceStatusId);
       $stmt->execute();
       $result = $stmt->get_result();
       while($row=$result->fetch_assoc()){
-        $patients = $this->getFields($row);
-        return $patients;
+        $invoiceStatus = $this->getFields($row);
+        return $invoiceStatus;
       }
       $stmt->close();
       return null;
@@ -181,10 +163,10 @@ class PatientsDao{
   }
 
 /**
-* function to select array of object of type Patients from database
+* function to select array of object of type InvoiceStatus from database
 * @param fields: array of fields consisting of one or more fields to select by
 * @param values: array of values consisting of one or more values for corresponding fields. Number must correspond with fields number.
-* @return array of objects of type Patients
+* @return array of objects of type InvoiceStatus
 */
   public function selectBy($fields,$values,$types,$orderByFields=array(),$pageSize=0,$pageNo=null){
     //determine page size
@@ -213,14 +195,14 @@ class PatientsDao{
     }
 
     try{
-      $sql="SELECT * FROM patients  WHERE ".implode(" AND ",$whereVars) .(sizeof($orderByFields)>0?("ORDER BY ".implode(",",$orderByFields)):"")." $limitClause";
+      $sql="SELECT * FROM invoice_status  WHERE ".implode(" AND ",$whereVars) .(sizeof($orderByFields)>0?("ORDER BY ".implode(",",$orderByFields)):"")." $limitClause";
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $patients = $this->getFields($row);
-        $objects[]=$patients;
+        $invoiceStatus = $this->getFields($row);
+        $objects[]=$invoiceStatus;
       }
       $stmt->close();
       return $objects;
@@ -232,14 +214,14 @@ class PatientsDao{
   }
 
 /**
-* function to delete a single instance of object of type Patients from database
+* function to delete a single instance of object of type InvoiceStatus from database
 * @return boolean
 */
-  public function delete($patientsId){
+  public function delete($invoiceStatusId){
     try{
-      $sql="DELETE FROM `patients` WHERE `patientId`=?";
+      $sql="DELETE FROM `invoice_status` WHERE `invoiceStatusId`=?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("i",$patientsId);
+      $stmt->bind_param("i",$invoiceStatusId);
       $stmt->execute();
       $numRows = $stmt->affected_rows;
       $stmt->close();
@@ -252,20 +234,20 @@ class PatientsDao{
   }
 
 /**
-* function to select array of object of type Patients from database
+* function to select array of object of type InvoiceStatus from database
 * @param values: whereClause containing search conditions.
-* @return array of objects of type Patients
+* @return array of objects of type InvoiceStatus
 */
   public function selectByWhereClause($whereClause){
     try{
-      $sql="SELECT * FROM patients  WHERE ".$whereClause;
+      $sql="SELECT * FROM invoice_status  WHERE ".$whereClause;
       $stmt=Database::getConnection()->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $objects = array();
       while($row=$result->fetch_assoc()){
-        $patients = $this->getFields($row);
-        $objects[]=$patients;
+        $invoiceStatus = $this->getFields($row);
+        $objects[]=$invoiceStatus;
       }
       $stmt->close();
       return $objects;
@@ -302,23 +284,14 @@ class PatientsDao{
   }
 
 /**
-* function to select array of object of type Patients from database
+* function to select array of object of type InvoiceStatus from database
 * @param values: whereClause containing search conditions.
-* @return array of objects of type Patients
+* @return array of objects of type InvoiceStatus
 */
   public function getFields($row){
-    $patients= new Patients();
-      $patients->setPatientId($row['patientId']);
-      $patients->setFileId($row['fileId']);
-      $patients->setFirstName($row['firstName']);
-      $patients->setOtherNames($row['otherNames']);
-      $patients->setLastName($row['lastName']);
-      $patients->setGender($row['gender']);
-      $patients->setAddress($row['address']);
-      $patients->setContactNumber($row['contactNumber']);
-      $patients->setDateOfBirth($row['dateOfBirth']);
-      $patients->setNationality($row['nationality']);
-      $patients->setStatus($row['status']);
-    return $patients;
+    $invoiceStatus= new InvoiceStatus();
+      $invoiceStatus->setInvoiceStatusId($row['invoiceStatusId']);
+      $invoiceStatus->setName($row['name']);
+    return $invoiceStatus;
   }
 }

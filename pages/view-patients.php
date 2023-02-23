@@ -26,6 +26,14 @@ if(isset($_POST['id']) && $_POST['id']!=''){
   $statusDao = new StatusDao(); 
   $status =  $statusDao->select(filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT)); 
 }
+//make available variables of gender available in scope for use:
+if(isset($_POST['genderId']) && $_POST['genderId']!=''){
+  include_once("../classes/gender.php");
+  include_once("../daos/gender-dao.php");
+
+  $genderDao = new GenderDao(); 
+  $gender =  $genderDao->select(filter_var($_GET['genderId'],FILTER_SANITIZE_NUMBER_INT)); 
+}
 include("../daos/patients-dao.php");
 include("../classes/patients.php");
 include("../config/database.php");
@@ -54,6 +62,9 @@ $dao = new PatientsDao();
       </th>
       <th>
         Last&nbsp;Name
+      </th>
+      <th>
+        Gender
       </th>
       <th>
         Address
@@ -108,6 +119,16 @@ $dao = new PatientsDao();
         <td>
         <?php
           echo $patients->getLastName();
+        ?>
+        </td>
+        <td>
+        <?php
+          include_once("../classes/gender.php");
+          include_once("../daos/gender-dao.php");
+
+          $fgenderDao = new GenderDao(); 
+          $fgender = $fgenderDao->select($patients->getGender()); 
+          echo  $fgender==null?"-": $fgender->toString();
         ?>
         </td>
         <td>

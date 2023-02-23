@@ -181,11 +181,51 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   if(storedValue){
     $('#'+id).val(storedValue);
   }
+  id = 'input-invoice-status' +'_row_' + i;
+  storedValue = localStorage.getItem(id);
+  if(storedValue){
+    $('#'+id).val(storedValue);
+  }
   if(incrementRowCount){
     localStorage.setItem("table_invoice",rowCount-1);
   }
   localStorage.setItem("table_invoice_id",tableId);
 }
+
+/**
+/*
+/* function to update CancelInvoice 
+/* @params id: unique identifer for the object being updated
+/*
+**/
+ let CancelInvoice = (data) =>{
+  swal({
+    title: "Once you cancel this invoice, you will not be able to see it.",
+    text: "Are you Sure?",
+    type: "warning",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    showLoaderOnConfirm: true,
+  }, ()=> {
+    completeAction();
+  });
+  let completeAction = ()=>{
+    $.ajax({
+      url: "scripts/cancelinvoice.php",
+      type: "post",
+      dataType: "json",
+      data:data,
+      success: (data)=>{
+        if(data.status == "success"){
+          viewInvoiceManageinvoices_pharamacyuser({});
+          swal(data.title,data.message,'success');
+      }else{
+          swal(data.title,data.message,'warning');
+        }
+      }
+    });
+  }
+};
 
 
 //declare fields in scope
@@ -256,7 +296,8 @@ let addNewInvoiceManageinvoices_pharamacyuser=(data)=>{
       if(resp.status == "success"){
         $('#dataInputModal').modal('hide');
         $('#form-submit-feedback').html('<div class="alert alert-success"><i class="fa fa-check"></i> '+data.message+'</div>');
-                viewInvoiceManageinvoices_pharamacyuser(args);
+        Invoice.viewInvoiceManageinvoices_pharamacyuser(args);
+        viewInvoiceManageinvoices_pharamacyuser(args);
         swal(resp.title,resp.message,'success');
       }else{
         $('#form-submit-feedback').html('<div class="alert alert-danger"><i class="fa fa-times"></i> '+resp.message+'</div>');
@@ -288,7 +329,8 @@ let addNewInvoiceManageinvoices_pharamacyuser=(data)=>{
       success: (data)=>{
         if(data.status == "success"){
              viewInvoiceManageinvoices_pharamacyuser(args);
-                    swal(data.title,data.message,'success');
+          Invoice.viewInvoiceManageinvoices_pharamacyuser(args);
+          swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');
         }
@@ -420,6 +462,7 @@ $(document).ready(()=>{
    submitFormInvoice : submitFormInvoice, 
    uploadFile : uploadFile, 
    deleteFile : deleteFile, 
+   CancelInvoice : CancelInvoice, 
    viewInvoiceManageinvoices_pharamacyuser : viewInvoiceManageinvoices_pharamacyuser, 
     addNewInvoiceManageinvoices_pharamacyuser :  addNewInvoiceManageinvoices_pharamacyuser, 
    submitFormInvoiceManageinvoices_pharamacyuser : submitFormInvoiceManageinvoices_pharamacyuser, 

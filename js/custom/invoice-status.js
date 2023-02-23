@@ -1,4 +1,4 @@
-let Patients  = (function($) {
+let InvoiceStatus  = (function($) {
 "use strict";
 
 /**
@@ -78,7 +78,7 @@ let uploadFile=(obj,typeOfFile,fieldId,fieldName)=>{
         } else if(typeOfFile =='file'){
           url='img/file-thumbnail.png';
         }
-        var output ='<div id="" class="row m-3"><div class="col-sm-12 col-md-2 col-lg-2"><img src="'+url+'" class="rounded" style="width:100%"/></div><div class="col-sm-12 col-md-10 col-lg-10"><a href="javascript:void(0)" onclick="Patients.deleteFile(\''+typeOfFile+'\',\''+fieldId+'\',\''+fieldName+'\')" class="btn"><i class="fa fa-trash"></i> Delete Image</a></div></div>';
+        var output ='<div id="" class="row m-3"><div class="col-sm-12 col-md-2 col-lg-2"><img src="'+url+'" class="rounded" style="width:100%"/></div><div class="col-sm-12 col-md-10 col-lg-10"><a href="javascript:void(0)" onclick="InvoiceStatus.deleteFile(\''+typeOfFile+'\',\''+fieldId+'\',\''+fieldName+'\')" class="btn"><i class="fa fa-trash"></i> Delete Image</a></div></div>';
         $('#input_feedback_'+fieldName+'_'+fieldId).html(output);
         //update input with new url
         $("#"+fieldId).val(response.url);
@@ -109,8 +109,8 @@ let removeFormTableRow=(tableId,obj)=>{
   rows[i].innerHTML.replace(/_row_[0-9]/g,'_row_'+rowCount);
   rowCount += 1;
   }
-  localStorage.setItem("table_patients_id",tableId);
-    localStorage.setItem("table_patients",(rows.length-1));
+  localStorage.setItem("table_invoice_status_id",tableId);
+    localStorage.setItem("table_invoice_status",(rows.length-1));
 }
 
 /**
@@ -136,88 +136,43 @@ let addFormTableRow=(tableId,incrementRowCount=true)=>{
   var i = rowCount-1; //add row number
   var id = undefined;
   var storedValue = undefined;
-  id = 'input-patients-patient-id' +'_row_' + i;
+  id = 'input-invoice-status-invoice-status-id' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
-  id = 'input-patients-file-id' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-first-name' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-other-names' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-last-name' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-gender' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-address' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-contact-number' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-date-of-birth' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-nationality' +'_row_' + i;
-  storedValue = localStorage.getItem(id);
-  if(storedValue){
-    $('#'+id).val(storedValue);
-  }
-  id = 'input-patients-status' +'_row_' + i;
+  id = 'input-invoice-status-name' +'_row_' + i;
   storedValue = localStorage.getItem(id);
   if(storedValue){
     $('#'+id).val(storedValue);
   }
   if(incrementRowCount){
-    localStorage.setItem("table_patients",rowCount-1);
+    localStorage.setItem("table_invoice_status",rowCount-1);
   }
-  localStorage.setItem("table_patients_id",tableId);
+  localStorage.setItem("table_invoice_status_id",tableId);
 }
 
 let divPageContent = $('#page-content');
-let viewPatients=( patientId)=>{
-  let viewInModal = $('#link-view-patients').data('viewInModal'); 
+let viewInvoiceStatus=( invoiceStatusId)=>{
+  let viewInModal = $('#link-view-invoice-status').data('viewInModal'); 
     loader(divPageContent);
   $.ajax({
-    url: "pages/view-patients.php",
+    url: "pages/view-invoice-status.php",
     type: "post",
     data: { 
-      patientId:patientId
+      invoiceStatusId:invoiceStatusId
      },
     success: (data)=>{
         divPageContent.html(data);
-      $('#table-patients').DataTable({});
+      $('#table-invoice-status').DataTable({});
     }
   });
 }
 
-let addNewPatients=(data)=>{
+let addNewInvoiceStatus=(data)=>{
   $('#dataInputModal').modal('show');
   $.ajax({
-    url: "forms/patients-form.php",
+    url: "forms/invoice-status-form.php",
     type: "get",
     data:data,
     success: (data)=>{
@@ -233,9 +188,9 @@ let addNewPatients=(data)=>{
   });
 }
 
- let submitFormPatients = (e,args) =>{
+ let submitFormInvoiceStatus = (e,args) =>{
   e.preventDefault();
-  let oForm = document.getElementById('form-patients');
+  let oForm = document.getElementById('form-invoice-status');
   let elements = oForm.elements;
   let data = {};
   let tinyFields = [];
@@ -247,11 +202,11 @@ let addNewPatients=(data)=>{
       data[element.name]=element.value;
     }
   };
-  console.log('patients',data);
+  console.log('invoice_status',data);
   $('#form-submit-feedback').html('<div class="alert alert-warning"><i class="fa fa-hourglass"></i> Submitting. Please wait...</div>');
   $('#form-submit-button').prop('disabled', true);
   $.ajax({
-    url: "scripts/submit-patients-form.php",
+    url: "scripts/submit-invoice-status-form.php",
     type: "post",
     dataType:"json",
     data:data,
@@ -260,7 +215,7 @@ let addNewPatients=(data)=>{
       if(data.status == "success"){
         $('#form-submit-feedback').html('<div class="alert alert-success"><i class="fa fa-check"></i> '+data.message+'</div>');
   $('#dataInputModal').modal('hide');
-        viewPatients(args);
+        viewInvoiceStatus(args);
         swal(data.title,data.message,'success');
       }else{
         $('#form-submit-feedback').html('<div class="alert alert-danger"><i class="fa fa-times"></i> '+data.message+'</div>');
@@ -275,7 +230,7 @@ let addNewPatients=(data)=>{
 /* function to delete item 
 /*
 **/
- let deletePatients = (patientsId) =>{
+ let deleteInvoiceStatus = (invoiceStatusId) =>{
   swal({
     title: "Are you sure you want to delete this item?",
     text: "If you are sure you want to delete; proceed and click okay below. Otherwise, cancel to abort.",
@@ -285,13 +240,13 @@ let addNewPatients=(data)=>{
     showLoaderOnConfirm: true,
   },  ()=> {
     $.ajax({
-      url: "scripts/delete-patients-item.php",
+      url: "scripts/delete-invoice-status-item.php",
       type: "post",
       dataType: "json",
-      data:{patientsId: patientsId},
+      data:{invoiceStatusId: invoiceStatusId},
       success: (data)=>{
         if(data.status == "success"){
-          viewPatients();
+          viewInvoiceStatus();
           swal(data.title,data.message,'success');
       }else{
           swal(data.title,data.message,'warning');
@@ -302,22 +257,22 @@ let addNewPatients=(data)=>{
 };
 
 $(document).ready(()=>{
-  $('#link-view-patients').off().on('click',()=>{
-    viewPatients();
+  $('#link-view-invoice-status').off().on('click',()=>{
+    viewInvoiceStatus();
   });
 
-  $('#add-new-patients').on('click',()=>{
-    addNewPatients();
+  $('#add-new-invoice-status').on('click',()=>{
+    addNewInvoiceStatus();
   });
 });
 
  return {
-   addNewPatients:addNewPatients,
-   deletePatients:deletePatients,
+   addNewInvoiceStatus:addNewInvoiceStatus,
+   deleteInvoiceStatus:deleteInvoiceStatus,
   removeFormTableRow:removeFormTableRow,
   addFormTableRow:addFormTableRow,
-  viewPatients:viewPatients,
-   submitFormPatients : submitFormPatients, 
+  viewInvoiceStatus:viewInvoiceStatus,
+   submitFormInvoiceStatus : submitFormInvoiceStatus, 
    uploadFile : uploadFile, 
    deleteFile : deleteFile, 
 }

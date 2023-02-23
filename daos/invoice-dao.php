@@ -15,10 +15,11 @@ class InvoiceDao{
     $taxAmount=  $invoice->getTaxAmount();
     $amount=  $invoice->getAmount();
     $isPaidFor=  $invoice->getIsPaidFor();
+    $status=  $invoice->getStatus();
     try{
-      $sql="INSERT INTO invoice(`invoiceId`,`invoiceNo`,`description`,`invoiceDate`,`patientId`,`taxAmount`,`amount`,`isPaidFor`) VALUES(?,?,?,?,?,?,?,?)";
+      $sql="INSERT INTO invoice(`invoiceId`,`invoiceNo`,`description`,`invoiceDate`,`patientId`,`taxAmount`,`amount`,`isPaidFor`,`status`) VALUES(?,?,?,?,?,?,?,?,?)";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("isssissi",$invoiceId,$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaidFor);
+      $stmt->bind_param("isssissii",$invoiceId,$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaidFor,$status);
       $stmt->execute();
       $stmt->store_result();
       $inserted = $stmt->insert_id;
@@ -57,10 +58,11 @@ class InvoiceDao{
     $taxAmount=  $invoice->getTaxAmount();
     $amount=  $invoice->getAmount();
     $isPaidFor=  $invoice->getIsPaidFor();
+    $status=  $invoice->getStatus();
     try{
-      $sql="UPDATE invoice SET `invoiceNo`=?,`description`=?,`invoiceDate`=?,`patientId`=?,`taxAmount`=?,`amount`=?,`isPaidFor`=? WHERE invoiceId =?";
+      $sql="UPDATE invoice SET `invoiceNo`=?,`description`=?,`invoiceDate`=?,`patientId`=?,`taxAmount`=?,`amount`=?,`isPaidFor`=?,`status`=? WHERE invoiceId =?";
       $stmt=Database::getConnection()->prepare($sql);
-      $stmt->bind_param("sssissii",$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaidFor,$invoiceId);
+      $stmt->bind_param("sssissiii",$invoiceNo,$description,$invoiceDate,$patientId,$taxAmount,$amount,$isPaidFor,$status,$invoiceId);
       $stmt->execute();
       $stmt->close();
 
@@ -310,6 +312,7 @@ class InvoiceDao{
       $invoice->setTaxAmount($row['taxAmount']);
       $invoice->setAmount($row['amount']);
       $invoice->setIsPaidFor($row['isPaidFor']);
+      $invoice->setStatus($row['status']);
     return $invoice;
   }
 }

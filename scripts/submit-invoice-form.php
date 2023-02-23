@@ -17,6 +17,9 @@ if(!isset($_POST["invoiceDate"]) || $_POST["invoiceDate"]==''){
 if(!isset($_POST["patientId"]) || $_POST["patientId"]==''){ 
   exit(json_encode(array("title"=>"patientId required","status"=>"error","message"=>"The field patientId is required")));
 }
+if(!isset($_POST["status"]) || $_POST["status"]==''){ 
+  exit(json_encode(array("title"=>"status required","status"=>"error","message"=>"The field status is required")));
+}
 
 $invoiceEdit->setInvoiceId(!isset($_POST["invoiceId"]) || $_POST["invoiceId"]==""?NULL:filter_var($_POST["invoiceId"],FILTER_SANITIZE_NUMBER_INT));
 $invoiceEdit->setInvoiceNo(!isset($_POST["invoiceNo"]) || $_POST["invoiceNo"]==""?NULL:filter_var($_POST["invoiceNo"],FILTER_SANITIZE_STRING));
@@ -26,6 +29,7 @@ $invoiceEdit->setPatientId(!isset($_POST["patientId"]) || $_POST["patientId"]=="
 $invoiceEdit->setTaxAmount(!isset($_POST["taxAmount"]) || $_POST["taxAmount"]==""?NULL:filter_var($_POST["taxAmount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 $invoiceEdit->setAmount(!isset($_POST["amount"]) || $_POST["amount"]==""?NULL:filter_var($_POST["amount"],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION));
 $invoiceEdit->setIsPaidFor(!isset($_POST["isPaidFor"]) || $_POST["isPaidFor"]==""?NULL:filter_var($_POST["isPaidFor"],FILTER_SANITIZE_NUMBER_INT));
+$invoiceEdit->setStatus(!isset($_POST["status"]) || $_POST["status"]==""?NULL:filter_var($_POST["status"],FILTER_SANITIZE_NUMBER_INT));
 
 try{
   if(isset($_POST["invoiceId"]) && (int)$_POST["invoiceId"] > 0){

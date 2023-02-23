@@ -85,6 +85,36 @@ if(isset($patientId)){
 </div> <!--end form-group-->
 
  <!--start of form group-->
+<div class="form-group input-patients-gender">
+
+                 <?php
+                  $readonly = in_array('gender',$uneditableFields)?'readonly':'';
+                  //override default value with actual value if object is sent
+                  if($patientsEdit->getPatientId()!=null){ $defaultValues['gender']=$patientsEdit->getGender();};
+                  ?>
+                  <label for="input-patients-gender">Gender*</label>
+  <?php 
+    include_once("../classes/gender.php");
+    include_once("../daos/gender-dao.php");
+
+    $genderDao = new GenderDao(); 
+    $objects = $genderDao->selectAll(); 
+    ?>
+    <select name="gender" id="input-patients-gender" class=" form-control" required <?php echo $readonly;?>  >
+      <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Gender--</option>
+      <?php
+        foreach($objects as $gender){
+          $optionValue  = $gender->getGenderId();
+          $hidden  =  $readonly=='readonly' && isset($defaultValues['gender']) && $defaultValues['gender']!=$optionValue?"hidden":"" ;
+          $disabled  =  $readonly=='readonly' && isset($defaultValues['gender']) && $defaultValues['gender']!=$optionValue?"disabled":"" ;
+          $selected  =  isset($defaultValues['gender']) && $defaultValues['gender']==$optionValue? "selected" : "" ;
+          echo'<option value="'.$optionValue.'" '.$selected.' '.$hidden.' '.$hidden.' '.$selected.'>'.$gender->toString().'</option>';
+        }
+      ?>
+    </select>
+</div> <!--end form-group-->
+
+ <!--start of form group-->
 <div class="form-group input-patients-address">
 
                  <?php

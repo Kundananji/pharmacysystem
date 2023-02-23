@@ -12,6 +12,7 @@ class Invoice implements \JsonSerializable{
   private $taxAmount;
   private $amount;
   private $isPaidFor;
+  private $status;
 
 /**
 * function to initialize object
@@ -161,6 +162,24 @@ class Invoice implements \JsonSerializable{
 */
   public function getIsPaidFor(){
     return $this->isPaidFor;
+
+  }
+
+/**
+* function to set the value of status
+* @param status : value to set
+*/
+  public function setStatus($status){
+    $this->status=$status;
+
+  }
+
+/**
+* function to get the value of status
+* @return int(10)
+*/
+  public function getStatus(){
+    return $this->status;
 
   }
 
