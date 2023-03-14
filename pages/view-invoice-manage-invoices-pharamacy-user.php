@@ -190,7 +190,7 @@ $objects=[];
 
   }
   echo'<tfoot>';
-
+  if($invoiceSetting!=null){
   echo'<tr>';
   echo'<td colspan="4">';
 	  echo 'Sub Total';
@@ -216,8 +216,9 @@ echo'<td colspan="1" style="font-weight:bold;text-align:right">';
  }
   echo'%</td>';
 echo'</tr>';
+}
 
-
+if($invoiceSetting!=null){
 echo'<tr>';
 echo'<td colspan="4">';
   echo 'Total Tax';
@@ -226,7 +227,7 @@ echo'<td colspan="1" style="font-weight:bold;text-align:right">';
   echo number_format($invoice->getTaxAmount(),'2','.',',');
 echo'</td>';
 echo'</tr>';
-
+}
 
   echo'<tr>';
   echo'<td colspan="4">';

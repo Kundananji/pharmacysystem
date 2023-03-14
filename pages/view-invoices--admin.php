@@ -1,5 +1,8 @@
 <?php
        require '../config/database.php';
+       $date = date('Y-m-d');
+       $startDate = isset($_POST['startDate'])?filter_var($_POST['startDate'],FILTER_SANITIZE_SPECIAL_CHARS):$date;
+       $endDate = isset($_POST['endDate'])?filter_var($_POST['endDate'],FILTER_SANITIZE_SPECIAL_CHARS):$date;
 ?>
 
 <div class="card">
@@ -63,38 +66,67 @@
 
           <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 7px 0; margin-left: 15px;">
             <div class="todays-report">
-              <div class="h5">Todays Report</div>
+              <div class="h5"> <?php echo ($endDate==$startDate)?"Todays Report -":"Report FROM"?> <?php echo date("jS F, Y",strtotime($startDate)); echo $endDate!=$startDate?" to ".date("jS F, Y",strtotime($endDate)):"";?></div>
               <table class="table table-bordered table-striped table-hover">
                 <tbody>
-                  <?php
-                    require '../php/db_connection.php';
-                    if($con) {
-                      $date = date('Y-m-d');
-                  ?>
+         
                   <tr>
                     <?php
                       $total = 0;
-                      $query = "SELECT amount FROM invoice WHERE invoiceDate = '$date'";
+                      $query = "SELECT amount FROM invoice WHERE invoiceDate BETWEEN '$startDate' AND '$endDate' AND `status`=1";
                       $result = Database::getConnection()->query($query);
-
-                      while($row = $result->fetch_array())
+                      $count = 0;
+                      while($row = $result->fetch_array()){
                         $total = $total + $row['amount'];
+                        $count+=1;
+                      }
                     ?>
+                    <th>Invoices Issued</th>
+                    <th class="text-success"><?php echo number_format($count); ?></th>
+                  </tr>
+                  <tr>
                     <th>Total Sales</th>
                     <th class="text-success">ZMW. <?php echo $total; ?></th>
-                  </tr>
+                 </tr>
+                  <!--
                   <tr>
                     <?php
                       //echo $date;
                       $total = 0;
                       $query = "SELECT TOTAL_AMOUNT FROM purchases WHERE purchase_date = '$date'";
                       $result = Database::getConnection()->query($query);
-                      while($row = $result->fetch_array())
+                      while($row = $result->fetch_array()){
                         $total = $total + $row['TOTAL_AMOUNT'];
-                    }
+                      }
+                    
                     ?>
                     <th>Total Purchase</th>
                     <th class="text-danger">ZMW. <?php echo $total; ?></th>
+                  </tr>
+                    -->
+                  <tr>
+                    <?php
+                      //echo $date;
+                    
+                      $query = "SELECT COUNT(*) as Total,sum(case when pt.gender =1 then 1 else 0 END) as Male, sum(case when pt.gender =2 then 1 else 0 END) AS Female FROM invoice inv INNER JOIN patients pt ON inv.patientId=pt.patientId WHERE invoiceDate BETWEEN '$startDate' AND '$endDate' AND inv.`status` = 1";
+                      $result = Database::getConnection()->query($query);
+                      while($row = $result->fetch_array()){
+                        $total = $row['Total'];
+                        $male =  $row['Male'];
+                        $female =  $row['Female'];
+                      }
+                    
+                    ?>
+                    <th>Total Patients</th>
+                    <th class="text-danger"><?php echo number_format($total); ?></th>
+                  </tr>
+                  <tr>
+                  <th>Male Patients</th>
+                    <th class="text-danger"><?php echo number_format($male); ?></th>
+                  </tr>
+                  <tr>
+                  <th>Female Patients</th>
+                    <th class="text-danger"><?php echo number_format($female); ?></th>
                   </tr>
                 </tbody>
               </table>
