@@ -81,17 +81,12 @@ if(sizeof($objects)> 0){
 
 echo'<div id="receipt-print-area">';
 
-echo'<table border="1" cellpadding="10" cellspacing="0" style="margin:0px auto;width:100%" class="table">';
+echo'<table border="1" cellpadding="2" cellspacing="0" style="margin:0px auto;width:300.36px;font-size:19px" class="table">';
 
   echo'<tr>';
-  echo'<td colspan="3">';
-   echo'<table>';  
-     echo'<tr>';
-       echo'<td style="vertical-align:middle">';
-       echo'<img src="img/hms.jpg" style="width:100px;border-radius:50px">';
-       echo'</td>';
+  echo'<td colspan="5" style="text-align:center">';
 
-       echo'<td>';
+       echo'<img src="img/hms.jpg" style="width:50;border-radius:25px">';
 
        echo'<br/><b>MULTI CARE HOSPITAL</b>';
        echo'<br/>Plot No. 27196, Off Chilumbulu Road, Libala South';
@@ -100,11 +95,16 @@ echo'<table border="1" cellpadding="10" cellspacing="0" style="margin:0px auto;w
        echo'<b>Email:</b> multicare@gmail.com<br/>';
        echo'<b>TPIN:</b> 1004307067</p>';
        echo'<hr>';
-       echo'</td>';
+       echo'<h2>Receipt</h2>';
+      
+       echo'<p><b>Receipt No:</b> '.$receipt->getReceiptNo().'<br/>';
+       echo'<b>Receipt Date:</b> '.date("j F, Y",strtotime($receipt->getReceiptDate())).'<br/>';
+   echo'</td>';
 
-     echo'</tr>';
+  echo'</tr>';
 
-   echo'</table>';
+   echo'<tr>';
+   echo'<td   colspan="5">';
 
    echo'<b>Patient Details: </b>';
    echo'<hr>';
@@ -112,19 +112,9 @@ echo'<table border="1" cellpadding="10" cellspacing="0" style="margin:0px auto;w
    echo  str_ireplace("\n","<br/>",$patient->getAddress());			
 
  echo'</td>';
- echo'<td  colspan="2">';
+ echo'</tr>';
 
- echo'<h2>Receipt</h2>';
- echo'<hr>';
- echo'<p><b>Receipt No:</b> '.$receipt->getReceiptNo().'<br/>';
- echo'<b>Receipt Date:</b> '.date("j F, Y",strtotime($receipt->getReceiptDate())).'<br/>';
- echo'</td>';
-echo'</tr>';
-echo'<tr>';
- echo'<td colspan="5">';
 
- echo'</td>';
-echo'</tr>';
 
 echo'<tr style="font-weight:bold">';
  echo'<td colspan="2">';

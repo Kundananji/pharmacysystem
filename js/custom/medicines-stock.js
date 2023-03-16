@@ -94,6 +94,10 @@ let uploadFile=(obj,typeOfFile,fieldId,fieldName)=>{
 * Function to initialize plugins on the form
 **/
 let initializePlugins=()=>{
+      //initialize select 2 on selects
+      $('.select-2-basic-single').select2({
+        width:"resolve"
+      });
 }
 /**
 * Function to remove row from form table

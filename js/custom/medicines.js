@@ -94,6 +94,7 @@ let uploadFile=(obj,typeOfFile,fieldId,fieldName)=>{
 * Function to initialize plugins on the form
 **/
 let initializePlugins=()=>{
+
 }
 /**
 * Function to remove row from form table

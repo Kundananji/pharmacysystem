@@ -52,7 +52,7 @@ if(isset($id)){
     $medicinesDao = new MedicinesDao(); 
     $objects = $medicinesDao->selectAll(); 
     ?>
-    <select name="medicineId" id="input-medicines-stock-medicine-id" class=" form-control" required <?php echo $readonly;?>  >
+    <select name="medicineId" id="input-medicines-stock-medicine-id" class="select-2-basic-single w-100 form-control" required <?php echo $readonly;?>  >
       <option value="" <?php echo $readonly=='readonly'?'disabled hidden':'';?>>--Select Medicines--</option>
       <?php
         foreach($objects as $medicines){

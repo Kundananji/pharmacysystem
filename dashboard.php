@@ -231,7 +231,7 @@
 
 
      <!--General Modal-->
-     <div class="modal fade" id="generalModal" tabindex="-1" role="dialog" aria-labelledby="generalModalLabel"
+     <div class="modal fade" id="generalModal"  role="dialog" aria-labelledby="generalModalLabel"
          aria-hidden="true">
          <div class="modal-dialog"  style="max-width: 800px" role="document">
              <div class="modal-content">
@@ -253,7 +253,7 @@
 
       
      <!-- Data Input Modal-->
-     <div class="modal fade" id="dataInputModal" tabindex="-1" role="dialog" aria-labelledby="dataInputModalLabel"
+     <div class="modal fade" id="dataInputModal"  role="dialog" aria-labelledby="dataInputModalLabel"
          aria-hidden="true">
          <div class="modal-dialog"  style="max-width: 800px" role="document">
              <div class="modal-content">
@@ -275,7 +275,7 @@
  
            
      <!-- Data Input Modal Wide-->
-     <div class="modal fade" id="dataInputModalWide" tabindex="-1" role="dialog" aria-labelledby="dataInputModalLabel"
+     <div class="modal fade" id="dataInputModalWide"  role="dialog" aria-labelledby="dataInputModalLabel"
          aria-hidden="true">
          <div class="modal-dialog modal-dialog-fullscreen" role="document">
              <div class="modal-content modal-content-fullscreen">
@@ -297,7 +297,7 @@
  
  
      <!-- Logout Modal-->
-     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     <div class="modal fade" id="logoutModal" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
          <div class="modal-dialog" role="document">
              <div class="modal-content">
